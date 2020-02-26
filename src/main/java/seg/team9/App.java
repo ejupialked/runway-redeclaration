@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 
@@ -12,27 +14,24 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
-
-    private static Scene scene;
+    private static final Logger logger = LogManager.getLogger(App.class);
+    private Stage primaryStage;
+    private static String PRIMARY = "primarywindow";
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
-        stage.setScene(scene);
-        stage.show();
+        this.primaryStage = stage;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/seg/team9/view/" + PRIMARY + ".fxml"));
+        Parent root = fxmlLoader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/seg/team9/view/" + fxml + ".fxml"));
-
-        return fxmlLoader.load();
-    }
 
     public static void main(String[] args) {
+        logger.info("Launching application...");
         launch();
     }
 

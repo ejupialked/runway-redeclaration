@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane collapsible="false" prefHeight="621.0" prefWidth="843.0" text="MainWindow" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
+   <content>
+      <SplitPane dividerPositions="0.5">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #E0E0E0;">
+               <children>
+                  <TabPane fx:id="tabPaneRunways" layoutX="14.0" layoutY="14.0" prefHeight="388.0" prefWidth="388.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="193.20000000000005" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="16.399999999999977" AnchorPane.topAnchor="14.0">
+                    <tabs>
+                      <Tab fx:id="sideViewTab"  text="Side View">
+                          <fx:include source="siderunway.fxml"/>
+                        </Tab>
+                      <Tab fx:id="topDownViewTab" text="Top-down View" >
+                            <fx:include source="topdownrunway.fxml"/>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+                  <Button layoutX="123.0" layoutY="490.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="170.0" text="Input..." AnchorPane.bottomAnchor="33.200000000000045" />
+               </children>
+            </AnchorPane>
+            <SplitPane dividerPositions="0.5" prefHeight="505.0" prefWidth="413.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="161.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;" VBox.vgrow="ALWAYS" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+              </items>
+            </SplitPane>
+        </items>
+      </SplitPane>
+   </content>
+</TitledPane>
