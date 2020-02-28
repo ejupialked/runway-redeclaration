@@ -1,9 +1,13 @@
 package seg.team9.business.logic;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 
 public class Calculator {
+    private static final Logger logger = LogManager.getLogger("Calculator");
+
 
     public Double calculateTODA(Runway runway, Obstacle obstacle)
     {
