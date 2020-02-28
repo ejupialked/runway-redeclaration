@@ -100,4 +100,9 @@ public class Runway {
     public void setStopway(Double stopway) {
         this.stopway = stopway;
     }
+
+    @Override
+    public String toString() {
+        return designator;
+    }
 }
