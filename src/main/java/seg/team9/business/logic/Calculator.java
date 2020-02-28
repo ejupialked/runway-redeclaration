@@ -8,16 +8,10 @@ import seg.team9.business.models.Runway;
 public class Calculator {
     private static final Logger logger = LogManager.getLogger("Calculator");
 
-
-    public Double calculateTODA(Runway runway, Obstacle obstacle)
-    {
-        return null;
-    }
+    
+    public Double calculateTODA(Runway runway, Obstacle obstacle) { return null; }
     //blastAllowance type is unsure
-    public Double calculateTORA(Runway runway, Obstacle obstacle, Double blastAllowance)
-    {
-        return null;
-    }
+    public Double calculateTORA(Runway runway, Obstacle obstacle, Double blastAllowance) { return null; }
 
     public Double calculateASDA(Runway runway, Obstacle obstacle)
     {
