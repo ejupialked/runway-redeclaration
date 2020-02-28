@@ -5,11 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PrimaryWindowController implements Initializable {
+    private static final Logger logger = LogManager.getLogger("PrimaryWindowController");
 
 
     // Inject ui components.
