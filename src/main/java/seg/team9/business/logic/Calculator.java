@@ -55,24 +55,4 @@ public class Calculator {
                 distance - runway.getResa() - stripend
         );
     }
-
-    public Double calculateTODA(DirectedRunway runway, Obstacle obstacle) { return null; }
-
-    //blastAllowance type is unsure
-    public Double calculateTORA(DirectedRunway runway, Obstacle obstacle, Double blastAllowance) { return null; }
-
-    public Double calculateASDA(DirectedRunway runway, Obstacle obstacle) { return null; }
-
-    public Double calculateLDA(DirectedRunway runway, Obstacle obstacle) { return null; }
-
-    public Double calculateRESA(DirectedRunway runway, Obstacle obstacle) { return null; }
-
-    public Double calculateSlope(DirectedRunway runway, Obstacle obstacle) { return null; }
-
-    //minAngle type is unsure
-    public Double calculateALS(DirectedRunway runway, Obstacle obstacle, Double minAngleAsc) { return null; }
-
-    //maxAngle type is unsure
-    public Double calculateTOCS(DirectedRunway runway, Obstacle obstacle, Double maxAngleDesc) { return null; }
-
 }

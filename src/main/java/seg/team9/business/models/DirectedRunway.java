@@ -8,10 +8,13 @@ public class DirectedRunway
     private Double threshold;
     private Double clearway, stopway;
 
-    public DirectedRunway (String designator, Double TODA, Double TORA, Double ASDA, Double LDA, Double threshold)
+    public DirectedRunway (String designator, Double TODA, Double TORA, Double ASDA, Double LDA, Double threshold, Double clearway, Double stopway)
     {
         this.designator = designator;
         this.threshold = threshold;
+        this.clearway = clearway;
+        this.stopway = stopway;
+        this.resa = 240d;
         this.toda = TODA;
         this.workingTODA = TODA;
         this.tora = TORA;
@@ -50,7 +53,7 @@ public class DirectedRunway
 
     public Double getWorkingTORA() { return workingTORA; }
 
-    public void setWorkingTORA(Double workingTORA){ this.workingTODA = workingTORA; }
+    public void setWorkingTORA(Double workingTORA){ this.workingTORA = workingTORA; }
 
     public Double getAsda() {
         return asda;
