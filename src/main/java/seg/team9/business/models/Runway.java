@@ -9,4 +9,12 @@ public class Runway {
         lRunway = left;
     }
 
+    public DirectedRunway getRRunway(){
+        return rRunway;
+    }
+
+    public DirectedRunway getLRunway(){
+        return lRunway;
+    }
+
 }
