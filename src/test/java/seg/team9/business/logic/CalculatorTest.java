@@ -1,6 +1,5 @@
 package seg.team9.business.logic;
 
-import javafx.scene.effect.Bloom;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
@@ -21,7 +20,7 @@ public class CalculatorTest {
         logger.debug("Testing calculator class...");
         c = new Calculator();
 
-        Obstacle o = new Obstacle(12d, 100d, 0d, 3646d, -50d);
+        Obstacle o = new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d);
         lr = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 360d, 360d);
         rr = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 360d, 360d);
         Runway r = new Runway(rr, lr);
