@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.business.logic.Calculator;
 
 import java.io.IOException;
 
@@ -14,6 +15,10 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
+
+
+    private static final Calculator calculator = new Calculator();
+
     private static final Logger logger = LogManager.getLogger(App.class);
     private Stage primaryStage;
     private static String PRIMARY = "primarywindow";
@@ -29,6 +34,9 @@ public class App extends Application {
         primaryStage.show();
     }
 
+    public static Calculator getCalculator() {
+        return calculator;
+    }
 
     public static void main(String[] args) {
         logger.info("Launching application...");

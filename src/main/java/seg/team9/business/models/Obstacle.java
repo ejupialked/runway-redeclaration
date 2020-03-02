@@ -2,7 +2,7 @@ package seg.team9.business.models;
 
 public class Obstacle {
     private Double height,width;
-    private Double distanceCenter,distanceRThreshold, distanceLThreshold;
+    private Double distanceCenter, distanceRThreshold, distanceLThreshold;
 
     public Obstacle (Double height, Double width, Double distanceCenter, Double distanceRThreshold,Double distanceLThreshold)
     {

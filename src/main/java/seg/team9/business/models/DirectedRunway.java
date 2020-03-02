@@ -25,6 +25,7 @@ public class DirectedRunway
         this.workingLDA = LDA;
     }
 
+
     public String getDesignator() {
         return designator;
     }
@@ -41,19 +42,13 @@ public class DirectedRunway
         this.toda = toda;
     }
 
-    public Double getWorkingTODA() { return workingTODA; }
-
-    public void setWorkingTODA(Double workingTODA){ this.workingTODA = workingTODA; }
-
-    public Double getTora() { return tora; }
+    public Double getTora() {
+        return tora;
+    }
 
     public void setTora(Double tora) {
         this.tora = tora;
     }
-
-    public Double getWorkingTORA() { return workingTORA; }
-
-    public void setWorkingTORA(Double workingTORA){ this.workingTORA = workingTORA; }
 
     public Double getAsda() {
         return asda;
@@ -63,10 +58,6 @@ public class DirectedRunway
         this.asda = asda;
     }
 
-    public Double getWorkingASDA() { return workingASDA; }
-
-    public void setWorkingASDA(Double workingASDA){ this.workingASDA = workingASDA; }
-
     public Double getLda() {
         return lda;
     }
@@ -74,10 +65,6 @@ public class DirectedRunway
     public void setLda(Double lda) {
         this.lda = lda;
     }
-
-    public Double getWorkingLDA() { return workingLDA; }
-
-    public void setWorkingLDA(Double workingLDA){ this.workingLDA = workingLDA; }
 
     public Double getResa() {
         return resa;
@@ -101,6 +88,38 @@ public class DirectedRunway
 
     public void setTocs(Double tocs) {
         this.tocs = tocs;
+    }
+
+    public Double getWorkingTODA() {
+        return workingTODA;
+    }
+
+    public void setWorkingTODA(Double workingTODA) {
+        this.workingTODA = workingTODA;
+    }
+
+    public Double getWorkingTORA() {
+        return workingTORA;
+    }
+
+    public void setWorkingTORA(Double workingTORA) {
+        this.workingTORA = workingTORA;
+    }
+
+    public Double getWorkingASDA() {
+        return workingASDA;
+    }
+
+    public void setWorkingASDA(Double workingASDA) {
+        this.workingASDA = workingASDA;
+    }
+
+    public Double getWorkingLDA() {
+        return workingLDA;
+    }
+
+    public void setWorkingLDA(Double workingLDA) {
+        this.workingLDA = workingLDA;
     }
 
     public Double getThreshold() {

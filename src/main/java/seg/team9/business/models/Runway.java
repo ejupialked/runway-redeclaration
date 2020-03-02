@@ -4,9 +4,9 @@ public class Runway {
 
     private DirectedRunway rRunway, lRunway;
 
-    public Runway(DirectedRunway right, DirectedRunway left){
-        rRunway = right;
-        lRunway = left;
+    public Runway(DirectedRunway rRunway, DirectedRunway lRunway){
+        this.rRunway = rRunway;
+        this.lRunway = lRunway;
     }
 
     public DirectedRunway getRRunway(){
