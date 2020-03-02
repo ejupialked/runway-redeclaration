@@ -8,6 +8,11 @@ public class DirectedRunway
     private Double threshold;
     private Double clearway, stopway;
 
+
+    public DirectedRunway(String designator){
+        this.designator = designator;
+    }
+
     public DirectedRunway (String designator, Double TODA, Double TORA, Double ASDA, Double LDA, Double threshold, Double clearway, Double stopway)
     {
         this.designator = designator;
@@ -144,5 +149,10 @@ public class DirectedRunway
 
     public void setStopway(Double stopway) {
         this.stopway = stopway;
+    }
+
+    @Override
+    public String toString() {
+        return designator;
     }
 }

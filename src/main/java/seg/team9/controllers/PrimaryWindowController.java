@@ -1,5 +1,7 @@
 package seg.team9.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.Utils.MockData;
 import seg.team9.business.models.Airport;
+import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Runway;
 
 import java.net.URL;
@@ -22,7 +25,7 @@ public class PrimaryWindowController implements Initializable {
     @FXML private MenuBar menuBar; //menu bar
     @FXML private MenuItem menuItemClose;
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
-    @FXML private ChoiceBox<Runway> choiceBoxRunway;
+    @FXML private ChoiceBox<DirectedRunway> choiceBoxRunway;
 
 
     // Injecting controllers
@@ -40,8 +43,17 @@ public class PrimaryWindowController implements Initializable {
     private void initChoiceBoxes(){
         choiceBoxAirport.getItems().addAll(MockData.airportList());
         choiceBoxAirport.getSelectionModel().selectFirst();
-        choiceBoxRunway.getItems().addAll(MockData.runwayList());
+        choiceBoxRunway.getItems().addAll(MockData.directedRunways());
         choiceBoxRunway.getSelectionModel().selectFirst();
+
+
+        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<DirectedRunway>() {
+            @Override
+            public void changed(ObservableValue<? extends DirectedRunway> observableValue, DirectedRunway directedRunway, DirectedRunway t1) {
+                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue().getDesignator());
+            }
+        });
+
     }
 
     private void initMenuBar(){

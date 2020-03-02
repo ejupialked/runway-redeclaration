@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="923.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
+<AnchorPane prefHeight="923.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
    <children>
       <MenuBar fx:id="menuBar" prefWidth="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -36,17 +45,19 @@
                   <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="104.0" prefHeight="388.0" prefWidth="388.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="103.20000000000005" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="104.0">
                     <tabs>
                       <Tab fx:id="topDownViewTab" text="Top-down View">
-                            <fx:include source="topdownrunway.fxml" />
+                          <content>
+                              <fx:include fx:id="topDownView" source="topdownrunway.fxml" />
+                          </content>
                       </Tab>
                       <Tab fx:id="sideViewTab" text="Side View">
                           <fx:include source="siderunway.fxml" />
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <Label layoutX="24.0" layoutY="25.0" prefHeight="17.0" prefWidth="47.0" text="Airport:" />
-                  <ChoiceBox fx:id="choiceBoxAirport" layoutX="83.0" layoutY="20.0" prefWidth="150.0" />
-                  <Label layoutX="24.0" layoutY="63.0" prefHeight="17.0" prefWidth="47.0" text="Runway:" />
-                  <ChoiceBox fx:id="choiceBoxRunway" layoutX="83.0" layoutY="58.0" prefWidth="150.0" />
+                  <Label layoutX="24.0" layoutY="25.0" prefHeight="17.0" text="Airport:" />
+                  <ChoiceBox fx:id="choiceBoxAirport" layoutX="91.0" layoutY="21.0" prefWidth="150.0" />
+                  <Label layoutX="24.0" layoutY="63.0" prefHeight="17.0" prefWidth="67.0" text="Runway:" />
+                  <ChoiceBox fx:id="choiceBoxRunway" layoutX="91.0" layoutY="59.0" prefWidth="150.0" />
                </children>
             </AnchorPane>
             <SplitPane dividerPositions="0.5" prefHeight="505.0" prefWidth="413.0">
