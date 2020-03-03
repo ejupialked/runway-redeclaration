@@ -1,14 +1,22 @@
 package seg.team9.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.Utils.MockData;
 import seg.team9.business.models.Obstacle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,6 +26,8 @@ public class ObstacleViewController implements Initializable {
     @FXML
     private ChoiceBox<Obstacle> boxObstacles;
 
+    @FXML
+    private Button buttonAddObstacle;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init ObstacleViewController");
@@ -42,7 +52,8 @@ public class ObstacleViewController implements Initializable {
         });
 
         //Adding mock objects (U13 - Predefined obstacles)
-        boxObstacles.getItems().addAll(MockData.obstacleList());
+        MockData.obstacleList();
+        boxObstacles.getItems().addAll(MockData.obstacles);
         boxObstacles.getSelectionModel().selectFirst();
 
         boxObstacles.valueProperty().addListener(((observable, oldValue, newValue) -> {
@@ -50,6 +61,22 @@ public class ObstacleViewController implements Initializable {
                 logger.info("Selected object: " + newValue.getName());
         }));
     }
-
+    @FXML
+    void onClick(MouseEvent event) {
+        final String formName= "obstacleaddform";
+        Parent root;
+        try
+        {
+            root = FXMLLoader.load(ObstacleViewController.class.getResource("/view/"+formName+".fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Add Obstacle");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.err.println(e);
+        }
+    }
 
 }

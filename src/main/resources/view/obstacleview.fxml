@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"  fx:controller="seg.team9.controllers.ObstacleViewController"  VBox.vgrow="ALWAYS">
+<AnchorPane VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.ObstacleViewController">
         <TitledPane collapsible="false" text="Obstacle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;">
                     <children>
-                        <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+                        <Button fx:id="buttonAddObstacle" layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
                         <ChoiceBox fx:id="boxObstacles" layoutX="24.0" layoutY="27.0" prefHeight="25.0" prefWidth="234.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" />
                     </children>
                 </AnchorPane>

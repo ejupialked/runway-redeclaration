@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.App;
 import seg.team9.Utils.MockData;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
@@ -61,16 +62,9 @@ public class PrimaryWindowController implements Initializable {
         menuItemClose.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                showPopup("This feature has not been implemented yet");
+                App.showPopup("This feature has not been implemented yet",Alert.AlertType.INFORMATION);
             }
         });
     }
 
-    private void showPopup(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }
