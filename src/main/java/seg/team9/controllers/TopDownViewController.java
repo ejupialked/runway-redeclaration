@@ -23,7 +23,6 @@ public class TopDownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("SideViewController");
 
     @FXML private AnchorPane topDownView;
-    @FXML private Button updateButton;
     @FXML private Label title;
 
     private Double xScaler;
@@ -58,11 +57,11 @@ public class TopDownViewController implements Initializable {
         initText();
         initLines();
         initRectangles();
-        updateButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                updateUI();
-            }
+        topDownView.widthProperty().addListener((obs,oldVal,newVal) -> {
+            updateUI();
+        });
+        topDownView.heightProperty().addListener((obs,oldVal,newVal) -> {
+            updateUI();
         });
     }
 
@@ -272,7 +271,6 @@ public class TopDownViewController implements Initializable {
         topDownView.getChildren().add(textLDA);
 
         topDownView.getChildren().add(title);
-        topDownView.getChildren().add(updateButton);
     }
 
 
