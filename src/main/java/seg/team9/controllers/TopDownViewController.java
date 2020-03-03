@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.business.logic.Calculator;
+import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 
@@ -25,7 +26,12 @@ public class TopDownViewController implements Initializable {
     @FXML private AnchorPane topDownView;
     @FXML private Label title;
 
+    private static TopDownViewController instance;
+
     private Calculator calculator = new Calculator();
+
+    private Obstacle currentObstacle = new Obstacle("Nothing", 1D, 1D, 0D, 3660D,0D);
+    private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D));
 
     //UI STUFF
     private Double xScaler;
@@ -35,7 +41,7 @@ public class TopDownViewController implements Initializable {
     private Line centreLine = new Line();
 
     //Right Runway
-    private Text runwayDesignatorR = new Text("09/R");
+    private Text runwayDesignatorR = new Text("SELECT A RUNWAY");
     private Line thresholdR = new Line();
     private Rectangle stopwayR = new Rectangle();
     private Rectangle clearwayR = new Rectangle();
@@ -51,9 +57,13 @@ public class TopDownViewController implements Initializable {
     private Text textASDAR = new Text("ASDA");
     private Text textTORAR = new Text("TORA");
     private Text textLDAR = new Text("LDA");
+    private Double TODAR = 0D;
+    private Double ASDAR = 0D;
+    private Double TORAR = 0D;
+    private Double LDAR = 0D;
 
     //Left Runway
-    private Text runwayDesignatorL = new Text("27/L");
+    private Text runwayDesignatorL = new Text("SELECT A RUNWAY");
     private Line thresholdL = new Line();
     private Rectangle stopwayL = new Rectangle();
     private Rectangle clearwayL = new Rectangle();
@@ -69,6 +79,18 @@ public class TopDownViewController implements Initializable {
     private Text textASDAL = new Text("ASDA");
     private Text textTORAL = new Text("TORA");
     private Text textLDAL = new Text("LDA");
+    private Double TODAL = 0D;
+    private Double ASDAL = 0D;
+    private Double TORAL = 0D;
+    private Double LDAL = 0D;
+
+    public TopDownViewController() {
+        instance = this;
+    }
+
+    public static TopDownViewController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -377,17 +399,43 @@ public class TopDownViewController implements Initializable {
 
 
     public void displayDirectedRunwaySelected(Runway runway) {
-        calculator.redesignate(runway, new Obstacle("Nothing", 1D, 1D, 0D, 3660D,0D));
-        runwayDesignatorR.setText(runway.getRRunway().getDesignator().toString());
-        textTODAR.setText("TODA: "+runway.getRRunway().getWorkingTODA().toString());
-        textASDAR.setText("ASDA: "+runway.getRRunway().getWorkingASDA().toString());
-        textTORAR.setText("TORA: "+runway.getRRunway().getWorkingTORA().toString());
-        textLDAR.setText("LDA: "+runway.getRRunway().getWorkingLDA().toString());
+        currentRunway = runway;
+        updateValues();
+        updateText();
+        updateUI();
+    }
 
-        runwayDesignatorL.setText(runway.getLRunway().getDesignator().toString());
-        textTODAL.setText("TODA: "+runway.getLRunway().getWorkingTODA().toString());
-        textASDAL.setText("ASDA: "+runway.getLRunway().getWorkingASDA().toString());
-        textTORAL.setText("TORA: "+runway.getLRunway().getWorkingTORA().toString());
-        textLDAL.setText("LDA: "+runway.getLRunway().getWorkingLDA().toString());
+    public void displayObstacleSelected(Obstacle obstacle){
+        currentObstacle = obstacle;
+        updateValues();
+        updateText();
+        updateUI();
+    }
+
+    public void updateValues(){
+        calculator.redesignate(currentRunway, currentObstacle);
+        runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator().toString());
+        TODAR = currentRunway.getRRunway().getWorkingTODA();
+        ASDAR = currentRunway.getRRunway().getWorkingASDA();
+        TORAR = currentRunway.getRRunway().getWorkingTORA();
+        LDAR = currentRunway.getRRunway().getWorkingLDA();
+
+        runwayDesignatorL.setText(currentRunway.getLRunway().getDesignator().toString());
+        TODAL = currentRunway.getLRunway().getWorkingTODA();
+        ASDAL = currentRunway.getLRunway().getWorkingASDA();
+        TORAL = currentRunway.getLRunway().getWorkingTORA();
+        LDAL = currentRunway.getLRunway().getWorkingLDA();
+    }
+
+    public void updateText(){
+        textTODAR.setText("TODA: "+TODAR.toString());
+        textASDAR.setText("ASDA: "+ASDAR.toString());
+        textTORAR.setText("TORA: "+TORAR.toString());
+        textLDAR.setText("LDA: "+LDAR.toString());
+
+        textTODAL.setText("TODA: "+TODAL.toString());
+        textASDAL.setText("ASDA: "+ASDAL.toString());
+        textTORAL.setText("TORA: "+TORAL.toString());
+        textLDAL.setText("LDA: "+LDAL.toString());
     }
 }

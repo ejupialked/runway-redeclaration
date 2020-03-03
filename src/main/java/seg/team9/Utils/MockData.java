@@ -40,7 +40,8 @@ public class MockData {
 
     public static List<Obstacle> obstacleList(){
         ArrayList<Obstacle> obstacles = new ArrayList<>();
-        obstacles.add(new Obstacle("obstacle", 10D, 10D, 0D, 3000D, 660D));
+        obstacles.add(new Obstacle("obstacle1", 100D, 10D, 0D, 3000D, 660D));
+        obstacles.add(new Obstacle("obstacle2", 1D, 10D, 0D, 3000D, 660D));
         return obstacles;
     }
 }

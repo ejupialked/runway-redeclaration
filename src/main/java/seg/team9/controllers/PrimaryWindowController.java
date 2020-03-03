@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import seg.team9.Utils.MockData;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
+import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 
 import java.net.URL;
