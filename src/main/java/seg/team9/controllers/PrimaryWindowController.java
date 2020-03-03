@@ -51,6 +51,7 @@ public class PrimaryWindowController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends DirectedRunway> observableValue, DirectedRunway directedRunway, DirectedRunway t1) {
                 topDownViewController.displayDirectedRunwaySelected(observableValue.getValue().getDesignator());
+                topDownViewController.updateUI();
             }
         });
 
