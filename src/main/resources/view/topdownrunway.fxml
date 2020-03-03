@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:id="topDownView" fx:controller="seg.team9.controllers.TopDownViewController">
+   <children>
+      <ImageView fx:id="imageView" fitWidth="1455.0" layoutX="7.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/runway.PNG" />
+         </image></ImageView>
+      <Label layoutX="14.0" layoutY="14.0" text="Top down runway" />
+      <Label fx:id="runwayDesignatorLabel" layoutX="247.0" layoutY="556.0" rotate="90.0" text="20/L" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="60.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

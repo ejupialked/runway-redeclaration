@@ -1,19 +1,31 @@
 package seg.team9.business.models;
 
 public class Obstacle {
+    String name;
     private Double height,width;
-    private Double distanceCenter,distanceThrehold;
+    private Double distanceCenter,distanceRThreshold, distanceLThreshold;
 
-    public Obstacle (Double height, Double width, Double distanceCenter, Double distanceThrehold)
+
+    public Obstacle (String name){
+        this.name = name;
+    }
+
+    public Obstacle (String name, Double height, Double width, Double distanceCenter, Double distanceRThreshold,Double distanceLThreshold)
     {
+        this.name = name;
         this.height = height;
         this.width = width;
         this.distanceCenter = distanceCenter;
-        this.distanceThrehold = distanceThrehold;
+        this.distanceRThreshold = distanceRThreshold;
+        this.distanceLThreshold = distanceLThreshold;
     }
 
     public Double getHeight() {
         return height;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setHeight(Double height) {
@@ -36,11 +48,15 @@ public class Obstacle {
         this.distanceCenter = distanceCenter;
     }
 
-    public Double getDistanceThrehold() {
-        return distanceThrehold;
+    public Double getDistanceRThreshold() { return distanceRThreshold; }
+
+    public void setDistanceRThreshold(Double distanceRThreshold) {
+        this.distanceRThreshold = distanceRThreshold;
     }
 
-    public void setDistanceThrehold(Double distanceThrehold) {
-        this.distanceThrehold = distanceThrehold;
+    public Double getDistanceLThreshold() { return distanceLThreshold; }
+
+    public void setDistanceLThreshold(Double distanceLThreshold) {
+        this.distanceLThreshold = distanceLThreshold;
     }
 }
