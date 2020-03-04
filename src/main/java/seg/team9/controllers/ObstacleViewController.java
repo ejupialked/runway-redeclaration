@@ -1,5 +1,7 @@
 package seg.team9.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -25,6 +28,28 @@ public class ObstacleViewController implements Initializable {
 
     @FXML
     private ChoiceBox<Obstacle> boxObstacles;
+
+
+
+    @FXML
+    private Label txtObstacleName;
+
+    @FXML
+    private Label txtObstacleHeight;
+
+    @FXML
+    private Label txtObstacleWidth;
+
+    @FXML
+    private Label txtDistanceCenter;
+
+    @FXML
+    private Label txtDistanceThresholdLeft;
+
+    @FXML
+    private Label txtDistanceThresholdRight;
+
+
 
     @FXML
     private Button buttonAddObstacle;
@@ -61,6 +86,14 @@ public class ObstacleViewController implements Initializable {
                 TopDownViewController.getInstance().displayObstacleSelected(newValue);
         }));
 
+
+        boxObstacles.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Obstacle>() {
+            @Override
+            public void changed(ObservableValue<? extends Obstacle> observableValue, Obstacle obstacle, Obstacle t1) {
+                updateLabelsObstacle(obstacle);
+            }
+        });
+
         TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
     }
     @FXML
@@ -81,5 +114,19 @@ public class ObstacleViewController implements Initializable {
         }
     }
 
+
+    public void updateLabelsObstacle(Obstacle o) {
+          txtObstacleName.setText(o.getName());
+          txtObstacleHeight.setText(addUnitMeasurement(o.getHeight().toString()));
+          txtObstacleWidth.setText(addUnitMeasurement(o.getWidth().toString()));
+          txtDistanceCenter.setText(addUnitMeasurement(o.getDistanceCenter().toString()));
+          txtDistanceThresholdLeft.setText(addUnitMeasurement(o.getDistanceLThreshold().toString()));
+          txtDistanceThresholdRight.setText(o.getDistanceRThreshold().toString());
+    }
+
+
+    private String addUnitMeasurement(String value) {
+        return value + "m";
+    }
 
 }
