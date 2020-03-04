@@ -58,7 +58,7 @@ public class ObstacleViewController implements Initializable {
 
         boxObstacles.valueProperty().addListener(((observable, oldValue, newValue) -> {
             if(newValue!=null)
-                logger.info("Selected object: " + newValue.getName());
+                TopDownViewController.getInstance().displayObstacleSelected(newValue);
         }));
 
         TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
