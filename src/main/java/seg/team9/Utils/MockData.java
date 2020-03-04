@@ -15,15 +15,15 @@ public class MockData {
     public static List<Runway> runwayList(){
         ArrayList<Runway> runways = new ArrayList<>();
         runways.add(new Runway(directedRunways().get(0), directedRunways().get(1)));
-        runways.add(new Runway(directedRunways().get(0), directedRunways().get(1)));
+        runways.add(new Runway(directedRunways().get(1), directedRunways().get(0)));
         return runways;
     }
 
 
     public static List<DirectedRunway> directedRunways(){
         ArrayList<DirectedRunway> directedRunways = new ArrayList<>();
-        directedRunways.add(new DirectedRunway("09/R", 3660D,3660D,3660D,3660D,0D,100D,200D));
-        directedRunways.add(new DirectedRunway("270/L", 3660D,3660D,3660D,3660D,0D,100D,200D));
+        directedRunways.add(new DirectedRunway("09/R", 3660D,3660D,3660D,3660D,0D,50D,10D));
+        directedRunways.add(new DirectedRunway("270/L", 3660D,3660D,3660D,3660D,0D,25D,20D));
         return directedRunways;
     }
 
