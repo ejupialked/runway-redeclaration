@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 public class CalculationBreakdownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("CalculationBreakdownViewController");
 
-
     @FXML private Label labelTOCS;
     @FXML private Label labelALS;
     @FXML private Label labelSlope;

@@ -47,11 +47,4 @@ public class App extends Application {
     }
 
 
-    public static void showPopup(String message , Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle("Info");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

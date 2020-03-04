@@ -13,10 +13,10 @@
 <AnchorPane VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.ObstacleViewController">
         <TitledPane collapsible="false" text="Obstacle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane prefHeight="364.0" prefWidth="501.0" style="-fx-background-color: #E0E0E0;">
+                <AnchorPane prefHeight="318.0" prefWidth="501.0" style="-fx-background-color: #E0E0E0;">
                     <children>
-                        <Button fx:id="buttonAddObstacle" layoutX="411.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="411.0" />
-                        <ChoiceBox fx:id="boxObstacles" layoutX="24.0" layoutY="27.0" prefHeight="25.0" prefWidth="234.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+                        <Button fx:id="buttonAddObstacle" layoutX="431.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.leftAnchor="334.6" AnchorPane.rightAnchor="100.0" />
+                        <ChoiceBox fx:id="boxObstacles" layoutX="24.0" layoutY="27.0" prefHeight="25.0" prefWidth="234.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
                <Label layoutX="34.0" layoutY="138.0">
                   <font>
                      <Font name="System Bold" size="13.0" />
@@ -113,7 +113,7 @@
                      <Insets />
                   </opaqueInsets>
                </VBox>
-               <Button fx:id="buttonEditObstacle" layoutX="34.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" prefHeight="37.0" prefWidth="56.0" text="Edit" />
+               <Button fx:id="buttonEditObstacle" layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" prefHeight="37.0" prefWidth="56.0" text="Edit" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="334.6" />
                     </children>
                 </AnchorPane>
             </content>

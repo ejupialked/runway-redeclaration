@@ -11,6 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.Utils.MockData;
+import seg.team9.Utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
@@ -28,7 +29,6 @@ public class PrimaryWindowController implements Initializable {
     @FXML private MenuItem menuItemClose;
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
     @FXML private ChoiceBox<Runway> choiceBoxRunway;
-
 
     // Injecting controllers
     @FXML private SideViewController sideViewController; // side runway
@@ -50,23 +50,15 @@ public class PrimaryWindowController implements Initializable {
         topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
 
 
-        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Runway>() {
-            @Override
-            public void changed(ObservableValue<? extends Runway> observableValue, Runway directedRunway, Runway t1) {
-                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
-                topDownViewController.updateUI();
-            }
+        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
+            topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+            topDownViewController.updateUI();
         });
 
     }
 
     private void initMenuBar(){
-        menuItemClose.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                App.showPopup("This feature has not been implemented yet",Alert.AlertType.INFORMATION);
-            }
-        });
+        menuItemClose.setOnAction(actionEvent -> UtilsUI.showErrorMessage("This feature has not been implemented yet"));
     }
 
 }
