@@ -1,5 +1,7 @@
 package seg.team9.controllers;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -58,6 +60,13 @@ public class ObstacleViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init ObstacleViewController");
         initObstacleBox();
+        MockData.obstacleList().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                boxObstacles.getSelectionModel().select(MockData.obstacleList().get(MockData.obstacleList().size()-1));
+            }
+        });
+
     }
 
     public void initObstacleBox() {
@@ -166,5 +175,4 @@ public class ObstacleViewController implements Initializable {
     private String addUnitMeasurement(String value) {
         return value + "m";
     }
-
 }
