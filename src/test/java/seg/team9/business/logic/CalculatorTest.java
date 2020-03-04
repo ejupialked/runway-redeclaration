@@ -14,6 +14,8 @@ public class CalculatorTest {
     private static Calculator c;
     private static  DirectedRunway lr;
     private  static  DirectedRunway rr;
+    private static  DirectedRunway lr2;
+    private  static  DirectedRunway rr2;
 
     @BeforeClass
     public static void beforeClass(){
@@ -21,11 +23,18 @@ public class CalculatorTest {
         c = new Calculator();
 
         Obstacle o = new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d);
-        lr = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 360d, 360d);
-        rr = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 360d, 360d);
+        lr = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 0d, 0d);
+        rr = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 0d, 0d);
         Runway r = new Runway(rr, lr);
 
         c.redesignate(r,o);
+
+        Obstacle o2 = new Obstacle("Boeing737", 25d, 100d, 20d, 2853d, 500d);
+        rr2 = new DirectedRunway("09R", 3660d, 3660d, 3660d, 3353d, 307d, 0d, 0d);
+        lr2 = new DirectedRunway("27L", 3660d, 3660d, 3660d, 3660d, 0d, 0d, 0d);
+        Runway r2 = new Runway(rr2, lr2);
+
+        c.redesignate(r2,o2);
     }
 
     @Test
@@ -76,4 +85,51 @@ public class CalculatorTest {
         Assert.assertEquals(2985d, lr.getWorkingLDA(), 0.0f);
     }
 
+    @Test
+    public void testTORARight2() {
+        logger.debug("Testing right TORA 2...");
+        Assert.assertEquals(1850d, rr2.getWorkingTORA(), 0.0f);
+    }
+
+    @Test
+    public void testTODARight2() {
+        logger.debug("Testing right TODA 2...");
+        Assert.assertEquals(1850d, rr2.getWorkingTODA(), 0.0f);
+    }
+
+    @Test
+    public void testASDARight2() {
+        logger.debug("Testing right ASDA 2...");
+        Assert.assertEquals(1850d, rr2.getWorkingASDA(), 0.0f);
+    }
+
+    @Test
+    public void testLDARight2() {
+        logger.debug("Testing right LDA 2...");
+        Assert.assertEquals(2553d, rr2.getWorkingLDA(), 0.0f);
+    }
+
+    @Test
+    public void testTORALeft2() {
+        logger.debug("Testing left TORA 2...");
+        Assert.assertEquals(2860d, lr2.getWorkingTORA(), 0.0f);
+    }
+
+    @Test
+    public void testTODALeft2() {
+        logger.debug("Testing left TODA 2...");
+        Assert.assertEquals(2860d, lr2.getWorkingTODA(), 0.0f);
+    }
+
+    @Test
+    public void testASDALeft2() {
+        logger.debug("Testing right ASDA 2...");
+        Assert.assertEquals(2860d, lr2.getWorkingASDA(), 0.0f);
+    }
+
+    @Test
+    public void testLDALeft2() {
+        logger.debug("Testing left LDA 2...");
+        Assert.assertEquals(1850d, lr2.getWorkingLDA(), 0.0f);
+    }
 }
