@@ -133,6 +133,8 @@ public class TopDownViewController implements Initializable {
         runwayDesignatorR.setRotate(90);
         runwayDesignatorR.setFont(Font.font(15));
         runwayDesignatorR.setStroke(Color.WHITE);
+        runwayDesignatorR.setSmooth(true);
+
         textTODAR.setFont(Font.font(10));
         textTODAR.setStroke(Color.BLACK);
         textASDAR.setFont(Font.font(10));

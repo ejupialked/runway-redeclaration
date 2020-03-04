@@ -90,7 +90,7 @@ public class ObstacleViewController implements Initializable {
         boxObstacles.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Obstacle>() {
             @Override
             public void changed(ObservableValue<? extends Obstacle> observableValue, Obstacle obstacle, Obstacle t1) {
-                updateLabelsObstacle(obstacle);
+                updateLabelsObstacle(t1);
             }
         });
 
