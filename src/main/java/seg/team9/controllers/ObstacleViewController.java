@@ -53,7 +53,7 @@ public class ObstacleViewController implements Initializable {
 
         //Adding mock objects (U13 - Predefined obstacles)
         MockData.obstacleList();
-        boxObstacles.getItems().addAll(MockData.obstacles);
+        boxObstacles.setItems(MockData.obstacles);
         boxObstacles.getSelectionModel().selectFirst();
 
         boxObstacles.valueProperty().addListener(((observable, oldValue, newValue) -> {
