@@ -1,18 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.ObstacleViewController">
         <TitledPane collapsible="false" text="Obstacle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;">
+                <AnchorPane prefHeight="276.0" prefWidth="501.0" style="-fx-background-color: #E0E0E0;">
                     <children>
-                        <Button fx:id="buttonAddObstacle" layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+                        <Button fx:id="buttonAddObstacle" layoutX="411.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="411.0" />
                         <ChoiceBox fx:id="boxObstacles" layoutX="24.0" layoutY="27.0" prefHeight="25.0" prefWidth="234.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+               <Label layoutX="34.0" layoutY="138.0">
+                  <font>
+                     <Font name="System Bold" size="13.0" />
+                  </font>
+               </Label>
+               <VBox layoutX="21.0" layoutY="75.0" prefHeight="179.0" prefWidth="359.0" spacing="10.0">
+                  <children>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <children>
+                           <Label text="name:">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="txtObstacleName" text="Obstacle" textAlignment="JUSTIFY" textFill="#311fb9">
+                              <font>
+                                 <Font name="System Italic" size="17.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <children>
+                           <Label text="height:">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="txtObstacleHeight" text="10m" textAlignment="JUSTIFY" textFill="#311fb9">
+                              <font>
+                                 <Font name="System Italic" size="17.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <children>
+                           <Label text="width:">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="txtObstacleWidth" text="40m" textAlignment="JUSTIFY" textFill="#311fb9">
+                              <font>
+                                 <Font name="System Italic" size="17.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <children>
+                           <Label text="distance center:">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="txtDistanceCenter" text="300m" textAlignment="JUSTIFY" textFill="#311fb9">
+                              <font>
+                                 <Font name="System Italic" size="17.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <children>
+                           <Label text="distance threshold (left) :">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="txtDistanceThresholdLeft" text="3000m" textAlignment="JUSTIFY" textFill="#311fb9">
+                              <font>
+                                 <Font name="System Italic" size="17.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                        <children>
+                           <Label text="distance threshold (right) :">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                           </Label>
+                           <Label fx:id="txtDistanceThresholdRight" text="200m" textAlignment="JUSTIFY" textFill="#311fb9">
+                              <font>
+                                 <Font name="System Italic" size="17.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </HBox>
+                  </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </VBox>
                     </children>
                 </AnchorPane>
             </content>
