@@ -1,4 +1,4 @@
-module org.example {
+module seg.team9 {
     requires javafx.controls;
     requires javafx.fxml;
     requires log4j;
