@@ -10,6 +10,9 @@ public class Airport {
     private Double latitude;
     private Double longitude;
 
+    public Airport(String name) {
+        this.name = name;
+    }
     public Airport(String name, String city, Double latitude, Double longitude)
     {
         this.runwayList = new ArrayList<>();
@@ -57,5 +60,10 @@ public class Airport {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
