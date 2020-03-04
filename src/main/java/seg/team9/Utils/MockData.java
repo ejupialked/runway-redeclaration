@@ -9,7 +9,6 @@ import seg.team9.business.models.Runway;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MockData {
 
@@ -48,18 +47,15 @@ public class MockData {
 
     public static void obstacleList(){
         ArrayList<Obstacle> obstacles = new ArrayList<>();
-<<<<<<< HEAD
         for (int i = 0; i < 10 ; i++) {
            addObstacle(new Obstacle("obstacle" + i));
         }
     }
 
-    public static void addObstacle(Obstacle obstacle){
+    public static ObservableList<Obstacle> addObstacle(Obstacle obstacle){
         obstacles.add(obstacle);
-=======
         obstacles.add(new Obstacle("obstacle1", 100D, 10D, 0D, 3000D, 660D));
         obstacles.add(new Obstacle("obstacle2", 1D, 10D, 0D, 3000D, 660D));
         return obstacles;
->>>>>>> 97d45441575b3653a1b4c90e15b2e5070615b6f0
     }
 }
