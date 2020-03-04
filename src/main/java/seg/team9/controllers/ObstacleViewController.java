@@ -57,6 +57,8 @@ public class ObstacleViewController implements Initializable {
                 TopDownViewController.getInstance().displayObstacleSelected(newValue);
             }
         });
+
+        TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
     }
 
 

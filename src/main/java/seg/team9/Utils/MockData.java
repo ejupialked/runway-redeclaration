@@ -22,8 +22,8 @@ public class MockData {
 
     public static List<DirectedRunway> directedRunways(){
         ArrayList<DirectedRunway> directedRunways = new ArrayList<>();
-        directedRunways.add(new DirectedRunway("09/R", 3660D,3660D,3660D,3660D,0D,50D,10D));
-        directedRunways.add(new DirectedRunway("270/L", 3660D,3660D,3660D,3660D,0D,25D,20D));
+        directedRunways.add(new DirectedRunway("09/R", 3660D,3660D,3660D,3660D,0D,500D,100D));
+        directedRunways.add(new DirectedRunway("270/L", 3660D,3660D,3660D,3660D,0D,250D,200D));
         return directedRunways;
     }
 
@@ -40,8 +40,8 @@ public class MockData {
 
     public static List<Obstacle> obstacleList(){
         ArrayList<Obstacle> obstacles = new ArrayList<>();
-        obstacles.add(new Obstacle("obstacle1", 100D, 10D, 0D, 3000D, 660D));
-        obstacles.add(new Obstacle("obstacle2", 1D, 10D, 0D, 3000D, 660D));
+        obstacles.add(new Obstacle("obstacle1", 100D, 200D, 0D, 1000D, 3000D));
+        obstacles.add(new Obstacle("obstacle2", 100D, 100D, 100D, 2000D, 1400D));
         return obstacles;
     }
 }

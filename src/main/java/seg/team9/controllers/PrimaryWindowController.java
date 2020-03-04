@@ -46,6 +46,7 @@ public class PrimaryWindowController implements Initializable {
         choiceBoxAirport.getSelectionModel().selectFirst();
         choiceBoxRunway.getItems().addAll(MockData.runwayList());
         choiceBoxRunway.getSelectionModel().selectFirst();
+        topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
 
 
         choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Runway>() {

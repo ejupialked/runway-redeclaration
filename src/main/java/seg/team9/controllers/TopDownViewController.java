@@ -122,10 +122,10 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateScaler(){
-        runwayBeginX = xScaler*0.1;
-        runwayEndX = xScaler*0.1+xScaler*0.8;
-        runwayLength = xScaler*0.8;
-        runwayScaleX = currentRunway.getLRunway().getTora()/runwayLength;
+        runwayBeginX = xScaler*0.15;
+        runwayLength = xScaler*0.7;
+        runwayEndX = runwayBeginX+runwayLength;
+        runwayScaleX = runwayLength/currentRunway.getLRunway().getTora();
     }
 
     public void initText(){
@@ -237,16 +237,16 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateCentreLine(){
-        centreLine.setStartX(xScaler*0.15);
+        centreLine.setStartX(runwayBeginX+0.1*runwayLength);
         centreLine.setStartY(yScaler*0.5);
-        centreLine.setEndX(xScaler*0.85);
+        centreLine.setEndX(runwayEndX-0.1*runwayLength);
         centreLine.setEndY(yScaler*0.5);
     }
 
     public void updateRunwayDesignator(){
-        runwayDesignatorR.setX(xScaler*0.1);
+        runwayDesignatorR.setX(runwayBeginX);
         runwayDesignatorR.setY(yScaler*0.5);
-        runwayDesignatorL.setX(xScaler*0.865);
+        runwayDesignatorL.setX(runwayEndX-40);
         runwayDesignatorL.setY(yScaler*0.5);
     }
 
@@ -348,38 +348,38 @@ public class TopDownViewController implements Initializable {
     }
 
     private void updateTextTODA(){
-        textTODAR.setX(0.11*xScaler);
+        textTODAR.setX(runwayBeginX);
         textTODAR.setY(0.05*yScaler);
-        textTODAL.setX(0.8*xScaler);
+        textTODAL.setX(runwayEndX-200);
         textTODAL.setY(0.95*yScaler);
     }
 
     private void updateTextASDA(){
-        textASDAR.setX(0.11*xScaler);
+        textASDAR.setX(runwayBeginX);
         textASDAR.setY(0.1*yScaler);
-        textASDAL.setX(0.8*xScaler);
+        textASDAL.setX(runwayEndX-200);
         textASDAL.setY(0.9*yScaler);
     }
 
     private void updateTextTORA(){
-        textTORAR.setX(0.11*xScaler);
+        textTORAR.setX(runwayBeginX);
         textTORAR.setY(0.15*yScaler);
-        textTORAL.setX(0.8*xScaler);
+        textTORAL.setX(runwayEndX-200);
         textTORAL.setY(0.85*yScaler);
     }
 
     private void updateTextLDA(){
-        textLDAR.setX(0.11*xScaler);
+        textLDAR.setX(runwayBeginX);
         textLDAR.setY(0.19*yScaler);
-        textLDAL.setX(0.8*xScaler);
+        textLDAL.setX(runwayEndX-200);
         textLDAL.setY(0.81*yScaler);
     }
 
     public void updateObstacle(){
-        obstacle.setX(runwayBeginX+currentObstacle.getDistanceRThreshold());
-        obstacle.setY(0.5*yScaler);
-        obstacle.setWidth(currentObstacle.getWidth()*xScaler);
-        obstacle.setHeight(currentObstacle.getHeight()*yScaler);
+        obstacle.setX(runwayBeginX+currentObstacle.getDistanceRThreshold()*runwayScaleX);
+        obstacle.setY(0.5*yScaler+currentObstacle.getDistanceCenter()*runwayScaleX-(currentObstacle.getWidth()*runwayScaleX)/2);
+        obstacle.setWidth(currentObstacle.getWidth()*runwayScaleX);
+        obstacle.setHeight(currentObstacle.getWidth()*runwayScaleX);
     }
 
     public void addChildren(){
