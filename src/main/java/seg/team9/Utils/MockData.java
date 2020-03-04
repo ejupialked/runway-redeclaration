@@ -1,5 +1,7 @@
 package seg.team9.Utils;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
@@ -11,6 +13,12 @@ import java.util.Map;
 
 public class MockData {
 
+    static public ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
+
+
+    public MockData() {
+
+    }
 
     public static List<Runway> runwayList(){
         ArrayList<Runway> runways = new ArrayList<>();
@@ -38,10 +46,18 @@ public class MockData {
         return airports;
     }
 
-    public static List<Obstacle> obstacleList(){
-        ArrayList<Obstacle> obstacles = new ArrayList<>();
-        obstacles.add(new Obstacle("obstacle1", 100D, 200D, 0D, 1000D, 3000D));
-        obstacles.add(new Obstacle("obstacle2", 100D, 100D, 100D, 2000D, 1400D));
+    public static ObservableList<Obstacle> obstacleList(){
+//        ArrayList<Obstacle> obstacles = new ArrayList<>();
+//        for (int i = 0; i < 10 ; i++) {
+//           addObstacle(new Obstacle("obstacle" + i));
+//        }
+        obstacles.add(new Obstacle("obstacle1", 100D, 10D, 0D, 3000D, 660D));
+        obstacles.add(new Obstacle("obstacle2", 1D, 10D, 0D, 3000D, 660D));
+        return obstacles;
+    }
+
+    public static ObservableList<Obstacle> addObstacle(Obstacle obstacle){
+        obstacles.add(obstacle);
         return obstacles;
     }
 }

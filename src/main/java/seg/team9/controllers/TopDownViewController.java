@@ -155,7 +155,8 @@ public class TopDownViewController implements Initializable {
 
     public void initLines(){
         centreLine.setStroke(Color.WHITE);
-        centreLine.getStrokeDashArray().addAll(25d, 10d);
+        centreLine.setStrokeWidth(5d);
+        centreLine.getStrokeDashArray().addAll(40d, 20d);
         thresholdR.setStroke(Color.WHITE);
         EOClearwayR.setStroke(Color.BLACK);
         EORunwayR.setStroke(Color.BLACK);
