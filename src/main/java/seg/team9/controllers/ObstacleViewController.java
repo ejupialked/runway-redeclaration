@@ -2,6 +2,7 @@ package seg.team9.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -49,10 +50,10 @@ public class ObstacleViewController implements Initializable {
     @FXML
     private Label txtDistanceThresholdRight;
 
+    private Obstacle selectedObstacle;
 
 
-    @FXML
-    private Button buttonAddObstacle;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init ObstacleViewController");
@@ -90,12 +91,19 @@ public class ObstacleViewController implements Initializable {
         boxObstacles.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Obstacle>() {
             @Override
             public void changed(ObservableValue<? extends Obstacle> observableValue, Obstacle obstacle, Obstacle t1) {
+                setSelectedObstacle(t1);
                 updateLabelsObstacle(t1);
             }
         });
 
         TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
     }
+
+
+    public void setSelectedObstacle(Obstacle selectedObstacle) {
+        this.selectedObstacle = selectedObstacle;
+    }
+
     @FXML
     void onClick(MouseEvent event) {
         final String formName= "obstacleaddform";
@@ -115,7 +123,37 @@ public class ObstacleViewController implements Initializable {
     }
 
 
+
+    @FXML
+    void onEditObstacle(MouseEvent event) {
+        final String formName= "obstacleeditform";
+        Parent root;
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(ObstacleEditFormController.class.getResource("/view/"+formName+".fxml"));
+
+            root = fxmlLoader.load();
+
+            ObstacleEditFormController obstacleEditFormController = fxmlLoader.getController();
+            obstacleEditFormController.setEditItem(selectedObstacle);
+            obstacleEditFormController.initForm();
+
+            //root = FXMLLoader.load(ObstacleViewController.class.getResource("/view/"+formName+".fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Edit Obstacle");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.err.println(e);
+        }
+
+    }
+
     public void updateLabelsObstacle(Obstacle o) {
+
+        System.out.println(o.toString());
           txtObstacleName.setText(o.getName());
           txtObstacleHeight.setText(addUnitMeasurement(o.getHeight().toString()));
           txtObstacleWidth.setText(addUnitMeasurement(o.getWidth().toString()));

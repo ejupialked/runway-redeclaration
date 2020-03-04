@@ -13,7 +13,7 @@
 <AnchorPane VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.ObstacleViewController">
         <TitledPane collapsible="false" text="Obstacle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane prefHeight="276.0" prefWidth="501.0" style="-fx-background-color: #E0E0E0;">
+                <AnchorPane prefHeight="364.0" prefWidth="501.0" style="-fx-background-color: #E0E0E0;">
                     <children>
                         <Button fx:id="buttonAddObstacle" layoutX="411.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="411.0" />
                         <ChoiceBox fx:id="boxObstacles" layoutX="24.0" layoutY="27.0" prefHeight="25.0" prefWidth="234.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" />
@@ -113,6 +113,7 @@
                      <Insets />
                   </opaqueInsets>
                </VBox>
+               <Button fx:id="buttonEditObstacle" layoutX="34.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" prefHeight="37.0" prefWidth="56.0" text="Edit" />
                     </children>
                 </AnchorPane>
             </content>

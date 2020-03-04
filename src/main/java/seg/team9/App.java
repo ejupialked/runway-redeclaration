@@ -29,6 +29,8 @@ public class App extends Application {
         this.primaryStage = stage;
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/" + PRIMARY + ".fxml"));
+
+
         Parent root = fxmlLoader.load();
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
