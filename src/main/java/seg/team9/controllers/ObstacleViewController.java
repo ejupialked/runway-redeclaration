@@ -60,12 +60,7 @@ public class ObstacleViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init ObstacleViewController");
         initObstacleBox();
-        MockData.obstacleList().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                boxObstacles.getSelectionModel().select(MockData.obstacleList().get(MockData.obstacleList().size()-1));
-            }
-        });
+        MockData.obstacleList();
 
     }
 
