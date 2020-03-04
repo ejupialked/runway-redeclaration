@@ -35,10 +35,10 @@ public class Calculator {
                 runway.getTora() - BLAST_PROTECTION - distance - runway.getThreshold()
         );
         runway.setWorkingASDA(
-                tora + runway.getStopway()
+                runway.getWorkingTORA() + runway.getStopway()
         );
         runway.setWorkingTODA(
-                tora + runway.getClearway()
+                runway.getWorkingTORA()  + runway.getClearway()
         );
         runway.setWorkingLDA(
                 runway.getLda() - distance - (height * SLOPE) - STRIPEND
