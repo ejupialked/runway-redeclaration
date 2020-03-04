@@ -45,17 +45,18 @@ public class MockData {
         return airports;
     }
 
-    public static void obstacleList(){
-        ArrayList<Obstacle> obstacles = new ArrayList<>();
-        for (int i = 0; i < 10 ; i++) {
-           addObstacle(new Obstacle("obstacle" + i));
-        }
+    public static ObservableList<Obstacle> obstacleList(){
+//        ArrayList<Obstacle> obstacles = new ArrayList<>();
+//        for (int i = 0; i < 10 ; i++) {
+//           addObstacle(new Obstacle("obstacle" + i));
+//        }
+        obstacles.add(new Obstacle("obstacle1", 100D, 10D, 0D, 3000D, 660D));
+        obstacles.add(new Obstacle("obstacle2", 1D, 10D, 0D, 3000D, 660D));
+        return obstacles;
     }
 
     public static ObservableList<Obstacle> addObstacle(Obstacle obstacle){
         obstacles.add(obstacle);
-        obstacles.add(new Obstacle("obstacle1", 100D, 10D, 0D, 3000D, 660D));
-        obstacles.add(new Obstacle("obstacle2", 1D, 10D, 0D, 3000D, 660D));
         return obstacles;
     }
 }

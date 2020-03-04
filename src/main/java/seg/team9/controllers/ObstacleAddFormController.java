@@ -38,7 +38,8 @@ public class ObstacleAddFormController {
     @FXML
     private TextField textName;
 
-
+    @FXML
+    private ObstacleViewController controller;
     @FXML
     void onClick(MouseEvent event) {
         if(textName.getText().equals(""))
@@ -69,6 +70,10 @@ public class ObstacleAddFormController {
             MockData.addObstacle(new Obstacle(textName.getText(),Double.parseDouble(textHeight.getText()),
                     Double.parseDouble(textWidth.getText()),Double.parseDouble(textCenterDist.getText()),
                     Double.parseDouble(textDistRThrreshold.getText()),Double.parseDouble(textDistLThrreshold.getText())));
+            for(Obstacle o : MockData.obstacles)
+            {
+                System.out.println(o.getName());
+            }
             Stage scene = (Stage) buttonFinish.getScene().getWindow();
             scene.close();
         }
