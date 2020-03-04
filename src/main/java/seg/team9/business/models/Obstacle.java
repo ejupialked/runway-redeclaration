@@ -6,9 +6,9 @@ public class Obstacle {
     private Double distanceCenter,distanceRThreshold, distanceLThreshold;
 
 
-    /*public Obstacle (String name){
+    public Obstacle (String name){
         this.name = name;
-    }*/
+    }
 
     public Obstacle (String name, Double height, Double width, Double distanceCenter, Double distanceRThreshold,Double distanceLThreshold)
     {
@@ -22,6 +22,10 @@ public class Obstacle {
 
     public Double getHeight() {
         return height;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
