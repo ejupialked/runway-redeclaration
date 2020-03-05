@@ -1,4 +1,4 @@
-package seg.team9.controllers;
+package seg.team9.controllers.runways;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;

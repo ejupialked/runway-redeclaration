@@ -1,21 +1,18 @@
 package seg.team9.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import seg.team9.App;
-import seg.team9.Utils.MockData;
-import seg.team9.Utils.UtilsUI;
+import seg.team9.utils.MockData;
+import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
-import seg.team9.business.models.DirectedRunway;
-import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.calculation.CalculationBreakdownViewController;
+import seg.team9.controllers.obstacle.ObstacleViewController;
+import seg.team9.controllers.runways.SideViewController;
+import seg.team9.controllers.runways.TopDownViewController;
 
 import java.net.URL;
 import java.util.ResourceBundle;

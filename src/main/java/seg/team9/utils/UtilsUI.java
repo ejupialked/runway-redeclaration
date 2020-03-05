@@ -1,12 +1,15 @@
-package seg.team9.Utils;
+package seg.team9.utils;
 
 import javafx.scene.control.Alert;
-import seg.team9.App;
 
 public class UtilsUI {
 
     public static void showErrorMessage(String error){
         showPopup(error, Alert.AlertType.ERROR);
+    }
+
+    public static void showInfoMessage(String info){
+        showPopup(info, Alert.AlertType.INFORMATION);
     }
 
     private static void showPopup(String message , Alert.AlertType type) {

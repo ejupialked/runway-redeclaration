@@ -1,4 +1,4 @@
-package seg.team9.controllers;
+package seg.team9.controllers.calculation;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 public class CalculationBreakdownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("CalculationBreakdownViewController");
 
+    private static CalculationBreakdownViewController instance;
+
     @FXML private Label labelTOCS;
     @FXML private Label labelALS;
     @FXML private Label labelSlope;
@@ -22,11 +24,21 @@ public class CalculationBreakdownViewController implements Initializable {
     @FXML private Label labelTODA;
     @FXML private Label labelTORA;
 
+    public CalculationBreakdownViewController() {
+        instance = this;
+    }
+
+    public static CalculationBreakdownViewController getInstance() {
+        return instance;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init CalculationBreakdownViewController");
         initLabels();
     }
+
+
 
     public void initLabels(){
      labelTOCS.setText("3932");

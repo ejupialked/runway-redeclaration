@@ -1,4 +1,4 @@
-package seg.team9.controllers;
+package seg.team9.controllers.runways;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

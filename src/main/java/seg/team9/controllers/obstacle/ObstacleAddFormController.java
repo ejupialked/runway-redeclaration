@@ -1,34 +1,23 @@
-package seg.team9.controllers;
-
+package seg.team9.controllers.obstacle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import seg.team9.Exceptions.TextFieldEmptyException;
-import seg.team9.Utils.UtilsUI;
+import seg.team9.exceptions.TextFieldEmptyException;
+import seg.team9.utils.MockData;
+import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Obstacle;
 
-public class ObstacleEditFormController  {
+public class ObstacleAddFormController {
 
     @FXML private TextField textHeight;
     @FXML private TextField textWidth;
     @FXML private TextField textCenterDist;
     @FXML private TextField textDistLThreshold;
     @FXML private TextField textDistRThreshold;
-    @FXML private Button buttonEdit;
+    @FXML private Button buttonFinish;
     @FXML private TextField textName;
-    private Obstacle obstacleSelected;
-
-    public void initForm(Obstacle obstacleSelected){
-        this.obstacleSelected = obstacleSelected;
-        textHeight.setText(obstacleSelected.getHeight().toString());
-        textWidth.setText(obstacleSelected.getWidth().toString());
-        textCenterDist.setText(obstacleSelected.getDistanceCenter().toString());
-        textDistLThreshold.setText(obstacleSelected.getDistanceLThreshold().toString());
-        textDistRThreshold.setText(obstacleSelected.getDistanceRThreshold().toString());
-        textName.setText(obstacleSelected.getName());
-    }
 
     @FXML
     void onClick(MouseEvent event) {
@@ -38,22 +27,22 @@ public class ObstacleEditFormController  {
         } catch (TextFieldEmptyException e) {
             UtilsUI.showErrorMessage(e.getMessage());
         }
+        Obstacle o = new Obstacle(
+                    textName.getText(),
+                    Double.parseDouble(textHeight.getText()),
+                    Double.parseDouble(textWidth.getText()),
+                    Double.parseDouble(textCenterDist.getText()),
+                    Double.parseDouble(textDistRThreshold.getText()),
+                    Double.parseDouble(textDistLThreshold.getText()));
 
-        //get scene
-        Stage scene = (Stage) buttonEdit.getScene().getWindow();
+            MockData.addObstacle(o);
 
-        obstacleSelected.setName(textName.getText());
-        obstacleSelected.setDistanceCenter(Double.parseDouble(textCenterDist.getText()));
-        obstacleSelected.setDistanceLThreshold(Double.parseDouble(textDistLThreshold.getText()));
-        obstacleSelected.setDistanceRThreshold(Double.parseDouble(textDistRThreshold.getText()));
-        obstacleSelected.setWidth(Double.parseDouble(textWidth.getText()));
-        obstacleSelected.setHeight(Double.parseDouble(textHeight.getText()));
+            Stage scene = (Stage) buttonFinish.getScene().getWindow();
+            scene.close();
 
-        //updates labels in the obstacle view
-        ObstacleViewController.getInstance().updateLabelsObstacle(obstacleSelected);
-
-        scene.close();
+            UtilsUI.showInfoMessage("Obstacle: " + o.getName() + " has been added!");
     }
+
 
     /**
      * Validate all user inputs

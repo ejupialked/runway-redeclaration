@@ -1,4 +1,4 @@
-package seg.team9.Exceptions;
+package seg.team9.exceptions;
 
 public class TextFieldEmptyException extends Exception {
 

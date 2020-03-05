@@ -1,8 +1,7 @@
-package seg.team9.controllers;
+package seg.team9.controllers.runways;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,10 +9,11 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import seg.team9.business.logic.Calculator;
+import seg.team9.App;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
@@ -24,12 +24,13 @@ import java.util.ResourceBundle;
 public class TopDownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("SideViewController");
 
+
+    String FONT_FAMILY = "Helvetica";
+
     @FXML private AnchorPane topDownView;
-    @FXML private Label title;
 
     private static TopDownViewController instance;
 
-    private Calculator calculator = new Calculator();
 
     private Obstacle currentObstacle = new Obstacle("Nothing", 1D, 1D, 0D, 3660D,0D);
     private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D));
@@ -116,6 +117,7 @@ public class TopDownViewController implements Initializable {
         logger.info("init TopDownViewController");
         topDownView.setMinHeight(0);
         topDownView.setMinWidth(0);
+        topDownView.setStyle("-fx-background-color: green");
         addChildren();
         initText();
         initLines();
@@ -149,29 +151,33 @@ public class TopDownViewController implements Initializable {
 
     public void initText(){
         runwayDesignatorR.setRotate(90);
-        runwayDesignatorR.setFont(Font.font(15));
-        runwayDesignatorR.setStroke(Color.WHITE);
+        runwayDesignatorR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 30));
+        runwayDesignatorR.setFill(Color.WHITE);
         runwayDesignatorR.setSmooth(true);
 
-        textTODAR.setFont(Font.font(10));
-        textTODAR.setStroke(Color.BLACK);
-        textASDAR.setFont(Font.font(10));
-        textASDAR.setStroke(Color.BLACK);
-        textTORAR.setFont(Font.font(10));
-        textTORAR.setStroke(Color.BLACK);
-        textLDAR.setFont(Font.font(10));
-        textLDAR.setStroke(Color.BLACK);
+
         runwayDesignatorL.setRotate(270);
-        runwayDesignatorL.setFont(Font.font(15));
-        runwayDesignatorL.setStroke(Color.WHITE);
-        textTODAL.setFont(Font.font(10));
-        textTODAL.setStroke(Color.BLACK);
-        textASDAL.setFont(Font.font(10));
-        textASDAL.setStroke(Color.BLACK);
-        textTORAL.setFont(Font.font(10));
-        textTORAL.setStroke(Color.BLACK);
-        textLDAL.setFont(Font.font(10));
-        textLDAL.setStroke(Color.BLACK);
+        runwayDesignatorL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 30));
+        runwayDesignatorL.setFill(Color.WHITE);
+        runwayDesignatorL.setSmooth(true);
+
+        textTODAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textTODAR.setFill(Color.WHITE);
+        textASDAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textASDAR.setFill(Color.WHITE);
+        textTORAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textTORAR.setFill(Color.WHITE);
+        textLDAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textLDAR.setFill(Color.WHITE);
+
+        textTODAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textTODAL.setFill(Color.WHITE);
+        textASDAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textASDAL.setFill(Color.WHITE);
+        textTORAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textTORAL.setFill(Color.WHITE);
+        textLDAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textLDAL.setFill(Color.WHITE);
     }
 
     public void initLines(){
@@ -252,7 +258,7 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateClearedAndGradedArea(){
-        double points[] = {
+        double[] points = {
                 0,0.3*yScaler,
                 0.2*xScaler, 0.3*yScaler,
                 0.3*xScaler,0.2*yScaler,
@@ -479,7 +485,6 @@ public class TopDownViewController implements Initializable {
         text.getChildren().add(textTORAL);
         text.getChildren().add(textLDAL);
 
-        topDownView.getChildren().add(title);
         topDownView.getChildren().add(graphics);
         topDownView.getChildren().add(text);
     }
@@ -501,14 +506,14 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateValues(){
-        calculator.redesignate(currentRunway, currentObstacle);
-        runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator().toString());
+        App.getCalculator().redesignate(currentRunway, currentObstacle);
+        runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
         TODAR = currentRunway.getRRunway().getWorkingTODA();
         ASDAR = currentRunway.getRRunway().getWorkingASDA();
         TORAR = currentRunway.getRRunway().getWorkingTORA();
         LDAR = currentRunway.getRRunway().getWorkingLDA();
 
-        runwayDesignatorL.setText(currentRunway.getLRunway().getDesignator().toString());
+        runwayDesignatorL.setText(currentRunway.getLRunway().getDesignator());
         TODAL = currentRunway.getLRunway().getWorkingTODA();
         ASDAL = currentRunway.getLRunway().getWorkingASDA();
         TORAL = currentRunway.getLRunway().getWorkingTORA();

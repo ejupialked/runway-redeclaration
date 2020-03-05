@@ -1,26 +1,20 @@
-package seg.team9.controllers;
+package seg.team9.controllers.obstacle;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import seg.team9.Utils.MockData;
+import seg.team9.utils.MockData;
 import seg.team9.business.models.Obstacle;
+import seg.team9.controllers.runways.TopDownViewController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,14 +49,20 @@ public class ObstacleViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init ObstacleViewController");
         initObstacleBox();
-        MockData.obstacleList();
     }
 
     public void initObstacleBox() {
         logger.info("init ObstacleBox");
 
         //Adding mock objects (U13 - Predefined obstacles)
-        MockData.obstacleList();
+        MockData.obstacleList().addListener(new ListChangeListener<Obstacle>() {
+            @Override
+            public void onChanged(Change<? extends Obstacle> change) {
+                // update everything
+            }
+        });
+
+
         boxObstacles.setItems(MockData.obstacles);
         boxObstacles.getSelectionModel().selectFirst();
 
