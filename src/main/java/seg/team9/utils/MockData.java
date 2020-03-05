@@ -1,4 +1,4 @@
-package seg.team9.Utils;
+package seg.team9.utils;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +9,6 @@ import seg.team9.business.models.Runway;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MockData {
 

@@ -1,26 +1,20 @@
-package seg.team9.controllers;
+package seg.team9.controllers.obstacle;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import seg.team9.Utils.MockData;
+import seg.team9.utils.MockData;
 import seg.team9.business.models.Obstacle;
+import seg.team9.controllers.runways.TopDownViewController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,75 +23,61 @@ import java.util.ResourceBundle;
 public class ObstacleViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("ObstacleViewController");
 
-    @FXML
-    private ChoiceBox<Obstacle> boxObstacles;
+    private static ObstacleViewController instance;
 
 
-
-    @FXML
-    private Label txtObstacleName;
-
-    @FXML
-    private Label txtObstacleHeight;
-
-    @FXML
-    private Label txtObstacleWidth;
-
-    @FXML
-    private Label txtDistanceCenter;
-
-    @FXML
-    private Label txtDistanceThresholdLeft;
-
-    @FXML
-    private Label txtDistanceThresholdRight;
+    @FXML private ChoiceBox<Obstacle> boxObstacles;
+    @FXML private Label txtObstacleName;
+    @FXML private Label txtObstacleHeight;
+    @FXML private Label txtObstacleWidth;
+    @FXML private Label txtDistanceCenter;
+    @FXML private Label txtDistanceThresholdLeft;
+    @FXML private Label txtDistanceThresholdRight;
 
     private Obstacle selectedObstacle;
 
 
+    public ObstacleViewController() {
+        instance = this;
+    }
+
+    public static ObstacleViewController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init ObstacleViewController");
         initObstacleBox();
-        MockData.obstacleList();
-
     }
 
     public void initObstacleBox() {
         logger.info("init ObstacleBox");
-        boxObstacles.setConverter(new StringConverter<Obstacle>() {
 
-            //Obstacle.toString() returns the name of the obstacle
+        //Adding mock objects (U13 - Predefined obstacles)
+        MockData.obstacleList().addListener(new ListChangeListener<Obstacle>() {
             @Override
-            public String toString(Obstacle object) {
-                return  object.getName();
-            }
-
-            //Gets the first object that matches the given name
-            @Override
-            public Obstacle fromString(String string) {
-                return boxObstacles.getItems().stream().filter(obstacle -> obstacle.getName().equals(string)).findFirst().orElse(null);
+            public void onChanged(Change<? extends Obstacle> change) {
+                // update everything
             }
         });
 
-        //Adding mock objects (U13 - Predefined obstacles)
-        MockData.obstacleList();
+
         boxObstacles.setItems(MockData.obstacles);
         boxObstacles.getSelectionModel().selectFirst();
 
+        setSelectedObstacle(boxObstacles.getValue());
+
+        //When an obstacle is selected
         boxObstacles.valueProperty().addListener(((observable, oldValue, newValue) -> {
             if(newValue!=null)
                 TopDownViewController.getInstance().displayObstacleSelected(newValue);
         }));
 
-
-        boxObstacles.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Obstacle>() {
-            @Override
-            public void changed(ObservableValue<? extends Obstacle> observableValue, Obstacle obstacle, Obstacle t1) {
-                setSelectedObstacle(t1);
-                updateLabelsObstacle(t1);
-            }
+        //When an obstacle is selected
+        boxObstacles.getSelectionModel().selectedItemProperty().addListener((observableValue, obstacle, t1) -> {
+            setSelectedObstacle(t1);
+            updateLabelsObstacle(t1);
         });
 
         TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
@@ -112,53 +92,42 @@ public class ObstacleViewController implements Initializable {
     void onClick(MouseEvent event) {
         final String formName= "obstacleaddform";
         Parent root;
-        try
-        {
+        try {
             root = FXMLLoader.load(ObstacleViewController.class.getResource("/view/"+formName+".fxml"));
             Stage stage = new Stage();
             stage.setTitle("Add Obstacle");
             stage.setScene(new Scene(root));
             stage.show();
         }
-        catch (IOException e)
-        {
-            System.err.println(e);
+        catch (IOException e) {
+            logger.error(e);
         }
     }
-
-
 
     @FXML
     void onEditObstacle(MouseEvent event) {
         final String formName= "obstacleeditform";
         Parent root;
-        try
-        {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(ObstacleEditFormController.class.getResource("/view/"+formName+".fxml"));
-
             root = fxmlLoader.load();
 
             ObstacleEditFormController obstacleEditFormController = fxmlLoader.getController();
-            obstacleEditFormController.setEditItem(selectedObstacle);
-            obstacleEditFormController.initForm();
+            obstacleEditFormController.initForm(selectedObstacle);
 
-            //root = FXMLLoader.load(ObstacleViewController.class.getResource("/view/"+formName+".fxml"));
             Stage stage = new Stage();
             stage.setTitle("Edit Obstacle");
             stage.setScene(new Scene(root));
             stage.show();
         }
-        catch (IOException e)
-        {
-            System.err.println(e);
+        catch (IOException e) {
+            logger.error(e);
         }
 
     }
 
     public void updateLabelsObstacle(Obstacle o) {
-
-        System.out.println(o.toString());
-          txtObstacleName.setText(o.getName());
+         txtObstacleName.setText(o.getName());
           txtObstacleHeight.setText(addUnitMeasurement(o.getHeight().toString()));
           txtObstacleWidth.setText(addUnitMeasurement(o.getWidth().toString()));
           txtDistanceCenter.setText(addUnitMeasurement(o.getDistanceCenter().toString()));

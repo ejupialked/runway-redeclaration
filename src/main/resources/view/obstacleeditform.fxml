@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="obstacleEditForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.ObstacleEditFormController">
+<AnchorPane fx:id="obstacleEditForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.obstacle.ObstacleEditFormController">
     <children>
         <TextField fx:id="textHeight" layoutX="293.0" layoutY="88.0" />
         <Label layoutX="131.0" layoutY="87.0" text="Height">
@@ -26,13 +26,13 @@
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="textDistLThrreshold" layoutX="293.0" layoutY="210.0" />
+        <TextField fx:id="textDistLThreshold" layoutX="293.0" layoutY="210.0" />
         <Label layoutX="75.0" layoutY="210.0" text="Distance Left Threshold">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <TextField fx:id="textDistRThrreshold" layoutX="293.0" layoutY="249.0" />
+        <TextField fx:id="textDistRThreshold" layoutX="293.0" layoutY="249.0" />
         <Label layoutX="70.0" layoutY="248.0" text="Distance Right Threshold">
             <font>
                 <Font size="15.0" />

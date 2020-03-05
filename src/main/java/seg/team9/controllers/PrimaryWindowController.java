@@ -1,20 +1,18 @@
 package seg.team9.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import seg.team9.App;
-import seg.team9.Utils.MockData;
+import seg.team9.utils.MockData;
+import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
-import seg.team9.business.models.DirectedRunway;
-import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.calculation.CalculationBreakdownViewController;
+import seg.team9.controllers.obstacle.ObstacleViewController;
+import seg.team9.controllers.runways.SideViewController;
+import seg.team9.controllers.runways.TopDownViewController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +26,6 @@ public class PrimaryWindowController implements Initializable {
     @FXML private MenuItem menuItemClose;
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
     @FXML private ChoiceBox<Runway> choiceBoxRunway;
-
 
     // Injecting controllers
     @FXML private SideViewController sideViewController; // side runway
@@ -50,23 +47,15 @@ public class PrimaryWindowController implements Initializable {
         topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
 
 
-        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Runway>() {
-            @Override
-            public void changed(ObservableValue<? extends Runway> observableValue, Runway directedRunway, Runway t1) {
-                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
-                topDownViewController.updateUI();
-            }
+        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
+            topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+            topDownViewController.updateUI();
         });
 
     }
 
     private void initMenuBar(){
-        menuItemClose.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                App.showPopup("This feature has not been implemented yet",Alert.AlertType.INFORMATION);
-            }
-        });
+        menuItemClose.setOnAction(actionEvent -> UtilsUI.showErrorMessage("This feature has not been implemented yet"));
     }
 
 }

@@ -63,4 +63,9 @@ public class Obstacle {
     public void setDistanceLThreshold(Double distanceLThreshold) {
         this.distanceLThreshold = distanceLThreshold;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

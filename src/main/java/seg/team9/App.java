@@ -27,9 +27,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
-
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/" + PRIMARY + ".fxml"));
-
 
         Parent root = fxmlLoader.load();
         primaryStage.setMaximized(true);
@@ -47,11 +45,4 @@ public class App extends Application {
     }
 
 
-    public static void showPopup(String message , Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setTitle("Info");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }
