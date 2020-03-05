@@ -293,7 +293,7 @@ public class TopDownViewController implements Initializable {
     public void updateRunwayDesignator(){
         runwayDesignatorR.setX(runwayBeginX);
         runwayDesignatorR.setY(yScaler*0.5);
-        runwayDesignatorL.setX(runwayEndX-40);
+        runwayDesignatorL.setX(runwayEndX-60);
         runwayDesignatorL.setY(yScaler*0.5);
     }
 
