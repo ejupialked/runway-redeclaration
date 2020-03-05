@@ -23,16 +23,19 @@ public class MockData {
         ArrayList<Runway> runways = new ArrayList<>();
         runways.add(new Runway(directedRunways().get(0), directedRunways().get(1)));
         runways.add(new Runway(directedRunways().get(2), directedRunways().get(3)));
+        runways.add(new Runway(directedRunways().get(4), directedRunways().get(5)));
         return runways;
     }
 
 
     public static List<DirectedRunway> directedRunways(){
         ArrayList<DirectedRunway> directedRunways = new ArrayList<>();
-        directedRunways.add(new DirectedRunway("09/R", 3660D,3660D,3660D,3353D,307D,0D,0D));
-        directedRunways.add(new DirectedRunway("27/L", 3660D,3660D,3660D,3660D,0D,0D,0D));
-        directedRunways.add(new DirectedRunway("06/R", 3660D,3660D,3660D,3660D,0D,500D,100D));
-        directedRunways.add(new DirectedRunway("30/L", 3660D,3660D,3660D,3660D,0D,250D,200D));
+        directedRunways.add(new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 0d, 0d));
+        directedRunways.add(new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 0d, 0d));
+        directedRunways.add(new DirectedRunway("09R", 3660d, 3660d, 3660d, 3353d, 307d, 0d, 0d));
+        directedRunways.add(new DirectedRunway("27L", 3660d, 3660d, 3660d, 3660d, 0d, 0d, 0d));
+        directedRunways.add(new DirectedRunway("4R",4000D,4000D,4000D,4000D,0D,0D,0D));
+        directedRunways.add(new DirectedRunway("32R",4000D,4000D,4000D,4000D,0D,0D,0D));
         return directedRunways;
     }
 
@@ -52,8 +55,8 @@ public class MockData {
 //        for (int i = 0; i < 10 ; i++) {
 //           addObstacle(new Obstacle("obstacle" + i));
 //        }
-        obstacles.add(new Obstacle("obstacle1", 5D, 100D, 100D, 2000D, 660D));
-        obstacles.add(new Obstacle("obstacle2", 1D, 100D, 0D, 660D, 2000D));
+        obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
+        obstacles.add(new Obstacle("Boeing737", 25d, 100d, 20d, 2853d, 500d));
         return obstacles;
     }
 
