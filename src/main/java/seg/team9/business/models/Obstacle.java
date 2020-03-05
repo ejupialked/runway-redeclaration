@@ -1,7 +1,7 @@
 package seg.team9.business.models;
 
 public class Obstacle {
-    String name;
+    private String name;
     private Double height,width;
     private Double distanceCenter,distanceRThreshold, distanceLThreshold;
 
@@ -27,7 +27,7 @@ public class Obstacle {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name){
         this.name = name;
     }
