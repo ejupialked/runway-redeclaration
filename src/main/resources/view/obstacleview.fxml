@@ -15,7 +15,7 @@
             <content>
                 <AnchorPane prefHeight="318.0" prefWidth="501.0" style="-fx-background-color: #E0E0E0;">
                     <children>
-                        <Button fx:id="buttonAddObstacle" layoutX="431.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.leftAnchor="334.6" AnchorPane.rightAnchor="100.0">
+                        <Button fx:id="buttonAddObstacle" layoutX="431.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.rightAnchor="50.0">
                   <font>
                      <Font size="14.0" />
                   </font></Button>
@@ -71,7 +71,7 @@
                      </HBox>
                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                         <children>
-                           <Label alignment="BOTTOM_RIGHT" prefHeight="17.0" prefWidth="137.0" text="distance center:">
+                           <Label alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="165.0" text="distance center:">
                               <font>
                                  <Font name="System Bold" size="16.0" />
                               </font>
@@ -85,7 +85,7 @@
                      </HBox>
                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                         <children>
-                           <Label alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="177.0" text="distance threshold (left) :">
+                           <Label alignment="BOTTOM_RIGHT" prefHeight="20.0" prefWidth="242.0" text="distance threshold (left) :">
                               <font>
                                  <Font name="System Bold" size="16.0" />
                               </font>
@@ -116,7 +116,7 @@
                      <Insets />
                   </opaqueInsets>
                </VBox>
-               <Button fx:id="buttonEditObstacle" layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" prefHeight="37.0" prefWidth="56.0" text="Edit" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="334.6">
+               <Button fx:id="buttonEditObstacle" layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" prefHeight="37.0" prefWidth="56.0" text="Edit" AnchorPane.leftAnchor="50.0">
                   <font>
                      <Font size="14.0" />
                   </font></Button>
