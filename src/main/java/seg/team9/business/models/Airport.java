@@ -22,8 +22,7 @@ public class Airport {
         this.longitude = longitude;
     }
 
-    public void addRunway(Runway runway)
-    {
+    public void addRunway(Runway runway) {
         runwayList.add(runway);
     }
     public ArrayList<Runway> getRunwayList() {

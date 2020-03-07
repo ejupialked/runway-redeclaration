@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.App;
 import seg.team9.utils.MockData;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.TopDownViewController;
@@ -63,20 +64,13 @@ public class ObstacleViewController implements Initializable {
     public void initObstacleBox() {
         logger.info("init ObstacleBox");
 
-        //Adding mock objects (U13 - Predefined obstacles)
-        MockData.obstacleList().addListener(new ListChangeListener<Obstacle>() {
-            @Override
-            public void onChanged(Change<? extends Obstacle> change) {
-                // update everything
-            }
-        });
 
-        for(Obstacle o : MockData.obstacles){
+        for(Obstacle o : App.obstacleObservableList()){
             CheckBox newbox = new CheckBox(o.getName());
             checkBoxes.getChildren().add(newbox);
             checkToObst.put(newbox, o);
         }
-        boxObstacles.setItems(MockData.obstacles);
+        boxObstacles.setItems(App.obstacleObservableList());
         boxObstacles.getSelectionModel().selectFirst();
 
         setSelectedObstacle(boxObstacles.getValue());

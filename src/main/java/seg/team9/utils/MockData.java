@@ -1,7 +1,5 @@
 package seg.team9.utils;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
@@ -11,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockData {
-
-    static public ObservableList<Obstacle> obstacles = FXCollections.observableArrayList();
-
 
     public MockData() {
 
@@ -27,7 +22,6 @@ public class MockData {
         return runways;
     }
 
-
     public static List<DirectedRunway> directedRunways(){
         ArrayList<DirectedRunway> directedRunways = new ArrayList<>();
         directedRunways.add(new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 0d, 0d));
@@ -39,7 +33,6 @@ public class MockData {
         return directedRunways;
     }
 
-
     public static List<Airport> airportList(){
         ArrayList<Airport> airports = new ArrayList<>();
         airports.add(new Airport("Heathrow"));
@@ -50,19 +43,11 @@ public class MockData {
         return airports;
     }
 
-    public static ObservableList<Obstacle> obstacleList(){
-//        ArrayList<Obstacle> obstacles = new ArrayList<>();
-//        for (int i = 0; i < 10 ; i++) {
-//           addObstacle(new Obstacle("obstacle" + i));
-//        }
+    public static List<Obstacle> obstacleList(){
+        ArrayList<Obstacle> obstacles = new ArrayList<>();
         obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
         obstacles.add(new Obstacle("Boeing777", 25d, 100d, 20d, 2853d, 500d));
-
         return obstacles;
     }
 
-    public static ObservableList<Obstacle> addObstacle(Obstacle obstacle){
-        obstacles.add(obstacle);
-        return obstacles;
-    }
 }
