@@ -56,7 +56,7 @@ public class MockData {
 //           addObstacle(new Obstacle("obstacle" + i));
 //        }
         obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
-        obstacles.add(new Obstacle("Boeing737", 25d, 100d, 20d, 2853d, 500d));
+        obstacles.add(new Obstacle("Boeing777", 25d, 100d, 20d, 2853d, 500d));
         return obstacles;
     }
 

@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seg.team9.exceptions.TextFieldEmptyException;
+import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.TopDownViewController;
@@ -43,12 +44,16 @@ public class ObstacleEditFormController  {
         //get scene
         Stage scene = (Stage) buttonEdit.getScene().getWindow();
 
+        MockData.obstacles.remove(obstacleSelected);
+
         obstacleSelected.setName(textName.getText());
         obstacleSelected.setDistanceCenter(Double.parseDouble(textCenterDist.getText()));
         obstacleSelected.setDistanceLThreshold(Double.parseDouble(textDistLThreshold.getText()));
         obstacleSelected.setDistanceRThreshold(Double.parseDouble(textDistRThreshold.getText()));
         obstacleSelected.setWidth(Double.parseDouble(textWidth.getText()));
         obstacleSelected.setHeight(Double.parseDouble(textHeight.getText()));
+
+        MockData.obstacles.add(obstacleSelected);
 
         //updates labels in the obstacle view
         ObstacleViewController.getInstance().updateLabelsObstacle(obstacleSelected);
