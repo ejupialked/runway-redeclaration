@@ -55,8 +55,9 @@ public class MockData {
 //        for (int i = 0; i < 10 ; i++) {
 //           addObstacle(new Obstacle("obstacle" + i));
 //        }
-        obstacles.add(new Obstacle("Boeing737 on Left", 12d, 100d, 0d, 3646d, -50d));
-        obstacles.add(new Obstacle("Boeing737 on Right", 25d, 100d, 20d, 2853d, 500d));
+        obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
+        obstacles.add(new Obstacle("Boeing777", 25d, 100d, 20d, 2853d, 500d));
+
         return obstacles;
     }
 
