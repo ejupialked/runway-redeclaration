@@ -13,7 +13,7 @@ public class DirectedRunway
         this.designator = designator;
     }*/
 
-    public DirectedRunway (String designator, Double TODA, Double TORA, Double ASDA, Double LDA, Double threshold, Double clearway, Double stopway)
+    public DirectedRunway (String designator, Double TORA, Double TODA, Double ASDA, Double LDA, Double threshold, Double clearway, Double stopway)
     {
         this.designator = designator;
         this.threshold = threshold;
