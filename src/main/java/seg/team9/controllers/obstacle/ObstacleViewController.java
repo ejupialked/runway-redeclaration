@@ -1,14 +1,20 @@
 package seg.team9.controllers.obstacle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -18,6 +24,7 @@ import seg.team9.controllers.runways.TopDownViewController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ObstacleViewController implements Initializable {
@@ -27,6 +34,7 @@ public class ObstacleViewController implements Initializable {
 
 
     @FXML private ChoiceBox<Obstacle> boxObstacles;
+    @FXML private VBox checkBoxes;
     @FXML private Label txtObstacleName;
     @FXML private Label txtObstacleHeight;
     @FXML private Label txtObstacleWidth;
@@ -35,6 +43,7 @@ public class ObstacleViewController implements Initializable {
     @FXML private Label txtDistanceThresholdRight;
 
     private Obstacle selectedObstacle;
+    private HashMap<CheckBox,Obstacle> checkToObst = new HashMap<CheckBox, Obstacle>();
 
 
     public ObstacleViewController() {
@@ -62,25 +71,43 @@ public class ObstacleViewController implements Initializable {
             }
         });
 
-
+        for(Obstacle o : MockData.obstacles){
+            CheckBox newbox = new CheckBox(o.getName());
+            checkBoxes.getChildren().add(newbox);
+            checkToObst.put(newbox, o);
+        }
         boxObstacles.setItems(MockData.obstacles);
         boxObstacles.getSelectionModel().selectFirst();
 
         setSelectedObstacle(boxObstacles.getValue());
 
-        //When an obstacle is selected
+        /*When an obstacle is selected
         boxObstacles.valueProperty().addListener(((observable, oldValue, newValue) -> {
             if(newValue!=null)
-                TopDownViewController.getInstance().displayObstacleSelected(newValue);
-        }));
+
+        }));*/
 
         //When an obstacle is selected
         boxObstacles.getSelectionModel().selectedItemProperty().addListener((observableValue, obstacle, t1) -> {
             setSelectedObstacle(t1);
             updateLabelsObstacle(t1);
+            //TopDownViewController.getInstance().displayObstacleSelected(t1);
         });
 
-        TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
+        //TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
+        CheckBox test = new CheckBox("Meme");
+
+        for(Node n : checkBoxes.getChildren()){
+            CheckBox c = (CheckBox)n;
+            c.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if(newValue == true)
+                        TopDownViewController.getInstance().displayObstacleSelected(checkToObst.get(c));
+                }
+            });
+        }
+
     }
 
 
@@ -128,11 +155,11 @@ public class ObstacleViewController implements Initializable {
 
     public void updateLabelsObstacle(Obstacle o) {
          txtObstacleName.setText(o.getName());
-          txtObstacleHeight.setText(addUnitMeasurement(o.getHeight().toString()));
-          txtObstacleWidth.setText(addUnitMeasurement(o.getWidth().toString()));
-          txtDistanceCenter.setText(addUnitMeasurement(o.getDistanceCenter().toString()));
-          txtDistanceThresholdLeft.setText(addUnitMeasurement(o.getDistanceLThreshold().toString()));
-          txtDistanceThresholdRight.setText(o.getDistanceRThreshold().toString());
+         txtObstacleHeight.setText(addUnitMeasurement(o.getHeight().toString()));
+         txtObstacleWidth.setText(addUnitMeasurement(o.getWidth().toString()));
+         txtDistanceCenter.setText(addUnitMeasurement(o.getDistanceCenter().toString()));
+         txtDistanceThresholdLeft.setText(addUnitMeasurement(o.getDistanceLThreshold().toString()));
+         txtDistanceThresholdRight.setText(o.getDistanceRThreshold().toString());
     }
 
 
