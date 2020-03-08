@@ -2,9 +2,11 @@ package seg.team9.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
@@ -18,6 +20,7 @@ import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PrimaryWindowController implements Initializable {
@@ -30,16 +33,37 @@ public class PrimaryWindowController implements Initializable {
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
     @FXML private ChoiceBox<Runway> choiceBoxRunway;
 
+    private ArrayList<AnchorPane> lightPanes;
+    private ArrayList<AnchorPane> darkPanes;
+    @FXML private AnchorPane paneView;
+    @FXML private AnchorPane paneCalculations;
+    @FXML private AnchorPane paneQMarks;
     // Injecting controllers
     @FXML private SideViewController sideViewController; // side runway
     @FXML private TopDownViewController topDownViewController; // top down runway
     @FXML private ObstacleViewController obstacleViewController;
     @FXML private CalculationBreakdownViewController calculationsBreakdownViewController;
 
+    private String white = " #FFFFFF";
+    private String grey = "#E0E0E0";
+    private String darkerWhite = "#cccccc";
+    private String darkerGray = "#B3B3B3";
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initMenuBar();
         initChoiceBoxes();
+        initArrays();
+    }
+
+    private void initArrays() {
+        lightPanes = new ArrayList<>();
+        darkPanes = new ArrayList<>();
+        lightPanes.add(paneCalculations);
+        lightPanes.add(calculationsBreakdownViewController.getPaneCalculationsBreakdown());
+        darkPanes.add(paneView);
+        darkPanes.add(paneQMarks);
+        darkPanes.add(obstacleViewController.getPaneObstacles());
     }
 
     private void initChoiceBoxes(){
@@ -75,4 +99,19 @@ public class PrimaryWindowController implements Initializable {
         menuItemClose.setOnAction(actionEvent -> UtilsUI.showErrorMessage("This feature has not been implemented yet"));
     }
 
+    public void onColourChangeDefault(ActionEvent actionEvent) {
+        for (AnchorPane pane : lightPanes)
+            pane.setStyle("-fx-background-color: " + white + ";");
+
+        for(AnchorPane pane : darkPanes)
+            pane.setStyle("-fx-background-color: " + grey + ";");
+    }
+
+    public void onColourChangeDark(ActionEvent actionEvent) {
+        for (AnchorPane pane : lightPanes)
+            pane.setStyle("-fx-background-color: " + darkerWhite + ";");
+
+        for(AnchorPane pane : darkPanes)
+            pane.setStyle("-fx-background-color: " + darkerGray + ";");
+    }
 }
