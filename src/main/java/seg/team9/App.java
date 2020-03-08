@@ -50,11 +50,11 @@ public class App extends Application {
     }
 
     public static ObservableList<Obstacle> obstacleObservableList(){
-        return FXCollections.observableArrayList(MockData.obstacleList());
+        return FXCollections.observableArrayList(MockData.obstacles);
     }
 
     public static ObservableList<Airport> airportObservableList(){
-        return FXCollections.observableArrayList(MockData.airportList());
+        return FXCollections.observableArrayList(MockData.aiports);
     }
 
 }

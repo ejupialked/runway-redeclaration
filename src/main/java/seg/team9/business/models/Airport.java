@@ -12,6 +12,7 @@ public class Airport {
 
     public Airport(String name) {
         this.name = name;
+        this.runwayList = new ArrayList<>();
     }
     public Airport(String name, String city, Double latitude, Double longitude)
     {

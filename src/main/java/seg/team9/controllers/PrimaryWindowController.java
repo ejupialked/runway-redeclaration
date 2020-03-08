@@ -1,10 +1,13 @@
 package seg.team9.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.App;
 import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
@@ -40,16 +43,30 @@ public class PrimaryWindowController implements Initializable {
     }
 
     private void initChoiceBoxes(){
-        choiceBoxAirport.getItems().addAll(MockData.airportList());
+        choiceBoxAirport.getItems().addAll(App.airportObservableList());
         choiceBoxAirport.getSelectionModel().selectFirst();
-        choiceBoxRunway.getItems().addAll(MockData.runwayList());
+
+        Airport a = choiceBoxAirport.getValue();
+
+        choiceBoxRunway.getItems().addAll(a.getRunwayList());
         choiceBoxRunway.getSelectionModel().selectFirst();
+
         topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
+
+        //when an airport is selected the runway list will update
+        choiceBoxAirport.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Airport>() {
+            @Override
+            public void changed(ObservableValue<? extends Airport> observableValue, Airport airport, Airport t1) {
+                choiceBoxRunway.getItems().clear();
+                choiceBoxRunway.getItems().addAll(airport.getRunwayList());
+                choiceBoxRunway.getSelectionModel().selectFirst();
+            }
+        });
 
 
         choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
-            topDownViewController.updateUI();
+            //topDownViewController.updateUI(); you're calling this method already in line 67
         });
 
     }

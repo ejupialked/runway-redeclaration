@@ -7,7 +7,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seg.team9.App;
 import seg.team9.exceptions.TextFieldEmptyException;
-import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.TopDownViewController;

@@ -72,6 +72,7 @@ public class ObstacleViewController implements Initializable {
         }
         boxObstacles.setItems(App.obstacleObservableList());
         boxObstacles.getSelectionModel().selectFirst();
+        updateLabelsObstacle(boxObstacles.getValue());
 
         setSelectedObstacle(boxObstacles.getValue());
 
