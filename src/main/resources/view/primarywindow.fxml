@@ -68,7 +68,7 @@
                   <ChoiceBox fx:id="choiceBoxAirport" layoutX="91.0" layoutY="21.0" prefWidth="150.0" />
                   <Label layoutX="24.0" layoutY="63.0" prefHeight="17.0" prefWidth="67.0" text="Runway:" />
                   <ChoiceBox fx:id="choiceBoxRunway" layoutX="91.0" layoutY="59.0" prefWidth="150.0" />
-                  <GridPane layoutX="60.0" layoutY="818.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                  <GridPane layoutX="60.0" layoutY="818.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -80,16 +80,16 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ColorPicker GridPane.columnIndex="1" />
-                        <ColorPicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ColorPicker GridPane.columnIndex="3" />
-                        <ColorPicker GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <ColorPicker fx:id="colourPickerTORA" onAction="#onSelectedTORAColour" GridPane.columnIndex="1" />
+                        <ColorPicker fx:id="colourPickerTODA" onAction="#onSelectedTODAColour" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ColorPicker fx:id="colourPickerASDA" onAction="#onSelectedASDAColour" GridPane.columnIndex="3" />
+                        <ColorPicker fx:id="colourPickerLDA" onAction="#o0nSelectedLDAColour" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <Label text="TORA">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="12.0" text="TOCS" GridPane.rowIndex="1">
+                        <Label layoutX="10.0" layoutY="12.0" text="TODA" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
