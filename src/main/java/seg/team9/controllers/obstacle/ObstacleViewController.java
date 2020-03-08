@@ -14,6 +14,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
@@ -41,7 +42,7 @@ public class ObstacleViewController implements Initializable {
     @FXML private Label txtDistanceCenter;
     @FXML private Label txtDistanceThresholdLeft;
     @FXML private Label txtDistanceThresholdRight;
-
+    @FXML private AnchorPane paneObstacles;
     private Obstacle selectedObstacle;
     private HashMap<CheckBox,Obstacle> checkToObst = new HashMap<CheckBox, Obstacle>();
 
@@ -165,5 +166,9 @@ public class ObstacleViewController implements Initializable {
 
     private String addUnitMeasurement(String value) {
         return value + "m";
+    }
+
+    public AnchorPane getPaneObstacles() {
+        return paneObstacles;
     }
 }

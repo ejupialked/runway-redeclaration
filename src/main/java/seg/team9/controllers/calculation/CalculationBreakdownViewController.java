@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
+import javafx.scene.layout.AnchorPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -23,7 +24,7 @@ public class CalculationBreakdownViewController implements Initializable {
     @FXML private Label labelASDA;
     @FXML private Label labelTODA;
     @FXML private Label labelTORA;
-
+    @FXML private AnchorPane paneCalculationsBreakdown;
     public CalculationBreakdownViewController() {
         instance = this;
     }
@@ -49,5 +50,9 @@ public class CalculationBreakdownViewController implements Initializable {
      labelASDA.setText("530");
      labelTODA.setText("932");
      labelTORA.setText("731");
+    }
+
+    public AnchorPane getPaneCalculationsBreakdown() {
+        return paneCalculationsBreakdown;
     }
 }
