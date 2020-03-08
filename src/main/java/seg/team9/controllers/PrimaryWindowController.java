@@ -82,14 +82,16 @@ public class PrimaryWindowController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Airport> observableValue, Airport airport, Airport t1) {
                 choiceBoxRunway.getItems().clear();
-                choiceBoxRunway.getItems().addAll(airport.getRunwayList());
+                choiceBoxRunway.getItems().addAll(t1.getRunwayList());
                 choiceBoxRunway.getSelectionModel().selectFirst();
             }
         });
 
 
         choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
-            topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+            if(t1 != null) {
+                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+            }
             //topDownViewController.updateUI(); you're calling this method already in line 67
         });
 
