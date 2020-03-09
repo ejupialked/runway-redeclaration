@@ -41,6 +41,8 @@ public class CalculatorTest {
         bd2 = (HashMap) c.getCalculationsBreakdown().clone();
     }
 
+    //Tests for calculated values.
+
     @Test
     //Testing the redesignated TORA value of the first right runway (27R).
     public void testTORARight() {
@@ -153,7 +155,11 @@ public class CalculatorTest {
         Assert.assertEquals(1850d, lr2.getWorkingLDA(), 0.0f);
     }
 
+    //Tests for calculations breakdown
+
     @Test
+    //Testing the first right runway's values will be calculated in the correct way (27R).
+    //Also testing the correct header is applied for the output.
     public void testBreakdownTOTLTHeader(){
         logger.debug("Testing Taking off towards, landing towards header...");
         String expected = "Taking off towards, landing towards: 27R";
@@ -161,6 +167,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first left runway's values are will be calculated in the correct way (09L).
+    //Also testing the correct header is applied for the output.
     public void testBreakdownTOALOHeader(){
         logger.debug("Testing Taking off away, landing over header...");
         String expected = "Taking off away, landing over: 09L";
@@ -168,6 +176,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first right runway's TORA is being calculated in the correct way (27R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTTORA(){
         logger.debug("Testing TOTLT TORA calculation and values...");
         String expecteddesc = "TORA: Distance From Threshold + Runway Threshold - (Height * Slope) - Strip End";
@@ -177,6 +187,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first right runway's TODA is being calculated in the correct way (27R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTTODA(){
         logger.debug("Testing TOTLT TODA calculation and values...");
         String expecteddesc = "TODA: Working TORA";
@@ -186,6 +198,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first right runway's ASDA is being calculated in the correct way (27R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTASDA(){
         logger.debug("Testing TOTLT ASDA calculation and values...");
         String expecteddesc = "ASDA: Working TORA";
@@ -195,6 +209,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first right runway's LDA is being calculated in the correct way (27R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTLDA(){
         logger.debug("Testing TOTLT LDA calculation and values...");
         String expecteddesc = "LDA: Distance from threshold - RESA - Strip End";
@@ -204,6 +220,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first left runway's TORA is being calculated in the correct way (09L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOTORA(){
         logger.debug("Testing TOALO TORA calculation and values...");
         String expecteddesc = "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold";
@@ -213,6 +231,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first left runway's TODA is being calculated in the correct way (09L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOTODA(){
         logger.debug("Testing TOALO TODA calculation and values...");
         String expecteddesc = "TODA: Working TORA + Clearway";
@@ -222,6 +242,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first left runway's ASDA is being calculated in the correct way (09L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOASDA(){
         logger.debug("Testing TOALO ASDA calculation and values...");
         String expecteddesc = "ASDA: Working TORA + Stopway";
@@ -231,6 +253,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the first left runway's LDA is being calculated in the correct way (09L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOLDA(){
         logger.debug("Testing TOALO LDA calculation and values...");
         String expecteddesc = "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End";
@@ -240,6 +264,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second right runway's values will be calculated in the correct way (09R).
+    //Also testing the correct header is applied for the output.
     public void testBreakdownTOTLTHeader2(){
         logger.debug("Testing Taking off towards, landing towards header 2...");
         String expected = "Taking off towards, landing towards: 09R";
@@ -247,6 +273,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second left runway's values will be calculated in the correct way (27L).
+    //Also testing the correct header is applied for the output.
     public void testBreakdownTOALOHeader2(){
         logger.debug("Testing Taking off away, landing over header 2...");
         String expected = "Taking off away, landing over: 27L";
@@ -254,6 +282,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second right runway's TORA is being calculated in the correct way (09R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTTORA2(){
         logger.debug("Testing TOTLT TORA calculation and values 2...");
         String expecteddesc = "TORA: Distance From Threshold + Runway Threshold - (Height * Slope) - Strip End";
@@ -263,6 +293,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second right runway's TODA is being calculated in the correct way (09R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTTODA2(){
         logger.debug("Testing TOTLT TODA calculation and values 2...");
         String expecteddesc = "TODA: Working TORA";
@@ -272,6 +304,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second right runway's ASDA is being calculated in the correct way (09R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTASDA2(){
         logger.debug("Testing TOTLT ASDA calculation and values 2...");
         String expecteddesc = "ASDA: Working TORA";
@@ -281,6 +315,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second right runway's LDA is being calculated in the correct way (09R).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOTLTLDA2(){
         logger.debug("Testing TOTLT LDA calculation and values 2...");
         String expecteddesc = "LDA: Distance from threshold - RESA - Strip End";
@@ -290,6 +326,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second left runway's TORA is being calculated in the correct way (27L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOTORA2(){
         logger.debug("Testing TOALO TORA calculation and values 2...");
         String expecteddesc = "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold";
@@ -299,6 +337,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second left runway's TODA is being calculated in the correct way (27L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOTODA2(){
         logger.debug("Testing TOALO TODA calculation and values 2...");
         String expecteddesc = "TODA: Working TORA + Clearway";
@@ -308,6 +348,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second left runway's ASDA is being calculated in the correct way (27L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOASDA2(){
         logger.debug("Testing TOALO ASDA calculation and values 2...");
         String expecteddesc = "ASDA: Working TORA + Stopway";
@@ -317,6 +359,8 @@ public class CalculatorTest {
     }
 
     @Test
+    //Testing the second left runway's LDA is being calculated in the correct way (27L).
+    //This includes the formula being used and the values being subbed in.
     public void testBreakdownTOALOLDA2(){
         logger.debug("Testing TOALO LDA calculation and values 2...");
         String expecteddesc = "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End";
