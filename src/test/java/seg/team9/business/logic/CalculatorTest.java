@@ -181,8 +181,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTTORA(){
         logger.debug("Testing TOTLT TORA calculation and values...");
         String expecteddesc = "TORA: Distance From Threshold + Runway Threshold - (Height * Slope) - Strip End";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOTLTTORAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOTLTTORAdesc"));
         String expectedval = "TORA: 3646.0 + 0.0 - (12.0 * 50.0) - 60.0 = 2986.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOTLTTORAval"));
         Assert.assertEquals(expectedval, bd.get("TOTLTTORAval"));
     }
 
@@ -192,8 +196,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTTODA(){
         logger.debug("Testing TOTLT TODA calculation and values...");
         String expecteddesc = "TODA: Working TORA";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOTLTTODAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOTLTTODAdesc"));
         String expectedval = "TODA: 2986.0 = 2986.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOTLTTORAval"));
         Assert.assertEquals(expectedval, bd.get("TOTLTTODAval"));
     }
 
@@ -203,8 +211,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTASDA(){
         logger.debug("Testing TOTLT ASDA calculation and values...");
         String expecteddesc = "ASDA: Working TORA";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOTLTASDAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOTLTASDAdesc"));
         String expectedval = "ASDA: 2986.0 = 2986.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOTLTTORAval"));
         Assert.assertEquals(expectedval, bd.get("TOTLTASDAval"));
     }
 
@@ -214,8 +226,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTLDA(){
         logger.debug("Testing TOTLT LDA calculation and values...");
         String expecteddesc = "LDA: Distance from threshold - RESA - Strip End";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOTLTLDAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOTLTLDAdesc"));
         String expectedval = "LDA: 3646.0 - 240.0 - 60.0 = 3346.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOTLTLDAval"));
         Assert.assertEquals(expectedval, bd.get("TOTLTLDAval"));
     }
 
@@ -225,8 +241,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOTORA(){
         logger.debug("Testing TOALO TORA calculation and values...");
         String expecteddesc = "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOALOTORAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOALOTORAdesc"));
         String expectedval = "TORA: 3902.0 - 300.0 - -50.0 - 306.0 = 3346.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOALOTORAval"));
         Assert.assertEquals(expectedval, bd.get("TOALOTORAval"));
     }
 
@@ -236,8 +256,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOTODA(){
         logger.debug("Testing TOALO TODA calculation and values...");
         String expecteddesc = "TODA: Working TORA + Clearway";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOALOTODAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOALOTODAdesc"));
         String expectedval = "TODA: 3346.0 + 0.0 = 3346.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOALOTODAval"));
         Assert.assertEquals(expectedval, bd.get("TOALOTODAval"));
     }
 
@@ -247,8 +271,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOASDA(){
         logger.debug("Testing TOALO ASDA calculation and values...");
         String expecteddesc = "ASDA: Working TORA + Stopway";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOALOASDAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOALOASDAdesc"));
         String expectedval = "ASDA: 3346.0 + 0.0 = 3346.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOALOASDAval"));
         Assert.assertEquals(expectedval, bd.get("TOALOASDAval"));
     }
 
@@ -258,8 +286,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOLDA(){
         logger.debug("Testing TOALO LDA calculation and values...");
         String expecteddesc = "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd.get("TOALOLDAdesc"));
         Assert.assertEquals(expecteddesc, bd.get("TOALOLDAdesc"));
         String expectedval = "LDA: 3595.0 - -50.0 - (12.0 * 50.0) - 60.0 = 2985.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd.get("TOALOLDAval"));
         Assert.assertEquals(expectedval, bd.get("TOALOLDAval"));
     }
 
@@ -269,6 +301,8 @@ public class CalculatorTest {
     public void testBreakdownTOTLTHeader2(){
         logger.debug("Testing Taking off towards, landing towards header 2...");
         String expected = "Taking off towards, landing towards: 09R";
+        logger.debug("Expected header: " + expected);
+        logger.debug("Actual header: " + bd2.get("TOTLT"));
         Assert.assertEquals(expected, bd2.get("TOTLT"));
     }
 
@@ -278,6 +312,8 @@ public class CalculatorTest {
     public void testBreakdownTOALOHeader2(){
         logger.debug("Testing Taking off away, landing over header 2...");
         String expected = "Taking off away, landing over: 27L";
+        logger.debug("Expected header: " + expected);
+        logger.debug("Actual header: " + bd2.get("TOALO"));
         Assert.assertEquals(expected, bd2.get("TOALO"));
     }
 
@@ -287,8 +323,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTTORA2(){
         logger.debug("Testing TOTLT TORA calculation and values 2...");
         String expecteddesc = "TORA: Distance From Threshold + Runway Threshold - (Height * Slope) - Strip End";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOTLTTORAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOTLTTORAdesc"));
         String expectedval = "TORA: 2853.0 + 307.0 - (25.0 * 50.0) - 60.0 = 1850.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOTLTTORAval"));
         Assert.assertEquals(expectedval, bd2.get("TOTLTTORAval"));
     }
 
@@ -298,8 +338,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTTODA2(){
         logger.debug("Testing TOTLT TODA calculation and values 2...");
         String expecteddesc = "TODA: Working TORA";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOTLTTODAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOTLTTODAdesc"));
         String expectedval = "TODA: 1850.0 = 1850.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOTLTTODAval"));
         Assert.assertEquals(expectedval, bd2.get("TOTLTTODAval"));
     }
 
@@ -309,8 +353,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTASDA2(){
         logger.debug("Testing TOTLT ASDA calculation and values 2...");
         String expecteddesc = "ASDA: Working TORA";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOTLTASDAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOTLTASDAdesc"));
         String expectedval = "ASDA: 1850.0 = 1850.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOTLTASDAval"));
         Assert.assertEquals(expectedval, bd2.get("TOTLTASDAval"));
     }
 
@@ -320,8 +368,12 @@ public class CalculatorTest {
     public void testBreakdownTOTLTLDA2(){
         logger.debug("Testing TOTLT LDA calculation and values 2...");
         String expecteddesc = "LDA: Distance from threshold - RESA - Strip End";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOTLTLDAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOTLTLDAdesc"));
         String expectedval = "LDA: 2853.0 - 240.0 - 60.0 = 2553.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOTLTLDAval"));
         Assert.assertEquals(expectedval, bd2.get("TOTLTLDAval"));
     }
 
@@ -331,8 +383,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOTORA2(){
         logger.debug("Testing TOALO TORA calculation and values 2...");
         String expecteddesc = "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOALOTORAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOALOTORAdesc"));
         String expectedval = "TORA: 3660.0 - 300.0 - 500.0 - 0.0 = 2860.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOALOTORAval"));
         Assert.assertEquals(expectedval, bd2.get("TOALOTORAval"));
     }
 
@@ -342,8 +398,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOTODA2(){
         logger.debug("Testing TOALO TODA calculation and values 2...");
         String expecteddesc = "TODA: Working TORA + Clearway";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOALOTODAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOALOTODAdesc"));
         String expectedval = "TODA: 2860.0 + 0.0 = 2860.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOALOTODAval"));
         Assert.assertEquals(expectedval, bd2.get("TOALOTODAval"));
     }
 
@@ -353,8 +413,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOASDA2(){
         logger.debug("Testing TOALO ASDA calculation and values 2...");
         String expecteddesc = "ASDA: Working TORA + Stopway";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOALOASDAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOALOASDAdesc"));
         String expectedval = "ASDA: 2860.0 + 0.0 = 2860.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOALOASDAval"));
         Assert.assertEquals(expectedval, bd2.get("TOALOASDAval"));
     }
 
@@ -364,8 +428,12 @@ public class CalculatorTest {
     public void testBreakdownTOALOLDA2(){
         logger.debug("Testing TOALO LDA calculation and values 2...");
         String expecteddesc = "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End";
+        logger.debug("Expected formula: " + expecteddesc);
+        logger.debug("Actual formula: " + bd2.get("TOALOLDAdesc"));
         Assert.assertEquals(expecteddesc, bd2.get("TOALOLDAdesc"));
         String expectedval = "LDA: 3660.0 - 500.0 - (25.0 * 50.0) - 60.0 = 1850.0";
+        logger.debug("Expected formula: " + expectedval);
+        logger.debug("Actual formula: " + bd2.get("TOALOLDAval"));
         Assert.assertEquals(expectedval, bd2.get("TOALOLDAval"));
     }
 }
