@@ -163,6 +163,8 @@ public class CalculatorTest {
     public void testBreakdownTOTLTHeader(){
         logger.debug("Testing Taking off towards, landing towards header...");
         String expected = "Taking off towards, landing towards: 27R";
+        logger.debug("Expected header: " + expected);
+        logger.debug("Actual header: " + bd.get("TOTLT"));
         Assert.assertEquals(expected, bd.get("TOTLT"));
     }
 
@@ -172,6 +174,8 @@ public class CalculatorTest {
     public void testBreakdownTOALOHeader(){
         logger.debug("Testing Taking off away, landing over header...");
         String expected = "Taking off away, landing over: 09L";
+        logger.debug("Expected header: " + expected);
+        logger.debug("Actual header: " + bd.get("TOALO"));
         Assert.assertEquals(expected, bd.get("TOALO"));
     }
 
