@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 public class PrimaryWindowController implements Initializable {
     private static final Logger logger = LogManager.getLogger("PrimaryWindowController");
 
+    private static PrimaryWindowController instance;
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
     @FXML private MenuBar menuBar; //menu bar
@@ -38,6 +39,7 @@ public class PrimaryWindowController implements Initializable {
     @FXML private ColorPicker colourPickerTODA;
     @FXML private ColorPicker colourPickerLDA;
     @FXML private ColorPicker colourPickerASDA;
+    @FXML private SplitPane splitPaneView;
 
     private ArrayList<AnchorPane> lightPanes;
     private ArrayList<AnchorPane> darkPanes;
@@ -57,6 +59,8 @@ public class PrimaryWindowController implements Initializable {
     private String darkerGray = "#B3B3B3";
 
 
+    public PrimaryWindowController(){instance = this;}
+    public static PrimaryWindowController getInstance(){return instance;}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -64,6 +68,11 @@ public class PrimaryWindowController implements Initializable {
         initChoiceBoxes();
         initArrays();
         initColorPickers();
+        initSplitPane();
+    }
+
+    void initSplitPane(){
+        logger.info(splitPaneView.getDividers().get(0));
     }
 
     private void initColorPickers(){
@@ -100,6 +109,8 @@ public class PrimaryWindowController implements Initializable {
                 choiceBoxRunway.getItems().clear();
                 choiceBoxRunway.getItems().addAll(airport.getRunwayList());
                 choiceBoxRunway.getSelectionModel().selectFirst();
+
+                changeColourArrows();
             }
         });
 
@@ -107,8 +118,20 @@ public class PrimaryWindowController implements Initializable {
         choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
             //topDownViewController.updateUI(); you're calling this method already in line 67
+
+            changeColourArrows();
+            logger.info("Changed colours");
         });
 
+    }
+
+    public void changeColourArrows()
+    {
+        //Recolour arrows
+        topDownViewController.changeColourTORA(colourPickerTORA.getValue());
+        topDownViewController.changeColourTODA(colourPickerTODA.getValue());
+        topDownViewController.changeColourASDA(colourPickerASDA.getValue());
+        topDownViewController.changeColourLDA(colourPickerLDA.getValue());
     }
 
     private void initMenuBar(){
