@@ -94,6 +94,13 @@ public class Calculator {
         calculationBreakdown.put("TOTLTLDAval", "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND + " = " + runway.getWorkingLDA());
     }
 
+    //The calculations breakdown for the calculator are stored as a hashmap, pairing up a key for the part of the calculation with its value.
+    //The key can be one of the following:
+        //TOTLT/TOALO: representing the header for that set of calculations (TOTLT = taking off towards, landing towards, TOALO = taking off over, landing over)
+            //This includes the name of the runway and which set of calculations are being used.
+        //<TOTLT/TOALO><TORA/TODA/ASDA/LDA><desc/val> - the part of the calculation you want, then the specific value, then the formula or values.
+            //I.e. TOALOASDAval would be something like "ASDA: 3330.0 - 54.0 + (12 * 50) = 3876.0
+    //This method simply returns the hashmap containing the breakdown for the last carried out redesignation.
     public HashMap<String, String> getCalculationsBreakdown(){
         return calculationBreakdown;
     }
