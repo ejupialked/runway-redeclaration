@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import java.util.HashMap;
 
 public class Calculator {
 
@@ -13,11 +14,12 @@ public class Calculator {
     private static final Double BLAST_PROTECTION = 300d;
     private static final Double SLOPE = 50d;
     private static final Double STRIPEND = 60d;
+    private HashMap<String, String> calculationBreakdown = new HashMap<String, String>();
 
     //Running this method on a runway will calculate the redesignated values and store them in the WorkingXXXX variables.
-    //The return of this method is a 2D array containing the calculation breakdowns split by each directed runway, and making it clear which direction the plane is landing or taking off.
-    public String[][] redesignate(Runway runway, Obstacle obstacle){
-        return findDirection(runway, obstacle);
+    //The method does not return anything - merely used as a gateway.
+    public void redesignate(Runway runway, Obstacle obstacle){
+        findDirection(runway, obstacle);
     }
 
 
@@ -25,86 +27,74 @@ public class Calculator {
     //TOTLT - Taking off towards, landing towards
     //TOALO - Taking off away, landing over
     //The relevant calculations are then carried out for the necessary runway.
-    //The method returns the same calculation breakdown as the redesignate method.
-    private String[][] findDirection(Runway runway, Obstacle obstacle){
-        String[][] calculations = new String[2][];
-        String[] TOTLT;
-        String[] TOALO;
-
+    //The method doesn't return anything, but writes the calculation breakdown to the hash map.
+    private void findDirection(Runway runway, Obstacle obstacle){
         if(obstacle.getDistanceLThreshold() > obstacle.getDistanceRThreshold()){
-            TOTLT = calculateTOTLT(runway.getLRunway(), obstacle.getDistanceLThreshold(), obstacle.getHeight());
-            TOTLT[0] = "Taking off towards, landing towards: " + runway.getLRunway().toString();
-            TOALO = calculateTOALO(runway.getRRunway(), obstacle.getDistanceRThreshold(), obstacle.getHeight());
-            TOALO[0] = "Taking off away, landing over: " + runway.getRRunway().toString();
+            calculationBreakdown.put("TOTLT", "Taking off towards, landing towards: " + runway.getLRunway().toString());
+            calculateTOTLT(runway.getLRunway(), obstacle.getDistanceLThreshold(), obstacle.getHeight());
+            calculationBreakdown.put("TOALO", "Taking off away, landing over: " + runway.getRRunway().toString());
+            calculateTOALO(runway.getRRunway(), obstacle.getDistanceRThreshold(), obstacle.getHeight());
         }
         else{
-            TOTLT = calculateTOTLT(runway.getRRunway(), obstacle.getDistanceRThreshold(), obstacle.getHeight());
-            TOTLT[0] = "Taking off towards, landing towards: " + runway.getRRunway().toString();
-            TOALO = calculateTOALO(runway.getLRunway(), obstacle.getDistanceLThreshold(), obstacle.getHeight());
-            TOALO[0] = "Taking off away, landing over: " + runway.getLRunway().toString();
+            calculationBreakdown.put("TOTLT", "Taking off towards, landing towards: " + runway.getRRunway().toString());
+            calculateTOTLT(runway.getRRunway(), obstacle.getDistanceRThreshold(), obstacle.getHeight());
+            calculationBreakdown.put("TOALO", "Taking off away, landing over: " + runway.getLRunway().toString());
+            calculateTOALO(runway.getLRunway(), obstacle.getDistanceLThreshold(), obstacle.getHeight());
         }
-
-        calculations[0] = TOTLT;
-        calculations[1] = TOALO;
-        return calculations;
     }
 
     //This method calculates the redesignated values for the runway that is taking off away from and landing over the obstacle.
-    //The calculation breakdown for this runway are returned in an array.
+    //The calculation breakdown for this runway are added to the hashmap.
     //The parameters are the runway to calculate on, the distance of the obstacle from that runway's threshold and the height of the obstacle.
-    private String[] calculateTOALO(DirectedRunway runway, Double distance, Double height){
-        String[] calculations = new String[9];
-
+    private void calculateTOALO(DirectedRunway runway, Double distance, Double height){
         runway.setWorkingTORA(
                 runway.getTora() - BLAST_PROTECTION - distance - runway.getThreshold()
         );
-        calculations[1] = "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold" ;
-        calculations[2] = "TORA: " + runway.getTora() + " - " + BLAST_PROTECTION + " - " + distance + " - " + runway.getThreshold() + " = " + runway.getWorkingTORA();
+        calculationBreakdown.put("TOALOTORAdesc", "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold");
+        calculationBreakdown.put("TOALOTORAval", "TORA: " + runway.getTora() + " - " + BLAST_PROTECTION + " - " + distance + " - " + runway.getThreshold() + " = " + runway.getWorkingTORA());
 
         runway.setWorkingASDA(
                 runway.getWorkingTORA() + runway.getStopway()
         );
-        calculations[3] = "ASDA: Working TORA + Stopway";
-        calculations[4] = "ASDA: " + runway.getWorkingTORA() + " + " + runway.getStopway() + " = " + runway.getWorkingASDA();
+        calculationBreakdown.put("TOALOASDAdesc", "ASDA: Working TORA + Stopway");
+        calculationBreakdown.put("TOALOASDAval", "ASDA: " + runway.getWorkingTORA() + " + " + runway.getStopway() + " = " + runway.getWorkingASDA());
 
         runway.setWorkingTODA(
                 runway.getWorkingTORA() + runway.getClearway()
         );
-        calculations[5] = "TODA: Working TORA + Clearway";
-        calculations[6] = "TODA: " + runway.getWorkingTORA() + " + " + runway.getClearway() + " = " + runway.getWorkingTODA();
+        calculationBreakdown.put("TOALOTODAdesc", "TODA: Working TORA + Clearway");
+        calculationBreakdown.put("TOALOTODAval", "TODA: " + runway.getWorkingTORA() + " + " + runway.getClearway() + " = " + runway.getWorkingTODA());
 
         runway.setWorkingLDA(
                 runway.getLda() - distance - (height * SLOPE) - STRIPEND
         );
-        calculations[7] = "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End";
-        calculations[8] = "LDA: " + runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND;
-
-        return calculations;
+        calculationBreakdown.put("TOALOLDAdesc", "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End");
+        calculationBreakdown.put("TOALOLDAval", "LDA: " + runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND);
     }
 
     //This method calculates the redesignated values for the runway that is taking off towards and landing towards the obstacle.
-    //The calculation breakdown for this runway are returned in an array.
+    //The calculation breakdown for this runway are stored in the hashmap.
     //The parameters are the runway to calculate on, the distance of the obstacle from that runway's threshold and the height of the obstacle.
-    private String[] calculateTOTLT(DirectedRunway runway, Double distance, Double height){
-        String[] calculations = new String[9];
-
+    private void calculateTOTLT(DirectedRunway runway, Double distance, Double height){
         runway.setWorkingTORA(
                 distance + runway.getThreshold() - (height * SLOPE)  - STRIPEND
         );
-        calculations[1] = "TORA: Distance From Threshold + Runway Threshold - (Height * Slope) - Strip End";
-        calculations[2] = "TORA: " + distance + " + " + runway.getThreshold() + " - (" + height + " * " + SLOPE + ") - " + STRIPEND + " = " + runway.getWorkingTORA();
+        calculationBreakdown.put("TOTLTTORAdesc", "TORA: Distance From Threshold + Runway Threshold - (Height * Slope) - Strip End");
+        calculationBreakdown.put("TOTLTTORAval", "TORA: " + distance + " + " + runway.getThreshold() + " - (" + height + " * " + SLOPE + ") - " + STRIPEND + " = " + runway.getWorkingTORA());
         runway.setWorkingASDA(runway.getWorkingTORA());
-        calculations[3] = "ASDA: Working TORA";
-        calculations[4] = "ASDA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA();
+        calculationBreakdown.put("TOTLTASDAdesc", "ASDA: Working TORA");
+        calculationBreakdown.put("TOTLTASDAval", "ASDA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA());
         runway.setWorkingTODA(runway.getWorkingTORA());
-        calculations[5] = "TODA: Working TORA";
-        calculations[6] = "TODA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA();
+        calculationBreakdown.put("TOTLTTODAdesc", "TODA: Working TORA");
+        calculationBreakdown.put("TOTLTTORAval", "TODA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA());
         runway.setWorkingLDA(
                 distance - runway.getResa() - STRIPEND
         );
-        calculations[7] = "LDA: Distance from threshold - RESA - Strip End";
-        calculations[8] = "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND;
+        calculationBreakdown.put("TOTLTLDAdesc", "LDA: Distance from threshold - RESA - Strip End");
+        calculationBreakdown.put("TOTLTLDAval", "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND);
+    }
 
-        return calculations;
+    public HashMap<String, String> getCalculationsBreakdown(){
+        return calculationBreakdown;
     }
 }

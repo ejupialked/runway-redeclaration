@@ -7,15 +7,15 @@ import org.junit.*;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
-
+import java.util.HashMap;
 
 public class CalculatorTest {
     private static final Logger logger = LogManager.getLogger("CalculatorTest");
     private static Calculator c;
     private static  DirectedRunway lr;
-    private  static  DirectedRunway rr;
+    private static  DirectedRunway rr;
     private static  DirectedRunway lr2;
-    private  static  DirectedRunway rr2;
+    private static  DirectedRunway rr2;
 
     @BeforeClass
     //This is the instantiation of all needed objects for the tests to be run.
@@ -28,17 +28,15 @@ public class CalculatorTest {
         lr = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 0d, 0d);
         rr = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 0d, 0d);
         Runway r = new Runway(rr, lr);
-
-        //Var used to view the calculation breakdown output.
-        String[][] test = c.redesignate(r,o);
+        c.redesignate(r,o);
+        HashMap<String, String> bd = (HashMap) c.getCalculationsBreakdown().clone();
 
         Obstacle o2 = new Obstacle("Boeing737", 25d, 100d, 20d, 2853d, 500d);
         rr2 = new DirectedRunway("09R", 3660d, 3660d, 3660d, 3353d, 307d, 0d, 0d);
         lr2 = new DirectedRunway("27L", 3660d, 3660d, 3660d, 3660d, 0d, 0d, 0d);
         Runway r2 = new Runway(rr2, lr2);
-
-        //Var used to view the calculation breakdown output.
-        String[][] test2 = c.redesignate(r2,o2);
+        c.redesignate(r2,o2);
+        HashMap<String, String> bd2 = (HashMap) c.getCalculationsBreakdown().clone();
     }
 
     @Test
@@ -151,5 +149,10 @@ public class CalculatorTest {
     public void testLDALeft2() {
         logger.debug("Testing left LDA 2...");
         Assert.assertEquals(1850d, lr2.getWorkingLDA(), 0.0f);
+    }
+
+    @Test
+    public void testBreakdownTOTLTHeader(){
+
     }
 }
