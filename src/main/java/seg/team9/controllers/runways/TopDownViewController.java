@@ -531,4 +531,24 @@ public class TopDownViewController implements Initializable {
         textTORAL.setText("TORA: "+TORAL.toString());
         textLDAL.setText("LDA: "+LDAL.toString());
     }
+
+    public void changeColourTORA(Color color){
+        arrowTORAL.changeColour(color);
+        arrowTORAR.changeColour(color);
+    }
+
+    public void changeColourTODA(Color color){
+        arrowTODAL.changeColour(color);
+        arrowTODAR.changeColour(color);
+    }
+
+    public void changeColourLDA(Color color){
+        arrowLDAL.changeColour(color);
+        arrowLDAR.changeColour(color);
+    }
+
+    public void changeColourASDA(Color color){
+        arrowASDAR.changeColour(color);
+        arrowASDAL.changeColour(color);
+    }
 }
