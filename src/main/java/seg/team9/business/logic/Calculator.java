@@ -69,7 +69,7 @@ public class Calculator {
                 runway.getLda() - distance - (height * SLOPE) - STRIPEND
         );
         calculationBreakdown.put("TOALOLDAdesc", "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End");
-        calculationBreakdown.put("TOALOLDAval", "LDA: " + runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND);
+        calculationBreakdown.put("TOALOLDAval", "LDA: " + runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND + " = " + runway.getWorkingLDA());
     }
 
     //This method calculates the redesignated values for the runway that is taking off towards and landing towards the obstacle.
@@ -86,12 +86,12 @@ public class Calculator {
         calculationBreakdown.put("TOTLTASDAval", "ASDA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA());
         runway.setWorkingTODA(runway.getWorkingTORA());
         calculationBreakdown.put("TOTLTTODAdesc", "TODA: Working TORA");
-        calculationBreakdown.put("TOTLTTORAval", "TODA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA());
+        calculationBreakdown.put("TOTLTTODAval", "TODA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA());
         runway.setWorkingLDA(
                 distance - runway.getResa() - STRIPEND
         );
         calculationBreakdown.put("TOTLTLDAdesc", "LDA: Distance from threshold - RESA - Strip End");
-        calculationBreakdown.put("TOTLTLDAval", "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND);
+        calculationBreakdown.put("TOTLTLDAval", "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND + " = " + runway.getWorkingLDA());
     }
 
     public HashMap<String, String> getCalculationsBreakdown(){
