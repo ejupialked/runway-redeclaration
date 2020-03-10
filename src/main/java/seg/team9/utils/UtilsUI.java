@@ -1,6 +1,7 @@
-package seg.team9.utils;
+package seg.team9.Utils;
 
 import javafx.scene.control.Alert;
+
 
 public class UtilsUI {
 
@@ -19,4 +20,6 @@ public class UtilsUI {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 }

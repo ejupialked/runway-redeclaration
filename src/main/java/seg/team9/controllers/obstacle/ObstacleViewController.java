@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
-import seg.team9.utils.MockData;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.TopDownViewController;
 
