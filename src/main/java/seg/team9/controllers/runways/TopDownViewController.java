@@ -254,7 +254,6 @@ public class TopDownViewController implements Initializable {
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
-        logger.info(currentRunway.getRRunway().getWorkingTORA()+"<"+currentRunway.getRRunway().getWorkingASDA());
     }
 
     public void updateClearedAndGradedArea(){
@@ -506,6 +505,7 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateValues(){
+        logger.info("currentRunway"+currentRunway);
         App.getCalculator().redesignate(currentRunway, currentObstacle);
         runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
         TODAR = currentRunway.getRRunway().getWorkingTODA();
@@ -530,5 +530,30 @@ public class TopDownViewController implements Initializable {
         textASDAL.setText("ASDA: "+ASDAL.toString());
         textTORAL.setText("TORA: "+TORAL.toString());
         textLDAL.setText("LDA: "+LDAL.toString());
+    }
+
+
+    public Runway getCurrentRunway(){
+        return currentRunway;
+    }
+
+    public void changeColourTORA(Color color){
+        arrowTORAL.changeColour(color);
+        arrowTORAR.changeColour(color);
+    }
+
+    public void changeColourTODA(Color color){
+        arrowTODAL.changeColour(color);
+        arrowTODAR.changeColour(color);
+    }
+
+    public void changeColourLDA(Color color){
+        arrowLDAL.changeColour(color);
+        arrowLDAR.changeColour(color);
+    }
+
+    public void changeColourASDA(Color color){
+        arrowASDAR.changeColour(color);
+        arrowASDAL.changeColour(color);
     }
 }
