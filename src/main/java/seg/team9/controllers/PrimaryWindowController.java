@@ -11,11 +11,10 @@ import javafx.scene.paint.Color;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
-import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
-import seg.team9.controllers.calculation.CalculationBreakdownViewController;
+import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
@@ -48,7 +47,7 @@ public class PrimaryWindowController implements Initializable {
     @FXML private SideViewController sideViewController; // side runway
     @FXML private TopDownViewController topDownViewController; // top down runway
     @FXML private ObstacleViewController obstacleViewController;
-    @FXML private CalculationBreakdownViewController calculationsBreakdownViewController;
+    @FXML private CalculationsViewController calculationsBreakdownViewController;
 
     //Declaring colours
     private String white = " #FFFFFF";

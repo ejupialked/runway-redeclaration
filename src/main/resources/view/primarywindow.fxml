@@ -122,7 +122,7 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                          <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
-                         <fx:include fx:id="calculationsBreakdownView" source="calculationsbreakdownview.fxml" />
+                         <fx:include fx:id="calculationsBreakdownView" source="calculationsview.fxml" />
                         <AnchorPane VBox.vgrow="ALWAYS">
                            <children>
                               <TitledPane collapsible="false" text="???" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

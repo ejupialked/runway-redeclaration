@@ -11,10 +11,10 @@ import org.apache.log4j.Logger;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CalculationBreakdownViewController implements Initializable {
+public class CalculationsViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("CalculationBreakdownViewController");
 
-    private static CalculationBreakdownViewController instance;
+    private static CalculationsViewController instance;
 
     @FXML private Label labelTOCS;
     @FXML private Label labelALS;
@@ -24,18 +24,20 @@ public class CalculationBreakdownViewController implements Initializable {
     @FXML private Label labelASDA;
     @FXML private Label labelTODA;
     @FXML private Label labelTORA;
-    @FXML private AnchorPane paneCalculationsBreakdown;
-    public CalculationBreakdownViewController() {
+    @FXML private AnchorPane paneCalculations;
+
+
+    public CalculationsViewController() {
         instance = this;
     }
 
-    public static CalculationBreakdownViewController getInstance() {
+    public static CalculationsViewController getInstance() {
         return instance;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logger.info("init CalculationBreakdownViewController");
+        logger.info("init CalculationsViewController");
         initLabels();
     }
 
@@ -52,7 +54,7 @@ public class CalculationBreakdownViewController implements Initializable {
      labelTORA.setText("731");
     }
 
-    public AnchorPane getPaneCalculationsBreakdown() {
-        return paneCalculationsBreakdown;
+    public AnchorPane getPaneCalculations() {
+        return paneCalculations;
     }
 }
