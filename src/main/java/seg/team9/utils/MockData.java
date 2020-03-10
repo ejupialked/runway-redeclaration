@@ -1,4 +1,4 @@
-package seg.team9.Utils;
+package seg.team9.utils;
 
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;

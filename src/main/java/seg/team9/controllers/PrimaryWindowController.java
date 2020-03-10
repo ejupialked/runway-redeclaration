@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
-import seg.team9.Utils.MockData;
 import seg.team9.Utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;

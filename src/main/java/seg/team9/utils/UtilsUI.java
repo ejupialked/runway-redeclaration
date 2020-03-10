@@ -2,6 +2,7 @@ package seg.team9.Utils;
 
 import javafx.scene.control.Alert;
 
+
 public class UtilsUI {
 
     public static void showErrorMessage(String error){
@@ -19,4 +20,6 @@ public class UtilsUI {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 }
