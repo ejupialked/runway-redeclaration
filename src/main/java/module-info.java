@@ -4,6 +4,7 @@ module seg.team9 {
     requires log4j;
 
     opens seg.team9.controllers.calculation to javafx.fxml;
+    opens seg.team9.controllers.breakdown to javafx.fxml;
     opens seg.team9.controllers.obstacle to javafx.fxml;
     opens seg.team9.controllers.runways to javafx.fxml;
     opens seg.team9.controllers to javafx.fxml;

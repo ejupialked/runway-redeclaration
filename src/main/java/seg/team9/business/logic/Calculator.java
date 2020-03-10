@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.breakdown.CalculationBreakdownController;
+
 import java.util.HashMap;
 
 public class Calculator {
@@ -20,6 +22,8 @@ public class Calculator {
     //The method does not return anything - merely used as a gateway.
     public void redesignate(Runway runway, Obstacle obstacle){
         findDirection(runway, obstacle);
+
+        CalculationBreakdownController.getInstance().showBreakdown(calculationBreakdown);
     }
 
 

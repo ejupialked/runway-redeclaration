@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CalculationsViewController implements Initializable {
-    private static final Logger logger = LogManager.getLogger("CalculationBreakdownViewController");
+    private static final Logger logger = LogManager.getLogger("CalculationViewController");
 
     private static CalculationsViewController instance;
 

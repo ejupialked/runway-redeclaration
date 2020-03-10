@@ -95,6 +95,9 @@
                 </children>
             </AnchorPane>
         </content>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
     </TitledPane>
 </children>
 </AnchorPane>

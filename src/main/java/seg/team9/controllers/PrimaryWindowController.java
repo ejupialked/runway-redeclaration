@@ -43,11 +43,12 @@ public class PrimaryWindowController implements Initializable {
     @FXML private AnchorPane paneView;
     @FXML private AnchorPane paneCalculations;
     @FXML private AnchorPane paneQMarks;
+
     // Injecting controllers
     @FXML private SideViewController sideViewController; // side runway
     @FXML private TopDownViewController topDownViewController; // top down runway
     @FXML private ObstacleViewController obstacleViewController;
-    @FXML private CalculationsViewController calculationsBreakdownViewController;
+    @FXML private CalculationsViewController calculationsViewController;
 
     //Declaring colours
     private String white = " #FFFFFF";
@@ -75,7 +76,7 @@ public class PrimaryWindowController implements Initializable {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
         lightPanes.add(paneCalculations);
-        lightPanes.add(calculationsBreakdownViewController.getPaneCalculationsBreakdown());
+        lightPanes.add(calculationsViewController.getPaneCalculations());
         darkPanes.add(paneView);
         darkPanes.add(paneQMarks);
         darkPanes.add(obstacleViewController.getPaneObstacles());
