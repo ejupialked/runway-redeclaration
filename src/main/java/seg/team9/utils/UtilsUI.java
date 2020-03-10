@@ -1,4 +1,4 @@
-package seg.team9.utils;
+package seg.team9.Utils;
 
 import javafx.scene.control.Alert;
 

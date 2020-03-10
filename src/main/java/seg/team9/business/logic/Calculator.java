@@ -60,7 +60,7 @@ public class Calculator {
         calculationBreakdown.put("TOALOASDAval", "ASDA: " + runway.getWorkingTORA() + " + " + runway.getStopway() + " = " + runway.getWorkingASDA());
 
         runway.setWorkingTODA(
-                runway.getWorkingTORA() + runway.getClearway()
+                runway.getWorkingTORA()  + runway.getClearway()
         );
         calculationBreakdown.put("TOALOTODAdesc", "TODA: Working TORA + Clearway");
         calculationBreakdown.put("TOALOTODAval", "TODA: " + runway.getWorkingTORA() + " + " + runway.getClearway() + " = " + runway.getWorkingTODA());

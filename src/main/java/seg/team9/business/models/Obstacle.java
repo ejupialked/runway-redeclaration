@@ -24,12 +24,12 @@ public class Obstacle {
         return height;
     }
 
-    public String getName() {
-        return name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
     public void setHeight(Double height) {
@@ -62,5 +62,10 @@ public class Obstacle {
 
     public void setDistanceLThreshold(Double distanceLThreshold) {
         this.distanceLThreshold = distanceLThreshold;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

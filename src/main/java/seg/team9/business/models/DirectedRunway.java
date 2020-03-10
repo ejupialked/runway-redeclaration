@@ -9,9 +9,9 @@ public class DirectedRunway
     private Double clearway, stopway;
 
 
-    public DirectedRunway(String designator){
+    /*public DirectedRunway(String designator){
         this.designator = designator;
-    }
+    }*/
 
     public DirectedRunway (String designator, Double TORA, Double TODA, Double ASDA, Double LDA, Double threshold, Double clearway, Double stopway)
     {

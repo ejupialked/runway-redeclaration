@@ -205,7 +205,7 @@ public class CalculatorTest {
         Assert.assertEquals(expecteddesc, bd.get("TOTLTTODAdesc"));
         String expectedval = "TODA: 2986.0 = 2986.0";
         logger.debug("Expected formula: " + expectedval);
-        logger.debug("Actual formula: " + bd.get("TOTLTTORAval"));
+        logger.debug("Actual formula: " + bd.get("TOTLTTODAval"));
         Assert.assertEquals(expectedval, bd.get("TOTLTTODAval"));
     }
 
@@ -220,7 +220,7 @@ public class CalculatorTest {
         Assert.assertEquals(expecteddesc, bd.get("TOTLTASDAdesc"));
         String expectedval = "ASDA: 2986.0 = 2986.0";
         logger.debug("Expected formula: " + expectedval);
-        logger.debug("Actual formula: " + bd.get("TOTLTTORAval"));
+        logger.debug("Actual formula: " + bd.get("TOTLTASDAval"));
         Assert.assertEquals(expectedval, bd.get("TOTLTASDAval"));
     }
 

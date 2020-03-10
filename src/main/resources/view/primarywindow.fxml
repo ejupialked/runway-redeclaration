@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="923.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
+<AnchorPane fx:id="primaryPane" prefHeight="923.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
    <children>
       <MenuBar fx:id="menuBar" prefWidth="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -27,9 +27,14 @@
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
+               <items>
+                  <Menu mnemonicParsing="false" text="Colours">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onColourChangeDefault" text="Default" />
+                        <MenuItem mnemonicParsing="false" onAction="#onColourChangeDark" text="Dark" />
+                    </items>
+                  </Menu>
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
@@ -40,7 +45,7 @@
       </MenuBar>
       <SplitPane dividerPositions="0.4986922406277245" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="888.0" prefWidth="550.0" style="-fx-background-color: #E0E0E0;">
+          <AnchorPane fx:id="paneView" minHeight="0.0" minWidth="0.0" prefHeight="888.0" prefWidth="550.0" style="-fx-background-color: #E0E0E0;">
                <children>
                   <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="104.0" prefHeight="388.0" prefWidth="388.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="103.20000000000005" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="104.0">
                     <tabs>
@@ -62,11 +67,11 @@
             </AnchorPane>
             <SplitPane dividerPositions="0.5" prefHeight="505.0" prefWidth="413.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="161.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="893.0" prefWidth="170.0">
                      <children>
                         <TitledPane collapsible="false" text="Calculations" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                              <AnchorPane fx:id="paneCalculations" prefHeight="200.0" prefWidth="200.0" />
                            </content>
                         </TitledPane>
                      </children>
@@ -79,7 +84,7 @@
                            <children>
                               <TitledPane collapsible="false" text="???" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;" />
+                                    <AnchorPane fx:id="paneQMarks" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;" />
                                  </content>
                               </TitledPane>
                            </children>

@@ -7,42 +7,49 @@ import seg.team9.business.models.Runway;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MockData {
 
+    public static List<Airport> aiports = airports();
+    public static List<Obstacle> obstacles = obstacles();
 
-    public static List<Runway> runwayList(){
-        ArrayList<Runway> runways = new ArrayList<>();
-        runways.add(new Runway(directedRunways().get(0), directedRunways().get(1)));
-        runways.add(new Runway(directedRunways().get(0), directedRunways().get(1)));
-        return runways;
+
+    private static List<Airport> airports(){
+        ArrayList<Airport> airportArrayList = new ArrayList<>();
+
+        //HEATHROW
+        DirectedRunway d1 = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 0d, 0d);
+        DirectedRunway d2 = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 0d, 0d);
+        Runway r1 = new Runway(d1, d2);
+        Airport a1 = new Airport("Heathrow");
+        a1.addRunway(r1);
+
+        //GATWICK
+        DirectedRunway d3 = new DirectedRunway("19R", 3660d, 3660d, 3660d, 3353d, 307d, 0d, 0d);
+        DirectedRunway d4 = new DirectedRunway("30L", 3660d, 3660d, 3660d, 3660d, 0d, 0d, 0d);
+        Runway r2 = new Runway(d3, d2);
+        Airport a2 = new Airport("Gatwick");
+        a2.addRunway(r2);
+
+        //LUTON
+        DirectedRunway d5 = new DirectedRunway("4R",4000D,4000D,4000D,4000D,0D,0D,0D);
+        DirectedRunway d6 = new DirectedRunway("32R",4000D,4000D,4000D,4000D,0D,0D,0D);
+        Runway r3 = new Runway(d5, d6);
+        Airport a3 = new Airport("Luton");
+        a3.addRunway(r3);
+
+        airportArrayList.add(a1);
+        airportArrayList.add(a2);
+        airportArrayList.add(a3);
+
+        return airportArrayList;
     }
 
-
-    public static List<DirectedRunway> directedRunways(){
-        ArrayList<DirectedRunway> directedRunways = new ArrayList<>();
-        directedRunways.add(new DirectedRunway("09/R"));
-        directedRunways.add(new DirectedRunway("13/L"));
-        return directedRunways;
-    }
-
-
-    public static List<Airport> airportList(){
-        ArrayList<Airport> airports = new ArrayList<>();
-        airports.add(new Airport("Heathrow"));
-        airports.add(new Airport("Gatwick"));
-        airports.add(new Airport("Stansted"));
-        airports.add(new Airport("Luton"));
-        airports.add(new Airport("City Airport"));
-        return airports;
-    }
-
-    public static List<Obstacle> obstacleList(){
+    private static List<Obstacle> obstacles(){
         ArrayList<Obstacle> obstacles = new ArrayList<>();
-        for (int i = 0; i < 10 ; i++) {
-           obstacles.add(new Obstacle("obstacle" + i));
-        }
+        obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
+        obstacles.add(new Obstacle("Boeing777", 25d, 100d, 20d, 2853d, 500d));
         return obstacles;
     }
+
 }

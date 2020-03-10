@@ -16,4 +16,9 @@ public class Runway {
         return lRunway;
     }
 
+    @Override
+    public String toString(){
+        return lRunway.toString()+" "+rRunway.toString();
+    }
+
 }
