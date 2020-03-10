@@ -13,14 +13,20 @@ public class Arrow extends Path{
     private double endingY;
     private double arrowSize;
 
+
     public Arrow(double startX, double startY, double endX, double endY, double arrowHeadSize, Color color){
         super();
         startingX = startX;
         startingY = startY;
         endingX = endX;
         endingY = endY;
-        arrowSize = arrowHeadSize;        strokeProperty().bind(fillProperty());
-        setFill(color);        //Line
+
+        arrowSize = arrowHeadSize;
+
+        strokeProperty().bind(fillProperty());
+        setFill(color);
+
+        //Line
         getElements().add(new MoveTo(startX, startY));
         getElements().add(new LineTo(endX, endY));        //ArrowHead
         double angle = Math.atan2((endY - startY), (endX - startX)) - Math.PI / 2.0;
@@ -47,9 +53,14 @@ public class Arrow extends Path{
     public void changeColour(Color color){
         getElements().clear();
         strokeProperty().bind(fillProperty());
-        setFill(color);        //Line
+
+        setFill(color);
+
+        //Line
         getElements().add(new MoveTo(startingX, startingY));
-        getElements().add(new LineTo(endingX, endingY));        //ArrowHead
+        getElements().add(new LineTo(endingX, endingY));
+
+        //ArrowHead
         double angle = Math.atan2((endingY - startingY), (endingX - startingX)) - Math.PI / 2.0;
         double sin = Math.sin(angle);
         double cos = Math.cos(angle);
@@ -58,8 +69,11 @@ public class Arrow extends Path{
         double y1 = (- 1.0 / 2.0 * sin - Math.sqrt(3) / 2 * cos) * arrowSize + endingY;
         //point2
         double x2 = (1.0 / 2.0 * cos + Math.sqrt(3) / 2 * sin) * arrowSize + endingX;
-        double y2 = (1.0 / 2.0 * sin - Math.sqrt(3) / 2 * cos) * arrowSize + endingY;        getElements().add(new LineTo(x1, y1));
+        double y2 = (1.0 / 2.0 * sin - Math.sqrt(3) / 2 * cos) * arrowSize + endingY;
+
+        getElements().add(new LineTo(x1, y1));
         getElements().add(new LineTo(x2, y2));
         getElements().add(new LineTo(endingX, endingY));
     }
+
 }

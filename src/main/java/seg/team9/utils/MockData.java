@@ -27,7 +27,7 @@ public class MockData {
         //GATWICK
         DirectedRunway d3 = new DirectedRunway("19R", 3660d, 3660d, 3660d, 3353d, 307d, 0d, 0d);
         DirectedRunway d4 = new DirectedRunway("30L", 3660d, 3660d, 3660d, 3660d, 0d, 0d, 0d);
-        Runway r2 = new Runway(d3, d2);
+        Runway r2 = new Runway(d3, d4);
         Airport a2 = new Airport("Gatwick");
         a2.addRunway(r2);
 
@@ -38,9 +38,17 @@ public class MockData {
         Airport a3 = new Airport("Luton");
         a3.addRunway(r3);
 
+        //HENRYS TEST LAND
+        DirectedRunway d7 = new DirectedRunway("09R",4000D,4100D,4000D,4000D,0D,100D,50D);
+        DirectedRunway d8 = new DirectedRunway("270L",4000D,4100D,4000D,4000D,0D,100D,50D);
+        Runway r4 = new Runway(d7, d8);
+        Airport a4 = new Airport("Henrys Test Land");
+        a4.addRunway(r4);
+
         airportArrayList.add(a1);
         airportArrayList.add(a2);
         airportArrayList.add(a3);
+        airportArrayList.add(a4);
 
         return airportArrayList;
     }
