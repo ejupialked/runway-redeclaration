@@ -17,6 +17,7 @@ import seg.team9.App;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.PrimaryWindowController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,9 +29,8 @@ public class TopDownViewController implements Initializable {
     String FONT_FAMILY = "Helvetica";
 
     @FXML private AnchorPane topDownView;
-
+    @FXML private PrimaryWindowController primaryWindowController;
     private static TopDownViewController instance;
-
 
     private Obstacle currentObstacle = new Obstacle("Nothing", 1D, 1D, 0D, 3660D,0D);
     private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D));
@@ -254,6 +254,10 @@ public class TopDownViewController implements Initializable {
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
+        logger.info(currentRunway.getRRunway().getWorkingTORA()+"<"+currentRunway.getRRunway().getWorkingASDA());
+
+        PrimaryWindowController.getInstance().changeColourArrows();
+
     }
 
     public void updateClearedAndGradedArea(){
