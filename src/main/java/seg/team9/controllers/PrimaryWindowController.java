@@ -11,11 +11,10 @@ import javafx.scene.paint.Color;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
-import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
-import seg.team9.controllers.calculation.CalculationBreakdownViewController;
+import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
@@ -46,11 +45,12 @@ public class PrimaryWindowController implements Initializable {
     @FXML private AnchorPane paneView;
     @FXML private AnchorPane paneCalculations;
     @FXML private AnchorPane paneQMarks;
+
     // Injecting controllers
     @FXML private SideViewController sideViewController; // side runway
     @FXML private TopDownViewController topDownViewController; // top down runway
     @FXML private ObstacleViewController obstacleViewController;
-    @FXML private CalculationBreakdownViewController calculationsBreakdownViewController;
+    @FXML private CalculationsViewController calculationsViewController;
 
     //Declaring colours
     private String white = " #FFFFFF";
@@ -85,7 +85,7 @@ public class PrimaryWindowController implements Initializable {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
         lightPanes.add(paneCalculations);
-        lightPanes.add(calculationsBreakdownViewController.getPaneCalculationsBreakdown());
+        lightPanes.add(calculationsViewController.getPaneCalculations());
         darkPanes.add(paneView);
         darkPanes.add(paneQMarks);
         darkPanes.add(obstacleViewController.getPaneObstacles());
@@ -107,7 +107,7 @@ public class PrimaryWindowController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Airport> observableValue, Airport airport, Airport t1) {
                 choiceBoxRunway.getItems().clear();
-                choiceBoxRunway.getItems().addAll(airport.getRunwayList());
+                choiceBoxRunway.getItems().addAll(t1.getRunwayList());
                 choiceBoxRunway.getSelectionModel().selectFirst();
 
                 changeColourArrows();
@@ -116,7 +116,9 @@ public class PrimaryWindowController implements Initializable {
 
 
         choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
-            topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+            if(t1 != null) {
+                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+            }
             //topDownViewController.updateUI(); you're calling this method already in line 67
 
             changeColourArrows();

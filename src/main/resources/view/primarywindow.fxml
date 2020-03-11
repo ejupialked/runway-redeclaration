@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="primaryPane" prefHeight="923.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
+<AnchorPane fx:id="primaryPane" prefHeight="957.0" prefWidth="1541.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
    <children>
-      <MenuBar fx:id="menuBar" prefWidth="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar fx:id="menuBar" layoutY="-6.0" prefHeight="35.0" prefWidth="1160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -52,14 +52,14 @@
         <items>
           <AnchorPane fx:id="paneView" minHeight="0.0" minWidth="0.0" prefHeight="888.0" prefWidth="550.0" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="104.0" prefHeight="388.0" prefWidth="388.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="103.20000000000005" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="104.0">
+                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="104.0" prefHeight="388.0" prefWidth="600.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="103.20000000000005" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="104.0">
                     <tabs>
                       <Tab fx:id="topDownViewTab" text="Top-down View">
                           <content>
                               <fx:include fx:id="topDownView" source="topdownrunway.fxml" />
                           </content>
                       </Tab>
-                      <Tab fx:id="sideViewTab" text="Side View">
+                      <Tab fx:id="sideViewTab" text="Side View" >
                           <fx:include source="siderunway.fxml" />
                         </Tab>
                     </tabs>
@@ -108,21 +108,24 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <SplitPane dividerPositions="0.5" prefHeight="505.0" prefWidth="413.0">
+            <SplitPane dividerPositions="0.5109004739336492" prefHeight="505.0" prefWidth="413.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="893.0" prefWidth="170.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <TitledPane collapsible="false" text="Calculations" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TitledPane fx:id="titledPaneBreakdown" collapsible="false" prefHeight="893.0" prefWidth="500.0" text="Calculations" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
-                              <AnchorPane fx:id="paneCalculations" prefHeight="200.0" prefWidth="200.0" />
+                               <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
                            </content>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
                         </TitledPane>
                      </children>
                   </AnchorPane>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                          <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
-                         <fx:include fx:id="calculationsBreakdownView" source="calculationsbreakdownview.fxml" />
+                         <fx:include fx:id="calculationsView" source="calculationsview.fxml" />
                         <AnchorPane VBox.vgrow="ALWAYS">
                            <children>
                               <TitledPane collapsible="false" text="???" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

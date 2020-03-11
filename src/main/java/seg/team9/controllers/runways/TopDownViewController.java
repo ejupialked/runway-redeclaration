@@ -257,6 +257,7 @@ public class TopDownViewController implements Initializable {
         logger.info(currentRunway.getRRunway().getWorkingTORA()+"<"+currentRunway.getRRunway().getWorkingASDA());
 
         PrimaryWindowController.getInstance().changeColourArrows();
+
     }
 
     public void updateClearedAndGradedArea(){
@@ -508,6 +509,7 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateValues(){
+        logger.info("currentRunway"+currentRunway);
         App.getCalculator().redesignate(currentRunway, currentObstacle);
         runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
         TODAR = currentRunway.getRRunway().getWorkingTODA();
@@ -532,6 +534,11 @@ public class TopDownViewController implements Initializable {
         textASDAL.setText("ASDA: "+ASDAL.toString());
         textTORAL.setText("TORA: "+TORAL.toString());
         textLDAL.setText("LDA: "+LDAL.toString());
+    }
+
+
+    public Runway getCurrentRunway(){
+        return currentRunway;
     }
 
     public void changeColourTORA(Color color){

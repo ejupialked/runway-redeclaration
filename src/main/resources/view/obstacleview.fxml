@@ -29,9 +29,9 @@
                   <children>
                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                         <children>
-                           <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="25.0" prefWidth="50.0" text="name:">
+                           <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="25.0" text="name:">
                               <font>
-                                 <Font name="System Bold" size="16.0" />
+                                 <Font name="System Italic" size="16.0" />
                               </font>
                            </Label>
                            <Label fx:id="txtObstacleName" text="Obstacle" textAlignment="JUSTIFY" textFill="#311fb9">
@@ -43,9 +43,9 @@
                      </HBox>
                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                         <children>
-                           <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="22.0" prefWidth="54.0" text="height:">
+                           <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="22.0" text="height:" HBox.hgrow="ALWAYS">
                               <font>
-                                 <Font name="System Bold" size="16.0" />
+                                 <Font name="System Italic" size="16.0" />
                               </font>
                            </Label>
                            <Label fx:id="txtObstacleHeight" text="33333" textAlignment="JUSTIFY" textFill="#311fb9" HBox.hgrow="ALWAYS">
@@ -57,9 +57,9 @@
                      </HBox>
                      <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                         <children>
-                           <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="25.0" prefWidth="52.0" text="width:">
+                           <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="25.0" text="width:" HBox.hgrow="ALWAYS">
                               <font>
-                                 <Font name="System Bold" size="16.0" />
+                                 <Font name="System Italic" size="16.0" />
                               </font>
                            </Label>
                            <Label fx:id="txtObstacleWidth" text="40m" textAlignment="JUSTIFY" textFill="#311fb9">
@@ -73,7 +73,7 @@
                         <children>
                            <Label alignment="TOP_LEFT" contentDisplay="TOP" text="distance center">
                               <font>
-                                 <Font name="System Bold" size="16.0" />
+                                 <Font name="System Italic" size="16.0" />
                               </font>
                            </Label>
                            <Label fx:id="txtDistanceCenter" text="300m" textAlignment="JUSTIFY" textFill="#311fb9">
@@ -87,7 +87,7 @@
                         <children>
                            <Label alignment="TOP_LEFT" contentDisplay="TOP" text="distance threshold (right) :">
                               <font>
-                                 <Font name="System Bold" size="16.0" />
+                                 <Font name="System Italic" size="16.0" />
                               </font>
                            </Label>
                            <Label fx:id="txtDistanceThresholdLeft" text="3333333333" textAlignment="JUSTIFY" textFill="#311fb9">
@@ -101,7 +101,7 @@
                         <children>
                            <Label alignment="TOP_LEFT" contentDisplay="TOP" text="distance threshold (right) :">
                               <font>
-                                 <Font name="System Bold" size="16.0" />
+                                 <Font name="System Italic" size="16.0" />
                               </font>
                            </Label>
                            <Label fx:id="txtDistanceThresholdRight" text="333333333" textAlignment="JUSTIFY" textFill="#311fb9" HBox.hgrow="ALWAYS">
@@ -124,5 +124,8 @@
                     </children>
                 </AnchorPane>
             </content>
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
         </TitledPane>
 </AnchorPane>
