@@ -35,7 +35,6 @@ public class ObstacleViewController implements Initializable {
 
 
     @FXML private ChoiceBox<Obstacle> boxObstacles;
-    @FXML private VBox checkBoxes;
     @FXML private Label txtObstacleName;
     @FXML private Label txtObstacleHeight;
     @FXML private Label txtObstacleWidth;
@@ -65,43 +64,21 @@ public class ObstacleViewController implements Initializable {
         logger.info("init ObstacleBox");
 
 
-        for(Obstacle o : App.obstacleObservableList()){
-            CheckBox newbox = new CheckBox(o.getName());
-            checkBoxes.getChildren().add(newbox);
-            checkToObst.put(newbox, o);
-        }
         boxObstacles.setItems(App.obstacleObservableList());
         boxObstacles.getSelectionModel().selectFirst();
         updateLabelsObstacle(boxObstacles.getValue());
 
         setSelectedObstacle(boxObstacles.getValue());
 
-        /*When an obstacle is selected
-        boxObstacles.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            if(newValue!=null)
-
-        }));*/
 
         //When an obstacle is selected
         boxObstacles.getSelectionModel().selectedItemProperty().addListener((observableValue, obstacle, t1) -> {
             setSelectedObstacle(t1);
             updateLabelsObstacle(t1);
-            //TopDownViewController.getInstance().displayObstacleSelected(t1);
+            TopDownViewController.getInstance().displayObstacleSelected(t1);
         });
 
-        //TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getSelectionModel().getSelectedItem());
-        CheckBox test = new CheckBox("Meme");
 
-        for(Node n : checkBoxes.getChildren()){
-            CheckBox c = (CheckBox)n;
-            c.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                @Override
-                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                    if(newValue == true)
-                        TopDownViewController.getInstance().displayObstacleSelected(checkToObst.get(c));
-                }
-            });
-        }
 
     }
 
