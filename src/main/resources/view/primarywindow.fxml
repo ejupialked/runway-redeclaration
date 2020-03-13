@@ -10,6 +10,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -52,14 +54,14 @@
         <items>
           <AnchorPane fx:id="paneView" minHeight="0.0" minWidth="0.0" prefHeight="888.0" prefWidth="550.0" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="104.0" prefHeight="388.0" prefWidth="600.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="103.20000000000005" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="104.0">
+                  <TabPane fx:id="tabPaneRunways" layoutX="24.0" layoutY="132.0" prefHeight="388.0" prefWidth="600.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="75.20000000000005" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="132.0">
                     <tabs>
                       <Tab fx:id="topDownViewTab" text="Top-down View">
                           <content>
                               <fx:include fx:id="topDownView" source="topdownrunway.fxml" />
                           </content>
                       </Tab>
-                      <Tab fx:id="sideViewTab" text="Side View" >
+                      <Tab fx:id="sideViewTab" text="Side View">
                           <fx:include source="siderunway.fxml" />
                         </Tab>
                     </tabs>
@@ -68,7 +70,7 @@
                   <ChoiceBox fx:id="choiceBoxAirport" layoutX="91.0" layoutY="21.0" prefWidth="150.0" />
                   <Label layoutX="24.0" layoutY="63.0" prefHeight="17.0" prefWidth="67.0" text="Runway:" />
                   <ChoiceBox fx:id="choiceBoxRunway" layoutX="91.0" layoutY="59.0" prefWidth="150.0" />
-                  <GridPane layoutX="60.0" layoutY="818.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                  <GridPane layoutX="50.0" layoutY="860.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -106,6 +108,10 @@
                         </Label>
                      </children>
                   </GridPane>
+                   <ImageView fx:id="compass" fitHeight="108.0" fitWidth="122.0" layoutX="627.0" layoutY="18.0" pickOnBounds="true" preserveRatio="false" AnchorPane.rightAnchor="14.0">
+                       <image>
+                           <Image url="@../Images/compass.png" />
+                       </image></ImageView>
                </children>
             </AnchorPane>
             <SplitPane dividerPositions="0.5109004739336492" prefHeight="505.0" prefWidth="413.0">

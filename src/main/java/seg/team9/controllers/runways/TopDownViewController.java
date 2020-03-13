@@ -104,6 +104,7 @@ public class TopDownViewController implements Initializable {
     private Double displacedDesignatorL = 0D;
     private Double displacedDesignatorR = 0D;
 
+
     public TopDownViewController() {
         instance = this;
     }
@@ -244,6 +245,8 @@ public class TopDownViewController implements Initializable {
         updateObstacle();
         addChildren();
         try {
+
+            PrimaryWindowController.getInstance().rotateCompass((double) (Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90));
             graphics.setRotate(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90);
             if(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90 <= 180){
                 text.setRotate(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90);
@@ -259,6 +262,9 @@ public class TopDownViewController implements Initializable {
         PrimaryWindowController.getInstance().changeColourArrows();
 
     }
+
+
+
 
     public void updateClearedAndGradedArea(){
         double[] points = {

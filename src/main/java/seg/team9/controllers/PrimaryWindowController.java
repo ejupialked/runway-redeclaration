@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import org.apache.log4j.LogManager;
@@ -51,6 +52,9 @@ public class PrimaryWindowController implements Initializable {
     @FXML private TopDownViewController topDownViewController; // top down runway
     @FXML private ObstacleViewController obstacleViewController;
     @FXML private CalculationsViewController calculationsViewController;
+
+    @FXML
+    ImageView compass;
 
     //Declaring colours
     private String white = " #FFFFFF";
@@ -170,5 +174,10 @@ public class PrimaryWindowController implements Initializable {
 
     public void o0nSelectedLDAColour(ActionEvent actionEvent) {
         topDownViewController.changeColourLDA(colourPickerLDA.getValue());
+    }
+
+
+    public void rotateCompass(Double val){
+        compass.setRotate(val);
     }
 }
