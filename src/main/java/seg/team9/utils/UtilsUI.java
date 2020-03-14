@@ -1,6 +1,9 @@
 package seg.team9.utils;
 
+import javafx.animation.RotateTransition;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.util.Duration;
 
 
 public class UtilsUI {
@@ -21,5 +24,12 @@ public class UtilsUI {
         alert.showAndWait();
     }
 
+
+    public static void rotateView(Node graphics, double angle, long duration){
+        RotateTransition rt = new RotateTransition(Duration.millis(duration), graphics);
+        rt.setToAngle(angle);
+        rt.setAutoReverse(true);
+        rt.play();
+    }
 
 }
