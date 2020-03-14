@@ -1,5 +1,7 @@
 package seg.team9.controllers;
 
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
@@ -55,6 +58,8 @@ public class PrimaryWindowController implements Initializable {
 
     @FXML
     ImageView compass;
+    @FXML
+    ImageView needle;
 
     //Declaring colours
     private String white = " #FFFFFF";
@@ -68,11 +73,16 @@ public class PrimaryWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initCompass();
         initMenuBar();
         initChoiceBoxes();
         initArrays();
         initColorPickers();
         initSplitPane();
+    }
+
+    private void initCompass() {
+        needle.setRotate(270);
     }
 
     void initSplitPane(){
@@ -131,8 +141,7 @@ public class PrimaryWindowController implements Initializable {
 
     }
 
-    public void changeColourArrows()
-    {
+    public void changeColourArrows() {
         //Recolour arrows
         topDownViewController.changeColourTORA(colourPickerTORA.getValue());
         topDownViewController.changeColourTODA(colourPickerTODA.getValue());
@@ -177,7 +186,7 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
-    public void rotateCompass(Double val){
-        compass.setRotate(val);
+    public void rotateNeedle(Double val){
+       UtilsUI.rotateView(needle, val, 3000);
     }
 }

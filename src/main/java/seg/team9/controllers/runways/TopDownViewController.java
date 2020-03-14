@@ -18,6 +18,7 @@ import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -183,11 +184,13 @@ public class TopDownViewController implements Initializable {
 
     public void initLines(){
         centreLine.setStroke(Color.WHITE);
-        centreLine.setStrokeWidth(5d);
-        centreLine.getStrokeDashArray().addAll(40d, 20d);
+        centreLine.setStrokeWidth(12d);
+        centreLine.getStrokeDashArray().addAll(50d, 30d);
+
         thresholdR.setStroke(Color.WHITE);
         TORALineR.setStroke(Color.BLACK);
         TODARLineR.setStroke(Color.BLACK);
+
         ADSALineR.setStroke(Color.BLACK);
         LDALineR.setStroke(Color.BLACK);
         runwayStartR.setStroke(Color.BLACK);
@@ -246,14 +249,20 @@ public class TopDownViewController implements Initializable {
         addChildren();
         try {
 
-            PrimaryWindowController.getInstance().rotateCompass((double) (Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90));
-            graphics.setRotate(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90);
-            if(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90 <= 180){
-                text.setRotate(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90);
+            double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
+
+            PrimaryWindowController.getInstance().rotateNeedle(graphicsRot);
+
+            UtilsUI.rotateView(graphics, graphicsRot, 3000);
+
+            double rotText = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
+
+            if(rotText <= 180){
+                UtilsUI.rotateView(text, rotText, 3000);
+            } else {
+                UtilsUI.rotateView(text, Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 270, 3000);
             }
-            else{
-                text.setRotate(Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 270);
-            }
+
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
@@ -397,21 +406,37 @@ public class TopDownViewController implements Initializable {
     private void updateArrowTODA(){
         arrowTODAR = new Arrow(runwayOffsetR+runwayBeginX,0.05*yScaler,runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTODA()*runwayScaleX,0.05*yScaler,10);
         arrowTODAL = new Arrow(runwayEndX-runwayOffsetL,0.95*yScaler,runwayEndX-currentRunway.getLRunway().getWorkingTODA()*runwayScaleX-runwayOffsetL,0.95*yScaler,10);
+
+        arrowTODAL.setStrokeWidth(3);
+        arrowTODAR.setStrokeWidth(3);
+
     }
 
     private void updateArrowASDA(){
         arrowASDAR = new Arrow(runwayOffsetR+runwayBeginX,0.1*yScaler,runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingASDA()*runwayScaleX,0.1*yScaler,10);
         arrowASDAL = new Arrow(runwayEndX-runwayOffsetL,0.9*yScaler,runwayEndX-currentRunway.getLRunway().getWorkingASDA()*runwayScaleX-runwayOffsetL,0.9*yScaler,10);
+
+        arrowASDAR.setStrokeWidth(3);
+        arrowASDAL.setStrokeWidth(3);
     }
 
     private void updateArrowTORA(){
         arrowTORAR = new Arrow(runwayOffsetR+runwayBeginX,0.15*yScaler,runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTORA()*runwayScaleX,0.15*yScaler,10);
         arrowTORAL = new Arrow(runwayEndX-runwayOffsetL,0.85*yScaler,runwayEndX-currentRunway.getLRunway().getWorkingTORA()*runwayScaleX-runwayOffsetL,0.85*yScaler,10);
+
+        arrowTORAR.setStrokeWidth(3);
+        arrowTORAL.setStrokeWidth(3);
+
+
     }
 
     private void updateArrowLDA(){
         arrowLDAR = new Arrow(runwayOffsetR+runwayBeginX+displacedDesignatorR,0.19*yScaler,runwayOffsetR+runwayBeginX+displacedDesignatorR+currentRunway.getRRunway().getWorkingLDA()*runwayScaleX,0.19*yScaler,10);
         arrowLDAL = new Arrow(runwayEndX-displacedDesignatorL-runwayOffsetL,0.81*yScaler,runwayEndX-displacedDesignatorL-currentRunway.getLRunway().getWorkingLDA()*runwayScaleX-runwayOffsetL,0.81*yScaler,10);
+
+        arrowLDAR.setStrokeWidth(3);
+        arrowLDAL.setStrokeWidth(3);
+
     }
 
     private void updateTextTODA(){
