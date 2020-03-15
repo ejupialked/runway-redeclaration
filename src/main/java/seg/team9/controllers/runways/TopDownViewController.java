@@ -251,9 +251,11 @@ public class TopDownViewController implements Initializable {
 
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
-            PrimaryWindowController.getInstance().rotateNeedle(graphicsRot);
+            PrimaryWindowController.getInstance().rotateNeedle(graphicsRot+90);
 
             UtilsUI.rotateView(graphics, graphicsRot, 3000);
+
+            logger.info("NEWROT"+Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")));
 
             double rotText = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
