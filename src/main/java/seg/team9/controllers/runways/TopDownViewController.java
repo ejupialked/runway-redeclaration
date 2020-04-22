@@ -2,6 +2,8 @@ package seg.team9.controllers.runways;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -33,31 +35,49 @@ public class TopDownViewController implements Initializable {
     @FXML private PrimaryWindowController primaryWindowController;
     private static TopDownViewController instance;
 
-    private Obstacle currentObstacle = new Obstacle("Nothing", 1D, 1D, 0D, 3660D,0D);
+    public boolean isSelected = true;
+
+    private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
     private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D));
 
     //UI STUFF
     private Pane graphics = new Pane();
     private Pane text = new Pane();
+    public Pane arrows = new Pane();
 
+
+    private Double screenWidth;
+    private Double screenHeight;
     private Double xScaler;
-    private Double yScaler;
+    private Double middleY;
     private Rectangle runwayBase = new Rectangle();
     private Polygon clearedAndGradedArea = new Polygon();
     private Line centreLine = new Line();
 
     private Rectangle obstacle = new Rectangle();
 
-    //Right Runway
-    private Text runwayDesignatorR = new Text("SELECT A RUNWAY");
-    private Line thresholdR = new Line();
-    private Rectangle stopwayR = new Rectangle();
-    private Rectangle clearwayR = new Rectangle();
-    private Line TODARLineR = new Line();
-    private Line ADSALineR = new Line();
-    private Line TORALineR = new Line();
-    private Line LDALineR = new Line();
-    private Line runwayStartR = new Line();
+    //Right Arrows
+    private Double TORAStartXR = 0D;
+    private Double TORAEndXR = 0D;
+
+    private Double TODAStartXR = 0D;
+    private Double TODAEndXR = 0D;
+
+    private Double ASDAStartXR = 0D;
+    private Double ASDAEndXR = 0D;
+
+    private Double LDAStartXR = 0D;
+    private Double LDAEndXR = 0D;
+
+
+    private Line TODAStartLineR = new Line();
+    private Line ASDAStartLineR = new Line();
+    private Line TORAStartLineR = new Line();
+    private Line LDAStartLineR = new Line();
+    private Line TODAEndLineR = new Line();
+    private Line ASDAEndLineR = new Line();
+    private Line TORAEndLineR = new Line();
+    private Line LDAEndLineR = new Line();
     private Arrow arrowTODAR = new Arrow(0,0,0,0,0);
     private Arrow arrowASDAR = new Arrow(0,0,0,0,0);
     private Arrow arrowTORAR = new Arrow(0,0,0,0,0);
@@ -66,6 +86,47 @@ public class TopDownViewController implements Initializable {
     private Text textASDAR = new Text("ASDA");
     private Text textTORAR = new Text("TORA");
     private Text textLDAR = new Text("LDA");
+
+    //Left Arrows
+    private Double TORAStartXL = 0D;
+    private Double TORAEndXL = 0D;
+
+    private Double TODAStartXL = 0D;
+    private Double TODAEndXL = 0D;
+
+    private Double ASDAStartXL = 0D;
+    private Double ASDAEndXL = 0D;
+
+    private Double LDAStartXL = 0D;
+    private Double LDAEndXL = 0D;
+
+
+    private Line TODAStartLineL = new Line();
+    private Line ASDAStartLineL = new Line();
+    private Line TORAStartLineL = new Line();
+    private Line LDAStartLineL = new Line();
+    private Line TODAEndLineL = new Line();
+    private Line ASDAEndLineL = new Line();
+    private Line TORAEndLineL = new Line();
+    private Line LDAEndLineL = new Line();
+    private Arrow arrowTODAL = new Arrow(0,0,0,0,0);
+    private Arrow arrowASDAL = new Arrow(0,0,0,0,0);
+    private Arrow arrowTORAL = new Arrow(0,0,0,0,0);
+    private Arrow arrowLDAL = new Arrow(0,0,0,0,0);
+    private Text textTODAL = new Text("TODA");
+    private Text textASDAL = new Text("ASDA");
+    private Text textTORAL = new Text("TORA");
+    private Text textLDAL = new Text("LDA");
+
+
+
+
+    //Right Runway
+    private Text runwayDesignatorR = new Text("SELECT A RUNWAY");
+    private Line thresholdR = new Line();
+    private Rectangle stopwayR = new Rectangle();
+    private Rectangle clearwayR = new Rectangle();
+
     private Double TODAR = 0D;
     private Double ASDAR = 0D;
     private Double TORAR = 0D;
@@ -76,29 +137,17 @@ public class TopDownViewController implements Initializable {
     private Line thresholdL = new Line();
     private Rectangle stopwayL = new Rectangle();
     private Rectangle clearwayL = new Rectangle();
-    private Line TODALineL = new Line();
-    private Line ASDALineL = new Line();
-    private Line TORALineL = new Line();
-    private Line LDALineL = new Line();
-    private Line runwayStartL = new Line();
-    private Arrow arrowTODAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowASDAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowTORAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowLDAL = new Arrow(0,0,0,0,0);
-    private Text textTODAL = new Text("TODA");
-    private Text textASDAL = new Text("ASDA");
-    private Text textTORAL = new Text("TORA");
-    private Text textLDAL = new Text("LDA");
+
     private Double TODAL = 0D;
     private Double ASDAL = 0D;
     private Double TORAL = 0D;
     private Double LDAL = 0D;
 
+
     //Positional Info
     private Double runwayBeginX;
     private Double runwayEndX;
     private Double runwayLength;
-    private Double runwayScaleX;
     private Double runwayOffsetR;
     private Double runwayOffsetL;
 
@@ -133,22 +182,25 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateScaler(){
-        runwayBeginX = xScaler * 0.15;
-        runwayLength = xScaler * 0.7;
+        middleY = graphics.getHeight()*0.5;
+        runwayBeginX = screenWidth * 0.15;
+        runwayLength = screenWidth * 0.7;
         runwayEndX = runwayBeginX + runwayLength;
-        runwayScaleX = runwayLength / currentRunway.getLRunway().getTora();
+        xScaler = runwayLength/currentRunway.getRRunway().getTora();
         if(currentObstacle.getDistanceRThreshold()>=(currentRunway.getRRunway().getTora()/2)) {
             runwayOffsetR = 0D;
         }
         else{
-            runwayOffsetR = runwayScaleX*(currentObstacle.getDistanceRThreshold())+obstacle.getWidth();
+            runwayOffsetR = xScaler*(currentObstacle.getDistanceRThreshold())+obstacle.getWidth();
         }
         if(currentObstacle.getDistanceLThreshold()>=currentRunway.getLRunway().getTora()/2) {
             runwayOffsetL = 0D;
         }
         else{
-            runwayOffsetL = runwayScaleX*(currentObstacle.getDistanceLThreshold())+obstacle.getWidth();
+            runwayOffsetL = xScaler*(currentObstacle.getDistanceLThreshold())+obstacle.getWidth();
         }
+
+        
     }
 
     public void initText(){
@@ -188,18 +240,6 @@ public class TopDownViewController implements Initializable {
         centreLine.getStrokeDashArray().addAll(50d, 30d);
 
         thresholdR.setStroke(Color.WHITE);
-        TORALineR.setStroke(Color.BLACK);
-        TODARLineR.setStroke(Color.BLACK);
-
-        ADSALineR.setStroke(Color.BLACK);
-        LDALineR.setStroke(Color.BLACK);
-        runwayStartR.setStroke(Color.BLACK);
-        thresholdL.setStroke(Color.WHITE);
-        TORALineL.setStroke(Color.BLACK);
-        TODALineL.setStroke(Color.BLACK);
-        ASDALineL.setStroke(Color.BLACK);
-        LDALineL.setStroke(Color.BLACK);
-        runwayStartL.setStroke(Color.BLACK);
     }
 
     public void initRectangles(){
@@ -222,8 +262,8 @@ public class TopDownViewController implements Initializable {
         graphics.setPrefHeight(topDownView.getHeight());
         text.setPrefWidth(topDownView.getWidth());
         text.setPrefHeight(topDownView.getHeight());
-        xScaler = topDownView.getWidth();
-        yScaler = topDownView.getHeight();
+        screenWidth = topDownView.getWidth();
+        screenHeight = topDownView.getHeight();
         updateScaler();
         updateClearedAndGradedArea();
         updateRunwayBase();
@@ -232,19 +272,7 @@ public class TopDownViewController implements Initializable {
         updateThreshold();
         updateStopway();
         updateClearway();
-        updateTODALine();
-        updateASDALine();
-        updateTORALine();
-        updateLDALine();
-        updateRunwayStart();
-        updateArrowTODA();
-        updateArrowASDA();
-        updateArrowTORA();
-        updateArrowLDA();
-        updateTextTODA();
-        updateTextASDA();
-        updateTextTORA();
-        updateTextLDA();
+        updateArrows();
         updateObstacle();
         addChildren();
         try {
@@ -266,7 +294,6 @@ public class TopDownViewController implements Initializable {
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
-        logger.info(currentRunway.getRRunway().getWorkingTORA()+"<"+currentRunway.getRRunway().getWorkingASDA());
 
         PrimaryWindowController.getInstance().changeColourArrows();
 
@@ -277,18 +304,18 @@ public class TopDownViewController implements Initializable {
 
     public void updateClearedAndGradedArea(){
         double[] points = {
-                0,0.3*yScaler,
-                0.2*xScaler, 0.3*yScaler,
-                0.3*xScaler,0.2*yScaler,
-                0.7*xScaler,0.2*yScaler,
-                0.8*xScaler,0.3*yScaler,
-                xScaler,0.3*yScaler,
-                xScaler,0.7*yScaler,
-                0.8*xScaler,0.7*yScaler,
-                0.7*xScaler,0.8*yScaler,
-                0.3*xScaler,0.8*yScaler,
-                0.2*xScaler,0.7*yScaler,
-                0,0.7*yScaler};
+                0,0.3* screenHeight,
+                0.2* screenWidth, 0.3* screenHeight,
+                0.3* screenWidth,0.2* screenHeight,
+                0.7* screenWidth,0.2* screenHeight,
+                0.8* screenWidth,0.3* screenHeight,
+                screenWidth,0.3* screenHeight,
+                screenWidth,0.7* screenHeight,
+                0.8* screenWidth,0.7* screenHeight,
+                0.7* screenWidth,0.8* screenHeight,
+                0.3* screenWidth,0.8* screenHeight,
+                0.2* screenWidth,0.7* screenHeight,
+                0,0.7* screenHeight};
         clearedAndGradedArea = new Polygon(points);
         clearedAndGradedArea.setFill(Color.BLUE);
         topDownView.getChildren().add(clearedAndGradedArea);
@@ -296,188 +323,179 @@ public class TopDownViewController implements Initializable {
 
     public void updateRunwayBase(){
         runwayBase.setX(runwayBeginX);
-        runwayBase.setY(yScaler*0.4);
+        runwayBase.setY(screenHeight *0.4);
         runwayBase.setWidth(runwayLength);
-        runwayBase.setHeight(yScaler*0.2);
+        runwayBase.setHeight(screenHeight *0.2);
     }
 
     public void updateCentreLine(){
         centreLine.setStartX(runwayBeginX+0.1*runwayLength);
-        centreLine.setStartY(yScaler*0.5);
+        centreLine.setStartY(screenHeight *0.5);
         centreLine.setEndX(runwayEndX-0.1*runwayLength);
-        centreLine.setEndY(yScaler*0.5);
+        centreLine.setEndY(screenHeight *0.5);
     }
 
     public void updateRunwayDesignator(){
         runwayDesignatorR.setX(runwayBeginX);
-        runwayDesignatorR.setY(yScaler*0.5);
+        runwayDesignatorR.setY(screenHeight *0.5);
         runwayDesignatorL.setX(runwayEndX-60);
-        runwayDesignatorL.setY(yScaler*0.5);
+        runwayDesignatorL.setY(screenHeight *0.5);
     }
 
     public void updateThreshold(){
-        thresholdR.setStartX(runwayBeginX+displacedDesignatorR*runwayScaleX);
-        thresholdR.setStartY(yScaler*0.45);
-        thresholdR.setEndX(runwayBeginX+displacedDesignatorR*runwayScaleX);
-        thresholdR.setEndY(yScaler*0.55);
-        thresholdL.setStartX(runwayBeginX+runwayLength-displacedDesignatorL*runwayScaleX);
-        thresholdL.setStartY(yScaler*0.45);
-        thresholdL.setEndX(runwayBeginX+runwayLength-displacedDesignatorL*runwayScaleX);
-        thresholdL.setEndY(yScaler*0.55);
+        thresholdR.setStartX(runwayBeginX+displacedDesignatorR*xScaler);
+        thresholdR.setStartY(screenHeight *0.45);
+        thresholdR.setEndX(runwayBeginX+displacedDesignatorR*xScaler);
+        thresholdR.setEndY(screenHeight *0.55);
+        thresholdL.setStartX(runwayBeginX+runwayLength-displacedDesignatorL*xScaler);
+        thresholdL.setStartY(screenHeight *0.45);
+        thresholdL.setEndX(runwayBeginX+runwayLength-displacedDesignatorL*xScaler);
+        thresholdL.setEndY(screenHeight *0.55);
     }
 
     public void updateStopway(){
         stopwayR.setX(runwayBeginX+runwayLength);
-        stopwayR.setY(yScaler*0.4);
-        stopwayR.setWidth(currentRunway.getRRunway().getStopway()*runwayScaleX);
-        stopwayR.setHeight(yScaler*0.2);
-        stopwayL.setX(runwayBeginX-currentRunway.getLRunway().getStopway()*runwayScaleX);
-        stopwayL.setY(yScaler*0.4);
-        stopwayL.setWidth(currentRunway.getLRunway().getStopway()*runwayScaleX);
-        stopwayL.setHeight(yScaler*0.2);
+        stopwayR.setY(screenHeight *0.4);
+        stopwayR.setWidth(currentRunway.getRRunway().getStopway()*xScaler);
+        stopwayR.setHeight(screenHeight *0.2);
+        stopwayL.setX(runwayBeginX-currentRunway.getLRunway().getStopway()*xScaler);
+        stopwayL.setY(screenHeight *0.4);
+        stopwayL.setWidth(currentRunway.getLRunway().getStopway()*xScaler);
+        stopwayL.setHeight(screenHeight *0.2);
     }
 
     public void updateClearway(){
         clearwayR.setX(runwayBeginX+runwayLength);
-        clearwayR.setY(yScaler*0.35);
-        clearwayR.setWidth(currentRunway.getRRunway().getClearway()*runwayScaleX);
-        clearwayR.setHeight(yScaler*0.3);
-        clearwayL.setX(runwayBeginX-currentRunway.getLRunway().getClearway()*runwayScaleX);
-        clearwayL.setY(yScaler*0.35);
-        clearwayL.setWidth(currentRunway.getLRunway().getClearway()*runwayScaleX);
-        clearwayL.setHeight(yScaler*0.3);
+        clearwayR.setY(screenHeight *0.35);
+        clearwayR.setWidth(currentRunway.getRRunway().getClearway()*xScaler);
+        clearwayR.setHeight(screenHeight *0.3);
+        clearwayL.setX(runwayBeginX-currentRunway.getLRunway().getClearway()*xScaler);
+        clearwayL.setY(screenHeight *0.35);
+        clearwayL.setWidth(currentRunway.getLRunway().getClearway()*xScaler);
+        clearwayL.setHeight(screenHeight *0.3);
     }
 
-    public void updateTODALine(){
-        TODARLineR.setStartX(runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTODA()*runwayScaleX);
-        TODARLineR.setStartY(0.5*yScaler);
-        TODARLineR.setEndX(runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTODA()*runwayScaleX);
-        TODARLineR.setEndY(0.05*yScaler);
-        TODALineL.setStartX(runwayEndX-currentRunway.getLRunway().getWorkingTODA()*runwayScaleX-runwayOffsetL);
-        TODALineL.setStartY(0.5*yScaler);
-        TODALineL.setEndX(runwayEndX-currentRunway.getLRunway().getWorkingTODA()*runwayScaleX-runwayOffsetL);
-        TODALineL.setEndY(0.95*yScaler);
+    public void setLinePos(Line line, double startX, double startY, double endX, double endY){
+        line.setStartX(startX);
+        line.setStartY(startY);
+
+        line.setEndX(endX);
+        line.setEndY(endY);
     }
 
-    public void updateASDALine(){
-        ADSALineR.setStartX(runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingASDA()*runwayScaleX);
-        ADSALineR.setStartY(0.5*yScaler);
-        ADSALineR.setEndX(runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingASDA()*runwayScaleX);
-        ADSALineR.setEndY(0.1*yScaler);
-        ASDALineL.setStartX(runwayEndX-currentRunway.getLRunway().getWorkingASDA()*runwayScaleX-runwayOffsetL);
-        ASDALineL.setStartY(0.5*yScaler);
-        ASDALineL.setEndX(runwayEndX-currentRunway.getLRunway().getWorkingASDA()*runwayScaleX-runwayOffsetL);
-        ASDALineL.setEndY(0.9*yScaler);
-    }
+    public void updateArrows(){
+        arrows.getChildren().clear();
+        text.getChildren().clear();
 
-    public void updateTORALine(){
-        TORALineR.setStartX(runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTORA()*runwayScaleX);
-        TORALineR.setStartY(0.5*yScaler);
-        TORALineR.setEndX(runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTORA()*runwayScaleX);
-        TORALineR.setEndY(0.15*yScaler);
-        TORALineL.setStartX(runwayEndX-currentRunway.getLRunway().getWorkingTORA()*runwayScaleX-runwayOffsetL);
-        TORALineL.setStartY(0.5*yScaler);
-        TORALineL.setEndX(runwayEndX-currentRunway.getLRunway().getWorkingTORA()*runwayScaleX-runwayOffsetL);
-        TORALineL.setEndY(0.85*yScaler);
-    }
+        updateText();
 
-    private void updateLDALine(){
-        LDALineR.setStartX(runwayOffsetR+runwayBeginX+displacedDesignatorR+currentRunway.getRRunway().getWorkingLDA()*runwayScaleX);
-        LDALineR.setStartY(0.5*yScaler);
-        LDALineR.setEndX(runwayOffsetR+runwayBeginX+displacedDesignatorR+currentRunway.getRRunway().getWorkingLDA()*runwayScaleX);
-        LDALineR.setEndY(0.19*yScaler);
-        LDALineL.setStartX(runwayEndX-displacedDesignatorL-currentRunway.getLRunway().getWorkingLDA()*runwayScaleX-runwayOffsetL);
-        LDALineL.setStartY(0.5*yScaler);
-        LDALineL.setEndX(runwayEndX-displacedDesignatorL-currentRunway.getLRunway().getWorkingLDA()*runwayScaleX-runwayOffsetL);
-        LDALineL.setEndY(0.81*yScaler);
-    }
+        if(currentObstacle.getDistanceRThreshold()>currentObstacle.getDistanceLThreshold()){
+            TORAStartXR = runwayBeginX;
+            TORAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingTORA() * xScaler;
+            TODAStartXR = runwayBeginX;
+            TODAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingTODA() * xScaler;
+            ASDAStartXR = runwayBeginX;
+            ASDAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingASDA() * xScaler;
+            LDAStartXR = runwayBeginX;
+            LDAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingLDA() * xScaler;
 
-    private void updateRunwayStart(){
-        runwayStartR.setStartX(runwayOffsetR+runwayBeginX);
-        runwayStartR.setStartY(0.5*yScaler);
-        runwayStartR.setEndX(runwayOffsetR+runwayBeginX);
-        runwayStartR.setEndY(0.05*yScaler);
-        runwayStartL.setStartX(runwayEndX-runwayOffsetL);
-        runwayStartL.setStartY(0.5*yScaler);
-        runwayStartL.setEndX(runwayEndX-runwayOffsetL);
-        runwayStartL.setEndY(0.95*yScaler);
-    }
-
-    private void updateArrowTODA(){
-        arrowTODAR = new Arrow(runwayOffsetR+runwayBeginX,0.05*yScaler,runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTODA()*runwayScaleX,0.05*yScaler,10);
-        arrowTODAL = new Arrow(runwayEndX-runwayOffsetL,0.95*yScaler,runwayEndX-currentRunway.getLRunway().getWorkingTODA()*runwayScaleX-runwayOffsetL,0.95*yScaler,10);
-
-        arrowTODAL.setStrokeWidth(3);
-        arrowTODAR.setStrokeWidth(3);
-
-    }
-
-    private void updateArrowASDA(){
-        arrowASDAR = new Arrow(runwayOffsetR+runwayBeginX,0.1*yScaler,runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingASDA()*runwayScaleX,0.1*yScaler,10);
-        arrowASDAL = new Arrow(runwayEndX-runwayOffsetL,0.9*yScaler,runwayEndX-currentRunway.getLRunway().getWorkingASDA()*runwayScaleX-runwayOffsetL,0.9*yScaler,10);
-
-        arrowASDAR.setStrokeWidth(3);
-        arrowASDAL.setStrokeWidth(3);
-    }
-
-    private void updateArrowTORA(){
-        arrowTORAR = new Arrow(runwayOffsetR+runwayBeginX,0.15*yScaler,runwayOffsetR+runwayBeginX+currentRunway.getRRunway().getWorkingTORA()*runwayScaleX,0.15*yScaler,10);
-        arrowTORAL = new Arrow(runwayEndX-runwayOffsetL,0.85*yScaler,runwayEndX-currentRunway.getLRunway().getWorkingTORA()*runwayScaleX-runwayOffsetL,0.85*yScaler,10);
-
-        arrowTORAR.setStrokeWidth(3);
-        arrowTORAL.setStrokeWidth(3);
+            TORAEndXL = runwayBeginX;
+            TORAStartXL = runwayBeginX + currentRunway.getLRunway().getWorkingTORA() * xScaler;
+            TODAEndXL = clearwayL.getX();
+            TODAStartXL = TODAEndXL + currentRunway.getLRunway().getWorkingTODA() * xScaler;
+            ASDAEndXL = stopwayL.getX();
+            ASDAStartXL = ASDAEndXL + currentRunway.getLRunway().getWorkingASDA() * xScaler;
+            LDAEndXL = runwayBeginX + currentRunway.getLRunway().getThreshold() * xScaler;
+            LDAStartXL = LDAEndXL + currentRunway.getLRunway().getWorkingLDA() * xScaler;
+        }
 
 
-    }
+        setLinePos(TORAStartLineR, TORAStartXR,middleY, TORAStartXR,0);
+        setLinePos(TORAEndLineR, TORAEndXR,middleY, TORAEndXR,0);
+        setLinePos(TORAStartLineL,TORAStartXL, middleY, TORAStartXL, topDownView.getHeight());
+        setLinePos(TORAEndLineL, TORAEndXL, middleY, TORAEndXL, topDownView.getHeight());
 
-    private void updateArrowLDA(){
-        arrowLDAR = new Arrow(runwayOffsetR+runwayBeginX+displacedDesignatorR,0.19*yScaler,runwayOffsetR+runwayBeginX+displacedDesignatorR+currentRunway.getRRunway().getWorkingLDA()*runwayScaleX,0.19*yScaler,10);
-        arrowLDAL = new Arrow(runwayEndX-displacedDesignatorL-runwayOffsetL,0.81*yScaler,runwayEndX-displacedDesignatorL-currentRunway.getLRunway().getWorkingLDA()*runwayScaleX-runwayOffsetL,0.81*yScaler,10);
+        setLinePos(TODAStartLineR, TODAStartXR,middleY, TODAStartXR,0);
+        setLinePos(TODAEndLineR, TODAEndXR,middleY, TODAEndXR,0);
+        setLinePos(TODAStartLineL,TODAStartXL, middleY, TODAStartXL, topDownView.getHeight());
+        setLinePos(TODAEndLineL, TODAEndXL, middleY, TODAEndXL, topDownView.getHeight());
 
-        arrowLDAR.setStrokeWidth(3);
-        arrowLDAL.setStrokeWidth(3);
+        setLinePos(ASDAStartLineR, ASDAStartXR,middleY, ASDAStartXR,0);
+        setLinePos(ASDAEndLineR, ASDAEndXR,middleY, ASDAEndXR,0);
+        setLinePos(ASDAStartLineL,ASDAStartXL, middleY, ASDAStartXL, topDownView.getHeight());
+        setLinePos(ASDAEndLineL, ASDAEndXL, middleY, ASDAEndXL, topDownView.getHeight());
 
-    }
+        setLinePos(LDAStartLineR, LDAStartXR,middleY, LDAStartXR,0);
+        setLinePos(LDAEndLineR, LDAEndXR,middleY, LDAEndXR,0);
+        setLinePos(LDAStartLineL,LDAStartXL, middleY, LDAStartXL, topDownView.getHeight());
+        setLinePos(LDAEndLineL, LDAEndXL, middleY, LDAEndXL, topDownView.getHeight());
 
-    private void updateTextTODA(){
-        textTODAR.setX(runwayOffsetR+runwayBeginX);
-        textTODAR.setY(0.05*yScaler);
-        textTODAL.setX(runwayEndX-200-runwayOffsetL);
-        textTODAL.setY(0.95*yScaler);
-    }
+        arrowTORAR = new Arrow(TORAStartXR, 0.05*screenHeight, TORAEndXR, 0.05*screenHeight);
+        arrowTORAL = new Arrow(TORAStartXL, 0.95*screenHeight, TORAEndXL, 0.95*screenHeight);
 
-    private void updateTextASDA(){
-        textASDAR.setX(runwayOffsetR+runwayBeginX);
-        textASDAR.setY(0.1*yScaler);
-        textASDAL.setX(runwayEndX-200-runwayOffsetL);
-        textASDAL.setY(0.9*yScaler);
-    }
+        arrowTODAR = new Arrow(TODAStartXR,0.15*screenHeight, TORAEndXR, 0.15*screenHeight);
+        arrowTODAL = new Arrow(TORAStartXL, 0.85*screenHeight, TORAEndXL, 0.85*screenHeight);
 
-    private void updateTextTORA(){
-        textTORAR.setX(runwayOffsetR+runwayBeginX);
-        textTORAR.setY(0.15*yScaler);
-        textTORAL.setX(runwayEndX-200-runwayOffsetL);
-        textTORAL.setY(0.85*yScaler);
-    }
+        arrowASDAR = new Arrow(ASDAStartXR, 0.25*screenHeight, TORAEndXR, 0.25*screenHeight);
+        arrowASDAL = new Arrow(ASDAStartXL, 0.75*screenHeight, TORAEndXL, 0.75*screenHeight);
 
-    private void updateTextLDA(){
-        textLDAR.setX(runwayOffsetR+runwayBeginX);
-        textLDAR.setY(0.19*yScaler);
-        textLDAL.setX(runwayEndX-200-runwayOffsetL);
-        textLDAL.setY(0.81*yScaler);
+        arrowLDAR = new Arrow(LDAStartXR, 0.35*screenHeight, LDAEndXR, 0.35*screenHeight);
+        arrowLDAL = new Arrow(LDAStartXL, 0.65*screenHeight, LDAEndXL, 0.65*screenHeight);
+
+
+        text.getChildren().add(textTORAR);
+        text.getChildren().add(textTORAL);
+        text.getChildren().add(textTODAR);
+        text.getChildren().add(textTODAL);
+        text.getChildren().add(textASDAR);
+        text.getChildren().add(textASDAL);
+        text.getChildren().add(textLDAR);
+        text.getChildren().add(textLDAL);
+
+
+        arrows.getChildren().add(text);
+
+
+        arrows.getChildren().add(TORAStartLineR);
+        arrows.getChildren().add(TORAStartLineL);
+        arrows.getChildren().add(TORAEndLineR);
+        arrows.getChildren().add(TORAEndLineL);
+        arrows.getChildren().add(TODAStartLineR);
+        arrows.getChildren().add(TODAStartLineL);
+        arrows.getChildren().add(TODAEndLineR);
+        arrows.getChildren().add(TODAEndLineL);
+        arrows.getChildren().add(ASDAStartLineR);
+        arrows.getChildren().add(ASDAStartLineL);
+        arrows.getChildren().add(ASDAEndLineR);
+        arrows.getChildren().add(ASDAEndLineL);
+        arrows.getChildren().add(LDAStartLineR);
+        arrows.getChildren().add(LDAStartLineL);
+        arrows.getChildren().add(LDAEndLineR);
+        arrows.getChildren().add(LDAEndLineL);
+
+        arrows.getChildren().add(arrowTORAR);
+        arrows.getChildren().add(arrowTORAL);
+        arrows.getChildren().add(arrowTODAR);
+        arrows.getChildren().add(arrowTODAL);
+        arrows.getChildren().add(arrowASDAR);
+        arrows.getChildren().add(arrowASDAL);
+        arrows.getChildren().add(arrowLDAR);
+        arrows.getChildren().add(arrowLDAL);
+
+
     }
 
     public void updateObstacle(){
-        obstacle.setX(runwayBeginX+currentObstacle.getDistanceRThreshold()*runwayScaleX);
-        obstacle.setY(0.5*yScaler+currentObstacle.getDistanceCenter()*runwayScaleX-(currentObstacle.getWidth()*runwayScaleX)/2);
-        obstacle.setWidth((currentRunway.getRRunway().getTora()-(currentObstacle.getDistanceRThreshold()+currentObstacle.getDistanceLThreshold()))*runwayScaleX);
-        obstacle.setHeight(currentObstacle.getWidth()*runwayScaleX);
+        obstacle.setX(runwayBeginX+currentObstacle.getDistanceRThreshold()*xScaler);
+        obstacle.setY(0.5* screenHeight +currentObstacle.getDistanceCenter()*xScaler-(currentObstacle.getWidth()*xScaler)/2);
+        obstacle.setWidth((currentRunway.getRRunway().getTora()-(currentObstacle.getDistanceRThreshold()+currentObstacle.getDistanceLThreshold()))*xScaler);
+        obstacle.setHeight(currentObstacle.getWidth()*xScaler);
     }
 
     public void addChildren(){
         topDownView.getChildren().clear();
         graphics.getChildren().clear();
-        text.getChildren().clear();
+
         graphics.getChildren().add(clearedAndGradedArea);
         graphics.getChildren().add(runwayBase);
         graphics.getChildren().add(centreLine);
@@ -487,40 +505,19 @@ public class TopDownViewController implements Initializable {
         graphics.getChildren().add(thresholdR);
         graphics.getChildren().add(stopwayR);
         graphics.getChildren().add(clearwayR);
-        graphics.getChildren().add(TODARLineR);
-        graphics.getChildren().add(ADSALineR);
-        graphics.getChildren().add(TORALineR);
-        graphics.getChildren().add(LDALineR);
-        graphics.getChildren().add(runwayStartR);
-        graphics.getChildren().add(arrowTODAR);
-        graphics.getChildren().add(arrowASDAR);
-        graphics.getChildren().add(arrowTORAR);
-        graphics.getChildren().add(arrowLDAR);
-        text.getChildren().add(textTODAR);
-        text.getChildren().add(textASDAR);
-        text.getChildren().add(textTORAR);
-        text.getChildren().add(textLDAR);
+
 
         graphics.getChildren().add(runwayDesignatorL);
         graphics.getChildren().add(thresholdL);
         graphics.getChildren().add(stopwayL);
         graphics.getChildren().add(clearwayL);
-        graphics.getChildren().add(TODALineL);
-        graphics.getChildren().add(ASDALineL);
-        graphics.getChildren().add(TORALineL);
-        graphics.getChildren().add(LDALineL);
-        graphics.getChildren().add(runwayStartL);
-        graphics.getChildren().add(arrowTODAL);
-        graphics.getChildren().add(arrowASDAL);
-        graphics.getChildren().add(arrowTORAL);
-        graphics.getChildren().add(arrowLDAL);
-        text.getChildren().add(textTODAL);
-        text.getChildren().add(textASDAL);
-        text.getChildren().add(textTORAL);
-        text.getChildren().add(textLDAL);
 
         topDownView.getChildren().add(graphics);
-        topDownView.getChildren().add(text);
+
+        if(isSelected){
+            topDownView.getChildren().add(arrows);
+        }
+
     }
 
 
@@ -528,43 +525,66 @@ public class TopDownViewController implements Initializable {
     public void displayDirectedRunwaySelected(Runway runway) {
         currentRunway = runway;
         updateValues();
-        updateText();
         updateUI();
     }
 
     public void displayObstacleSelected(Obstacle obstacle){
         currentObstacle = obstacle;
         updateValues();
-        updateText();
         updateUI();
+    }
+
+    public Obstacle getCurrentObstacle(){
+        return currentObstacle;
     }
 
     public void updateValues(){
         logger.info("currentRunway"+currentRunway);
-        App.getCalculator().redesignate(currentRunway, currentObstacle);
-        runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
-        TODAR = currentRunway.getRRunway().getWorkingTODA();
-        ASDAR = currentRunway.getRRunway().getWorkingASDA();
-        TORAR = currentRunway.getRRunway().getWorkingTORA();
-        LDAR = currentRunway.getRRunway().getWorkingLDA();
+        try {
+            App.getCalculator().redesignate(currentRunway, currentObstacle);
+            runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
+            TODAR = currentRunway.getRRunway().getWorkingTODA();
+            ASDAR = currentRunway.getRRunway().getWorkingASDA();
+            TORAR = currentRunway.getRRunway().getWorkingTORA();
+            LDAR = currentRunway.getRRunway().getWorkingLDA();
 
-        runwayDesignatorL.setText(currentRunway.getLRunway().getDesignator());
-        TODAL = currentRunway.getLRunway().getWorkingTODA();
-        ASDAL = currentRunway.getLRunway().getWorkingASDA();
-        TORAL = currentRunway.getLRunway().getWorkingTORA();
-        LDAL = currentRunway.getLRunway().getWorkingLDA();
+            runwayDesignatorL.setText(currentRunway.getLRunway().getDesignator());
+            TODAL = currentRunway.getLRunway().getWorkingTODA();
+            ASDAL = currentRunway.getLRunway().getWorkingASDA();
+            TORAL = currentRunway.getLRunway().getWorkingTORA();
+            LDAL = currentRunway.getLRunway().getWorkingLDA();
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     public void updateText(){
         textTODAR.setText("TODA: "+TODAR.toString());
+        textTODAR.setX(graphics.getWidth()*0.5);
+        textTODAR.setY(screenHeight*0.14);
         textASDAR.setText("ASDA: "+ASDAR.toString());
+        textASDAR.setX(graphics.getWidth()*0.5);
+        textASDAR.setY(screenHeight*0.24);
         textTORAR.setText("TORA: "+TORAR.toString());
+        textTORAR.setX(graphics.getWidth()*0.5);
+        textTORAR.setY(screenHeight*0.04);
         textLDAR.setText("LDA: "+LDAR.toString());
+        textLDAR.setX(graphics.getWidth()*0.5);
+        textLDAR.setY(screenHeight*0.34);
 
         textTODAL.setText("TODA: "+TODAL.toString());
+        textTODAL.setX(graphics.getWidth()*0.5);
+        textTODAL.setY(screenHeight*0.83);
         textASDAL.setText("ASDA: "+ASDAL.toString());
+        textASDAL.setX(graphics.getWidth()*0.5);
+        textASDAL.setY(screenHeight*0.73);
         textTORAL.setText("TORA: "+TORAL.toString());
+        textTORAL.setX(graphics.getWidth()*0.5);
+        textTORAL.setY(screenHeight*0.93);
         textLDAL.setText("LDA: "+LDAL.toString());
+        textLDAR.setX(graphics.getWidth()*0.5);
+        textLDAR.setY(screenHeight*0.63);
     }
 
 

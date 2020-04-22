@@ -25,6 +25,7 @@ import seg.team9.controllers.runways.TopDownViewController;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.ResourceBundle;
 
 public class PrimaryWindowController implements Initializable {
@@ -73,12 +74,14 @@ public class PrimaryWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        sideViewController = SideViewController.getInstance();
         initCompass();
         initMenuBar();
         initChoiceBoxes();
         initArrays();
         initColorPickers();
         initSplitPane();
+        initTabPane();
     }
 
     private void initCompass() {
@@ -115,6 +118,7 @@ public class PrimaryWindowController implements Initializable {
         choiceBoxRunway.getSelectionModel().selectFirst();
 
         topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
+        sideViewController.updateUI();
 
         //when an airport is selected the runway list will update
         choiceBoxAirport.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Airport>() {
@@ -132,6 +136,7 @@ public class PrimaryWindowController implements Initializable {
         choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             if(t1 != null) {
                 topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
+                sideViewController.updateUI();
             }
             //topDownViewController.updateUI(); you're calling this method already in line 67
 
@@ -143,14 +148,33 @@ public class PrimaryWindowController implements Initializable {
 
     public void changeColourArrows() {
         //Recolour arrows
-        topDownViewController.changeColourTORA(colourPickerTORA.getValue());
-        topDownViewController.changeColourTODA(colourPickerTODA.getValue());
-        topDownViewController.changeColourASDA(colourPickerASDA.getValue());
-        topDownViewController.changeColourLDA(colourPickerLDA.getValue());
+        try {
+            topDownViewController.changeColourTORA(colourPickerTORA.getValue());
+            topDownViewController.changeColourTODA(colourPickerTODA.getValue());
+            topDownViewController.changeColourASDA(colourPickerASDA.getValue());
+            topDownViewController.changeColourLDA(colourPickerLDA.getValue());
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     private void initMenuBar(){
         menuItemClose.setOnAction(actionEvent -> UtilsUI.showErrorMessage("This feature has not been implemented yet"));
+    }
+
+    private void initTabPane(){
+        tabPaneRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, oldv, newv) -> {
+            if(newv.getId().equals("topDownViewTab")){
+                topDownViewController.isSelected = true;
+                sideViewController.isSelected = false;
+            }
+            else{
+                topDownViewController.isSelected = false;
+                sideViewController.isSelected = true;
+            }
+            topDownViewController.updateUI();
+            sideViewController.updateUI();
+        });
     }
 
     public void onColourChangeDefault(ActionEvent actionEvent) {
