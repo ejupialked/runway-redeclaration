@@ -2,8 +2,6 @@ package seg.team9.controllers.runways;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -46,10 +44,10 @@ public class TopDownViewController implements Initializable {
     public Pane arrows = new Pane();
 
 
-    private Double screenWidth;
-    private Double screenHeight;
-    private Double xScaler;
-    private Double middleY;
+    public Double screenWidth;
+    public Double screenHeight;
+    public Double xScaler;
+    public Double middleY;
     private Rectangle runwayBase = new Rectangle();
     private Polygon clearedAndGradedArea = new Polygon();
     private Line centreLine = new Line();
@@ -57,66 +55,81 @@ public class TopDownViewController implements Initializable {
     private Rectangle obstacle = new Rectangle();
 
     //Right Arrows
-    private Double TORAStartXR = 0D;
-    private Double TORAEndXR = 0D;
+    public Double TORAStartXR = 0D;
+    public Double TORAEndXR = 0D;
 
-    private Double TODAStartXR = 0D;
-    private Double TODAEndXR = 0D;
+    public Double TODAStartXR = 0D;
+    public Double TODAEndXR = 0D;
 
-    private Double ASDAStartXR = 0D;
-    private Double ASDAEndXR = 0D;
+    public Double ASDAStartXR = 0D;
+    public Double ASDAEndXR = 0D;
 
-    private Double LDAStartXR = 0D;
-    private Double LDAEndXR = 0D;
+    public Double LDAStartXR = 0D;
+    public Double LDAEndXR = 0D;
+
+    public Double RESAStartXR = 0D;
+    public Double RESAEndXR = 0D;
 
 
     private Line TODAStartLineR = new Line();
     private Line ASDAStartLineR = new Line();
     private Line TORAStartLineR = new Line();
     private Line LDAStartLineR = new Line();
+    private Line RESAStartLineR = new Line();
     private Line TODAEndLineR = new Line();
     private Line ASDAEndLineR = new Line();
     private Line TORAEndLineR = new Line();
     private Line LDAEndLineR = new Line();
+    private Line RESAEndLineR = new Line();
+
     private Arrow arrowTODAR = new Arrow(0,0,0,0,0);
     private Arrow arrowASDAR = new Arrow(0,0,0,0,0);
     private Arrow arrowTORAR = new Arrow(0,0,0,0,0);
     private Arrow arrowLDAR = new Arrow(0,0,0,0,0);
+    private Arrow arrowRESAR = new Arrow(0,0,0,0,0);
     private Text textTODAR = new Text("TODA");
     private Text textASDAR = new Text("ASDA");
     private Text textTORAR = new Text("TORA");
     private Text textLDAR = new Text("LDA");
+    private Text textRESAR = new Text("RESA");
 
     //Left Arrows
-    private Double TORAStartXL = 0D;
-    private Double TORAEndXL = 0D;
+    public Double TORAStartXL = 0D;
+    public Double TORAEndXL = 0D;
 
-    private Double TODAStartXL = 0D;
-    private Double TODAEndXL = 0D;
+    public Double TODAStartXL = 0D;
+    public Double TODAEndXL = 0D;
 
-    private Double ASDAStartXL = 0D;
-    private Double ASDAEndXL = 0D;
+    public Double ASDAStartXL = 0D;
+    public Double ASDAEndXL = 0D;
 
-    private Double LDAStartXL = 0D;
-    private Double LDAEndXL = 0D;
+    public Double LDAStartXL = 0D;
+    public Double LDAEndXL = 0D;
+
+    public Double RESAStartXL = 0D;
+    public Double RESAEndXL = 0D;
 
 
     private Line TODAStartLineL = new Line();
     private Line ASDAStartLineL = new Line();
     private Line TORAStartLineL = new Line();
     private Line LDAStartLineL = new Line();
+    private Line RESAStartLineL = new Line();
     private Line TODAEndLineL = new Line();
     private Line ASDAEndLineL = new Line();
     private Line TORAEndLineL = new Line();
     private Line LDAEndLineL = new Line();
+    private Line RESAEndLineL = new Line();
     private Arrow arrowTODAL = new Arrow(0,0,0,0,0);
     private Arrow arrowASDAL = new Arrow(0,0,0,0,0);
     private Arrow arrowTORAL = new Arrow(0,0,0,0,0);
     private Arrow arrowLDAL = new Arrow(0,0,0,0,0);
+    private Arrow arrowRESAL = new Arrow(0,0,0,0,0);
     private Text textTODAL = new Text("TODA");
     private Text textASDAL = new Text("ASDA");
     private Text textTORAL = new Text("TORA");
     private Text textLDAL = new Text("LDA");
+    private Text textRESAL = new Text("RESA");
 
 
 
@@ -127,10 +140,11 @@ public class TopDownViewController implements Initializable {
     private Rectangle stopwayR = new Rectangle();
     private Rectangle clearwayR = new Rectangle();
 
-    private Double TODAR = 0D;
-    private Double ASDAR = 0D;
-    private Double TORAR = 0D;
-    private Double LDAR = 0D;
+    public Double TODAR = 0D;
+    public Double ASDAR = 0D;
+    public Double TORAR = 0D;
+    public Double LDAR = 0D;
+    public Double RESAR = 0D;
 
     //Left Runway
     private Text runwayDesignatorL = new Text("SELECT A RUNWAY");
@@ -138,21 +152,22 @@ public class TopDownViewController implements Initializable {
     private Rectangle stopwayL = new Rectangle();
     private Rectangle clearwayL = new Rectangle();
 
-    private Double TODAL = 0D;
-    private Double ASDAL = 0D;
-    private Double TORAL = 0D;
-    private Double LDAL = 0D;
+    public Double TODAL = 0D;
+    public Double ASDAL = 0D;
+    public Double TORAL = 0D;
+    public Double LDAL = 0D;
+    public Double RESAL = 0D;
 
 
     //Positional Info
-    private Double runwayBeginX;
-    private Double runwayEndX;
-    private Double runwayLength;
-    private Double runwayOffsetR;
-    private Double runwayOffsetL;
+    public Double runwayBeginX;
+    public Double runwayEndX;
+    public Double runwayLength;
+    public Double runwayOffsetR;
+    public Double runwayOffsetL;
 
-    private Double displacedDesignatorL = 0D;
-    private Double displacedDesignatorR = 0D;
+    public Double displacedDesignatorL = 0D;
+    public Double displacedDesignatorR = 0D;
 
 
     public TopDownViewController() {
@@ -223,6 +238,8 @@ public class TopDownViewController implements Initializable {
         textTORAR.setFill(Color.WHITE);
         textLDAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textLDAR.setFill(Color.WHITE);
+        textRESAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textRESAR.setFill(Color.WHITE);
 
         textTODAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textTODAL.setFill(Color.WHITE);
@@ -232,6 +249,8 @@ public class TopDownViewController implements Initializable {
         textTORAL.setFill(Color.WHITE);
         textLDAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textLDAL.setFill(Color.WHITE);
+        textRESAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textRESAL.setFill(Color.WHITE);
     }
 
     public void initLines(){
@@ -272,8 +291,8 @@ public class TopDownViewController implements Initializable {
         updateThreshold();
         updateStopway();
         updateClearway();
-        updateArrows();
         updateObstacle();
+        updateArrows();
         addChildren();
         try {
 
@@ -398,6 +417,8 @@ public class TopDownViewController implements Initializable {
             ASDAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingASDA() * xScaler;
             LDAStartXR = runwayBeginX;
             LDAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingLDA() * xScaler;
+            RESAEndXR = obstacle.getX();
+            RESAStartXR = RESAEndXR - currentRunway.getLRunway().getResa();
 
             TORAEndXL = runwayBeginX;
             TORAStartXL = runwayBeginX + currentRunway.getLRunway().getWorkingTORA() * xScaler;
@@ -407,6 +428,8 @@ public class TopDownViewController implements Initializable {
             ASDAStartXL = ASDAEndXL + currentRunway.getLRunway().getWorkingASDA() * xScaler;
             LDAEndXL = runwayBeginX + currentRunway.getLRunway().getThreshold() * xScaler;
             LDAStartXL = LDAEndXL + currentRunway.getLRunway().getWorkingLDA() * xScaler;
+            RESAStartXL = obstacle.getX();
+            RESAEndXL = RESAStartXL - currentRunway.getLRunway().getResa();
         }
         else{
             TORAEndXR = runwayBeginX + currentRunway.getRRunway().getTora() * xScaler;
@@ -417,6 +440,8 @@ public class TopDownViewController implements Initializable {
             ASDAStartXR = ASDAEndXR - currentRunway.getRRunway().getWorkingASDA()*xScaler;
             LDAEndXR = runwayBeginX + currentRunway.getRRunway().getTora() * xScaler;
             LDAStartXR = LDAEndXR - currentRunway.getRRunway().getWorkingLDA()*xScaler;
+            RESAStartXR = obstacle.getX()+obstacle.getWidth();
+            RESAEndXR = RESAStartXR + currentRunway.getLRunway().getResa();
 
             TORAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
             TORAEndXL = TORAStartXL - currentRunway.getLRunway().getWorkingTORA() * xScaler;
@@ -426,28 +451,37 @@ public class TopDownViewController implements Initializable {
             ASDAEndXL = ASDAStartXL - currentRunway.getLRunway().getWorkingASDA() * xScaler;
             LDAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
             LDAEndXL = LDAStartXL - currentRunway.getLRunway().getWorkingLDA() * xScaler;
+            RESAEndXL = obstacle.getX()+obstacle.getWidth();
+            RESAStartXL = RESAEndXL + currentRunway.getLRunway().getResa();
         }
 
 
-        setLinePos(TORAStartLineR, TORAStartXR,middleY, TORAStartXR,0);
-        setLinePos(TORAEndLineR, TORAEndXR,middleY, TORAEndXR,0);
-        setLinePos(TORAStartLineL,TORAStartXL, middleY, TORAStartXL, topDownView.getHeight());
-        setLinePos(TORAEndLineL, TORAEndXL, middleY, TORAEndXL, topDownView.getHeight());
+        setLinePos(TORAStartLineR, TORAStartXR,middleY, TORAStartXR,topDownView.getHeight()*0.05);
+        setLinePos(TORAEndLineR, TORAEndXR,middleY, TORAEndXR,topDownView.getHeight()*0.05);
+        setLinePos(TORAStartLineL,TORAStartXL, middleY, TORAStartXL, topDownView.getHeight()*0.95);
+        setLinePos(TORAEndLineL, TORAEndXL, middleY, TORAEndXL, topDownView.getHeight()*0.95);
 
-        setLinePos(TODAStartLineR, TODAStartXR,middleY, TODAStartXR,0);
-        setLinePos(TODAEndLineR, TODAEndXR,middleY, TODAEndXR,0);
-        setLinePos(TODAStartLineL,TODAStartXL, middleY, TODAStartXL, topDownView.getHeight());
-        setLinePos(TODAEndLineL, TODAEndXL, middleY, TODAEndXL, topDownView.getHeight());
+        setLinePos(TODAStartLineR, TODAStartXR,middleY, TODAStartXR,topDownView.getHeight()*0.15);
+        setLinePos(TODAEndLineR, TODAEndXR,middleY, TODAEndXR,topDownView.getHeight()*0.15);
+        setLinePos(TODAStartLineL,TODAStartXL, middleY, TODAStartXL, topDownView.getHeight()*0.85);
+        setLinePos(TODAEndLineL, TODAEndXL, middleY, TODAEndXL, topDownView.getHeight()*0.85);
 
-        setLinePos(ASDAStartLineR, ASDAStartXR,middleY, ASDAStartXR,0);
-        setLinePos(ASDAEndLineR, ASDAEndXR,middleY, ASDAEndXR,0);
-        setLinePos(ASDAStartLineL,ASDAStartXL, middleY, ASDAStartXL, topDownView.getHeight());
-        setLinePos(ASDAEndLineL, ASDAEndXL, middleY, ASDAEndXL, topDownView.getHeight());
+        setLinePos(ASDAStartLineR, ASDAStartXR,middleY, ASDAStartXR,topDownView.getHeight()*0.25);
+        setLinePos(ASDAEndLineR, ASDAEndXR,middleY, ASDAEndXR,topDownView.getHeight()*0.25);
+        setLinePos(ASDAStartLineL,ASDAStartXL, middleY, ASDAStartXL, topDownView.getHeight()*0.75);
+        setLinePos(ASDAEndLineL, ASDAEndXL, middleY, ASDAEndXL, topDownView.getHeight()*0.75);
 
-        setLinePos(LDAStartLineR, LDAStartXR,middleY, LDAStartXR,0);
-        setLinePos(LDAEndLineR, LDAEndXR,middleY, LDAEndXR,0);
-        setLinePos(LDAStartLineL,LDAStartXL, middleY, LDAStartXL, topDownView.getHeight());
-        setLinePos(LDAEndLineL, LDAEndXL, middleY, LDAEndXL, topDownView.getHeight());
+        setLinePos(LDAStartLineR, LDAStartXR,middleY, LDAStartXR,topDownView.getHeight()*0.35);
+        setLinePos(LDAEndLineR, LDAEndXR,middleY, LDAEndXR,topDownView.getHeight()*0.35);
+        setLinePos(LDAStartLineL,LDAStartXL, middleY, LDAStartXL, topDownView.getHeight()*0.65);
+        setLinePos(LDAEndLineL, LDAEndXL, middleY, LDAEndXL, topDownView.getHeight()*0.65);
+
+        setLinePos(RESAStartLineR, RESAStartXR,middleY, RESAStartXR,topDownView.getHeight()*0.45);
+        setLinePos(RESAEndLineR, RESAEndXR,middleY, RESAEndXR,topDownView.getHeight()*0.45);
+        setLinePos(RESAStartLineL,RESAStartXL, middleY, RESAStartXL, topDownView.getHeight()*0.55);
+        setLinePos(RESAEndLineL, RESAEndXL, middleY, RESAEndXL, topDownView.getHeight()*0.55);
+
+
 
         arrowTORAR = new Arrow(TORAStartXR, 0.05*screenHeight, TORAEndXR, 0.05*screenHeight);
         arrowTORAL = new Arrow(TORAStartXL, 0.95*screenHeight, TORAEndXL, 0.95*screenHeight);
@@ -461,6 +495,9 @@ public class TopDownViewController implements Initializable {
         arrowLDAR = new Arrow(LDAStartXR, 0.35*screenHeight, LDAEndXR, 0.35*screenHeight);
         arrowLDAL = new Arrow(LDAStartXL, 0.65*screenHeight, LDAEndXL, 0.65*screenHeight);
 
+        arrowRESAR = new Arrow(RESAStartXR, 0.45*screenHeight, RESAEndXR, 0.45*screenHeight);
+        arrowRESAL = new Arrow(RESAStartXL, 0.55*screenHeight, RESAEndXL, 0.55*screenHeight);
+
 
         text.getChildren().add(textTORAR);
         text.getChildren().add(textTORAL);
@@ -470,6 +507,8 @@ public class TopDownViewController implements Initializable {
         text.getChildren().add(textASDAL);
         text.getChildren().add(textLDAR);
         text.getChildren().add(textLDAL);
+        text.getChildren().add(textRESAR);
+        text.getChildren().add(textRESAL);
 
 
         arrows.getChildren().add(text);
@@ -491,6 +530,10 @@ public class TopDownViewController implements Initializable {
         arrows.getChildren().add(LDAStartLineL);
         arrows.getChildren().add(LDAEndLineR);
         arrows.getChildren().add(LDAEndLineL);
+        arrows.getChildren().add(RESAStartLineR);
+        arrows.getChildren().add(RESAStartLineL);
+        arrows.getChildren().add(RESAEndLineR);
+        arrows.getChildren().add(RESAEndLineL);
 
         arrows.getChildren().add(arrowTORAR);
         arrows.getChildren().add(arrowTORAL);
@@ -500,6 +543,8 @@ public class TopDownViewController implements Initializable {
         arrows.getChildren().add(arrowASDAL);
         arrows.getChildren().add(arrowLDAR);
         arrows.getChildren().add(arrowLDAL);
+        arrows.getChildren().add(arrowRESAR);
+        arrows.getChildren().add(arrowRESAL);
 
 
     }
@@ -566,12 +611,15 @@ public class TopDownViewController implements Initializable {
             ASDAR = currentRunway.getRRunway().getWorkingASDA();
             TORAR = currentRunway.getRRunway().getWorkingTORA();
             LDAR = currentRunway.getRRunway().getWorkingLDA();
+            RESAR = currentRunway.getRRunway().getResa();
+
 
             runwayDesignatorL.setText(currentRunway.getLRunway().getDesignator());
             TODAL = currentRunway.getLRunway().getWorkingTODA();
             ASDAL = currentRunway.getLRunway().getWorkingASDA();
             TORAL = currentRunway.getLRunway().getWorkingTORA();
             LDAL = currentRunway.getLRunway().getWorkingLDA();
+            RESAL = currentRunway.getLRunway().getResa();
         }
         catch (NullPointerException e){
             e.printStackTrace();
@@ -591,19 +639,25 @@ public class TopDownViewController implements Initializable {
         textLDAR.setText("LDA: "+LDAR.toString());
         textLDAR.setX(graphics.getWidth()*0.5);
         textLDAR.setY(screenHeight*0.34);
+        textRESAR.setText("RESA: "+ RESAR.toString());
+        textRESAR.setX(RESAStartXR);
+        textRESAR.setY(screenHeight*0.44);
 
         textTODAL.setText("TODA: "+TODAL.toString());
         textTODAL.setX(graphics.getWidth()*0.5);
-        textTODAL.setY(screenHeight*0.83);
+        textTODAL.setY(screenHeight*0.84);
         textASDAL.setText("ASDA: "+ASDAL.toString());
         textASDAL.setX(graphics.getWidth()*0.5);
-        textASDAL.setY(screenHeight*0.73);
+        textASDAL.setY(screenHeight*0.74);
         textTORAL.setText("TORA: "+TORAL.toString());
         textTORAL.setX(graphics.getWidth()*0.5);
-        textTORAL.setY(screenHeight*0.93);
+        textTORAL.setY(screenHeight*0.94);
         textLDAL.setText("LDA: "+LDAL.toString());
         textLDAL.setX(graphics.getWidth()*0.5);
-        textLDAL.setY(screenHeight*0.63);
+        textLDAL.setY(screenHeight*0.64);
+        textRESAL.setText("RESA: "+ RESAL.toString());
+        textRESAL.setX(RESAEndXL);
+        textRESAL.setY(screenHeight*0.54);
     }
 
 
