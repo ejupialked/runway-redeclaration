@@ -408,6 +408,25 @@ public class TopDownViewController implements Initializable {
             LDAEndXL = runwayBeginX + currentRunway.getLRunway().getThreshold() * xScaler;
             LDAStartXL = LDAEndXL + currentRunway.getLRunway().getWorkingLDA() * xScaler;
         }
+        else{
+            TORAEndXR = runwayBeginX + currentRunway.getRRunway().getTora() * xScaler;
+            TORAStartXR = TORAEndXR - currentRunway.getRRunway().getWorkingTORA()*xScaler;
+            TODAEndXR = runwayBeginX + currentRunway.getRRunway().getToda() * xScaler;
+            TODAStartXR = TODAEndXR - currentRunway.getRRunway().getWorkingTODA()*xScaler;
+            ASDAEndXR = runwayBeginX + currentRunway.getRRunway().getAsda() * xScaler;
+            ASDAStartXR = ASDAEndXR - currentRunway.getRRunway().getWorkingASDA()*xScaler;
+            LDAEndXR = runwayBeginX + currentRunway.getRRunway().getTora() * xScaler;
+            LDAStartXR = LDAEndXR - currentRunway.getRRunway().getWorkingLDA()*xScaler;
+
+            TORAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
+            TORAEndXL = TORAStartXL - currentRunway.getLRunway().getWorkingTORA() * xScaler;
+            TODAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
+            TODAEndXL = TODAStartXL - currentRunway.getLRunway().getWorkingTODA() * xScaler;
+            ASDAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
+            ASDAEndXL = ASDAStartXL - currentRunway.getLRunway().getWorkingASDA() * xScaler;
+            LDAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
+            LDAEndXL = LDAStartXL - currentRunway.getLRunway().getWorkingLDA() * xScaler;
+        }
 
 
         setLinePos(TORAStartLineR, TORAStartXR,middleY, TORAStartXR,0);
@@ -583,8 +602,8 @@ public class TopDownViewController implements Initializable {
         textTORAL.setX(graphics.getWidth()*0.5);
         textTORAL.setY(screenHeight*0.93);
         textLDAL.setText("LDA: "+LDAL.toString());
-        textLDAR.setX(graphics.getWidth()*0.5);
-        textLDAR.setY(screenHeight*0.63);
+        textLDAL.setX(graphics.getWidth()*0.5);
+        textLDAL.setY(screenHeight*0.63);
     }
 
 
