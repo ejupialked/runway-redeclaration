@@ -45,10 +45,8 @@ public class SideViewController implements Initializable {
 
     private Rectangle obstacle = new Rectangle();
 
-    private Line TOCSR = new Line();
-    private Line TOCSL = new Line();
-    private Line ALSR = new Line();
-    private Line ALSL = new Line();
+    private Line TOCS = new Line();
+    private Line ALS = new Line();
 
     public SideViewController() {
         instance = this;
@@ -132,7 +130,10 @@ public class SideViewController implements Initializable {
     }
 
     private void updateSlopes(){
-        //topDownViewController.setLinePos(TOCSR, topDownViewController.TORAEndXR);
+        if(topDownViewController.getCurrentObstacle().getDistanceRThreshold()>topDownViewController.getCurrentObstacle().getDistanceLThreshold()){
+            double middleOfObstacle = obstacle.getX()+(obstacle.getWidth()/2);
+            topDownViewController.setLinePos(ALS, middleOfObstacle, obstacle.getY(), middleOfObstacle-currentRunway.getRRunway().getAls(),screenHeight/2);
+        }
     }
 
     private void addChildren(){
@@ -144,10 +145,8 @@ public class SideViewController implements Initializable {
 
         graphics.getChildren().add(runway);
         graphics.getChildren().add(obstacle);
-        graphics.getChildren().add(TOCSR);
-        graphics.getChildren().add(TOCSL);
-        graphics.getChildren().add(ALSR);
-        graphics.getChildren().add(ALSL);
+        graphics.getChildren().add(TOCS);
+        graphics.getChildren().add(ALS);
 
 
 
