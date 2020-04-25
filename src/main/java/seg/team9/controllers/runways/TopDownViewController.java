@@ -321,6 +321,7 @@ public class TopDownViewController implements Initializable {
 
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
+
             PrimaryWindowController.getInstance().rotateNeedle(graphicsRot-90);
 
             UtilsUI.rotateView(graphics, graphicsRot, 3000);
@@ -332,6 +333,7 @@ public class TopDownViewController implements Initializable {
             else if(textFlipped){
                 UtilsUI.rotateView(text, 0, 3000);
                 textFlipped = false;
+
             }
 
         }catch (NumberFormatException e){
