@@ -21,6 +21,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.business.models.Obstacle;
+import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 
 import java.io.IOException;
@@ -69,6 +70,8 @@ public class ObstacleViewController implements Initializable {
         updateLabelsObstacle(boxObstacles.getValue());
 
         setSelectedObstacle(boxObstacles.getValue());
+        TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getValue());
+
 
 
         //When an obstacle is selected
@@ -76,6 +79,7 @@ public class ObstacleViewController implements Initializable {
             setSelectedObstacle(t1);
             updateLabelsObstacle(t1);
             TopDownViewController.getInstance().displayObstacleSelected(t1);
+            SideViewController.getInstance().updateUI();
         });
 
 
