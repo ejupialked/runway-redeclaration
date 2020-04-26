@@ -3,6 +3,7 @@ package seg.team9.controllers.breakdown;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.net.URL;
@@ -15,7 +16,7 @@ public class CalculationBreakdownController implements Initializable {
 
 
     @FXML private TextArea textBreakdown;
-
+    @FXML private AnchorPane paneBreakdown;
     private static CalculationBreakdownController instance;
 
 
@@ -49,4 +50,8 @@ public class CalculationBreakdownController implements Initializable {
 
         }
     }
+    public AnchorPane getPaneCalculationsBreakdown() {
+        return paneBreakdown;
+    }
+
 }

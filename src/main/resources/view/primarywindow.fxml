@@ -39,6 +39,7 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#onColourChangeDefault" text="Default" />
                         <MenuItem mnemonicParsing="false" onAction="#onColourChangeDark" text="Dark" />
+                          <MenuItem mnemonicParsing="false" onAction="#onColourChangeColourBlind" text="ColourBlind" />
                     </items>
                   </Menu>
                </items>
