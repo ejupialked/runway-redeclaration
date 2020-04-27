@@ -47,25 +47,25 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane fx:id="splitPaneView" dividerPositions="0.1585445094217024, 0.7706302794022092" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+      <SplitPane fx:id="splitPaneView" dividerPositions="0.1585445094217024, 0.6335282651072125" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
-            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="240.0">
+            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0">
                <children>
-                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="240.0" text="Compass">
+                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Compass">
                     <content>
-                      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="240.0">
+                      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="300.0">
                            <children>
-                               <ImageView fx:id="needle" fitHeight="173.0" fitWidth="229.0" layoutX="-1.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
+                               <ImageView fx:id="needle" fitHeight="173.0" fitWidth="229.0" layoutX="29.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
                                    <image>
                                        <Image url="@../Images/needle.png" />
                                    </image>
                               </ImageView>
-                               <ImageView fx:id="compass" fitHeight="173.0" fitWidth="229.0" layoutX="12.0" layoutY="23.0" pickOnBounds="true" preserveRatio="false">
+                               <ImageView fx:id="compass" fitHeight="189.0" fitWidth="245.0" layoutX="37.0" layoutY="16.0" pickOnBounds="true" preserveRatio="false">
                                    <image>
                                        <Image url="@../Images/compass.png" />
                                    </image>
                               </ImageView>
-                              <Label fx:id="labelCompass" layoutX="166.0" layoutY="197.0" text="230°" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                              <Label fx:id="labelCompass" layoutX="120.0" layoutY="209.0" text="230°">
                                  <font>
                                     <Font name="System Bold" size="19.0" />
                                  </font>
@@ -73,6 +73,9 @@
                            </children>
                         </AnchorPane>
                     </content>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
                   </TitledPane>
                    <fx:include fx:id="calculationsView" source="calculationsview.fxml" />
                </children>

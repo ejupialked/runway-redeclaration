@@ -5,8 +5,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +29,14 @@ public class CalculationsViewController implements Initializable {
     @FXML private Label labelTORA;
     @FXML private AnchorPane paneCalculations;
 
+    @FXML private Rectangle colorResa;
+    @FXML private Rectangle colorTora;
+    @FXML private Rectangle colorToda;
+    @FXML private Rectangle colorLda;
+    @FXML private Rectangle colorAsda;
+    @FXML private Rectangle colorTocs;
+    @FXML private Rectangle colorAls;
+    @FXML private Rectangle colorSlope;
 
     public CalculationsViewController() {
         instance = this;
@@ -39,8 +50,15 @@ public class CalculationsViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init CalculationsViewController");
         initLabels();
+        initColors();
     }
 
+    private void initColors() {
+        colorTora.setFill(UtilsUI.Colors.TORA);
+        colorToda.setFill(UtilsUI.Colors.TODA);
+        colorAsda.setFill(UtilsUI.Colors.ASDA);
+        colorLda.setFill(UtilsUI.Colors.LDA);
+    }
 
 
     public void initLabels(){

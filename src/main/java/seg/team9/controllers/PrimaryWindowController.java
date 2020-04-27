@@ -88,6 +88,7 @@ public class PrimaryWindowController implements Initializable {
         initColorPickers();
         initSplitPane();
         initTabPane();
+
     }
 
     private void initCompass() {
@@ -133,8 +134,6 @@ public class PrimaryWindowController implements Initializable {
                 choiceBoxRunway.getItems().clear();
                 choiceBoxRunway.getItems().addAll(t1.getRunwayList());
                 choiceBoxRunway.getSelectionModel().selectFirst();
-
-                changeColourArrows();
             }
         });
 
@@ -146,7 +145,8 @@ public class PrimaryWindowController implements Initializable {
             }
             //topDownViewController.updateUI(); you're calling this method already in line 67
 
-            changeColourArrows();
+            topDownViewController.initArrowsColors();
+            //changeColourArrows();
             logger.info("Changed colours");
         });
 
