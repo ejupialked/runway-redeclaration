@@ -1,0 +1,95 @@
+@startuml
+title Packages - Class Diagram
+
+
+  package "logic" {
+    class Calculator {
+
+    }
+
+  }
+
+  package "models" {
+
+  class DirectedRunway {
+
+ }
+    class Obstacle {
+
+    }
+
+    class Runaway {
+
+    }
+
+ class Airport {
+
+    }
+
+
+  }
+
+  package "breakdown" {
+    class CalculationsBreakDownController {
+
+    }
+  }
+
+  package "obstacle" {
+       class ObstacleAddFormController {
+
+       }
+
+       class ObstacleEditFormController {
+
+       }
+
+       class ObstacleViewController {
+
+       }
+
+  }
+
+  package "runways" {
+     class SideViewController {
+
+     }
+
+      class TopDownViewController {
+
+      }
+  }
+
+  package "calculation" {
+    class CalculationsController {
+
+    }
+  }
+
+  class PrimaryWindowController {
+
+  }
+
+
+
+
+Calculator -l-> Airport
+
+Airport -d-> Runaway : has
+Airport -l-> Obstacle : has
+Runaway -r-> DirectedRunway : has
+
+PrimaryWindowController -l-> Calculator
+
+PrimaryWindowController -u-> TopDownViewController
+PrimaryWindowController -u-> SideViewController
+PrimaryWindowController -d-> ObstacleViewController
+PrimaryWindowController -r-> CalculationsController
+PrimaryWindowController -l-> CalculationsBreakDownController
+
+ObstacleViewController -d-> ObstacleEditFormController
+ObstacleViewController -d-> ObstacleAddFormController
+
+
+
+@enduml
