@@ -3,8 +3,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="paneBreakdown" prefHeight="611.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.breakdown.CalculationBreakdownController">
+<AnchorPane fx:id="paneBreakdown" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.breakdown.CalculationBreakdownController">
    <children>
-      <TextArea fx:id="textBreakdown" layoutY="6.0" maxWidth="1.7976931348623157E308" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <TextArea fx:id="textBreakdown" layoutY="6.0" maxWidth="1.7976931348623157E308" wrapText="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
    </children>
 </AnchorPane>

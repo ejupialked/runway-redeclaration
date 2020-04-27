@@ -1,97 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="249.0" prefWidth="385.0" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.calculation.CalculationsViewController">
+<AnchorPane prefHeight="589.0" prefWidth="450.0"  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.calculation.CalculationsViewController">
 <children>
-    <TitledPane collapsible="false" prefWidth="335.0" text="Calculations" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <TitledPane collapsible="false" layoutX="13.0" layoutY="26.0" prefHeight="446.0" prefWidth="402.0" text="Calculations" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
-            <AnchorPane fx:id="paneCalculations" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="paneCalculations">
                 <children>
-                    <Label layoutX="14.0" layoutY="48.0" text="TODA:" AnchorPane.leftAnchor="5.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="14.0" layoutY="20.0" text="TORA:" AnchorPane.leftAnchor="5.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="1.0" layoutY="74.0" text="ASDA:" AnchorPane.leftAnchor="5.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="16.0" layoutY="101.0" text="LDA:" AnchorPane.leftAnchor="5.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="150.0" layoutY="101.0" text="RESA:" AnchorPane.rightAnchor="90.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="151.0" layoutY="74.0" text="Slope:" AnchorPane.rightAnchor="90.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="245.0" layoutY="48.0" text="ALS:" AnchorPane.rightAnchor="90.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label layoutX="238.0" layoutY="21.0" text="TOCS:" AnchorPane.rightAnchor="90.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelTOCS" layoutX="304.0" layoutY="20.0" text="34230" AnchorPane.rightAnchor="25.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelALS" layoutX="304.0" layoutY="48.0" text="32424" AnchorPane.rightAnchor="26.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelSlope" layoutX="319.0" layoutY="74.0" text="78" AnchorPane.rightAnchor="43.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelRESA" layoutX="313.0" layoutY="101.0" text="234" AnchorPane.rightAnchor="38.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelLDA" layoutX="81.0" layoutY="101.0" text="3232" AnchorPane.leftAnchor="70.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelASDA" layoutX="81.0" layoutY="74.0" text="3423" AnchorPane.leftAnchor="70.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelTODA" layoutX="80.0" layoutY="48.0" text="3434" AnchorPane.leftAnchor="70.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="labelTORA" layoutX="79.0" layoutY="21.0" text="3234" AnchorPane.leftAnchor="70.0">
-                        <font>
-                            <Font size="18.0" />
-                        </font>
-                    </Label>
+                  <GridPane layoutX="36.0" layoutY="17.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                          <Label text="RESA">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="TORA" GridPane.rowIndex="1">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="TODA" GridPane.rowIndex="2">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="LDA" GridPane.rowIndex="3">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="ASDA" GridPane.rowIndex="4">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="ALS" GridPane.rowIndex="5">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="TOCS" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label text="Slope" GridPane.rowIndex="7">
+                              <font>
+                                  <Font name="System Bold" size="20.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelRESA" text="234" GridPane.columnIndex="1">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelTORA" text="3234" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelTODA" text="3434" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelLDA" text="3232" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelASDA" text="3423" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelALS" text="32424" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelSlope" text="78" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                          <Label fx:id="labelTOCS" text="34230" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                              <font>
+                                  <Font size="18.0" />
+                              </font>
+                          </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </GridPane>
                 </children>
             </AnchorPane>
         </content>

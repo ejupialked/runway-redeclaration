@@ -64,6 +64,8 @@ public class PrimaryWindowController implements Initializable {
     @FXML
     ImageView needle;
 
+    @FXML Label labelCompass;
+
     //Declaring colours
     private String white = " #FFFFFF";
     private String grey = "#E0E0E0";
@@ -223,6 +225,7 @@ public class PrimaryWindowController implements Initializable {
 
 
     public void rotateNeedle(Double val){
+        labelCompass.setText(val + "°");
        UtilsUI.rotateView(needle, val, 3000);
     }
 }

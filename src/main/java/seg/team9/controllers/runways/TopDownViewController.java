@@ -24,13 +24,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TopDownViewController implements Initializable {
-    private static final Logger logger = LogManager.getLogger("SideViewController");
+    private static final Logger logger = LogManager.getLogger("TopDownViewController");
 
 
     String FONT_FAMILY = "Helvetica";
 
     @FXML private AnchorPane topDownView;
-    @FXML private PrimaryWindowController primaryWindowController;
     private static TopDownViewController instance;
 
     public boolean isSelected = true;
