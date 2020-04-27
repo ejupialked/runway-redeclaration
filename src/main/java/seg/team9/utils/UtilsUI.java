@@ -38,8 +38,5 @@ public class UtilsUI {
         public static Color TODA = Color.RED;
         public static Color ASDA = Color.MAGENTA;
         public static Color LDA = Color.CYAN;
-
-
     }
-
 }

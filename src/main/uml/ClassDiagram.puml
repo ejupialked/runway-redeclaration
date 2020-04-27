@@ -1,95 +1,198 @@
 @startuml
-title Packages - Class Diagram
+title Runway redeclaration - Class Diagram
 
+allow_mixing
+
+class App extends Application {
+    - primaryWindow: Stage
+    -{static} calculator : Calculator
+    +void start(Stage)
+    +{static} airports : ObservableList<Airport>
+    +{static} obstacles : ObservableList<Obstacle>
+
+
+}
 
   package "logic" {
-    class Calculator {
+class Calculator {
+     -{static} BLAST_PROTECTION : Double
+     -{static} SLOPE : Double
+     -{static} STRIPEND : Double
+     -calculationBreakdown : Map<String, String>
 
-    }
+      +void redesignate(Runway, Obstacle)
+      -void findDirection(Runway, Obstacle)
+      -void calculateTOALO(Runway, Obstacle)
+      -void calculateTOTLT(Runway, Obstacle)
 
-  }
 
-  package "models" {
-
-  class DirectedRunway {
-
- }
-    class Obstacle {
-
-    }
-
-    class Runaway {
-
-    }
-
- class Airport {
-
-    }
-
+}
 
   }
 
-  package "breakdown" {
-    class CalculationsBreakDownController {
+          package "models" {
 
-    }
+class DirectedRunway {
+    -designator : String
+    -threshold : Double
+    -clearway : Double
+    -RESA : Double
+    -TODA : Double
+    -ASDA : Double
+    -LDA : Double
+    -ALS : Double
+    -workingTODA : Double
+    -workingTORA : Double
+    -workingASDA : Double
+    -workingLDA : Double
+
+    ----
+            ..setters & getters..
+
+}
+class Obstacle {
+        -name : String
+        -height : Double
+        -width : Double
+        -distanceCenter : Double
+        -distanceRThreshold : Double
+        -distanceLThreshold : Double
+        ----
+                ..        setters & getters..
+
+}
+
+class Runaway {
+      -rightRunway : DirectedRunway
+      -leftRunwat : DirectedRunway
+
+}
+
+class Airport {
+     -name : String
+     -runwayList : List<Runaway>
+     -addRunway(runway: Runaway)
+}
+
+
   }
 
-  package "obstacle" {
+          package "controllers" {
+          package "breakdown" {
+
+class CalculationsBreakDownController {
+
+}
+  }
+
+package "obstacle" {
+
+
+
        class ObstacleAddFormController {
 
-       }
+}
 
-       class ObstacleEditFormController {
+class ObstacleEditFormController {
 
-       }
+}
 
-       class ObstacleViewController {
+class ObstacleViewController {
 
-       }
-
-  }
-
-  package "runways" {
-     class SideViewController {
-
-     }
-
-      class TopDownViewController {
-
-      }
-  }
-
-  package "calculation" {
-    class CalculationsController {
-
-    }
-  }
-
-  class PrimaryWindowController {
+}
 
   }
 
+          package "runways" {
 
 
 
-Calculator -l-> Airport
+class SideViewController {
 
-Airport -d-> Runaway : has
-Airport -l-> Obstacle : has
-Runaway -r-> DirectedRunway : has
-
-PrimaryWindowController -l-> Calculator
-
-PrimaryWindowController -u-> TopDownViewController
-PrimaryWindowController -u-> SideViewController
-PrimaryWindowController -d-> ObstacleViewController
-PrimaryWindowController -r-> CalculationsController
-PrimaryWindowController -l-> CalculationsBreakDownController
-
-ObstacleViewController -d-> ObstacleEditFormController
-ObstacleViewController -d-> ObstacleAddFormController
+}
 
 
+class Arrow {
 
+}
+
+class TopDownViewController {
+
+
+}
+  }
+
+package "calculation" {
+
+
+class CalculationsController {
+
+}
+  }
+
+class PrimaryWindowController {
+
+}
+
+}
+
+
+
+        TopDownViewController -l-  Arrow
+        SideViewController -r-o  Arrow
+
+        Airport -d-* "1..*" Runaway
+        Calculator -d-> "1" Obstacle
+        Runaway  -u-* "2" DirectedRunway : "contains"
+
+        Runaway "1" <-u-  Calculator
+
+
+        App .r.> "1" Calculator : "      <<instantiate>>    "
+        App .r.>  "1" PrimaryWindowController : "      <<instantiate>>    "
+
+        PrimaryWindowController -r-> "1" TopDownViewController
+        PrimaryWindowController -d-> "1" SideViewController
+        PrimaryWindowController -u-> "1" ObstacleViewController
+        PrimaryWindowController -r-> "1" CalculationsController
+        PrimaryWindowController -l-> "1" CalculationsBreakDownController
+
+        ObstacleViewController -r-> "1" ObstacleAddFormController
+        ObstacleViewController -l-> "1" ObstacleEditFormController
+
+
+artifact "obstacleView <FXML>" as obstacleView #Orange/LightGray
+ObstacleViewController <.d. obstacleView : binds
+
+artifact "obstacleEditForm <FXML>" as obstacleEditForm #Orange/LightGray
+ObstacleEditFormController <.d. obstacleEditForm : binds
+
+
+artifact "obstacleEditForm <FXML>" as obstacleAddForm #Orange/LightGray
+ObstacleAddFormController <.l. obstacleAddForm : binds
+
+
+artifact "sideRunway <FXML>" as sideRunway #LightOrange/LightGray
+SideViewController <.d. sideRunway : binds
+
+artifact "topDownRunway <FXML>" as topDownRunway #Orange/LightGray
+TopDownViewController <.d. topDownRunway : binds
+
+
+artifact "primaryWindow <FXML>" as primaryWindow #Orange/LightGray
+PrimaryWindowController <.r. primaryWindow : binds
+
+artifact "calculationBreakdownView <FXML>" as calculationBreakdown #Orange/LightGray
+CalculationsBreakDownController <.u. calculationBreakdown : binds
+
+
+note top of Calculator
+  This class modifies the <b>Runway</b>'s attributes
+  with the new values calculated
+  by using <i>redesignate(..)</i>.
+end note
 @enduml
+
+
+
+

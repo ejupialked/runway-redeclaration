@@ -99,11 +99,9 @@ public class SideViewController implements Initializable {
         runway.setHeight(0.01*screenHeight);
     }
 
-
     private void updateArrows(){
         topDownViewController.updateUI();
     }
-
 
     private void updateObstacle(){
         Obstacle tempObstacle = topDownViewController.getCurrentObstacle();

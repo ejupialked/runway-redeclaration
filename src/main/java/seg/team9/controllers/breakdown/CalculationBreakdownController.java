@@ -12,11 +12,10 @@ import java.util.ResourceBundle;
 public class CalculationBreakdownController implements Initializable {
 
     private static final Logger logger = LogManager.getLogger("CalculationBreakdownViewController");
-
+    private static CalculationBreakdownController instance;
 
     @FXML private TextArea textBreakdown;
 
-    private static CalculationBreakdownController instance;
 
 
     public CalculationBreakdownController() {
@@ -37,7 +36,6 @@ public class CalculationBreakdownController implements Initializable {
     public TextArea getTextBreakdown() {
         return textBreakdown;
     }
-
 
     public void showBreakdown(HashMap<String, String> calculationBreakdown) {
         textBreakdown.clear();
