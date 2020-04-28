@@ -3,11 +3,9 @@ package seg.team9.controllers.runways;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -37,6 +35,7 @@ public class SideViewController implements Initializable {
     private Double xScale;
     private Double screenHeight;
     private Double screenWidth;
+    private Double yScale;
 
 
     private Rectangle runway = new Rectangle();
@@ -45,8 +44,7 @@ public class SideViewController implements Initializable {
 
     private Rectangle obstacle = new Rectangle();
 
-    private Line TOCS = new Line();
-    private Line ALS = new Line();
+    private Line Slope = new Line();
 
     public SideViewController() {
         instance = this;
@@ -108,10 +106,10 @@ public class SideViewController implements Initializable {
     private void updateObstacle(){
         Obstacle tempObstacle = topDownViewController.getCurrentObstacle();
         obstacle.setX(tempObstacle.getDistanceRThreshold()*xScale+topDownViewController.runwayBeginX);
-        obstacle.setY(0.5*screenHeight-tempObstacle.getHeight()*xScale);
+        obstacle.setY(0.5*screenHeight-tempObstacle.getHeight()*yScale);
 
         obstacle.setWidth((currentRunway.getRRunway().getTora()-(tempObstacle.getDistanceRThreshold()+tempObstacle.getDistanceLThreshold()))*xScale);
-        obstacle.setHeight(tempObstacle.getHeight()*xScale);
+        obstacle.setHeight(tempObstacle.getHeight()*yScale);
     }
 
     private void rescale(){
@@ -122,6 +120,7 @@ public class SideViewController implements Initializable {
         currentRunway = topDownViewController.getCurrentRunway();
 
         xScale = topDownViewController.xScaler;
+        yScale = xScale*4;
         screenHeight = topDownViewController.screenHeight;
         screenWidth = topDownViewController.screenWidth;
         grass.setY(screenHeight*0.5);
@@ -131,8 +130,10 @@ public class SideViewController implements Initializable {
 
     private void updateSlopes(){
         if(topDownViewController.getCurrentObstacle().getDistanceRThreshold()>topDownViewController.getCurrentObstacle().getDistanceLThreshold()){
-            double middleOfObstacle = obstacle.getX()+(obstacle.getWidth()/2);
-            topDownViewController.setLinePos(ALS, middleOfObstacle, obstacle.getY(), middleOfObstacle-currentRunway.getRRunway().getAls(),screenHeight/2);
+            topDownViewController.setLinePos(Slope, obstacle.getX(), obstacle.getY(), obstacle.getX()-(50*topDownViewController.getCurrentObstacle().getHeight())*xScale,screenHeight/2);
+        }
+        else{
+            topDownViewController.setLinePos(Slope, obstacle.getX()+obstacle.getWidth(), obstacle.getY(), obstacle.getX()+obstacle.getWidth()+(50*topDownViewController.getCurrentObstacle().getHeight())*xScale,screenHeight/2);
         }
     }
 
@@ -145,8 +146,7 @@ public class SideViewController implements Initializable {
 
         graphics.getChildren().add(runway);
         graphics.getChildren().add(obstacle);
-        graphics.getChildren().add(TOCS);
-        graphics.getChildren().add(ALS);
+        graphics.getChildren().add(Slope);
 
 
 
