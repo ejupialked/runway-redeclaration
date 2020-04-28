@@ -60,6 +60,8 @@ public class PrimaryWindowController implements Initializable {
 
     @FXML Label labelCompass;
 
+
+    // -fx-background-color #E0E0E0
     //Declaring colours
     private String white = " #FFFFFF";
     private String grey = "#E0E0E0";
@@ -92,10 +94,10 @@ public class PrimaryWindowController implements Initializable {
     }
 
     private void initColorPickers(){
-        colourPickerTORA.setValue(Color.BLACK);
-        colourPickerTODA.setValue(Color.BLACK);
-        colourPickerASDA.setValue(Color.BLACK);
-        colourPickerLDA.setValue(Color.BLACK);
+       // colourPickerTORA.setValue(Color.BLACK);
+        //colourPickerTODA.setValue(Color.BLACK);
+        //colourPickerASDA.setValue(Color.BLACK);
+        //colourPickerLDA.setValue(Color.BLACK);
     }
     private void initArrays() {
         lightPanes = new ArrayList<>();

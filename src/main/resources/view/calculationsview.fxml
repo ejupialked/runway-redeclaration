@@ -15,13 +15,14 @@
 <children>
     <TitledPane collapsible="false" layoutX="13.0" layoutY="26.0" prefHeight="490.0" prefWidth="356.0" text="Calculation values" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
-            <AnchorPane fx:id="paneCalculations" prefHeight="559.0" prefWidth="395.0">
+            <AnchorPane fx:id="paneCalculations" prefHeight="559.0" prefWidth="395.0" style="-fx-background-color: #E0E0E0;">
                 <children>
-                  <GridPane gridLinesVisible="true" layoutX="6.0" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="388.0" prefWidth="296.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                  <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="369.0" prefWidth="294.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="69.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="115.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="116.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="8.0" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,83 +38,131 @@
                      <children>
                           <Label text="RESA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="TORA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="TODA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="LDA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="ASDA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="ALS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="TOCS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                           <Label text="Slope" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                               <font>
-                                  <Font name="System Bold" size="20.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelRESA" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                          <Label fx:id="labelRESAl" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelTORA" text="3234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                          <Label fx:id="labelTORAl" text="3234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelTODA" text="3434" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                          <Label fx:id="labelTODAl" text="3434" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelLDA" text="3232" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                          <Label fx:id="labelLDAl" text="3232" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelASDA" text="3423" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                          <Label fx:id="labelASDAl" text="3423" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelALS" text="32424" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                          <Label fx:id="labelALSl" text="32424" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelSlope" text="78" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                          <Label fx:id="labelSlopel" text="78" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
-                          <Label fx:id="labelTOCS" text="34230" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                          <Label fx:id="labelTOCSl" text="59°" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                               <font>
-                                  <Font size="18.0" />
+                                  <Font name="FreeMono Bold" size="18.0" />
                               </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                           </Label>
                         <Rectangle fx:id="colorResa" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <GridPane.margin>
@@ -127,20 +176,95 @@
                         <Rectangle fx:id="colorTocs" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
                         <Rectangle fx:id="colorAls" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                         <Rectangle fx:id="colorSlope" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="15.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
-                        <Label prefHeight="16.0" text="color" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label text="colour" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
-                              <Font name="System Italic" size="13.0" />
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefWidth="40.0" text="name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="leftDesignator" text="27/L" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label text="name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label fx:id="rightDesignator" text="27/R" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
-                              <Font name="System Italic" size="13.0" />
+                              <Font name="System Bold Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label text="value" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label fx:id="labelRESAr" text="23324" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
-                              <Font name="System Italic" size="13.0" />
+                              <Font name="FreeMono Bold" size="18.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelTORAr" text="2344m" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelTODAr" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelLDAr" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelASDAr" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelTOCSr" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelALSr" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="labelSlopeR" text="-" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="FreeMono Bold" size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </GridPane.margin>
                         </Label>
                      </children>
                      <cursor>

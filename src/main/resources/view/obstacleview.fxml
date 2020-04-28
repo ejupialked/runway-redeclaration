@@ -9,142 +9,178 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.obstacle.ObstacleViewController">
-        <TitledPane collapsible="false" minWidth="-Infinity" prefWidth="560.0" text="Obstacle" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane style="-fx-background-color: E0E0E0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.obstacle.ObstacleViewController">
+        <TitledPane collapsible="false" maxWidth="-Infinity" minWidth="510.0" prefWidth="525.0" text="Obstacle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <content>
-                <AnchorPane fx:id="paneObstacles" prefHeight="0.0" style="-fx-background-color: #E0E0E0;">
+                <AnchorPane fx:id="paneObstacles" style="-fx-background-color: #E0E0E0;">
                     <children>
-                        <Button fx:id="buttonAddObstacle" layoutX="431.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onClick" prefHeight="37.0" prefWidth="56.0" text="Add" AnchorPane.rightAnchor="30.0">
+                        <Button fx:id="buttonAddObstacle" layoutX="184.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#onClick" text="Add" AnchorPane.rightAnchor="278.0">
                   <font>
                      <Font size="14.0" />
                   </font></Button>
-                        <ChoiceBox fx:id="boxObstacles" layoutX="91.0" layoutY="29.0" prefHeight="26.0" prefWidth="197.0" AnchorPane.leftAnchor="30.0" />
+                        <ChoiceBox fx:id="boxObstacles" layoutX="75.0" layoutY="29.0" maxHeight="-Infinity" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="278.0" AnchorPane.topAnchor="20.0" />
                <Label layoutX="34.0" layoutY="138.0">
                   <font>
                      <Font name="System Bold" size="13.0" />
                   </font>
                </Label>
-               <Button fx:id="buttonEditObstacle" layoutX="14.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" prefHeight="37.0" prefWidth="56.0" text="Edit" AnchorPane.leftAnchor="30.0">
+               <Button fx:id="buttonEditObstacle" layoutX="34.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#onEditObstacle" text="Edit" AnchorPane.leftAnchor="20.0">
                   <font>
                      <Font size="14.0" />
                   </font></Button>
-               <GridPane layoutX="62.0" layoutY="68.0" prefHeight="184.0" prefWidth="555.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+               <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="307.0" layoutY="29.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="25.0">
                  <columnConstraints>
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="324.0" minWidth="10.0" prefWidth="311.0" />
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="0.0" prefWidth="100.0" />
+                   <ColumnConstraints />
+                   <ColumnConstraints minWidth="0.0" />
                  </columnConstraints>
                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="25.0" text="name">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="name" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="16.0" />
+                           <Font name="System Bold" size="14.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtObstacleName" text="Obstacle" textAlignment="JUSTIFY" textFill="#311fb9" GridPane.columnIndex="1">
+                     <Label fx:id="txtObstacleName" text="Obstacle" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="17.0" />
+                           <Font name="FreeMono Bold" size="16.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="22.0" text="height" GridPane.rowIndex="1">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="height" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="16.0" />
+                           <Font name="System Bold" size="14.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Distance from center-line" GridPane.rowIndex="3">
+                     <Label fx:id="txtObstacleHeight" minWidth="-Infinity" text="33333" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="16.0" />
+                           <Font name="FreeMono Bold" size="16.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="20.0" text="Distance from right edge of runway" GridPane.rowIndex="4">
+                     <Label fx:id="txtObstacleWidth" minWidth="-Infinity" text="40m" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="16.0" />
+                           <Font name="FreeMono Bold" size="16.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="20.0" text="Distance from left edge of runway" GridPane.rowIndex="5">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="width" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="16.0" />
+                           <Font name="System Bold" size="14.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtObstacleHeight" minWidth="-Infinity" prefWidth="140.0" text="33333" textAlignment="JUSTIFY" textFill="#311fb9" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="colour" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="17.0" />
+                           <Font name="System Bold" size="14.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtObstacleWidth" minWidth="-Infinity" prefWidth="140.0" text="40m" textAlignment="JUSTIFY" textFill="#311fb9" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  </children>
+               </GridPane>
+               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="208.0" layoutY="173.0" text="Distance from:" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                  <font>
+                     <Font size="15.0" />
+                  </font>
+               </Label>
+               <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="44.0" layoutY="203.0" maxWidth="1.7976931348623157E308" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <columnConstraints>
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                     <ColumnConstraints hgrow="ALWAYS" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="17.0" />
+                           <Font name="System Bold" size="16.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtDistanceCenter" minWidth="-Infinity" prefWidth="140.0" text="300m" textAlignment="JUSTIFY" textFill="#311fb9" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="center-line" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="17.0" />
+                           <Font name="System Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtDistanceThresholdLeft" minWidth="-Infinity" prefWidth="140.0" text="3333333333" textAlignment="JUSTIFY" textFill="#311fb9" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="right edge of runway" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="17.0" />
+                           <Font name="System Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtDistanceThresholdRight" minWidth="-Infinity" prefWidth="140.0" text="333333333" textAlignment="JUSTIFY" textFill="#311fb9" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text=" left edge of runway" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="17.0" />
+                           <Font name="System Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="18.0" prefWidth="45.0" text="width" GridPane.rowIndex="2">
+                     <Label fx:id="txtDistanceCenter" minWidth="-Infinity" text="300m" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Italic" size="16.0" />
+                           <Font name="FreeMono Bold" size="16.0" />
                         </font>
                         <GridPane.margin>
-                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           <Insets left="10.0" right="10.0" />
+                        </GridPane.margin>
+                     </Label>
+                     <Label fx:id="txtDistanceThresholdLeft" minWidth="-Infinity" text="3333333333" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <font>
+                           <Font name="FreeMono Bold" size="16.0" />
+                        </font>
+                        <GridPane.margin>
+                           <Insets left="10.0" right="10.0" />
+                        </GridPane.margin>
+                     </Label>
+                     <Label fx:id="txtDistanceThresholdRight" text="333333333" textAlignment="JUSTIFY" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <font>
+                           <Font name="FreeMono Bold" size="16.0" />
+                        </font>
+                        <GridPane.margin>
+                           <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
                   </children>
-                  <padding>
-                     <Insets top="10.0" />
-                  </padding>
                </GridPane>
+               <Label layoutX="341.0" layoutY="11.0" text="Obstacle details" AnchorPane.rightAnchor="60.0">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
                     </children>
                 </AnchorPane>
             </content>

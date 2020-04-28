@@ -16,8 +16,6 @@ public class CalculationBreakdownController implements Initializable {
 
     @FXML private TextArea textBreakdown;
 
-
-
     public CalculationBreakdownController() {
         instance = this;
     }

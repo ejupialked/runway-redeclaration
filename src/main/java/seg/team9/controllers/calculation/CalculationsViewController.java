@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.business.models.Runway;
 import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
@@ -17,25 +18,6 @@ public class CalculationsViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("CalculationViewController");
 
     private static CalculationsViewController instance;
-
-    @FXML private Label labelTOCS;
-    @FXML private Label labelALS;
-    @FXML private Label labelSlope;
-    @FXML private Label labelRESA;
-    @FXML private Label labelLDA;
-    @FXML private Label labelASDA;
-    @FXML private Label labelTODA;
-    @FXML private Label labelTORA;
-    @FXML private AnchorPane paneCalculations;
-
-    @FXML private Rectangle colorResa;
-    @FXML private Rectangle colorTora;
-    @FXML private Rectangle colorToda;
-    @FXML private Rectangle colorLda;
-    @FXML private Rectangle colorAsda;
-    @FXML private Rectangle colorTocs;
-    @FXML private Rectangle colorAls;
-    @FXML private Rectangle colorSlope;
 
     public CalculationsViewController() {
         instance = this;
@@ -61,17 +43,55 @@ public class CalculationsViewController implements Initializable {
 
 
     public void initLabels(){
-     labelTOCS.setText("3932");
-     labelALS.setText("732");
-     labelSlope.setText("52");
-     labelRESA.setText("33");
-     labelLDA.setText("154");
-     labelASDA.setText("530");
-     labelTODA.setText("932");
-     labelTORA.setText("731");
+
+    }
+
+    public void updateCalculationValues(Runway runway){
+
+        rightDesignator.setText(runway.getRRunway().getDesignator());
+        labelTODAr.setText(runway.getRRunway().getWorkingTODA().toString());
+        labelTODAr.setText(runway.getRRunway().getWorkingASDA().toString());
+        labelTODAr.setText(runway.getRRunway().getWorkingTORA().toString());
+        labelTODAr.setText(runway.getRRunway().getWorkingLDA().toString());
+        labelTODAr.setText(runway.getRRunway().getResa().toString());
+
+        leftDesignator.setText(runway.getLRunway().getDesignator());
+        labelTODAl.setText(runway.getLRunway().getWorkingTODA().toString());
+        labelASDAl.setText(runway.getLRunway().getWorkingASDA().toString());
+        labelTORAl.setText(runway.getLRunway().getWorkingTORA().toString());
+        labelLDAl.setText(runway.getLRunway().getWorkingLDA().toString());
+        labelRESAl.setText(runway.getLRunway().getResa().toString());
     }
 
     public AnchorPane getPaneCalculations() {
         return paneCalculations;
     }
+
+    @FXML private AnchorPane paneCalculations;
+    @FXML private Label labelRESAl;
+    @FXML private Label labelTORAl;
+    @FXML private Label labelTODAl;
+    @FXML private Label labelLDAl;
+    @FXML private Label labelASDAl;
+    @FXML private Label labelALSl;
+    @FXML private Label labelSlopel;
+    @FXML private Label labelTOCSl;
+    @FXML private Rectangle colorResa;
+    @FXML private Rectangle colorTora;
+    @FXML private Rectangle colorToda;
+    @FXML private Rectangle colorLda;
+    @FXML private Rectangle colorAsda;
+    @FXML private Rectangle colorTocs;
+    @FXML private Rectangle colorAls;
+    @FXML private Rectangle colorSlope;
+    @FXML private Label leftDesignator;
+    @FXML private Label rightDesignator;
+    @FXML private Label labelRESAr;
+    @FXML private Label labelTORAr;
+    @FXML private Label labelTODAr;
+    @FXML private Label labelLDAr;
+    @FXML private Label labelASDAr;
+    @FXML private Label labelTOCSr;
+    @FXML private Label labelALSr;
+    @FXML private Label labelSlopeR;
 }

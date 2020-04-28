@@ -18,6 +18,8 @@ import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.controllers.breakdown.CalculationBreakdownController;
+import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
@@ -696,6 +698,9 @@ public class TopDownViewController implements Initializable {
         logger.info("currentRunway"+currentRunway);
         try {
             App.getCalculator().redesignate(currentRunway, currentObstacle);
+
+            CalculationsViewController.getInstance().updateCalculationValues(currentRunway);
+
             runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
             TODAR = currentRunway.getRRunway().getWorkingTODA();
             ASDAR = currentRunway.getRRunway().getWorkingASDA();
@@ -710,6 +715,7 @@ public class TopDownViewController implements Initializable {
             TORAL = currentRunway.getLRunway().getWorkingTORA();
             LDAL = currentRunway.getLRunway().getWorkingLDA();
             RESAL = currentRunway.getLRunway().getResa();
+
         }
         catch (NullPointerException e){
             e.printStackTrace();

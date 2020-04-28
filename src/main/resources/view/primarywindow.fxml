@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -47,11 +46,11 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane fx:id="splitPaneView" dividerPositions="0.1585445094217024, 0.6335282651072125" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+      <SplitPane fx:id="splitPaneView" dividerPositions="0.22287199480181935, 0.6660168940870695" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
-            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0">
+            <VBox maxWidth="345.0" minWidth="-Infinity" prefWidth="339.0" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Compass">
+                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="345.0" minWidth="-Infinity" prefWidth="320.0" style="-fx-background-color: #E0E0E0;" text="Compass">
                     <content>
                       <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="300.0">
                            <children>
@@ -65,7 +64,7 @@
                                        <Image url="@../Images/compass.png" />
                                    </image>
                               </ImageView>
-                              <Label fx:id="labelCompass" layoutX="120.0" layoutY="209.0" text="230°">
+                              <Label fx:id="labelCompass" layoutX="124.0" layoutY="211.0" text="230°">
                                  <font>
                                     <Font name="System Bold" size="19.0" />
                                  </font>
@@ -82,7 +81,7 @@
             </VBox>
           <AnchorPane fx:id="paneView" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="193.0" prefHeight="388.0" prefWidth="600.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.200000000000045" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="193.0">
+                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="71.0" prefHeight="842.0" prefWidth="613.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="71.0">
                     <tabs>
                       <Tab fx:id="topDownViewTab" text="Top-down View">
                           <content>
@@ -98,37 +97,13 @@
                   <ChoiceBox fx:id="choiceBoxAirport" layoutX="91.0" layoutY="21.0" prefWidth="150.0" />
                   <Label layoutX="291.0" layoutY="26.0" prefHeight="17.0" prefWidth="67.0" text="Runway:" />
                   <ChoiceBox fx:id="choiceBoxRunway" layoutX="358.0" layoutY="22.0" prefWidth="150.0" />
-                  <Label layoutX="33.0" layoutY="107.0" text="TORA">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <ColorPicker fx:id="colourPickerTORA" layoutX="97.0" layoutY="105.0" onAction="#onSelectedTORAColour" prefHeight="26.0" prefWidth="103.0" />
-                  <Label layoutX="32.0" layoutY="137.0" text="TODA">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <ColorPicker fx:id="colourPickerTODA" layoutX="98.0" layoutY="136.0" onAction="#onSelectedTODAColour" prefHeight="26.0" prefWidth="103.0" />
-                  <Label layoutX="218.0" layoutY="108.0" text="ASDA">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <ColorPicker fx:id="colourPickerASDA" layoutX="282.0" layoutY="105.0" onAction="#onSelectedASDAColour" prefHeight="26.0" prefWidth="96.0" />
-                  <Label layoutX="220.0" layoutY="136.0" prefWidth="61.0" text="LDA">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <ColorPicker fx:id="colourPickerLDA" layoutX="282.0" layoutY="136.0" onAction="#o0nSelectedLDAColour" prefHeight="26.0" prefWidth="103.0" />
                </children>
 
                               </AnchorPane>
             <VBox>
                <children>
                    <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
-                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" prefHeight="893.0" prefWidth="500.0" text="Calculations">
+                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" text="Calculations">
                      <content>
                          <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
                      </content>
