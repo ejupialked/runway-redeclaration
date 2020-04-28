@@ -3,6 +3,7 @@ package seg.team9.utils;
 import javafx.animation.RotateTransition;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 
@@ -30,6 +31,15 @@ public class UtilsUI {
         rt.setToAngle(angle);
         rt.setAutoReverse(true);
         rt.play();
+    }
+
+    public static class Colors {
+        public static Color TORA = Color.YELLOW;
+        public static Color TODA = Color.RED;
+        public static Color ASDA = Color.MAGENTA;
+        public static Color LDA = Color.CYAN;
+
+
     }
 
 }

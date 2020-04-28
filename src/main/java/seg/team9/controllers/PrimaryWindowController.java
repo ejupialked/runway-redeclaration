@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Camera;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -15,6 +16,7 @@ import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.controllers.breakdown.CalculationBreakdownController;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
@@ -48,7 +50,7 @@ public class PrimaryWindowController implements Initializable {
     private ArrayList<AnchorPane> lightPanes;
     private ArrayList<AnchorPane> darkPanes;
     @FXML private AnchorPane paneView;
-    @FXML private AnchorPane paneCalculations;
+//    @FXML private AnchorPane paneCalculations;
     @FXML private AnchorPane paneQMarks;
 
     // Injecting controllers
@@ -56,17 +58,21 @@ public class PrimaryWindowController implements Initializable {
     @FXML private TopDownViewController topDownViewController; // top down runway
     @FXML private ObstacleViewController obstacleViewController;
     @FXML private CalculationsViewController calculationsViewController;
-
+    @FXML private CalculationBreakdownController calculationBreakdownController;
     @FXML
     ImageView compass;
     @FXML
     ImageView needle;
+
+    @FXML Label labelCompass;
 
     //Declaring colours
     private String white = " #FFFFFF";
     private String grey = "#E0E0E0";
     private String darkerWhite = "#cccccc";
     private String darkerGray = "#B3B3B3";
+    private String colourBlindWhite = " #DA6D00";
+    private String colourBlindGrey = "#006CDA";
 
 
     public PrimaryWindowController(){instance = this;}
@@ -82,6 +88,7 @@ public class PrimaryWindowController implements Initializable {
         initColorPickers();
         initSplitPane();
         initTabPane();
+
     }
 
     private void initCompass() {
@@ -101,8 +108,8 @@ public class PrimaryWindowController implements Initializable {
     private void initArrays() {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
-        lightPanes.add(paneCalculations);
-        lightPanes.add(calculationsViewController.getPaneCalculations());
+        lightPanes.add(CalculationsViewController.getInstance().getPaneCalculations());
+        lightPanes.add(CalculationBreakdownController.getInstance().getPaneCalculationsBreakdown());
         darkPanes.add(paneView);
         darkPanes.add(paneQMarks);
         darkPanes.add(obstacleViewController.getPaneObstacles());
@@ -127,8 +134,6 @@ public class PrimaryWindowController implements Initializable {
                 choiceBoxRunway.getItems().clear();
                 choiceBoxRunway.getItems().addAll(t1.getRunwayList());
                 choiceBoxRunway.getSelectionModel().selectFirst();
-
-                changeColourArrows();
             }
         });
 
@@ -140,7 +145,8 @@ public class PrimaryWindowController implements Initializable {
             }
             //topDownViewController.updateUI(); you're calling this method already in line 67
 
-            changeColourArrows();
+            topDownViewController.initArrowsColors();
+            //changeColourArrows();
             logger.info("Changed colours");
         });
 
@@ -193,6 +199,14 @@ public class PrimaryWindowController implements Initializable {
             pane.setStyle("-fx-background-color: " + darkerGray + ";");
     }
 
+    public void onColourChangeColourBlind(ActionEvent actionEvent){
+        for (AnchorPane pane : lightPanes)
+            pane.setStyle("-fx-background-color: " + colourBlindWhite + ";");
+
+        for(AnchorPane pane : darkPanes)
+            pane.setStyle("-fx-background-color: " + colourBlindGrey + ";");
+    }
+
     public void onSelectedTORAColour(ActionEvent actionEvent) {
        topDownViewController.changeColourTORA(colourPickerTORA.getValue());
     }
@@ -211,6 +225,7 @@ public class PrimaryWindowController implements Initializable {
 
 
     public void rotateNeedle(Double val){
+        labelCompass.setText(val + "°");
        UtilsUI.rotateView(needle, val, 3000);
     }
 }
