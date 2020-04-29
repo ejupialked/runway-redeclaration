@@ -2,6 +2,7 @@ package seg.team9.controllers.runways;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -18,15 +19,16 @@ import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
-import seg.team9.controllers.breakdown.CalculationBreakdownController;
 import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class TopDownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("TopDownViewController");
+    public AnchorPane gridPane1;
 
 
     String FONT_FAMILY = "Helvetica";
@@ -34,6 +36,7 @@ public class TopDownViewController implements Initializable {
     @FXML private AnchorPane topDownView;
     private static TopDownViewController instance;
 
+    private Button button = new Button("Helllo");
     public boolean isSelected = true;
 
     private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
@@ -209,13 +212,17 @@ public class TopDownViewController implements Initializable {
         initRectangles();
         initArrowsColors();
 
+
         topDownView.widthProperty().addListener((obs,oldVal,newVal) -> {
             updateUI();
+
         });
         topDownView.heightProperty().addListener((obs,oldVal,newVal) -> {
             updateUI();
         });
+
         updateUI();
+
     }
 
     public void updateScaler(){
@@ -240,17 +247,20 @@ public class TopDownViewController implements Initializable {
         
     }
 
+
     public void initText(){
         runwayDesignatorR.setRotate(90);
-        runwayDesignatorR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 12));
+        runwayDesignatorR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 18));
         runwayDesignatorR.setFill(Color.WHITE);
         runwayDesignatorR.setSmooth(true);
-
+        runwayDesignatorR.setScaleX(1.7d);
 
         runwayDesignatorL.setRotate(270);
-        runwayDesignatorL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 12));
+        runwayDesignatorL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 18));
         runwayDesignatorL.setFill(Color.WHITE);
         runwayDesignatorL.setSmooth(true);
+        runwayDesignatorL.setScaleX(1.7d);
+
 
         textTODAR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textTODAR.setFill(Color.WHITE);
@@ -281,10 +291,10 @@ public class TopDownViewController implements Initializable {
 
     public void initLines(){
         centreLine.setStroke(Color.WHITE);
-        centreLine.setStrokeWidth(2d);
-        centreLine.getStrokeDashArray().addAll(30d, 10d);
-
+        centreLine.setStrokeWidth(7d);
+        centreLine.getStrokeDashArray().addAll(30d, 30d);
         thresholdR.setStroke(Color.WHITE);
+
     }
 
     public void initRectangles(){
@@ -320,6 +330,8 @@ public class TopDownViewController implements Initializable {
         updateObstacle();
         updateArrows();
         addChildren();
+
+
         try {
 
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
@@ -365,7 +377,7 @@ public class TopDownViewController implements Initializable {
                 0.2* screenWidth,0.7* screenHeight,
                 0,0.7* screenHeight};
         clearedAndGradedArea = new Polygon(points);
-        clearedAndGradedArea.setFill(Color.BLUE);
+        clearedAndGradedArea.setFill(Color.DARKBLUE);
         topDownView.getChildren().add(clearedAndGradedArea);
     }
 
@@ -385,9 +397,11 @@ public class TopDownViewController implements Initializable {
 
     public void updateRunwayDesignator(){
         runwayDesignatorR.setX(runwayBeginX);
-        runwayDesignatorR.setY(screenHeight *0.5);
-        runwayDesignatorL.setX(runwayEndX-60);
-        runwayDesignatorL.setY(screenHeight *0.5);
+        runwayDesignatorR.setY(screenHeight *0.51);
+        runwayDesignatorL.setX(runwayEndX-38);
+        runwayDesignatorL.setY(screenHeight *0.51);
+
+        ;
     }
 
     public void updateThreshold(){
@@ -426,9 +440,11 @@ public class TopDownViewController implements Initializable {
     public void setLinePos(Line line, double startX, double startY, double endX, double endY){
         line.setStartX(startX);
         line.setStartY(startY);
-
         line.setEndX(endX);
         line.setEndY(endY);
+        line.setStroke(Color.WHITE);
+        line.getStrokeDashArray().addAll(5d, 4d);
+
     }
 
     public void updateArrows(){
@@ -647,13 +663,16 @@ public class TopDownViewController implements Initializable {
         obstacle.setY(0.5* screenHeight +currentObstacle.getDistanceCenter()*xScaler-(currentObstacle.getWidth()*xScaler)/2);
         obstacle.setWidth((currentRunway.getRRunway().getTora()-(currentObstacle.getDistanceRThreshold()+currentObstacle.getDistanceLThreshold()))*xScaler);
         obstacle.setHeight(currentObstacle.getWidth()*xScaler);
+
     }
 
     public void addChildren(){
-        topDownView.getChildren().clear();
+       topDownView.getChildren().clear();
         graphics.getChildren().clear();
 
+
         graphics.getChildren().add(clearedAndGradedArea);
+        clearedAndGradedArea.toBack();
         graphics.getChildren().add(runwayBase);
         graphics.getChildren().add(centreLine);
         graphics.getChildren().add(obstacle);
@@ -673,7 +692,13 @@ public class TopDownViewController implements Initializable {
             graphics.getChildren().add(arrows);
         }
 
+
         topDownView.getChildren().add(graphics);
+        topDownView.getChildren().add(PrimaryWindowController.getInstance().getTopLegend());
+
+        AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
+        AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
+
     }
 
 
@@ -757,7 +782,9 @@ public class TopDownViewController implements Initializable {
         textRESAL.setX(graphics.getWidth()*0.5);
         textRESAL.setY(screenHeight*0.6);
         textBlastL.setX(graphics.getWidth()*0.5);
-        textBlastL.setY(screenHeight*0.58);
+        textBlastL.setY(screenHeight*0.57);
+
+
     }
 
 
@@ -770,7 +797,7 @@ public class TopDownViewController implements Initializable {
         arrowTORAL.setStrokeWidth(4f);
 
         arrowTORAR.changeColour(UtilsUI.Colors.TORA);
-        arrowTORAL.setStrokeWidth(4f);
+        arrowTORAR.setStrokeWidth(4f);
 
         arrowTODAL.changeColour(UtilsUI.Colors.TODA);
         arrowTODAL.setStrokeWidth(4f);
@@ -790,6 +817,17 @@ public class TopDownViewController implements Initializable {
         arrowASDAL.changeColour(UtilsUI.Colors.ASDA);
         arrowASDAL.setStrokeWidth(4f);
 
+        arrowRESAL.changeColour(UtilsUI.Colors.RESA);
+        arrowRESAL.setStrokeWidth(4f);
+
+        arrowRESAR.changeColour(UtilsUI.Colors.RESA);
+        arrowRESAR.setStrokeWidth(4f);
+
+        arrowBlastL.changeColour(UtilsUI.Colors.BLAST);
+        arrowBlastL.setStrokeWidth(4f);
+
+        arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
+        arrowBlastR.setStrokeWidth(4f);
     }
 
     public void changeColourTORA(Color color){

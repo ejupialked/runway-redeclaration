@@ -103,7 +103,7 @@
             <VBox>
                <children>
                    <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
-                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" text="Calculations">
+                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" text="Re-declaration breakdown">
                      <content>
                          <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
                      </content>

@@ -108,4 +108,8 @@ public class Calculator {
     public HashMap<String, String> getCalculationsBreakdown(){
         return calculationBreakdown;
     }
+
+    public static Double getSLOPE() {
+        return SLOPE;
+    }
 }

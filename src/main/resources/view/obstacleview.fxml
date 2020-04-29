@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane style="-fx-background-color: E0E0E0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.obstacle.ObstacleViewController">
@@ -31,19 +30,18 @@
                   <font>
                      <Font size="14.0" />
                   </font></Button>
-               <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="307.0" layoutY="29.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="25.0">
+               <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="307.0" layoutY="29.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
                  <columnConstraints>
                    <ColumnConstraints />
                    <ColumnConstraints minWidth="0.0" />
                  </columnConstraints>
                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="name" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="name" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
                            <Font name="System Bold" size="14.0" />
                         </font>
@@ -51,7 +49,7 @@
                            <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtObstacleName" text="Obstacle" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <Label fx:id="txtObstacleName" text="Obstacle" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
                            <Font name="FreeMono Bold" size="16.0" />
                         </font>
@@ -59,7 +57,7 @@
                            <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="height" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="height" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <font>
                            <Font name="System Bold" size="14.0" />
                         </font>
@@ -67,7 +65,7 @@
                            <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtObstacleHeight" minWidth="-Infinity" text="33333" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <Label fx:id="txtObstacleHeight" minWidth="-Infinity" text="33333" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <font>
                            <Font name="FreeMono Bold" size="16.0" />
                         </font>
@@ -75,7 +73,7 @@
                            <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label fx:id="txtObstacleWidth" minWidth="-Infinity" text="40m" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <Label fx:id="txtObstacleWidth" minWidth="-Infinity" text="40m" textAlignment="JUSTIFY" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <font>
                            <Font name="FreeMono Bold" size="16.0" />
                         </font>
@@ -83,7 +81,7 @@
                            <Insets left="10.0" right="10.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="width" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="width" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <font>
                            <Font name="System Bold" size="14.0" />
                         </font>
@@ -91,15 +89,6 @@
                            <Insets left="5.0" right="5.0" />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="colour" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                        <font>
-                           <Font name="System Bold" size="14.0" />
-                        </font>
-                        <GridPane.margin>
-                           <Insets left="5.0" right="5.0" />
-                        </GridPane.margin>
-                     </Label>
-                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   </children>
                </GridPane>
                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="208.0" layoutY="173.0" text="Distance from:" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
@@ -176,7 +165,7 @@
                      </Label>
                   </children>
                </GridPane>
-               <Label layoutX="341.0" layoutY="11.0" text="Obstacle details" AnchorPane.rightAnchor="60.0">
+               <Label layoutX="355.0" layoutY="23.0" text="Obstacle details" AnchorPane.rightAnchor="55.0">
                   <font>
                      <Font size="14.0" />
                   </font>

@@ -32,8 +32,10 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/" + PRIMARY + ".fxml"));
 
         Parent root = fxmlLoader.load();
-        primaryWindow.setMaximized(true);
+        primaryWindow.setTitle("Runway-Redeclaration");
         primaryWindow.setScene(new Scene(root));
+        primaryWindow.setMaximized(true);
+        primaryWindow.setResizable(false);
         primaryWindow.show();
     }
 

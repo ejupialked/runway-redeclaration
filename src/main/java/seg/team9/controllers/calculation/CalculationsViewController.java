@@ -8,6 +8,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import seg.team9.App;
+import seg.team9.business.logic.Calculator;
 import seg.team9.business.models.Runway;
 import seg.team9.utils.UtilsUI;
 
@@ -35,10 +37,12 @@ public class CalculationsViewController implements Initializable {
     }
 
     private void initColors() {
-        colorTora.setFill(UtilsUI.Colors.TORA);
+        /*colorTora.setFill(UtilsUI.Colors.TORA);
         colorToda.setFill(UtilsUI.Colors.TODA);
         colorAsda.setFill(UtilsUI.Colors.ASDA);
         colorLda.setFill(UtilsUI.Colors.LDA);
+        colorResa.setFill(UtilsUI.Colors.RESA);
+*/
     }
 
 
@@ -49,18 +53,30 @@ public class CalculationsViewController implements Initializable {
     public void updateCalculationValues(Runway runway){
 
         rightDesignator.setText(runway.getRRunway().getDesignator());
-        labelTODAr.setText(runway.getRRunway().getWorkingTODA().toString());
-        labelTODAr.setText(runway.getRRunway().getWorkingASDA().toString());
-        labelTODAr.setText(runway.getRRunway().getWorkingTORA().toString());
-        labelTODAr.setText(runway.getRRunway().getWorkingLDA().toString());
-        labelTODAr.setText(runway.getRRunway().getResa().toString());
+        labelTODAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingTODA().toString()));
+        labelASDAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingASDA().toString()));
+        labelTORAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingTORA().toString()));
+        labelLDAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingLDA().toString()));
+        labelRESAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getResa().toString()));
 
         leftDesignator.setText(runway.getLRunway().getDesignator());
-        labelTODAl.setText(runway.getLRunway().getWorkingTODA().toString());
-        labelASDAl.setText(runway.getLRunway().getWorkingASDA().toString());
-        labelTORAl.setText(runway.getLRunway().getWorkingTORA().toString());
-        labelLDAl.setText(runway.getLRunway().getWorkingLDA().toString());
-        labelRESAl.setText(runway.getLRunway().getResa().toString());
+        labelTODAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingTODA().toString()));
+        labelASDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingASDA().toString()));
+        labelTORAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingTORA().toString()));
+        labelLDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingLDA().toString()));
+        labelRESAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getResa().toString()));
+
+
+        labelTOCSl.setText("-");
+        labelTOCSr.setText("-");
+
+        labelALSl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getAls().toString()));
+        labelALSr.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getAls().toString()));
+
+        labelSlopel.setText(Calculator.getSLOPE().toString()+"°");
+        labelSlopeR.setText(Calculator.getSLOPE().toString()+"°");
+
+
     }
 
     public AnchorPane getPaneCalculations() {

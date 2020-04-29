@@ -23,6 +23,7 @@ import seg.team9.App;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
+import seg.team9.utils.UtilsUI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -131,16 +132,16 @@ public class ObstacleViewController implements Initializable {
 
     public void updateLabelsObstacle(Obstacle o) {
          txtObstacleName.setText(o.getName());
-         txtObstacleHeight.setText(addUnitMeasurement(o.getHeight().toString()));
-         txtObstacleWidth.setText(addUnitMeasurement(o.getWidth().toString()));
-         txtDistanceCenter.setText(addUnitMeasurement(o.getDistanceCenter().toString()));
-         txtDistanceThresholdLeft.setText(addUnitMeasurement(o.getDistanceLThreshold().toString()));
+         txtObstacleHeight.setText(UtilsUI.addUnitMeasurement(o.getHeight().toString()));
+         txtObstacleWidth.setText(UtilsUI.addUnitMeasurement(o.getWidth().toString()));
+         txtDistanceCenter.setText(UtilsUI.addUnitMeasurement(o.getDistanceCenter().toString()));
+         txtDistanceThresholdLeft.setText(UtilsUI.addUnitMeasurement(o.getDistanceLThreshold().toString()));
          txtDistanceThresholdRight.setText(o.getDistanceRThreshold().toString());
     }
 
 
-    private String addUnitMeasurement(String value) {
-        return value + "m";
+    public ChoiceBox<Obstacle> getBoxObstacles() {
+        return boxObstacles;
     }
 
     public AnchorPane getPaneObstacles() {

@@ -17,6 +17,13 @@ public class MockData {
     private static List<Airport> airports(){
         ArrayList<Airport> airportArrayList = new ArrayList<>();
 
+        //HENRYS TEST LAND
+        DirectedRunway d7 = new DirectedRunway("09R",4000D,4100D,4000D,4000D,0D,100D,50D);
+        DirectedRunway d8 = new DirectedRunway("27L",4000D,4100D,4000D,4000D,0D,100D,50D);
+        Runway r4 = new Runway(d7, d8);
+        Airport a4 = new Airport("Henrys Test Land");
+        a4.addRunway(r4);
+
         //HEATHROW
         DirectedRunway d1 = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3595d, 306d, 0d, 0d);
         DirectedRunway d2 = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 0d, 0d);
@@ -38,25 +45,20 @@ public class MockData {
         Airport a3 = new Airport("Luton");
         a3.addRunway(r3);
 
-        //HENRYS TEST LAND
-        DirectedRunway d7 = new DirectedRunway("09R",4000D,4100D,4000D,4000D,0D,100D,50D);
-        DirectedRunway d8 = new DirectedRunway("27L",4000D,4100D,4000D,4000D,0D,100D,50D);
-        Runway r4 = new Runway(d7, d8);
-        Airport a4 = new Airport("Henrys Test Land");
-        a4.addRunway(r4);
 
+
+        airportArrayList.add(a4);
         airportArrayList.add(a1);
         airportArrayList.add(a2);
         airportArrayList.add(a3);
-        airportArrayList.add(a4);
 
         return airportArrayList;
     }
 
     private static List<Obstacle> obstacles(){
         ArrayList<Obstacle> obstacles = new ArrayList<>();
-        obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
         obstacles.add(new Obstacle("Boeing777", 25d, 100d, 20d, 2853d, 500d));
+        obstacles.add(new Obstacle("Boeing737", 12d, 100d, 0d, 3646d, -50d));
         return obstacles;
     }
 

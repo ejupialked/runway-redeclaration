@@ -7,13 +7,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.PrimaryWindowController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 
 public class SideViewController implements Initializable {
@@ -44,7 +47,7 @@ public class SideViewController implements Initializable {
 
     private Rectangle obstacle = new Rectangle();
 
-    private Line Slope = new Line();
+    private Line slope = new Line();
 
     public SideViewController() {
         instance = this;
@@ -60,7 +63,13 @@ public class SideViewController implements Initializable {
         initRectangles();
         sideView.setMinWidth(0);
         sideView.setMinHeight(0);
-        sideView.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        obstacle.setFill(Color.RED);
+        slope.setStroke(Color.WHITE);
+        slope.setSmooth(true);
+
+        slope.getStrokeDashArray().addAll(4d,4d);
+        sideView.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 
         rescale();
         updateUI();
@@ -72,6 +81,7 @@ public class SideViewController implements Initializable {
         sideView.heightProperty().addListener((observable, oldValue, newValue) -> {
             updateUI();
         });
+
     }
 
     public void initRectangles(){
@@ -128,23 +138,27 @@ public class SideViewController implements Initializable {
 
     private void updateSlopes(){
         if(topDownViewController.getCurrentObstacle().getDistanceRThreshold()>topDownViewController.getCurrentObstacle().getDistanceLThreshold()){
-            topDownViewController.setLinePos(Slope, obstacle.getX(), obstacle.getY(), obstacle.getX()-(50*topDownViewController.getCurrentObstacle().getHeight())*xScale,screenHeight/2);
+            topDownViewController.setLinePos(slope, obstacle.getX(), obstacle.getY(), obstacle.getX()-(50*topDownViewController.getCurrentObstacle().getHeight())*xScale,screenHeight/2);
         }
         else{
-            topDownViewController.setLinePos(Slope, obstacle.getX()+obstacle.getWidth(), obstacle.getY(), obstacle.getX()+obstacle.getWidth()+(50*topDownViewController.getCurrentObstacle().getHeight())*xScale,screenHeight/2);
+            topDownViewController.setLinePos(slope, obstacle.getX()+obstacle.getWidth(), obstacle.getY(), obstacle.getX()+obstacle.getWidth()+(50*topDownViewController.getCurrentObstacle().getHeight())*xScale,screenHeight/2);
         }
     }
 
     private void addChildren(){
         sideView.getChildren().clear();
         graphics.getChildren().clear();
+
+
+
         text.getChildren().clear();
+
 
         sideView.getChildren().add(grass);
 
         graphics.getChildren().add(runway);
         graphics.getChildren().add(obstacle);
-        graphics.getChildren().add(Slope);
+        graphics.getChildren().add(slope);
 
 
 
@@ -152,5 +166,10 @@ public class SideViewController implements Initializable {
         if(isSelected) {
             sideView.getChildren().add(topDownViewController.arrows);
         }
+
+        sideView.getChildren().add(PrimaryWindowController.getInstance().getSideLegend());
+
+        AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
+        AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
     }
 }

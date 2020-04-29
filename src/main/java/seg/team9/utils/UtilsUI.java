@@ -16,6 +16,9 @@ public class UtilsUI {
     public static void showInfoMessage(String info){
         showPopup(info, Alert.AlertType.INFORMATION);
     }
+    public static String addUnitMeasurement(String value) {
+        return value + "m";
+    }
 
     private static void showPopup(String message , Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -35,8 +38,15 @@ public class UtilsUI {
 
     public static class Colors {
         public static Color TORA = Color.YELLOW;
-        public static Color TODA = Color.RED;
+        public static Color TODA = Color.CORAL;
         public static Color ASDA = Color.MAGENTA;
         public static Color LDA = Color.CYAN;
+        public static Color RESA = Color.LAWNGREEN;
+        public static Color BLAST = Color.BROWN;
+        public static Color OBSTACLE = Color.RED;
+
+
+
+
     }
 }

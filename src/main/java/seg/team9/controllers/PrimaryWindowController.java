@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.controllers.runways.MapLegend;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
@@ -28,6 +29,11 @@ public class PrimaryWindowController implements Initializable {
     private static final Logger logger = LogManager.getLogger("PrimaryWindowController");
 
     private static PrimaryWindowController instance;
+
+    MapLegend sideLegend = new MapLegend();
+    MapLegend topLegend = new MapLegend();
+
+
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
     @FXML private MenuBar menuBar; //menu bar
@@ -82,7 +88,6 @@ public class PrimaryWindowController implements Initializable {
         initColorPickers();
         initSplitPane();
         initTabPane();
-
     }
 
     private void initCompass() {
@@ -90,7 +95,7 @@ public class PrimaryWindowController implements Initializable {
     }
 
     void initSplitPane(){
-        logger.info(splitPaneView.getDividers().get(0));
+        logger.info(splitPaneView.getDividers().get(0).getPosition());
     }
 
     private void initColorPickers(){
@@ -177,6 +182,10 @@ public class PrimaryWindowController implements Initializable {
         });
     }
 
+    public ChoiceBox<Airport> getChoiceBoxAirport() {
+        return choiceBoxAirport;
+    }
+
     public void onColourChangeDefault(ActionEvent actionEvent) {
         for (AnchorPane pane : lightPanes)
             pane.setStyle("-fx-background-color: " + white + ";");
@@ -211,7 +220,19 @@ public class PrimaryWindowController implements Initializable {
 
 
     public void rotateNeedle(Double val){
-        labelCompass.setText(val + "°");
-       UtilsUI.rotateView(needle, val, 3000);
+        if(val < 0)
+            labelCompass.setText(val+360 + "°");
+        else
+            labelCompass.setText(val + "°");
+
+        UtilsUI.rotateView(needle, val, 3000);
+    }
+
+    public MapLegend getSideLegend() {
+        return sideLegend;
+    }
+
+    public MapLegend getTopLegend() {
+        return topLegend;
     }
 }
