@@ -28,6 +28,7 @@ public class DirectedRunway
         this.workingASDA = ASDA;
         this.lda = LDA;
         this.workingLDA = LDA;
+        this.als = 0D;
     }
 
 

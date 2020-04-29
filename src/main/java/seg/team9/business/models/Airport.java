@@ -12,6 +12,7 @@ public class Airport {
 
     public Airport(String name) {
         this.name = name;
+        this.runwayList = new ArrayList<>();
     }
     public Airport(String name, String city, Double latitude, Double longitude)
     {
@@ -22,8 +23,7 @@ public class Airport {
         this.longitude = longitude;
     }
 
-    public void addRunway(Runway runway)
-    {
+    public void addRunway(Runway runway) {
         runwayList.add(runway);
     }
     public ArrayList<Runway> getRunwayList() {

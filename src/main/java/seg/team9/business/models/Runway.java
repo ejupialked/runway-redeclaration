@@ -1,24 +1,24 @@
 package seg.team9.business.models;
 
 public class Runway {
-    private DirectedRunway rRunway, lRunway;
+    private final DirectedRunway rightRunway, leftRunway;
 
-    public Runway(DirectedRunway rRunway, DirectedRunway lRunway){
-        this.rRunway = rRunway;
-        this.lRunway = lRunway;
+    public Runway(DirectedRunway rightRunway, DirectedRunway leftRunway){
+        this.rightRunway = rightRunway;
+        this.leftRunway = leftRunway;
     }
 
     public DirectedRunway getRRunway(){
-        return rRunway;
+        return rightRunway;
     }
 
     public DirectedRunway getLRunway(){
-        return lRunway;
+        return leftRunway;
     }
 
     @Override
     public String toString(){
-        return lRunway.toString()+" "+rRunway.toString();
+        return leftRunway.toString()+" "+ rightRunway.toString();
     }
 
 }

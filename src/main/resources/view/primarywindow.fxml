@@ -9,12 +9,15 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="primaryPane" prefHeight="923.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
+<AnchorPane fx:id="primaryPane" prefHeight="957.0" prefWidth="1541.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
    <children>
-      <MenuBar fx:id="menuBar" prefWidth="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar fx:id="menuBar" layoutY="-6.0" prefHeight="35.0" prefWidth="1160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -43,11 +46,42 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.4986922406277245" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+      <SplitPane fx:id="splitPaneView" dividerPositions="0.22287199480181935, 0.6660168940870695" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
-          <AnchorPane fx:id="paneView" minHeight="0.0" minWidth="0.0" prefHeight="888.0" prefWidth="550.0" style="-fx-background-color: #E0E0E0;">
+            <VBox maxWidth="345.0" minWidth="-Infinity" prefWidth="339.0" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="104.0" prefHeight="388.0" prefWidth="388.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="103.20000000000005" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="104.0">
+                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="345.0" minWidth="-Infinity" prefWidth="320.0" style="-fx-background-color: #E0E0E0;" text="Compass">
+                    <content>
+                      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="300.0">
+                           <children>
+                               <ImageView fx:id="needle" fitHeight="173.0" fitWidth="229.0" layoutX="29.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
+                                   <image>
+                                       <Image url="@../Images/needle.png" />
+                                   </image>
+                              </ImageView>
+                               <ImageView fx:id="compass" fitHeight="189.0" fitWidth="245.0" layoutX="37.0" layoutY="16.0" pickOnBounds="true" preserveRatio="false">
+                                   <image>
+                                       <Image url="@../Images/compass.png" />
+                                   </image>
+                              </ImageView>
+                              <Label fx:id="labelCompass" layoutX="124.0" layoutY="211.0" text="230°">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TitledPane>
+                   <fx:include fx:id="calculationsView" source="calculationsview.fxml" />
+               </children>
+            </VBox>
+          <AnchorPane fx:id="paneView" style="-fx-background-color: #E0E0E0;">
+               <children>
+                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="71.0" prefHeight="842.0" prefWidth="613.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="71.0">
                     <tabs>
                       <Tab fx:id="topDownViewTab" text="Top-down View">
                           <content>
@@ -61,38 +95,24 @@
                   </TabPane>
                   <Label layoutX="24.0" layoutY="25.0" prefHeight="17.0" text="Airport:" />
                   <ChoiceBox fx:id="choiceBoxAirport" layoutX="91.0" layoutY="21.0" prefWidth="150.0" />
-                  <Label layoutX="24.0" layoutY="63.0" prefHeight="17.0" prefWidth="67.0" text="Runway:" />
-                  <ChoiceBox fx:id="choiceBoxRunway" layoutX="91.0" layoutY="59.0" prefWidth="150.0" />
+                  <Label layoutX="291.0" layoutY="26.0" prefHeight="17.0" prefWidth="67.0" text="Runway:" />
+                  <ChoiceBox fx:id="choiceBoxRunway" layoutX="358.0" layoutY="22.0" prefWidth="150.0" />
                </children>
-            </AnchorPane>
-            <SplitPane dividerPositions="0.5" prefHeight="505.0" prefWidth="413.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="893.0" prefWidth="170.0">
-                     <children>
-                        <TitledPane collapsible="false" text="Calculations" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <AnchorPane fx:id="paneCalculations" prefHeight="200.0" prefWidth="200.0" />
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </AnchorPane>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                         <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
-                         <fx:include fx:id="calculationsBreakdownView" source="calculationsbreakdownview.fxml" />
-                        <AnchorPane VBox.vgrow="ALWAYS">
-                           <children>
-                              <TitledPane collapsible="false" text="???" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <content>
-                                    <AnchorPane fx:id="paneQMarks" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E0E0E0;" />
-                                 </content>
-                              </TitledPane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </VBox>
-              </items>
-            </SplitPane>
+
+                              </AnchorPane>
+            <VBox>
+               <children>
+                   <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
+                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" text="Re-declaration breakdown">
+                     <content>
+                         <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
+                     </content>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </TitledPane>
+               </children>
+            </VBox>
         </items>
       </SplitPane>
    </children>

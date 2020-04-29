@@ -1,7 +1,7 @@
 package seg.team9.business.models;
 
 public class Obstacle {
-    String name;
+    private String name;
     private Double height,width;
     private Double distanceCenter,distanceRThreshold, distanceLThreshold;
 
