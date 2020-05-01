@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.List;
 
 public class XML implements XMLExporter, XMLImporter{
+    private final String airportTag = "airport";
+    private final String obstacleTag = "obstacle";
     @Override
     public boolean exportAirport(Airport airport) {
         return false;

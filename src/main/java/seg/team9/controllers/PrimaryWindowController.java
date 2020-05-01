@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
@@ -24,6 +26,7 @@ import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -207,9 +210,11 @@ public class PrimaryWindowController implements Initializable {
     }
 
     public void onObstacleImportClick(ActionEvent actionEvent) {
-        XMLImporter xmlExporter = App.xml;
-
-        //  xmlExporter.importObstacles()
+        XMLImporter xmlImporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        File file = fileChooser.showOpenDialog(new Stage());
+        xmlImporter.importObstacles(file);
     }
 
     public void onAirportImportClick(ActionEvent actionEvent) {
