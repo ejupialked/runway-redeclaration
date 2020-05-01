@@ -21,24 +21,31 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="menuItemClose" mnemonicParsing="false" text="Close" />
-                  <Menu mnemonicParsing="false" text="Import">
+                  <MenuItem mnemonicParsing="false" onAction="#onPrintBreakdownClick" text="Print breakdown calculations..." />
+                  <Menu mnemonicParsing="false" text="Export">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#onObstacleExportClick" text="Obstacle..." />
+                        <MenuItem mnemonicParsing="false" onAction="#onAirportExportClick" text="Airport..." />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Import XML">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="XML" />
+                      <MenuItem mnemonicParsing="false" onAction="#onObstacleImportClick" text="Obstacle..." />
+                        <MenuItem mnemonicParsing="false" onAction="#onAirportImportClick" text="Airport..." />
                     </items>
                   </Menu>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+            <Menu mnemonicParsing="false" text="View">
                <items>
-                  <Menu mnemonicParsing="false" text="Colours">
+                  <Menu mnemonicParsing="false" text="Theme">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#onColourChangeDefault" text="Default" />
                         <MenuItem mnemonicParsing="false" onAction="#onColourChangeDark" text="Dark" />
                     </items>
                   </Menu>
                </items>
-          </Menu>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />

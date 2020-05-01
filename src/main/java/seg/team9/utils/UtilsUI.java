@@ -20,6 +20,7 @@ public class UtilsUI {
         return value + "m";
     }
 
+
     private static void showPopup(String message , Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(type.name());
@@ -44,9 +45,6 @@ public class UtilsUI {
         public static Color RESA = Color.LAWNGREEN;
         public static Color BLAST = Color.BROWN;
         public static Color OBSTACLE = Color.RED;
-
-
-
 
     }
 }

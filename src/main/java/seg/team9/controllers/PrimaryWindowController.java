@@ -12,7 +12,10 @@ import javafx.scene.paint.Color;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.XML.XMLExporter;
+import seg.team9.business.logic.XML.XMLImporter;
 import seg.team9.controllers.runways.MapLegend;
+import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
@@ -84,7 +87,6 @@ public class PrimaryWindowController implements Initializable {
         initMenuBar();
         initChoiceBoxes();
         initArrays();
-        initColorPickers();
         initSplitPane();
         initTabPane();
     }
@@ -97,12 +99,6 @@ public class PrimaryWindowController implements Initializable {
         logger.info(splitPaneView.getDividers().get(0).getPosition());
     }
 
-    private void initColorPickers(){
-       // colourPickerTORA.setValue(Color.BLACK);
-        //colourPickerTODA.setValue(Color.BLACK);
-        //colourPickerASDA.setValue(Color.BLACK);
-        //colourPickerLDA.setValue(Color.BLACK);
-    }
     private void initArrays() {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
@@ -141,29 +137,15 @@ public class PrimaryWindowController implements Initializable {
                 topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
                 sideViewController.updateUI();
             }
-            //topDownViewController.updateUI(); you're calling this method already in line 67
 
             topDownViewController.initArrowsColors();
-            //changeColourArrows();
             logger.info("Changed colours");
         });
 
     }
 
-    public void changeColourArrows() {
-        //Recolour arrows
-        try {
-            topDownViewController.changeColourTORA(colourPickerTORA.getValue());
-            topDownViewController.changeColourTODA(colourPickerTODA.getValue());
-            topDownViewController.changeColourASDA(colourPickerASDA.getValue());
-            topDownViewController.changeColourLDA(colourPickerLDA.getValue());
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
-    }
 
     private void initMenuBar(){
-        menuItemClose.setOnAction(actionEvent -> UtilsUI.showErrorMessage("This feature has not been implemented yet"));
     }
 
     private void initTabPane(){
@@ -201,31 +183,42 @@ public class PrimaryWindowController implements Initializable {
             pane.setStyle("-fx-background-color: " + darkerGray + ";");
     }
 
-    public void onSelectedTORAColour(ActionEvent actionEvent) {
-       topDownViewController.changeColourTORA(colourPickerTORA.getValue());
-    }
-
-    public void onSelectedTODAColour(ActionEvent actionEvent) {
-        topDownViewController.changeColourTODA(colourPickerTODA.getValue());
-    }
-
-    public void onSelectedASDAColour(ActionEvent actionEvent) {
-        topDownViewController.changeColourASDA(colourPickerASDA.getValue());
-    }
-
-    public void o0nSelectedLDAColour(ActionEvent actionEvent) {
-        topDownViewController.changeColourLDA(colourPickerLDA.getValue());
-    }
-
-
     public void rotateNeedle(Double val){
         if(val < 0)
             labelCompass.setText(val+360 + "°");
         else
             labelCompass.setText(val + "°");
-
         UtilsUI.rotateView(needle, val, 3000);
     }
+
+
+
+    public void onPrintBreakdownClick(ActionEvent actionEvent) {
+    }
+
+    public void onObstacleExportClick(ActionEvent actionEvent) {
+        XMLExporter xmlExporter = App.xml;
+        xmlExporter.importObstacles(MockData.obstacles);
+    }
+
+    public void onAirportExportClick(ActionEvent actionEvent) {
+        XMLExporter xmlExporter = App.xml;
+        xmlExporter.exportAirport(MockData.aiports.get(0));
+    }
+
+    public void onObstacleImportClick(ActionEvent actionEvent) {
+        XMLImporter xmlExporter = App.xml;
+
+        //  xmlExporter.importObstacles()
+    }
+
+    public void onAirportImportClick(ActionEvent actionEvent) {
+        XMLImporter xmlExporter = App.xml;
+
+        //xmlExporter.importObstacles()
+    }
+
+
 
     public MapLegend getSideLegend() {
         return sideLegend;

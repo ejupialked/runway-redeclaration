@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.business.logic.Calculator;
+import seg.team9.business.logic.XML.XML;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Obstacle;
 import seg.team9.utils.MockData;
@@ -21,6 +22,8 @@ import java.io.IOException;
  */
 public class App extends Application {
     private static final Calculator calculator = new Calculator();
+    public static final XML xml = new XML();
+
 
     private static final Logger logger = LogManager.getLogger(App.class);
     private static Stage primaryWindow;
@@ -35,10 +38,7 @@ public class App extends Application {
 
         airportObservableList = FXCollections.observableArrayList(MockData.aiports);
         obstacleObservableList =  FXCollections.observableArrayList(MockData.obstacles);
-
     }
-
-
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -52,6 +52,7 @@ public class App extends Application {
         primaryWindow.setResizable(false);
         primaryWindow.show();
     }
+
 
     public static Calculator getCalculator() {
         return calculator;
