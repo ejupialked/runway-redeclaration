@@ -42,7 +42,6 @@ public class CalculationBreakdownController implements Initializable {
 
             print += s + "\n \n";
             textBreakdown.setText(print);
-
         }
     }
 }

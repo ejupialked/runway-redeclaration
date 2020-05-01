@@ -26,6 +26,20 @@ public class App extends Application {
     private Stage primaryWindow;
     private static String PRIMARY = "primarywindow";
 
+    public static ObservableList<Obstacle> obstacleObservableList;
+    public static ObservableList<Airport> airportObservableList;
+
+    @Override
+    public void init() throws Exception {
+        super.init();
+
+        airportObservableList = FXCollections.observableArrayList(MockData.aiports);
+        obstacleObservableList =  FXCollections.observableArrayList(MockData.obstacles);
+
+    }
+
+
+
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryWindow = stage;
@@ -47,14 +61,5 @@ public class App extends Application {
         logger.info("Launching application...");
         launch();
     }
-
-    public static ObservableList<Obstacle> obstacleObservableList(){
-        return FXCollections.observableArrayList(MockData.obstacles);
-    }
-
-    public static ObservableList<Airport> airportObservableList(){
-        return FXCollections.observableArrayList(MockData.aiports);
-    }
-
 
 }

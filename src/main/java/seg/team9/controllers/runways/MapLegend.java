@@ -48,5 +48,4 @@ public class MapLegend extends AnchorPane {
     @FXML private Rectangle colorSlope;
     @FXML private Rectangle colorBlast;
 
-
 }

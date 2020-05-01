@@ -66,7 +66,7 @@ public class ObstacleViewController implements Initializable {
         logger.info("init ObstacleBox");
 
 
-        boxObstacles.setItems(App.obstacleObservableList());
+        boxObstacles.setItems(App.obstacleObservableList);
         boxObstacles.getSelectionModel().selectFirst();
         updateLabelsObstacle(boxObstacles.getValue());
 
@@ -130,6 +130,11 @@ public class ObstacleViewController implements Initializable {
 
     }
 
+
+    public void updateCheckbox(){
+        boxObstacles.getItems().clear();
+        boxObstacles.setItems(App.obstacleObservableList);
+    }
     public void updateLabelsObstacle(Obstacle o) {
          txtObstacleName.setText(o.getName());
          txtObstacleHeight.setText(UtilsUI.addUnitMeasurement(o.getHeight().toString()));
@@ -137,6 +142,8 @@ public class ObstacleViewController implements Initializable {
          txtDistanceCenter.setText(UtilsUI.addUnitMeasurement(o.getDistanceCenter().toString()));
          txtDistanceThresholdLeft.setText(UtilsUI.addUnitMeasurement(o.getDistanceLThreshold().toString()));
          txtDistanceThresholdRight.setText(o.getDistanceRThreshold().toString());
+         //boxObstacles.getItems().clear();
+        // boxObstacles.setItems(App.obstacleObservableList());
     }
 
 

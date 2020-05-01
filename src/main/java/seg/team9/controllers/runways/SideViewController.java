@@ -155,12 +155,9 @@ public class SideViewController implements Initializable {
 
 
         sideView.getChildren().add(grass);
-
         graphics.getChildren().add(runway);
         graphics.getChildren().add(obstacle);
         graphics.getChildren().add(slope);
-
-
 
         sideView.getChildren().add(graphics);
         if(isSelected) {
@@ -168,7 +165,6 @@ public class SideViewController implements Initializable {
         }
 
         sideView.getChildren().add(PrimaryWindowController.getInstance().getSideLegend());
-
         AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
         AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
     }

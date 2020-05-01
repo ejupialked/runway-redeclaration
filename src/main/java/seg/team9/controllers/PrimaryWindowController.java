@@ -33,7 +33,6 @@ public class PrimaryWindowController implements Initializable {
     MapLegend sideLegend = new MapLegend();
     MapLegend topLegend = new MapLegend();
 
-
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
     @FXML private MenuBar menuBar; //menu bar
@@ -115,7 +114,7 @@ public class PrimaryWindowController implements Initializable {
     }
 
     private void initChoiceBoxes(){
-        choiceBoxAirport.getItems().addAll(App.airportObservableList());
+        choiceBoxAirport.getItems().addAll(App.airportObservableList);
         choiceBoxAirport.getSelectionModel().selectFirst();
 
         Airport a = choiceBoxAirport.getValue();
