@@ -1,0 +1,10 @@
+<airport name="Luca's Airport">
+    <obstacle>
+        <name>BoeingMan</name>
+        <height>20</height>
+        <width>10</width>
+        <distancecenter>2</distancecenter>
+        <distancelthreshold>20</distancelthreshold>
+        <distancerthreshold>10</distancerthreshold>
+    </obstacle>
+</airport>

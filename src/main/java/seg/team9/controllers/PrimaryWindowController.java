@@ -214,7 +214,7 @@ public class PrimaryWindowController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file to import");
         File file = fileChooser.showOpenDialog(new Stage());
-        xmlImporter.importObstacles(file);
+        MockData.obstacles.addAll(xmlImporter.importObstacles(file));
     }
 
     public void onAirportImportClick(ActionEvent actionEvent) {
