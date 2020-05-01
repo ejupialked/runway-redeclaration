@@ -23,7 +23,7 @@ public class App extends Application {
     private static final Calculator calculator = new Calculator();
 
     private static final Logger logger = LogManager.getLogger(App.class);
-    private Stage primaryWindow;
+    private static Stage primaryWindow;
     private static String PRIMARY = "primarywindow";
 
     public static ObservableList<Obstacle> obstacleObservableList;
@@ -55,6 +55,10 @@ public class App extends Application {
 
     public static Calculator getCalculator() {
         return calculator;
+    }
+
+    public static Stage getPrimaryWindow() {
+        return primaryWindow;
     }
 
     public static void main(String[] args) {

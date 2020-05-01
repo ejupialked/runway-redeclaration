@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +17,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
@@ -100,6 +103,12 @@ public class ObstacleViewController implements Initializable {
             root = FXMLLoader.load(ObstacleViewController.class.getResource("/view/"+formName+".fxml"));
             Stage stage = new Stage();
             stage.setTitle("Add Obstacle");
+            stage.setResizable(false);
+
+            //prevent user from interacting with main view
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(App.getPrimaryWindow());
+
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -121,7 +130,13 @@ public class ObstacleViewController implements Initializable {
 
             Stage stage = new Stage();
             stage.setTitle("Edit Obstacle");
+            stage.setResizable(false);
             stage.setScene(new Scene(root));
+
+            //prevent user from interacting with main view
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(App.getPrimaryWindow());
+
             stage.show();
         }
         catch (IOException e) {
@@ -142,8 +157,7 @@ public class ObstacleViewController implements Initializable {
          txtDistanceCenter.setText(UtilsUI.addUnitMeasurement(o.getDistanceCenter().toString()));
          txtDistanceThresholdLeft.setText(UtilsUI.addUnitMeasurement(o.getDistanceLThreshold().toString()));
          txtDistanceThresholdRight.setText(o.getDistanceRThreshold().toString());
-         //boxObstacles.getItems().clear();
-        // boxObstacles.setItems(App.obstacleObservableList());
+
     }
 
 
