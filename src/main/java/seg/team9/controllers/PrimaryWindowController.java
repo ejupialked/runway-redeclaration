@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
+import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.MapLegend;
 import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
@@ -29,6 +30,7 @@ import seg.team9.controllers.runways.TopDownViewController;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PrimaryWindowController implements Initializable {
@@ -214,13 +216,22 @@ public class PrimaryWindowController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file to import");
         File file = fileChooser.showOpenDialog(new Stage());
-        MockData.obstacles.addAll(xmlImporter.importObstacles(file));
+//        MockData.obstacles.addAll(xmlImporter.importObstacles(file));
+        List<Obstacle> list = xmlImporter.importObstacles(file);
+        for(Obstacle o : list)
+            logger.info("Added : " + o.getName());
     }
 
     public void onAirportImportClick(ActionEvent actionEvent) {
-        XMLImporter xmlExporter = App.xml;
-
-        //xmlExporter.importObstacles()
+        XMLImporter xmlImporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        File file = fileChooser.showOpenDialog(new Stage());
+        Airport airport = xmlImporter.importAirport(file);
+        MockData.aiports.add(airport);
+        logger.info("Imported Airport : " + airport.getName());
+        for(Runway runway : airport.getRunwayList())
+            logger.info("With runway : " + runway.toString());
     }
 
 
