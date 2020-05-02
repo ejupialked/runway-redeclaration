@@ -65,6 +65,18 @@ public class CalculationsViewController implements Initializable {
         labelLDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingLDA().toString()));
 
 
+        rightDesignator1.setText(runway.getRRunway().getDesignator());
+        labelOriginalTODAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getToda().toString()));
+        labelOriginalASDAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getAsda().toString()));
+        labelOriginalTORAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getTora().toString()));
+        labelOriginalLDAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getLda().toString()));
+
+        leftDesignator1.setText(runway.getLRunway().getDesignator());
+        labelOriginalTODAl1.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getToda().toString()));
+        labelOriginalASDAl1.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getAsda().toString()));
+        labelOriginalTORAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getTora().toString()));
+        labelOriginalLDAl1.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getLda().toString()));
+
 
     }
 
@@ -99,4 +111,16 @@ public class CalculationsViewController implements Initializable {
     @FXML private Label labelTOCSr;
     @FXML private Label labelALSr;
     @FXML private Label labelSlopeR;
+
+    //original values
+    @FXML private Label labelOriginalTORAl;
+    @FXML private Label labelOriginalTODAl1;
+    @FXML private Label labelOriginalLDAl1;
+    @FXML private Label labelOriginalASDAl1;
+    @FXML private Label leftDesignator1;
+    @FXML private Label rightDesignator1;
+    @FXML private Label labelOriginalTORAr1;
+    @FXML private Label labelOriginalTODAr1;
+    @FXML private Label labelOriginalLDAr1;
+    @FXML private Label labelOriginalASDAr1;
 }
