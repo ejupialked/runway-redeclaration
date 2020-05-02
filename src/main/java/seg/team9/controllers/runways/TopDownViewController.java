@@ -46,6 +46,7 @@ public class TopDownViewController implements Initializable {
     private Pane graphics = new Pane();
     private Pane text = new Pane();
     public Pane arrows = new Pane();
+    private Compass compass;
     private boolean textFlipped = false;
 
 
@@ -206,11 +207,13 @@ public class TopDownViewController implements Initializable {
         topDownView.setMinHeight(0);
         topDownView.setMinWidth(0);
         topDownView.setStyle("-fx-background-color: green");
-        addChildren();
+        initCompass();
         initText();
         initLines();
         initRectangles();
         initArrowsColors();
+
+        addChildren();
 
 
         topDownView.widthProperty().addListener((obs,oldVal,newVal) -> {
@@ -223,6 +226,10 @@ public class TopDownViewController implements Initializable {
 
         updateUI();
 
+    }
+
+    private void initCompass() {
+        this.compass = PrimaryWindowController.getInstance().getTopCompass();
     }
 
     public void updateScaler(){
@@ -337,7 +344,7 @@ public class TopDownViewController implements Initializable {
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
 
-            PrimaryWindowController.getInstance().rotateNeedle(graphicsRot-90);
+            compass.rotateNeedle(graphicsRot-90);
 
             UtilsUI.rotateView(graphics, graphicsRot, 3000);
 
@@ -699,6 +706,11 @@ public class TopDownViewController implements Initializable {
         AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
         AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
 
+
+
+        topDownView.getChildren().add(compass);
+        AnchorPane.setBottomAnchor(compass, 0d);
+        AnchorPane.setRightAnchor(compass, -35d);
     }
 
 
