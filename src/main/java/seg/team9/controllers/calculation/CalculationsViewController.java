@@ -57,24 +57,13 @@ public class CalculationsViewController implements Initializable {
         labelASDAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingASDA().toString()));
         labelTORAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingTORA().toString()));
         labelLDAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingLDA().toString()));
-        labelRESAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getResa().toString()));
 
         leftDesignator.setText(runway.getLRunway().getDesignator());
         labelTODAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingTODA().toString()));
         labelASDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingASDA().toString()));
         labelTORAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingTORA().toString()));
         labelLDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingLDA().toString()));
-        labelRESAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getResa().toString()));
 
-
-        labelTOCSl.setText("-");
-        labelTOCSr.setText("-");
-
-        labelALSl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getAls().toString()));
-        labelALSr.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getAls().toString()));
-
-        labelSlopel.setText(Calculator.getSLOPE().toString()+"°");
-        labelSlopeR.setText(Calculator.getSLOPE().toString()+"°");
 
 
     }

@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
+import seg.team9.controllers.runways.Compass;
 import seg.team9.controllers.runways.MapLegend;
 import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
@@ -35,6 +36,9 @@ public class PrimaryWindowController implements Initializable {
 
     MapLegend sideLegend = new MapLegend();
     MapLegend topLegend = new MapLegend();
+
+    Compass sideCompass = new Compass();
+    Compass topCompass = new Compass();
 
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
@@ -83,7 +87,6 @@ public class PrimaryWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sideViewController = SideViewController.getInstance();
-        initCompass();
         initMenuBar();
         initChoiceBoxes();
         initArrays();
@@ -91,9 +94,6 @@ public class PrimaryWindowController implements Initializable {
         initTabPane();
     }
 
-    private void initCompass() {
-        needle.setRotate(270);
-    }
 
     void initSplitPane(){
         logger.info(splitPaneView.getDividers().get(0).getPosition());
@@ -183,13 +183,7 @@ public class PrimaryWindowController implements Initializable {
             pane.setStyle("-fx-background-color: " + darkerGray + ";");
     }
 
-    public void rotateNeedle(Double val){
-        if(val < 0)
-            labelCompass.setText(val+360 + "°");
-        else
-            labelCompass.setText(val + "°");
-        UtilsUI.rotateView(needle, val, 3000);
-    }
+
 
 
 
@@ -219,6 +213,13 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
+    public Compass getSideCompass() {
+        return sideCompass;
+    }
+
+    public Compass getTopCompass() {
+        return topCompass;
+    }
 
     public MapLegend getSideLegend() {
         return sideLegend;

@@ -9,8 +9,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -55,34 +53,8 @@
       </MenuBar>
       <SplitPane fx:id="splitPaneView" dividerPositions="0.22287199480181935, 0.6660168940870695" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
-            <VBox maxWidth="345.0" minWidth="-Infinity" prefWidth="339.0" style="-fx-background-color: #E0E0E0;">
+            <VBox maxWidth="345.0" minWidth="-Infinity" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TitledPane animated="false" maxHeight="-Infinity" maxWidth="345.0" minWidth="-Infinity" prefWidth="320.0" style="-fx-background-color: #E0E0E0;" text="Compass">
-                    <content>
-                      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="300.0">
-                           <children>
-                               <ImageView fx:id="needle" fitHeight="173.0" fitWidth="229.0" layoutX="29.0" layoutY="20.0" pickOnBounds="true" preserveRatio="false">
-                                   <image>
-                                       <Image url="@../Images/needle.png" />
-                                   </image>
-                              </ImageView>
-                               <ImageView fx:id="compass" fitHeight="189.0" fitWidth="245.0" layoutX="37.0" layoutY="16.0" pickOnBounds="true" preserveRatio="false">
-                                   <image>
-                                       <Image url="@../Images/compass.png" />
-                                   </image>
-                              </ImageView>
-                              <Label fx:id="labelCompass" layoutX="124.0" layoutY="211.0" text="230°">
-                                 <font>
-                                    <Font name="System Bold" size="19.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </TitledPane>
                    <fx:include fx:id="calculationsView" source="calculationsview.fxml" />
                </children>
             </VBox>
