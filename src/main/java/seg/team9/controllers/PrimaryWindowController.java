@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.PDFGenerator;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
 import seg.team9.controllers.runways.Compass;
@@ -197,6 +198,10 @@ public class PrimaryWindowController implements Initializable {
         return choiceBoxAirport;
     }
 
+    public ComboBox<Runway> getComboBoxRunways() {
+        return comboBoxRunways;
+    }
+
     public void onColourChangeDefault(ActionEvent actionEvent) {
         for (AnchorPane pane : lightPanes)
             pane.setStyle("-fx-background-color: " + white + ";");
@@ -215,8 +220,18 @@ public class PrimaryWindowController implements Initializable {
 
 
     public void onPrintBreakdownClick(ActionEvent actionEvent) {
-        int choice = UtilsUI.showPopupWithButtons("You can either open and print the " +
-                "report or simply save it.", Alert.AlertType.INFORMATION);
+        int choice;
+        try {
+            new PDFGenerator();
+
+            choice = UtilsUI.showPopupWithButtons("You can either open and print the " +
+                    "report or simply save it.", Alert.AlertType.INFORMATION);
+        } catch (IOException | DocumentException e) {
+            UtilsUI.showErrorMessage(e.getMessage());
+            return;
+        }
+
+
         if (choice == 3) {
             App.getPrimaryWindow().getScene().setCursor(Cursor.WAIT);
             app.showFile();

@@ -18,6 +18,8 @@ import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 import seg.team9.utils.MockData;
@@ -74,8 +76,10 @@ public class PDFGenerator {
 
     public void createPdf(String filename) throws DocumentException, IOException {
 
-        Obstacle o = MockData.obstacles.get(0);
-        Airport a = MockData.aiports.get(2);
+        Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
+        Airport a = PrimaryWindowController.getInstance().getChoiceBoxAirport().getValue();
+        Runway r = PrimaryWindowController.getInstance().getComboBoxRunways().getValue();
+
 
         this.document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(String.valueOf(filename)));
@@ -108,9 +112,9 @@ public class PDFGenerator {
         details.addCell(new Phrase("Runway:", subTitleFontSmall));
         details.addCell(a.getRunwayList().get(0).toString());
         details.addCell(new Phrase("Blast protection:", subTitleFontSmall));
-        details.addCell(a.getRunwayList().get(0).toString());
+        details.addCell("-");
         details.addCell(new Phrase("Strip end:", subTitleFontSmall));
-        details.addCell(a.getRunwayList().get(0).toString());
+        details.addCell("-");
         PdfPTable obstacle = new PdfPTable(2);
         obstacle.setHorizontalAlignment( 0);
         obstacle.setSpacingBefore(10);
@@ -146,15 +150,15 @@ public class PDFGenerator {
         document.add(outer);
 
 
-        document.add(new Paragraph("Re-declaration breakdown", subTitleFont));
+        document.add(new Paragraph("Re-declaration breakdown (to fix with real values...)", subTitleFont));
         addNewlines(document, 1);
         document.add(new Paragraph(new Phrase("09L (Take Off Away, Landing Over):", subTitleItalic)));
-        document.add(breakdownTable(MockData.aiports.get(1).getRunwayList().get(0).getLRunway()));
+        document.add(breakdownTable(r.getLRunway()));
         document.add(new Paragraph(new Phrase("29R (Take Off Away, Landing Over):", subTitleItalic)));
-        document.add(breakdownTable(MockData.aiports.get(1).getRunwayList().get(0).getRRunway()));
+        document.add(breakdownTable(r.getRRunway()));
 
 
-        PdfPTable table = createDeclarationTable(MockData.aiports.get(0).getRunwayList().get(0));
+        PdfPTable table = createDeclarationTable(r);
         table.setHorizontalAlignment(Element.ALIGN_LEFT);
         document.add(table);
 

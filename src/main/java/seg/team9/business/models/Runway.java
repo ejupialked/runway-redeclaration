@@ -27,7 +27,7 @@ public class Runway {
 
     @Override
     public String toString(){
-        return leftRunway.toString()+" "+ rightRunway.toString();
+        return leftRunway.toString()+"/"+ rightRunway.toString();
     }
 
 }

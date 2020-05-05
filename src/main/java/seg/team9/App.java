@@ -1,5 +1,6 @@
 package seg.team9;
 
+import com.itextpdf.text.DocumentException;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import seg.team9.business.models.Airport;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.PrimaryWindowController;
 import seg.team9.utils.MockData;
+import seg.team9.utils.UtilsUI;
 
 import java.io.File;
 import java.io.IOException;
