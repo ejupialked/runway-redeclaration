@@ -24,7 +24,6 @@ import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 public class TopDownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("TopDownViewController");
@@ -40,12 +39,13 @@ public class TopDownViewController implements Initializable {
     public boolean isSelected = true;
 
     private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
-    private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D));
+    private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D), 4000d);
 
     //UI STUFF
     private Pane graphics = new Pane();
     private Pane text = new Pane();
     public Pane arrows = new Pane();
+    private Compass compass;
     private boolean textFlipped = false;
 
 
@@ -206,11 +206,13 @@ public class TopDownViewController implements Initializable {
         topDownView.setMinHeight(0);
         topDownView.setMinWidth(0);
         topDownView.setStyle("-fx-background-color: green");
-        addChildren();
+        initCompass();
         initText();
         initLines();
         initRectangles();
         initArrowsColors();
+
+        addChildren();
 
 
         topDownView.widthProperty().addListener((obs,oldVal,newVal) -> {
@@ -223,6 +225,10 @@ public class TopDownViewController implements Initializable {
 
         updateUI();
 
+    }
+
+    private void initCompass() {
+        this.compass = PrimaryWindowController.getInstance().getTopCompass();
     }
 
     public void updateScaler(){
@@ -337,7 +343,7 @@ public class TopDownViewController implements Initializable {
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
 
-            PrimaryWindowController.getInstance().rotateNeedle(graphicsRot-90);
+            compass.rotateNeedle(graphicsRot-90);
 
             UtilsUI.rotateView(graphics, graphicsRot, 3000);
 
@@ -699,6 +705,11 @@ public class TopDownViewController implements Initializable {
         AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
         AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
 
+
+
+        topDownView.getChildren().add(compass);
+        AnchorPane.setBottomAnchor(compass, 0d);
+        AnchorPane.setRightAnchor(compass, -35d);
     }
 
 
@@ -828,41 +839,5 @@ public class TopDownViewController implements Initializable {
 
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
-    }
-
-    public void changeColourTORA(Color color){
-        arrowTORAL.changeColour(color);
-        arrowTORAL.setStrokeWidth(4f);
-
-        arrowTORAR.changeColour(color);
-        arrowTORAR.setStrokeWidth(4f);
-
-    }
-
-    public void changeColourTODA(Color color){
-        arrowTODAL.changeColour(color);
-        arrowTODAL.setStrokeWidth(4f);
-
-        arrowTODAR.changeColour(color);
-        arrowTODAR.setStrokeWidth(4f);
-
-    }
-
-    public void changeColourLDA(Color color){
-        arrowLDAL.changeColour(color);
-        arrowLDAL.setStrokeWidth(4f);
-
-        arrowLDAR.changeColour(color);
-        arrowLDAR.setStrokeWidth(4f);
-
-    }
-
-    public void changeColourASDA(Color color){
-        arrowASDAR.changeColour(color);
-        arrowASDAR.setStrokeWidth(4f);
-
-        arrowASDAL.changeColour(color);
-        arrowASDAL.setStrokeWidth(4f);
-
     }
 }

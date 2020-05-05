@@ -114,7 +114,7 @@ public class XML implements XMLExporter, XMLImporter{
                 Double stopwayR = Double.parseDouble(runway.getElementsByTagName("stopway").item(1).getTextContent());
 
                 airport.addRunway(new Runway(new DirectedRunway(designatorR,toraR,todaR,asdaR,ldaR,thresholdR,clearwayR,stopwayR),
-                        new DirectedRunway(designatorL,toraL,todaL,asdaL,ldaL,thresholdL,clearwayL,stopwayL)));
+                        new DirectedRunway(designatorL,toraL,todaL,asdaL,ldaL,thresholdL,clearwayL,stopwayL), 3000d));
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e){
