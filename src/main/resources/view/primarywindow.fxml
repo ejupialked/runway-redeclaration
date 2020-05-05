@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="primaryPane" prefHeight="957.0" prefWidth="1541.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
+<AnchorPane fx:id="primaryPane" prefHeight="957.0" prefWidth="1541.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.PrimaryWindowController">
    <children>
       <MenuBar fx:id="menuBar" layoutY="-6.0" prefHeight="35.0" prefWidth="1160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -103,7 +93,7 @@
             <VBox>
                <children>
                    <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
-                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" text="Re-declaration breakdown">
+                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" prefHeight="436.0" prefWidth="510.0" text="Re-declaration breakdown">
                      <content>
                          <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
                      </content>

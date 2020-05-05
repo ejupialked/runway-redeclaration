@@ -743,7 +743,7 @@ public class TopDownViewController implements Initializable {
 
         }
         catch (NullPointerException e){
-            e.printStackTrace();
+
         }
     }
 

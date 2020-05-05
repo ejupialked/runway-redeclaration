@@ -2,7 +2,9 @@ package seg.team9.controllers.breakdown;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.net.URL;
@@ -14,7 +16,13 @@ public class CalculationBreakdownController implements Initializable {
     private static final Logger logger = LogManager.getLogger("CalculationBreakdownViewController");
     private static CalculationBreakdownController instance;
 
-    @FXML private TextArea textBreakdown;
+    @FXML private TabPane tabPane;
+    @FXML private AnchorPane breakdownPane;
+
+    @FXML private TextArea TORAText;
+    @FXML private TextArea TODAText;
+    @FXML private TextArea LDAText;
+    @FXML private TextArea ASDAText;
 
     public CalculationBreakdownController() {
         instance = this;
@@ -26,23 +34,73 @@ public class CalculationBreakdownController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        textBreakdown.setPrefHeight(700d);
-        textBreakdown.setPrefWidth(700d);
+        TORAText.setPrefHeight(700d);
+        TORAText.setPrefWidth(700d);
+        TORAText.setEditable(false);
+        TODAText.setPrefHeight(700d);
+        TODAText.setPrefWidth(700d);
+        TODAText.setEditable(false);
+        LDAText.setPrefHeight(700d);
+        LDAText.setPrefWidth(700d);
+        LDAText.setEditable(false);
+        ASDAText.setPrefHeight(700d);
+        ASDAText.setPrefWidth(700d);
+        ASDAText.setEditable(false);
+        tabPane.setPrefHeight(800d);
+        tabPane.setPrefWidth(800d);
     }
 
 
-    public TextArea getTextBreakdown() {
-        return textBreakdown;
+    public TextArea getTORATextBreakdown() {
+        return TORAText;
+    }
+    public TextArea getTODATextBreakdown() {
+        return TODAText;
+    }
+    public TextArea getLDATextBreakdown() {
+        return LDAText;
+    }
+    public TextArea getASDATextBreakdown() {
+        return ASDAText;
     }
 
     public void showBreakdown(HashMap<String, String> calculationBreakdown) {
-        textBreakdown.clear();
-        String print = textBreakdown.getText();
-        for(String s: calculationBreakdown.values()){
+        String toraTextText = calculationBreakdown.get("TOTLT")+"\n";
+        toraTextText = toraTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
+        toraTextText = toraTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        toraTextText = toraTextText + calculationBreakdown.get("TOALO")+"\n";
+        toraTextText = toraTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
+        toraTextText = toraTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
 
-            print += s + "\n \n";
-            textBreakdown.setText(print);
 
-        }
+        String todaTextText = calculationBreakdown.get("TOTLT")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOALO")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
+
+
+        String ldaTextText = calculationBreakdown.get("TOTLT")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOALO")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
+
+
+        String asdaTextText = calculationBreakdown.get("TOTLT")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOALO")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
+
+
+
+        TORAText.setText(toraTextText);
+        TODAText.setText(todaTextText);
+        LDAText.setText(ldaTextText);
+        ASDAText.setText(asdaTextText);
     }
 }
