@@ -168,4 +168,9 @@ public class SideViewController implements Initializable {
         AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
         AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
     }
+
+
+    public AnchorPane getSideView() {
+        return sideView;
+    }
 }
