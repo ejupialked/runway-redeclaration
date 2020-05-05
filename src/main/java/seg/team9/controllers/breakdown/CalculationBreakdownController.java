@@ -34,20 +34,7 @@ public class CalculationBreakdownController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TORAText.setPrefHeight(600d);
-        TORAText.setPrefWidth(600d);
-        TORAText.setEditable(false);
-        TODAText.setPrefHeight(600d);
-        TODAText.setPrefWidth(600d);
-        TODAText.setEditable(false);
-        LDAText.setPrefHeight(600d);
-        LDAText.setPrefWidth(600d);
-        LDAText.setEditable(false);
-        ASDAText.setPrefHeight(600d);
-        ASDAText.setPrefWidth(600d);
-        ASDAText.setEditable(false);
-        tabPane.setPrefHeight(600d);
-        tabPane.setPrefWidth(600d);
+        logger.info("init CalculationBreakdownViewController...");
     }
 
 
