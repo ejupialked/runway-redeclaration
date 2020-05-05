@@ -1,8 +1,11 @@
 package seg.team9.business.models;
 
+import java.util.HashMap;
+
 public class Runway {
     private final DirectedRunway rightRunway, leftRunway;
     private final double length;
+    private HashMap<String, String> calculationBreakdow;
 
     public Runway(DirectedRunway rightRunway, DirectedRunway leftRunway, double length){
         this.rightRunway = rightRunway;
@@ -16,6 +19,10 @@ public class Runway {
 
     public DirectedRunway getLRunway(){
         return leftRunway;
+    }
+
+    public void setCalculationBreakdow(HashMap<String, String> calculationBreakdow) {
+        this.calculationBreakdow = calculationBreakdow;
     }
 
     @Override
