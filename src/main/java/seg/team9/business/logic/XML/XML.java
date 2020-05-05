@@ -11,11 +11,15 @@ import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
-import seg.team9.utils.MockData;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,8 +35,47 @@ public class XML implements XMLExporter, XMLImporter{
     }
 
     @Override
-    public boolean importObstacles(List<Obstacle> obstacles) {
-        return false;
+    public DOMSource exportObstacles(Obstacle obstacle) {
+        try {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+            Element rootElement = document.createElement(airportTag);
+            document.appendChild(rootElement);
+
+            Element eObstacle = document.createElement(obstacleTag);
+            rootElement.appendChild(eObstacle);
+
+            Element name = document.createElement("name");
+            name.appendChild(document.createTextNode(obstacle.getName()));
+            eObstacle.appendChild(name);
+
+            Element height = document.createElement("height");
+            height.appendChild(document.createTextNode(obstacle.getHeight().toString()));
+            eObstacle.appendChild(height);
+
+            Element width = document.createElement("width");
+            width.appendChild(document.createTextNode(obstacle.getWidth().toString()));
+            eObstacle.appendChild(width);
+
+            Element distancecenter = document.createElement("distancecenter");
+            distancecenter.appendChild(document.createTextNode(obstacle.getDistanceCenter().toString()));
+            eObstacle.appendChild(distancecenter);
+
+            Element distancerthreshold = document.createElement("distancerthreshold");
+            distancerthreshold.appendChild(document.createTextNode(obstacle.getDistanceRThreshold().toString()));
+            eObstacle.appendChild(distancerthreshold);
+
+            Element distancelthreshold = document.createElement("distancelthreshold");
+            distancelthreshold.appendChild(document.createTextNode(obstacle.getDistanceLThreshold().toString()));
+            eObstacle.appendChild(distancelthreshold);
+
+            return new DOMSource(document);
+        }
+        catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

@@ -27,6 +27,12 @@ import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -203,7 +209,29 @@ public class PrimaryWindowController implements Initializable {
 
     public void onObstacleExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
-        xmlExporter.importObstacles(MockData.obstacles);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*. xml"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if(file == null)
+            return;
+
+        if(!file.getName().contains(".xml"))
+            file = new File(file.getAbsolutePath()+".xml");
+
+        DOMSource source = xmlExporter.exportObstacles(ObstacleViewController.getInstance().getBoxObstacles().getValue());
+        if (source == null)
+            return;
+        StreamResult result = new StreamResult(file);
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.transform(source,result);
+        }
+        catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void onAirportExportClick(ActionEvent actionEvent) {

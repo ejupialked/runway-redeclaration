@@ -3,7 +3,7 @@ package seg.team9.business.logic.XML;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Obstacle;
 
-import java.util.List;
+import javax.xml.transform.dom.DOMSource;
 
 public interface XMLExporter {
     /**
@@ -15,8 +15,8 @@ public interface XMLExporter {
 
     /**
      * Export a list of obstacles
-     * @param obstacles to export
+     * @param obstacle to export
      * @return false if export fails, true otherwise
      */
-    public boolean importObstacles(List<Obstacle> obstacles);
+    public DOMSource exportObstacles(Obstacle obstacle);
 }
