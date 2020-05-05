@@ -4,6 +4,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="breakdownPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.breakdown.CalculationBreakdownController">
    <children>
@@ -12,28 +13,40 @@
           <Tab text="TORA">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0">
-                 <TextArea fx:id="TORAText" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                 <TextArea fx:id="TORAText" editable="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <font>
+                           <Font size="14.0" />
+                        </font></TextArea>
               </AnchorPane>
             </content>
           </Tab>
            <Tab text="TODA">
               <content>
                  <AnchorPane minHeight="0.0" minWidth="0.0">
-                    <TextArea fx:id="TODAText" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <TextArea fx:id="TODAText" editable="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <font>
+                           <Font size="14.0" />
+                        </font></TextArea>
                  </AnchorPane>
               </content>
            </Tab>
            <Tab text="LDA">
               <content>
                  <AnchorPane minHeight="0.0" minWidth="0.0">
-                    <TextArea fx:id="LDAText" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <TextArea fx:id="LDAText" editable="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <font>
+                           <Font size="14.0" />
+                        </font></TextArea>
                  </AnchorPane>
               </content>
            </Tab>
            <Tab text="ASDA">
               <content>
                  <AnchorPane minHeight="0.0" minWidth="0.0">
-                    <TextArea fx:id="ASDAText" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                    <TextArea fx:id="ASDAText" editable="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <font>
+                           <Font size="14.0" />
+                        </font></TextArea>
                  </AnchorPane>
               </content>
            </Tab>
