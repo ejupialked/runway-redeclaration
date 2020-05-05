@@ -74,27 +74,27 @@ public class CalculationBreakdownController implements Initializable {
 
 
         String todaTextText = calculationBreakdown.get("TOTLT")+"\n";
-        todaTextText = todaTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
-        todaTextText = todaTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOTLTTODAdesc")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOTLTTODAval")+"\n \n \n";
         todaTextText = todaTextText + calculationBreakdown.get("TOALO")+"\n";
-        todaTextText = todaTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
-        todaTextText = todaTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOALOTODAdesc")+"\n";
+        todaTextText = todaTextText + calculationBreakdown.get("TOALOTODAval")+"\n";
 
 
         String ldaTextText = calculationBreakdown.get("TOTLT")+"\n";
-        ldaTextText = ldaTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
-        ldaTextText = ldaTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOTLTLDAdesc")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOTLTLDAval")+"\n \n \n";
         ldaTextText = ldaTextText + calculationBreakdown.get("TOALO")+"\n";
-        ldaTextText = ldaTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
-        ldaTextText = ldaTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOALOLDAdesc")+"\n";
+        ldaTextText = ldaTextText + calculationBreakdown.get("TOALOLDAval")+"\n";
 
 
         String asdaTextText = calculationBreakdown.get("TOTLT")+"\n";
-        asdaTextText = asdaTextText + calculationBreakdown.get("TOTLTTORAdesc")+"\n";
-        asdaTextText = asdaTextText + calculationBreakdown.get("TOTLTTORAval")+"\n \n \n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOTLTASDAdesc")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOTLTASDAval")+"\n \n \n";
         asdaTextText = asdaTextText + calculationBreakdown.get("TOALO")+"\n";
-        asdaTextText = asdaTextText + calculationBreakdown.get("TOALOTORAdesc")+"\n";
-        asdaTextText = asdaTextText + calculationBreakdown.get("TOALOTORAval")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOALOASDAdesc")+"\n";
+        asdaTextText = asdaTextText + calculationBreakdown.get("TOALOASDAval")+"\n";
 
 
 
