@@ -11,7 +11,7 @@ public interface XMLExporter {
      * @param airport to export
      * @return false if export fails, true otherwise
      */
-    public boolean exportAirport(Airport airport);
+    public DOMSource exportAirport(Airport airport);
 
     /**
      * Export a list of obstacles

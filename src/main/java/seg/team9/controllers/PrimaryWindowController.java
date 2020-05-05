@@ -235,7 +235,28 @@ public class PrimaryWindowController implements Initializable {
 
     public void onAirportExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
-        xmlExporter.exportAirport(MockData.aiports.get(0));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*. xml"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if(file == null)
+            return;
+
+        if(!file.getName().contains(".xml"))
+            file = new File(file.getAbsolutePath()+".xml");
+
+        DOMSource source = xmlExporter.exportAirport(getChoiceBoxAirport().getValue());
+        if (source == null)
+            return;
+        StreamResult result = new StreamResult(file);
+        try {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.transform(source,result);
+        }
+        catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onObstacleImportClick(ActionEvent actionEvent) {

@@ -2,15 +2,13 @@ package seg.team9.business.logic.XML;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.PrimaryWindowController;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,8 +28,116 @@ public class XML implements XMLExporter, XMLImporter{
     private final String airportTag = "airport";
     private final String obstacleTag = "obstacle";
     @Override
-    public boolean exportAirport(Airport airport) {
-        return false;
+    public DOMSource exportAirport(Airport airport) {
+        try{
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+            Element rootElement = document.createElement(airportTag);
+            document.appendChild(rootElement);
+
+            Attr name = document.createAttribute("name");
+            name.setValue(airport.getName());
+            rootElement.setAttributeNode(name);
+
+            Element city = document.createElement("city");
+            city.appendChild(document.createTextNode(airport.getCity()));
+            rootElement.appendChild(city);
+
+            Element lat = document.createElement("lat");
+            lat.appendChild(document.createTextNode(airport.getLatitude().toString()));
+            rootElement.appendChild(lat);
+
+            Element longitude = document.createElement("long");
+            longitude.appendChild(document.createTextNode(airport.getLongitude().toString()));
+            rootElement.appendChild(longitude);
+
+            Element runways = document.createElement("runways");
+            rootElement.appendChild(runways);
+
+            Element runway = document.createElement("runway");
+
+            for (Runway run :airport.getRunwayList()) {
+
+                runways.appendChild(runway);
+
+                Element left = document.createElement("left");
+                runway.appendChild(left);
+
+                Element designator = document.createElement("designator");
+                designator.appendChild(document.createTextNode(run.getLRunway().getDesignator()));
+                left.appendChild(designator);
+
+                Element tora = document.createElement("tora");
+                tora.appendChild(document.createTextNode(run.getLRunway().getTora().toString()));
+                left.appendChild(tora);
+
+                Element toda = document.createElement("toda");
+                toda.appendChild(document.createTextNode(run.getLRunway().getToda().toString()));
+                left.appendChild(toda);
+
+                Element asda = document.createElement("asda");
+                asda.appendChild(document.createTextNode(run.getLRunway().getAsda().toString()));
+                left.appendChild(asda);
+
+                Element lda = document.createElement("lda");
+                lda.appendChild(document.createTextNode(run.getLRunway().getLda().toString()));
+                left.appendChild(lda);
+
+                Element threshold = document.createElement("threshold");
+                threshold.appendChild(document.createTextNode(run.getLRunway().getThreshold().toString()));
+                left.appendChild(threshold);
+
+                Element clearway = document.createElement("clearway");
+                clearway.appendChild(document.createTextNode(run.getLRunway().getClearway().toString()));
+                left.appendChild(clearway);
+
+                Element stopway = document.createElement("stopway");
+                stopway.appendChild(document.createTextNode(run.getLRunway().getStopway().toString()));
+                left.appendChild(stopway);
+
+                Element right = document.createElement("right");
+                runway.appendChild(right);
+
+                Element designatorr = document.createElement("designator");
+                designatorr.appendChild(document.createTextNode(run.getRRunway().getDesignator()));
+                right.appendChild(designatorr);
+
+                Element torar = document.createElement("tora");
+                torar.appendChild(document.createTextNode(run.getRRunway().getTora().toString()));
+                right.appendChild(torar);
+
+                Element todar = document.createElement("toda");
+                todar.appendChild(document.createTextNode(run.getRRunway().getToda().toString()));
+                right.appendChild(todar);
+
+                Element asdar = document.createElement("asda");
+                asda.appendChild(document.createTextNode(run.getRRunway().getAsda().toString()));
+                right.appendChild(asdar);
+
+                Element ldar = document.createElement("lda");
+                ldar.appendChild(document.createTextNode(run.getRRunway().getLda().toString()));
+                right.appendChild(ldar);
+
+                Element thresholdr = document.createElement("threshold");
+                thresholdr.appendChild(document.createTextNode(run.getRRunway().getThreshold().toString()));
+                right.appendChild(thresholdr);
+
+                Element clearwayr = document.createElement("clearway");
+                clearwayr.appendChild(document.createTextNode(run.getRRunway().getClearway().toString()));
+                right.appendChild(clearwayr);
+
+                Element stopwayr = document.createElement("stopway");
+                stopwayr.appendChild(document.createTextNode(run.getRRunway().getStopway().toString()));
+                right.appendChild(stopwayr);
+            }
+
+            return new DOMSource(document);
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
