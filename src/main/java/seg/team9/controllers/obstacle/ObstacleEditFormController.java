@@ -44,7 +44,7 @@ public class ObstacleEditFormController  {
         //get scene
         Stage scene = (Stage) buttonEdit.getScene().getWindow();
 
-        App.obstacleObservableList().remove(obstacleSelected);
+        App.obstacleObservableList.remove(obstacleSelected);
 
         obstacleSelected.setName(textName.getText());
         obstacleSelected.setDistanceCenter(Double.parseDouble(textCenterDist.getText()));
@@ -53,7 +53,7 @@ public class ObstacleEditFormController  {
         obstacleSelected.setWidth(Double.parseDouble(textWidth.getText()));
         obstacleSelected.setHeight(Double.parseDouble(textHeight.getText()));
 
-        App.obstacleObservableList().add(obstacleSelected);
+        App.obstacleObservableList.add(obstacleSelected);
 
         //updates labels in the obstacle view
         ObstacleViewController.getInstance().updateLabelsObstacle(obstacleSelected);

@@ -2,18 +2,21 @@ package seg.team9.controllers;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.XML.XMLExporter;
+import seg.team9.business.logic.XML.XMLImporter;
+import seg.team9.controllers.runways.Compass;
 import seg.team9.controllers.runways.MapLegend;
-import seg.team9.utils.UtilsUI;
+import seg.team9.utils.MockData;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.calculation.CalculationsViewController;
@@ -33,13 +36,15 @@ public class PrimaryWindowController implements Initializable {
     MapLegend sideLegend = new MapLegend();
     MapLegend topLegend = new MapLegend();
 
+    Compass sideCompass = new Compass();
+    Compass topCompass = new Compass();
 
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
     @FXML private MenuBar menuBar; //menu bar
     @FXML private MenuItem menuItemClose;
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
-    @FXML private ChoiceBox<Runway> choiceBoxRunway;
+    @FXML private ComboBox<Runway> comboBoxRunways;
     // Injecting colour pickers
     @FXML private ColorPicker colourPickerTORA;
     @FXML private ColorPicker colourPickerTODA;
@@ -81,29 +86,18 @@ public class PrimaryWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sideViewController = SideViewController.getInstance();
-        initCompass();
         initMenuBar();
         initChoiceBoxes();
         initArrays();
-        initColorPickers();
         initSplitPane();
         initTabPane();
     }
 
-    private void initCompass() {
-        needle.setRotate(270);
-    }
 
     void initSplitPane(){
         logger.info(splitPaneView.getDividers().get(0).getPosition());
     }
 
-    private void initColorPickers(){
-       // colourPickerTORA.setValue(Color.BLACK);
-        //colourPickerTODA.setValue(Color.BLACK);
-        //colourPickerASDA.setValue(Color.BLACK);
-        //colourPickerLDA.setValue(Color.BLACK);
-    }
     private void initArrays() {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
@@ -115,56 +109,48 @@ public class PrimaryWindowController implements Initializable {
     }
 
     private void initChoiceBoxes(){
-        choiceBoxAirport.getItems().addAll(App.airportObservableList());
+        choiceBoxAirport.getItems().addAll(App.airportObservableList);
         choiceBoxAirport.getSelectionModel().selectFirst();
 
         Airport a = choiceBoxAirport.getValue();
 
-        choiceBoxRunway.getItems().addAll(a.getRunwayList());
-        choiceBoxRunway.getSelectionModel().selectFirst();
+        initComboBox(a);
 
-        topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
+
+        topDownViewController.displayDirectedRunwaySelected(comboBoxRunways.getSelectionModel().getSelectedItem());
         sideViewController.updateUI();
 
         //when an airport is selected the runway list will update
         choiceBoxAirport.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Airport>() {
             @Override
             public void changed(ObservableValue<? extends Airport> observableValue, Airport airport, Airport t1) {
-                choiceBoxRunway.getItems().clear();
-                choiceBoxRunway.getItems().addAll(t1.getRunwayList());
-                choiceBoxRunway.getSelectionModel().selectFirst();
+                comboBoxRunways.getItems().clear();
+                comboBoxRunways.setItems(FXCollections.observableArrayList(t1.getRunwayList()));
+                comboBoxRunways.getSelectionModel().selectFirst();
             }
         });
 
 
-        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
+        comboBoxRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             if(t1 != null) {
                 topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
                 sideViewController.updateUI();
             }
-            //topDownViewController.updateUI(); you're calling this method already in line 67
 
             topDownViewController.initArrowsColors();
-            //changeColourArrows();
             logger.info("Changed colours");
         });
 
     }
 
-    public void changeColourArrows() {
-        //Recolour arrows
-        try {
-            topDownViewController.changeColourTORA(colourPickerTORA.getValue());
-            topDownViewController.changeColourTODA(colourPickerTODA.getValue());
-            topDownViewController.changeColourASDA(colourPickerASDA.getValue());
-            topDownViewController.changeColourLDA(colourPickerLDA.getValue());
-        }catch (NullPointerException e){
-            e.printStackTrace();
-        }
+
+    public void initComboBox(Airport a){
+        comboBoxRunways.setPromptText("Select runway");
+        comboBoxRunways.setItems(FXCollections.observableArrayList(a.getRunwayList()));
+        comboBoxRunways.getSelectionModel().selectFirst();
     }
 
     private void initMenuBar(){
-        menuItemClose.setOnAction(actionEvent -> UtilsUI.showErrorMessage("This feature has not been implemented yet"));
     }
 
     private void initTabPane(){
@@ -202,30 +188,42 @@ public class PrimaryWindowController implements Initializable {
             pane.setStyle("-fx-background-color: " + darkerGray + ";");
     }
 
-    public void onSelectedTORAColour(ActionEvent actionEvent) {
-       topDownViewController.changeColourTORA(colourPickerTORA.getValue());
+
+
+
+
+    public void onPrintBreakdownClick(ActionEvent actionEvent) {
     }
 
-    public void onSelectedTODAColour(ActionEvent actionEvent) {
-        topDownViewController.changeColourTODA(colourPickerTODA.getValue());
+    public void onObstacleExportClick(ActionEvent actionEvent) {
+        XMLExporter xmlExporter = App.xml;
+        xmlExporter.importObstacles(MockData.obstacles);
     }
 
-    public void onSelectedASDAColour(ActionEvent actionEvent) {
-        topDownViewController.changeColourASDA(colourPickerASDA.getValue());
+    public void onAirportExportClick(ActionEvent actionEvent) {
+        XMLExporter xmlExporter = App.xml;
+        xmlExporter.exportAirport(MockData.aiports.get(0));
     }
 
-    public void o0nSelectedLDAColour(ActionEvent actionEvent) {
-        topDownViewController.changeColourLDA(colourPickerLDA.getValue());
+    public void onObstacleImportClick(ActionEvent actionEvent) {
+        XMLImporter xmlExporter = App.xml;
+
+        //  xmlExporter.importObstacles()
+    }
+
+    public void onAirportImportClick(ActionEvent actionEvent) {
+        XMLImporter xmlExporter = App.xml;
+
+        //xmlExporter.importObstacles()
     }
 
 
-    public void rotateNeedle(Double val){
-        if(val < 0)
-            labelCompass.setText(val+360 + "°");
-        else
-            labelCompass.setText(val + "°");
+    public Compass getSideCompass() {
+        return sideCompass;
+    }
 
-        UtilsUI.rotateView(needle, val, 3000);
+    public Compass getTopCompass() {
+        return topCompass;
     }
 
     public MapLegend getSideLegend() {

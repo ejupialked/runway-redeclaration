@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seg.team9.App;
+import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.exceptions.TextFieldEmptyException;
 import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
@@ -36,7 +37,9 @@ public class ObstacleAddFormController {
                     Double.parseDouble(textDistRThreshold.getText()),
                     Double.parseDouble(textDistLThreshold.getText()));
 
-        App.obstacleObservableList().add(o);
+        App.obstacleObservableList.add(o);
+
+        //ObstacleViewController.getInstance().updateCheckbox();
 
             Stage scene = (Stage) buttonFinish.getScene().getWindow();
             scene.close();
