@@ -28,7 +28,7 @@ public class XML implements XMLExporter, XMLImporter{
     private final String airportTag = "airport";
     private final String obstacleTag = "obstacle";
     @Override
-    public DOMSource exportAirport(Airport airport) {
+    public boolean exportAirport(Airport airport,File file) {
         try{
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -55,10 +55,11 @@ public class XML implements XMLExporter, XMLImporter{
             Element runways = document.createElement("runways");
             rootElement.appendChild(runways);
 
-            Element runway = document.createElement("runway");
+
 
             for (Runway run :airport.getRunwayList()) {
 
+                Element runway = document.createElement("runway");
                 runways.appendChild(runway);
 
                 Element left = document.createElement("left");
@@ -112,7 +113,7 @@ public class XML implements XMLExporter, XMLImporter{
                 right.appendChild(todar);
 
                 Element asdar = document.createElement("asda");
-                asda.appendChild(document.createTextNode(run.getRRunway().getAsda().toString()));
+                asdar.appendChild(document.createTextNode(run.getRRunway().getAsda().toString()));
                 right.appendChild(asdar);
 
                 Element ldar = document.createElement("lda");
@@ -132,16 +133,27 @@ public class XML implements XMLExporter, XMLImporter{
                 right.appendChild(stopwayr);
             }
 
-            return new DOMSource(document);
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(file);
+            try {
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.transform(source,result);
+                return true;
+            }
+            catch (TransformerException e) {
+                e.printStackTrace();
+                return false;
+            }
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
+            return false;
         }
-        return null;
     }
 
     @Override
-    public DOMSource exportObstacles(Obstacle obstacle) {
+    public boolean exportObstacles(Obstacle obstacle,File file) {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -176,12 +188,23 @@ public class XML implements XMLExporter, XMLImporter{
             distancelthreshold.appendChild(document.createTextNode(obstacle.getDistanceLThreshold().toString()));
             eObstacle.appendChild(distancelthreshold);
 
-            return new DOMSource(document);
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(file);
+            try {
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.transform(source,result);
+                return true;
+            }
+            catch (TransformerException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
         catch (ParserConfigurationException e) {
             e.printStackTrace();
+            return false;
         }
-        return null;
     }
 
     @Override
@@ -197,7 +220,12 @@ public class XML implements XMLExporter, XMLImporter{
                 throw new IOException();
             if(airportList.item(0).getNodeType() == Node.ELEMENT_NODE) {
                 Element elementAirport = (Element) airportList.item(0);
-                airport = new Airport(elementAirport.getAttribute("name"));
+                String city = elementAirport.getElementsByTagName("city").item(0).getTextContent();
+                Double latitude = Double.parseDouble(elementAirport.getElementsByTagName("lat").item(0).getTextContent());
+                Double longitude = Double.parseDouble(elementAirport.getElementsByTagName("long").item(0).getTextContent());
+
+                airport = new Airport(elementAirport.getAttribute("name"),city,latitude,longitude);
+
             }
             NodeList runwayList = document.getElementsByTagName("runway");
             for(int i = 0;i<runwayList.getLength();i++){

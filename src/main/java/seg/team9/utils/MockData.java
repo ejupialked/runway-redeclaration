@@ -21,7 +21,7 @@ public class MockData {
         DirectedRunway d7 = new DirectedRunway("09R",4000D,4100D,4000D,4000D,0D,100D,50D);
         DirectedRunway d8 = new DirectedRunway("27L",4000D,4100D,4000D,4000D,0D,100D,50D);
         Runway r4 = new Runway(d7, d8, 4000);
-        Airport a4 = new Airport("Henrys Test Land");
+        Airport a4 = new Airport("Henrys Test Land","Southampton",39.21,23.89);
         a4.addRunway(r4);
 
         //HEATHROW

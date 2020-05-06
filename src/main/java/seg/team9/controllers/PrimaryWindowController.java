@@ -120,7 +120,7 @@ public class PrimaryWindowController implements Initializable {
     }
 
     private void initChoiceBoxes(){
-        choiceBoxAirport.getItems().addAll(App.airportObservableList);
+        choiceBoxAirport.setItems(App.airportObservableList);
         choiceBoxAirport.getSelectionModel().selectFirst();
 
         Airport a = choiceBoxAirport.getValue();
@@ -218,19 +218,11 @@ public class PrimaryWindowController implements Initializable {
         if(!file.getName().contains(".xml"))
             file = new File(file.getAbsolutePath()+".xml");
 
-        DOMSource source = xmlExporter.exportObstacles(ObstacleViewController.getInstance().getBoxObstacles().getValue());
-        if (source == null)
-            return;
-        StreamResult result = new StreamResult(file);
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.transform(source,result);
-        }
-        catch (TransformerException e) {
-            e.printStackTrace();
-        }
-
+        boolean check = xmlExporter.exportObstacles(ObstacleViewController.getInstance().getBoxObstacles().getValue(),file);
+        if (check)
+            logger.info("Exported successfully");
+        else
+            logger.info("Exporting went wrong");
     }
 
     public void onAirportExportClick(ActionEvent actionEvent) {
@@ -245,18 +237,13 @@ public class PrimaryWindowController implements Initializable {
         if(!file.getName().contains(".xml"))
             file = new File(file.getAbsolutePath()+".xml");
 
-        DOMSource source = xmlExporter.exportAirport(getChoiceBoxAirport().getValue());
-        if (source == null)
-            return;
-        StreamResult result = new StreamResult(file);
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.transform(source,result);
-        }
-        catch (TransformerException e) {
-            e.printStackTrace();
-        }
+        boolean check = xmlExporter.exportAirport(getChoiceBoxAirport().getValue(),file);
+        if (check)
+            logger.info("Exported successfully");
+        else
+            logger.info("Exporting went wrong");
+
+
     }
 
     public void onObstacleImportClick(ActionEvent actionEvent) {
@@ -267,7 +254,7 @@ public class PrimaryWindowController implements Initializable {
 //        MockData.obstacles.addAll(xmlImporter.importObstacles(file));
         List<Obstacle> list = xmlImporter.importObstacles(file);
         for(Obstacle o : list)
-            logger.info("Added : " + o.getName());
+            App.obstacleObservableList.add(o);
     }
 
     public void onAirportImportClick(ActionEvent actionEvent) {
@@ -276,7 +263,7 @@ public class PrimaryWindowController implements Initializable {
         fileChooser.setTitle("Choose file to import");
         File file = fileChooser.showOpenDialog(new Stage());
         Airport airport = xmlImporter.importAirport(file);
-        MockData.aiports.add(airport);
+        App.airportObservableList.add(airport);
         logger.info("Imported Airport : " + airport.getName());
         for(Runway runway : airport.getRunwayList())
             logger.info("With runway : " + runway.toString());
