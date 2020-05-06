@@ -26,6 +26,7 @@ import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
+import seg.team9.utils.UtilsUI;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -219,17 +220,21 @@ public class PrimaryWindowController implements Initializable {
             file = new File(file.getAbsolutePath()+".xml");
 
         boolean check = xmlExporter.exportObstacles(ObstacleViewController.getInstance().getBoxObstacles().getValue(),file);
-        if (check)
+        if (check) {
             logger.info("Exported successfully");
-        else
+            UtilsUI.showInfoMessage("The obstacles have been successfully exported to an XML file.");
+        }
+        else {
             logger.info("Exporting went wrong");
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the obstacles to an XML file.");
+        }
     }
 
     public void onAirportExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file to import");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*. xml"));
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*.xml"));
         File file = fileChooser.showSaveDialog(new Stage());
         if(file == null)
             return;
@@ -238,11 +243,14 @@ public class PrimaryWindowController implements Initializable {
             file = new File(file.getAbsolutePath()+".xml");
 
         boolean check = xmlExporter.exportAirport(getChoiceBoxAirport().getValue(),file);
-        if (check)
+        if (check) {
             logger.info("Exported successfully");
-        else
+            UtilsUI.showInfoMessage("Airport: " + getChoiceBoxAirport().getValue().getName() + " has been exported to an XML file.");
+        }
+        else {
             logger.info("Exporting went wrong");
-
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the airport: " + getChoiceBoxAirport().getValue().getName() + " to an XML file.");
+        }
 
     }
 
