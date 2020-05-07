@@ -2,6 +2,7 @@ module seg.team9 {
     requires javafx.controls;
     requires javafx.fxml;
     requires log4j;
+    requires java.xml;
     requires itextpdf;
     requires javafx.swing;
     requires layout;
@@ -12,7 +13,6 @@ module seg.team9 {
     opens seg.team9.controllers.obstacle to javafx.fxml;
     opens seg.team9.controllers.runways to javafx.fxml;
     opens seg.team9.controllers to javafx.fxml;
-
 
     exports seg.team9;
 }

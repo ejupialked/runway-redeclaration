@@ -14,12 +14,15 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.business.logic.PDFGenerator;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
+import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.Compass;
 import seg.team9.controllers.runways.MapLegend;
 import seg.team9.utils.MockData;
@@ -29,14 +32,19 @@ import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import seg.team9.utils.UtilsUI.DialogDirectoryChooser;
 import seg.team9.utils.UtilsUI;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PrimaryWindowController implements Initializable {
@@ -135,8 +143,8 @@ public class PrimaryWindowController implements Initializable {
         darkPanes.add(obstacleViewController.getPaneObstacles());
     }
 
-    private void initChoiceBoxes() {
-        choiceBoxAirport.getItems().addAll(App.airportObservableList);
+    private void initChoiceBoxes(){
+        choiceBoxAirport.setItems(App.airportObservableList);
         choiceBoxAirport.getSelectionModel().selectFirst();
 
         Airport a = choiceBoxAirport.getValue();
@@ -261,22 +269,82 @@ public class PrimaryWindowController implements Initializable {
             xmlExporter.exportAirport(MockData.aiports.get(0));
         }
 
-        public void onObstacleImportClick (ActionEvent actionEvent){
-            XMLImporter xmlExporter = App.xml;
+    public void onObstacleExportClick(ActionEvent actionEvent) {
+        XMLExporter xmlExporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*.xml"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if(file == null)
+            return;
 
-            //  xmlExporter.importObstacles()
+        if(!file.getName().contains(".xml"))
+            file = new File(file.getAbsolutePath()+".xml");
+
+        boolean check = xmlExporter.exportObstacles(ObstacleViewController.getInstance().getBoxObstacles().getValue(),file);
+        if (check) {
+            logger.info("Exported successfully");
+            UtilsUI.showInfoMessage("The obstacles have been successfully exported to an XML file.");
+        }
+        else {
+            logger.info("Exporting went wrong");
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the obstacles to an XML file.");
+        }
+    }
+
+    public void onAirportExportClick(ActionEvent actionEvent) {
+        XMLExporter xmlExporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*.xml"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if(file == null)
+            return;
+
+        if(!file.getName().contains(".xml"))
+            file = new File(file.getAbsolutePath()+".xml");
+
+        boolean check = xmlExporter.exportAirport(getChoiceBoxAirport().getValue(),file);
+        if (check) {
+            logger.info("Exported successfully");
+            UtilsUI.showInfoMessage("Airport: " + getChoiceBoxAirport().getValue().getName() + " has been exported to an XML file.");
+        }
+        else {
+            logger.info("Exporting went wrong");
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the airport: " + getChoiceBoxAirport().getValue().getName() + " to an XML file.");
         }
 
-        public void onAirportImportClick (ActionEvent actionEvent){
-            XMLImporter xmlExporter = App.xml;
+    }
 
-            //xmlExporter.importObstacles()
-        }
+    public void onObstacleImportClick(ActionEvent actionEvent) {
+        XMLImporter xmlImporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        File file = fileChooser.showOpenDialog(new Stage());
+//        MockData.obstacles.addAll(xmlImporter.importObstacles(file));
+        List<Obstacle> list = xmlImporter.importObstacles(file);
+        for(Obstacle o : list)
+            App.obstacleObservableList.add(o);
 
+        UtilsUI.showInfoMessage("Obstacles from file " + file.getName() +" has been imported to the application.");
 
-        public Compass getSideCompass () {
-            return sideCompass;
-        }
+    }
+
+    public void onAirportImportClick(ActionEvent actionEvent) {
+        XMLImporter xmlImporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        File file = fileChooser.showOpenDialog(new Stage());
+        Airport airport = xmlImporter.importAirport(file);
+        App.airportObservableList.add(airport);
+        logger.info("Imported Airport : " + airport.getName());
+        for(Runway runway : airport.getRunwayList())
+            logger.info("With runway : " + runway.toString());
+
+        UtilsUI.showInfoMessage("Airport from file " + file.getName() +" named " + airport.getName() + " has been imported to the application.");
+
+    }
+
 
         public Compass getTopCompass () {
             return topCompass;
