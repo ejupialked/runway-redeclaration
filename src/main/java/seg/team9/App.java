@@ -6,8 +6,10 @@ import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -59,6 +61,14 @@ public class App extends Application {
         primaryWindow.setTitle("Runway Re-declaration Software");
         primaryWindow.setScene(new Scene(root));
         primaryWindow.setMaximized(true);
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        primaryWindow.setX(bounds.getMinX());
+        primaryWindow.setY(bounds.getMinY());
+        primaryWindow.setWidth(bounds.getWidth());
+        primaryWindow.setHeight(bounds.getHeight());
+
         primaryWindow.setResizable(false);
         primaryWindow.show();
     }

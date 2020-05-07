@@ -231,14 +231,12 @@ public class PrimaryWindowController implements Initializable {
         int choice;
         try {
             new PDFGenerator();
-
             choice = UtilsUI.showPopupWithButtons("You can either open and print the " +
                     "report or simply save it.", Alert.AlertType.INFORMATION);
         } catch (IOException | DocumentException e) {
             UtilsUI.showErrorMessage(e.getMessage());
             return;
         }
-
 
         if (choice == 3) {
             App.getPrimaryWindow().getScene().setCursor(Cursor.WAIT);
@@ -255,19 +253,8 @@ public class PrimaryWindowController implements Initializable {
             } catch (Exception e) {
                 UtilsUI.showErrorMessage(e.getMessage());
             }
-
         }
     }
-
-        public void onObstacleExportClick (ActionEvent actionEvent){
-            XMLExporter xmlExporter = App.xml;
-            xmlExporter.importObstacles(MockData.obstacles);
-        }
-
-        public void onAirportExportClick (ActionEvent actionEvent){
-            XMLExporter xmlExporter = App.xml;
-            xmlExporter.exportAirport(MockData.aiports.get(0));
-        }
 
     public void onObstacleExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
@@ -307,11 +294,13 @@ public class PrimaryWindowController implements Initializable {
         boolean check = xmlExporter.exportAirport(getChoiceBoxAirport().getValue(),file);
         if (check) {
             logger.info("Exported successfully");
-            UtilsUI.showInfoMessage("Airport: " + getChoiceBoxAirport().getValue().getName() + " has been exported to an XML file.");
+            UtilsUI.showInfoMessage("Airport: " + getChoiceBoxAirport().getValue().getName()
+                    + " has been exported to an XML file.");
         }
         else {
             logger.info("Exporting went wrong");
-            UtilsUI.showErrorMessage("Something went wrong while trying to export the airport: " + getChoiceBoxAirport().getValue().getName() + " to an XML file.");
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the airport: "
+                    + getChoiceBoxAirport().getValue().getName() + " to an XML file.");
         }
 
     }
@@ -321,10 +310,8 @@ public class PrimaryWindowController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file to import");
         File file = fileChooser.showOpenDialog(new Stage());
-//        MockData.obstacles.addAll(xmlImporter.importObstacles(file));
         List<Obstacle> list = xmlImporter.importObstacles(file);
-        for(Obstacle o : list)
-            App.obstacleObservableList.add(o);
+        App.obstacleObservableList.addAll(list);
 
         UtilsUI.showInfoMessage("Obstacles from file " + file.getName() +" has been imported to the application.");
 
@@ -338,10 +325,13 @@ public class PrimaryWindowController implements Initializable {
         Airport airport = xmlImporter.importAirport(file);
         App.airportObservableList.add(airport);
         logger.info("Imported Airport : " + airport.getName());
-        for(Runway runway : airport.getRunwayList())
-            logger.info("With runway : " + runway.toString());
 
-        UtilsUI.showInfoMessage("Airport from file " + file.getName() +" named " + airport.getName() + " has been imported to the application.");
+        airport.getRunwayList()
+                .forEach(r -> logger.info("With runway : " + r.toString()));
+
+
+        UtilsUI.showInfoMessage("Airport from file " + file.getName()
+                +" named " + airport.getName() + " has been imported to the application.");
 
     }
 
