@@ -211,7 +211,7 @@ public class PrimaryWindowController implements Initializable {
         XMLExporter xmlExporter = App.xml;
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file to import");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*. xml"));
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*.xml"));
         File file = fileChooser.showSaveDialog(new Stage());
         if(file == null)
             return;
@@ -263,6 +263,9 @@ public class PrimaryWindowController implements Initializable {
         List<Obstacle> list = xmlImporter.importObstacles(file);
         for(Obstacle o : list)
             App.obstacleObservableList.add(o);
+
+        UtilsUI.showInfoMessage("Obstacles from file " + file.getName() +" has been imported to the application.");
+
     }
 
     public void onAirportImportClick(ActionEvent actionEvent) {
@@ -275,6 +278,9 @@ public class PrimaryWindowController implements Initializable {
         logger.info("Imported Airport : " + airport.getName());
         for(Runway runway : airport.getRunwayList())
             logger.info("With runway : " + runway.toString());
+
+        UtilsUI.showInfoMessage("Airport from file " + file.getName() +" named " + airport.getName() + " has been imported to the application.");
+
     }
 
 
