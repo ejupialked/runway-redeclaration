@@ -1,6 +1,5 @@
 package seg.team9.business.logic;
 
-import javafx.css.CssParser;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.business.models.DirectedRunway;
@@ -25,7 +24,7 @@ public class Calculator {
     //The method does not return anything - merely used as a gateway.
     public void redesignate(Runway runway, Obstacle obstacle){
         findDirection(runway, obstacle);
-
+        runway.setCalculationBreakdow(calculationBreakdown);
         CalculationBreakdownController.getInstance().showBreakdown(calculationBreakdown);
     }
 

@@ -1,12 +1,17 @@
 package seg.team9.controllers;
 
+import com.itextpdf.text.DocumentException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -14,6 +19,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.PDFGenerator;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
 import seg.team9.business.models.Obstacle;
@@ -26,15 +32,16 @@ import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
-import seg.team9.utils.UtilsUI;
-
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import seg.team9.utils.UtilsUI.DialogDirectoryChooser;
+import seg.team9.utils.UtilsUI;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,36 +59,46 @@ public class PrimaryWindowController implements Initializable {
     Compass topCompass = new Compass();
 
     // Injecting ui components.
-    @FXML private TabPane tabPaneRunways;
-    @FXML private MenuBar menuBar; //menu bar
-    @FXML private MenuItem menuItemClose;
-    @FXML private ChoiceBox<Airport> choiceBoxAirport;
-    @FXML private ComboBox<Runway> comboBoxRunways;
+    @FXML
+    private TabPane tabPaneRunways;
+    @FXML
+    private MenuBar menuBar; //menu bar
+    @FXML
+    private MenuItem menuItemClose;
+    @FXML
+    private ChoiceBox<Airport> choiceBoxAirport;
+    @FXML
+    private ComboBox<Runway> comboBoxRunways;
     // Injecting colour pickers
-    @FXML private ColorPicker colourPickerTORA;
-    @FXML private ColorPicker colourPickerTODA;
-    @FXML private ColorPicker colourPickerLDA;
-    @FXML private ColorPicker colourPickerASDA;
-    @FXML private SplitPane splitPaneView;
+    @FXML
+    private ColorPicker colourPickerTORA;
+    @FXML
+    private ColorPicker colourPickerTODA;
+    @FXML
+    private ColorPicker colourPickerLDA;
+    @FXML
+    private ColorPicker colourPickerASDA;
+    @FXML
+    private SplitPane splitPaneView;
 
     private ArrayList<AnchorPane> lightPanes;
     private ArrayList<AnchorPane> darkPanes;
-    @FXML private AnchorPane paneView;
-    @FXML private AnchorPane paneCalculations;
-    @FXML private AnchorPane paneQMarks;
+    @FXML
+    private AnchorPane paneView;
+    @FXML
+    private AnchorPane paneCalculations;
+    @FXML
+    private AnchorPane paneQMarks;
 
     // Injecting controllers
-    @FXML private SideViewController sideViewController; // side runway
-    @FXML private TopDownViewController topDownViewController; // top down runway
-    @FXML private ObstacleViewController obstacleViewController;
-    @FXML private CalculationsViewController calculationsViewController;
-
     @FXML
-    ImageView compass;
+    private SideViewController sideViewController; // side runway
     @FXML
-    ImageView needle;
-
-    @FXML Label labelCompass;
+    private TopDownViewController topDownViewController; // top down runway
+    @FXML
+    private ObstacleViewController obstacleViewController;
+    @FXML
+    private CalculationsViewController calculationsViewController;
 
 
     // -fx-background-color #E0E0E0
@@ -90,10 +107,16 @@ public class PrimaryWindowController implements Initializable {
     private String grey = "#E0E0E0";
     private String darkerWhite = "#cccccc";
     private String darkerGray = "#B3B3B3";
+    private App app;
 
 
-    public PrimaryWindowController(){instance = this;}
-    public static PrimaryWindowController getInstance(){return instance;}
+    public PrimaryWindowController() {
+        instance = this;
+    }
+
+    public static PrimaryWindowController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,7 +129,7 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
-    void initSplitPane(){
+    void initSplitPane() {
         logger.info(splitPaneView.getDividers().get(0).getPosition());
     }
 
@@ -144,7 +167,7 @@ public class PrimaryWindowController implements Initializable {
 
 
         comboBoxRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
-            if(t1 != null) {
+            if (t1 != null) {
                 topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
                 sideViewController.updateUI();
             }
@@ -156,22 +179,21 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
-    public void initComboBox(Airport a){
+    public void initComboBox(Airport a) {
         comboBoxRunways.setPromptText("Select runway");
         comboBoxRunways.setItems(FXCollections.observableArrayList(a.getRunwayList()));
         comboBoxRunways.getSelectionModel().selectFirst();
     }
 
-    private void initMenuBar(){
+    private void initMenuBar() {
     }
 
-    private void initTabPane(){
+    private void initTabPane() {
         tabPaneRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, oldv, newv) -> {
-            if(newv.getId().equals("topDownViewTab")){
+            if (newv.getId().equals("topDownViewTab")) {
                 topDownViewController.isSelected = true;
                 sideViewController.isSelected = false;
-            }
-            else{
+            } else {
                 topDownViewController.isSelected = false;
                 sideViewController.isSelected = true;
             }
@@ -184,11 +206,15 @@ public class PrimaryWindowController implements Initializable {
         return choiceBoxAirport;
     }
 
+    public ComboBox<Runway> getComboBoxRunways() {
+        return comboBoxRunways;
+    }
+
     public void onColourChangeDefault(ActionEvent actionEvent) {
         for (AnchorPane pane : lightPanes)
             pane.setStyle("-fx-background-color: " + white + ";");
 
-        for(AnchorPane pane : darkPanes)
+        for (AnchorPane pane : darkPanes)
             pane.setStyle("-fx-background-color: " + grey + ";");
     }
 
@@ -196,16 +222,52 @@ public class PrimaryWindowController implements Initializable {
         for (AnchorPane pane : lightPanes)
             pane.setStyle("-fx-background-color: " + darkerWhite + ";");
 
-        for(AnchorPane pane : darkPanes)
+        for (AnchorPane pane : darkPanes)
             pane.setStyle("-fx-background-color: " + darkerGray + ";");
     }
 
 
-
-
-
     public void onPrintBreakdownClick(ActionEvent actionEvent) {
+        int choice;
+        try {
+            new PDFGenerator();
+
+            choice = UtilsUI.showPopupWithButtons("You can either open and print the " +
+                    "report or simply save it.", Alert.AlertType.INFORMATION);
+        } catch (IOException | DocumentException e) {
+            UtilsUI.showErrorMessage(e.getMessage());
+            return;
+        }
+
+
+        if (choice == 3) {
+            App.getPrimaryWindow().getScene().setCursor(Cursor.WAIT);
+            app.showFile();
+            App.getPrimaryWindow().getScene().setCursor(Cursor.DEFAULT);
+        } else if (choice == 2) {
+            DialogDirectoryChooser ddc = new DialogDirectoryChooser(App.getPrimaryWindow());
+            File fileSaved = null; //returns location of the fil
+            try {
+                fileSaved = ddc.saveFile();
+                if(fileSaved != null){
+                    UtilsUI.showInfoMessage("The report can be found here: " + fileSaved.getAbsolutePath());
+                }
+            } catch (Exception e) {
+                UtilsUI.showErrorMessage(e.getMessage());
+            }
+
+        }
     }
+
+        public void onObstacleExportClick (ActionEvent actionEvent){
+            XMLExporter xmlExporter = App.xml;
+            xmlExporter.importObstacles(MockData.obstacles);
+        }
+
+        public void onAirportExportClick (ActionEvent actionEvent){
+            XMLExporter xmlExporter = App.xml;
+            xmlExporter.exportAirport(MockData.aiports.get(0));
+        }
 
     public void onObstacleExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
@@ -284,19 +346,20 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
-    public Compass getSideCompass() {
-        return sideCompass;
+        public Compass getTopCompass () {
+            return topCompass;
+        }
+
+        public MapLegend getSideLegend () {
+            return sideLegend;
+        }
+
+        public MapLegend getTopLegend () {
+            return topLegend;
+        }
+
+        public void setApp (App app){
+            this.app = app;
+        }
     }
 
-    public Compass getTopCompass() {
-        return topCompass;
-    }
-
-    public MapLegend getSideLegend() {
-        return sideLegend;
-    }
-
-    public MapLegend getTopLegend() {
-        return topLegend;
-    }
-}

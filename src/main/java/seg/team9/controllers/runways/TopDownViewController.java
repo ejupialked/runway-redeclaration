@@ -205,6 +205,12 @@ public class TopDownViewController implements Initializable {
         logger.info("init TopDownViewController");
         topDownView.setMinHeight(0);
         topDownView.setMinWidth(0);
+        AnchorPane.setBottomAnchor(topDownView, 0d);
+        AnchorPane.setTopAnchor(topDownView, 0d);
+        AnchorPane.setLeftAnchor(topDownView, 0d);
+        AnchorPane.setRightAnchor(topDownView, 0d);
+
+
         topDownView.setStyle("-fx-background-color: green");
         initCompass();
         initText();
@@ -754,7 +760,7 @@ public class TopDownViewController implements Initializable {
 
         }
         catch (NullPointerException e){
-            e.printStackTrace();
+
         }
     }
 
@@ -839,5 +845,10 @@ public class TopDownViewController implements Initializable {
 
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
+    }
+
+
+    public AnchorPane getTopDownView() {
+        return topDownView;
     }
 }
