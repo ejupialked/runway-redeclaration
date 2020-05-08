@@ -13,11 +13,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane style="-fx-background-color: E0E0E0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.obstacle.ObstacleViewController">
-        <TitledPane maxWidth="-Infinity" text="Obstacle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <TitledPane animated="true" maxWidth="-Infinity" text="Obstacle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <content>
                 <AnchorPane fx:id="paneObstacles" maxHeight="-Infinity">
                     <children>
-               <GridPane hgap="5.0" layoutX="126.0" layoutY="132.0" vgap="5.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <GridPane hgap="5.0" layoutX="126.0" layoutY="132.0" vgap="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                  <columnConstraints>
                    <ColumnConstraints hgrow="SOMETIMES" />
                    <ColumnConstraints hgrow="SOMETIMES" />

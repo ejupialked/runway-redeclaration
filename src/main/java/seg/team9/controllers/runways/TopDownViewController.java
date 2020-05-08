@@ -1,5 +1,6 @@
 package seg.team9.controllers.runways;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -216,7 +217,6 @@ public class TopDownViewController implements Initializable {
 
 
         topDownView.setStyle("-fx-background-color: green");
-        initCompass();
         initText();
         initLines();
         initRectangles();
@@ -241,9 +241,6 @@ public class TopDownViewController implements Initializable {
 
     }
 
-    private void initCompass() {
-        this.compass = PrimaryWindowController.getInstance().getTopCompass();
-    }
 
     public void updateScaler(){
         middleY = graphics.getHeight()*0.5;
@@ -356,7 +353,9 @@ public class TopDownViewController implements Initializable {
 
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
-            compass.rotateNeedle(graphicsRot-90);
+            if(compass != null)
+                compass.rotateNeedle(graphicsRot-90);
+
             if(!isHorizontal && changedRunway) {
                 UtilsUI.rotateView(graphics, 0, 3000);
                 if ((graphicsRot > 90) && !textFlipped) {
@@ -368,7 +367,7 @@ public class TopDownViewController implements Initializable {
                 }
             }
         }catch (NumberFormatException e){
-            logger.info("invalidrunwayrotation");
+            logger.error("invalid runway rotation");
         }
 
     }
@@ -746,9 +745,11 @@ public class TopDownViewController implements Initializable {
 
 
 
-        topDownView.getChildren().add(compass);
-        AnchorPane.setBottomAnchor(compass, 0d);
-        AnchorPane.setRightAnchor(compass, -35d);
+        if(compass != null) {
+            topDownView.getChildren().add(compass);
+            AnchorPane.setBottomAnchor(compass, 0d);
+            AnchorPane.setRightAnchor(compass, -35d);
+        }
     }
 
 
@@ -929,7 +930,13 @@ public class TopDownViewController implements Initializable {
         isColorDefault = true;
     }
 
+
+
     public AnchorPane getTopDownView() {
         return topDownView;
+    }
+
+    public void setCompass(Compass compass) {
+        this.compass = compass;
     }
 }

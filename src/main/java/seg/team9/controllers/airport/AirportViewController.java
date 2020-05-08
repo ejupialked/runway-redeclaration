@@ -13,6 +13,7 @@ import seg.team9.App;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Runway;
+import seg.team9.controllers.runways.Compass;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 import seg.team9.utils.UtilsUI;
@@ -48,7 +49,9 @@ public class AirportViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChoiceBoxes();
         updateTextFields(comboBoxRunways.getValue());
+        logger.info("init AirportController...");
     }
+
 
     private void updateTextFields(Runway t1) {
         txtRunwayLength.setText(addUnitMeasurement(String.valueOf(t1.getLength())));
@@ -124,15 +127,8 @@ public class AirportViewController implements Initializable {
         return instance;
     }
 
-    public void onAlignClick(ActionEvent actionEvent) {
-        TopDownViewController.getInstance().rotateRunway();
-        TopDownViewController.getInstance().isHorizontal = false;
 
-    }
 
-    public void onHorizontalClick(ActionEvent actionEvent) {
-        TopDownViewController.getInstance().rotateRunwayHorizontal();
-    }
     public void addAirport(ActionEvent actionEvent) {
     }
 }

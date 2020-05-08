@@ -52,15 +52,15 @@
       </MenuBar>
       <SplitPane fx:id="splitPaneView" dividerPositions="0.23391812865497075, 0.7894736842105263" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
-            <VBox maxWidth="345.0" minWidth="-Infinity" style="-fx-background-color: #E0E0E0;">
+            <VBox minWidth="-Infinity" style="-fx-background-color: #E0E0E0;">
                <children>
                    <fx:include fx:id="calculationsView" source="calculationsview.fxml" />
-                  <TitledPane fx:id="titledPaneBreakdown" collapsible="false" maxHeight="-Infinity" prefWidth="350.0" text="Re-declaration breakdown">
+                  <TitledPane fx:id="titledPaneBreakdown" maxHeight="-Infinity" prefWidth="350.0" text="Re-declaration breakdown">
                      <content>
                          <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
                      </content>
                      <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </TitledPane>
                </children>
@@ -83,7 +83,7 @@
                </children>
 
                               </AnchorPane>
-            <VBox>
+            <VBox spacing="1.0">
                <children>
                    <fx:include fx:id="airportview" source="airportView.fxml" />
                    <fx:include fx:id="obstacleView" source="obstacleview.fxml" />

@@ -55,9 +55,6 @@ public class PrimaryWindowController implements Initializable {
     MapLegend sideLegend = new MapLegend();
     MapLegend topLegend = new MapLegend();
 
-    Compass sideCompass = new Compass();
-    Compass topCompass = new Compass();
-
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
     @FXML private MenuBar menuBar; //menu bar
@@ -233,10 +230,6 @@ public class PrimaryWindowController implements Initializable {
 
     }
 
-
-        public Compass getTopCompass () {
-            return topCompass;
-        }
 
         public MapLegend getSideLegend () {
             return sideLegend;

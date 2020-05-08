@@ -10,16 +10,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.airport.AirportViewController">
    <children>
-      <TitledPane animated="false" minWidth="300.0" text="Airport" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TitledPane animated="true" minWidth="300.0" text="Airport" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane>
                <children>
-                  <GridPane hgap="5.0" vgap="5.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <GridPane hgap="5.0" vgap="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" />
                       <ColumnConstraints hgrow="SOMETIMES" />
@@ -31,16 +30,15 @@
 
                         <RowConstraints vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Airport:" />
                         <ChoiceBox fx:id="choiceBoxAirport" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Runway:" GridPane.rowIndex="1" />
-                        <ComboBox fx:id="comboBoxRunways" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="comboBoxRunways" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Length :" GridPane.rowIndex="2" />
-                        <TextField fx:id="txtRunwayLength" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtRunwayLength" editable="false" maxHeight="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                         <GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <columnConstraints>
@@ -55,12 +53,12 @@
                               <RowConstraints vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label fx:id="txtLeftDesignator" text="20L" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <Label fx:id="txtLeftDesignator" maxHeight="1.7976931348623157E308" text="20L" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                               </Label>
-                              <Label fx:id="txtRightDesignator" text="15R" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <Label fx:id="txtRightDesignator" maxHeight="1.7976931348623157E308" text="15R" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                               <TextField fx:id="txtThresholdRight" editable="false" text="333" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                               <TextField fx:id="txtClearwayRight" editable="false" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                               <TextField fx:id="txtStopwayRight" editable="false" text="2334" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -86,12 +84,8 @@
                               <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Designator:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                            </children>
                         </GridPane>
-                        <HBox spacing="25.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#addAirport" text="Add" />
-                               <Button fx:id="buttonHorizontal" layoutX="30.0" mnemonicParsing="false" onAction="#onHorizontalClick" text="Horizontal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                               <Button fx:id="buttonAlign" mnemonicParsing="false" onAction="#onAlignClick" text="Align" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />                           </children>
-                        </HBox>
+                              <Button mnemonicParsing="false" onAction="#addAirport" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+
                      </children>
                   </GridPane>
                </children>

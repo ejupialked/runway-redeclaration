@@ -19,6 +19,8 @@ import seg.team9.business.logic.XML.XML;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.controllers.runways.Compass;
+import seg.team9.controllers.runways.TopDownViewController;
 import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 
@@ -68,9 +70,10 @@ public class App extends Application {
         primaryWindow.setY(bounds.getMinY());
         primaryWindow.setWidth(bounds.getWidth());
         primaryWindow.setHeight(bounds.getHeight());
-
         primaryWindow.setResizable(false);
         primaryWindow.show();
+
+        TopDownViewController.getInstance().setCompass(new Compass());
     }
 
 
