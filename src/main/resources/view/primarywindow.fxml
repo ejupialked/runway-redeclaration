@@ -37,8 +37,8 @@
                <items>
                   <Menu mnemonicParsing="false" text="Theme">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Default" />
-                        <MenuItem mnemonicParsing="false" text="Dark" />
+                      <MenuItem mnemonicParsing="false" onAction="#onDefaultColourClick" text="Default" />
+                        <MenuItem mnemonicParsing="false" onAction="#onColourBlindColourClick"  text="ColourBlind" />
                     </items>
                   </Menu>
                </items>

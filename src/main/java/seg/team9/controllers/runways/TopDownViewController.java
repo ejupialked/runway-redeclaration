@@ -93,12 +93,12 @@ public class TopDownViewController implements Initializable {
     private Line RESAEndLineR = new Line();
     private Line BlastEndLineR = new Line();
 
-    private Arrow arrowTODAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowASDAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowTORAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowLDAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowRESAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowBlastR = new Arrow(0,0,0,0,0);
+    public Arrow arrowTODAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowASDAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowTORAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowLDAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowRESAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowBlastR = new Arrow(0,0,0,0,0);
 
     private Text textTODAR = new Text("TODA");
     private Text textASDAR = new Text("ASDA");
@@ -140,12 +140,12 @@ public class TopDownViewController implements Initializable {
     private Line RESAEndLineL = new Line();
     private Line BlastEndLineL = new Line();
 
-    private Arrow arrowTODAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowASDAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowTORAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowLDAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowRESAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowBlastL = new Arrow(0,0,0,0,0);
+    public Arrow arrowTODAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowASDAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowTORAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowLDAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowRESAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowBlastL = new Arrow(0,0,0,0,0);
 
     private Text textTODAL = new Text("TODA");
     private Text textASDAL = new Text("ASDA");
@@ -856,6 +856,8 @@ public class TopDownViewController implements Initializable {
 
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
+
+        PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
     }
 
 

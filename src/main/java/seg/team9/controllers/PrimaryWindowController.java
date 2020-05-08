@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
@@ -24,15 +25,13 @@ import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.airport.AirportViewController;
-import seg.team9.controllers.runways.Compass;
-import seg.team9.controllers.runways.MapLegend;
+import seg.team9.controllers.runways.*;
 import seg.team9.utils.MockData;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
-import seg.team9.controllers.runways.SideViewController;
-import seg.team9.controllers.runways.TopDownViewController;
+
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -246,5 +245,49 @@ public class PrimaryWindowController implements Initializable {
         public void setApp (App app){
             this.app = app;
         }
+
+    public void onDefaultColourClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().arrowTORAL.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowTORAL.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowTORAR.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowTORAR.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowTODAL.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowTODAL.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowTODAR.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowTODAR.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowLDAL.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowLDAL.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowLDAR.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowLDAR.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowASDAR.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowASDAR.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowASDAL.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowASDAL.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowRESAL.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowRESAL.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowRESAR.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowRESAR.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowBlastL.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowBlastL.setStrokeWidth(4f);
+
+        TopDownViewController.getInstance().arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
+        TopDownViewController.getInstance().arrowBlastR.setStrokeWidth(4f);
+
+        getTopLegend().setOpacity(0);
     }
+
+    public void onColourBlindColourClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().initArrowsColors();
+    }
+}
 
