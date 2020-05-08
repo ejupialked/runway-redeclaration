@@ -3,6 +3,7 @@ package seg.team9.controllers.airport;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -90,4 +91,7 @@ public class AirportViewController implements Initializable {
         return instance;
     }
 
+    public void onAlignClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().rotateRunway();
+    }
 }

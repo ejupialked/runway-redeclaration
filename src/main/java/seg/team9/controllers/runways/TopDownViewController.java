@@ -348,20 +348,7 @@ public class TopDownViewController implements Initializable {
 
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
-
             compass.rotateNeedle(graphicsRot-90);
-
-            UtilsUI.rotateView(graphics, graphicsRot, 3000);
-
-            if((graphicsRot>90) && !textFlipped) {
-                UtilsUI.rotateView(text, 180, 3000);
-                textFlipped = true;
-            }
-            else if(textFlipped){
-                  UtilsUI.rotateView(text, 0, 3000);
-                textFlipped = false;
-
-            }
 
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
@@ -369,7 +356,27 @@ public class TopDownViewController implements Initializable {
 
     }
 
+    public void rotateRunway(){
+        double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
+        try{
+            UtilsUI.rotateView(graphics, graphicsRot, 3000);
+
+            if((graphicsRot>90) && !textFlipped) {
+                UtilsUI.rotateView(text, 180, 3000);
+                textFlipped = true;
+            }
+            else if(textFlipped){
+                UtilsUI.rotateView(text, 0, 3000);
+                textFlipped = false;
+
+            }
+
+        }
+        catch (NumberFormatException e){
+            logger.info("invalidrunwayrotation");
+        }
+    }
 
 
     public void updateClearedAndGradedArea(){
