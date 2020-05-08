@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
@@ -30,6 +27,10 @@ public class AirportViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("AirportViewController");
     private static AirportViewController instance;
 
+    public AirportViewController() {
+        instance = this;
+    }
+
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
     @FXML private ComboBox<Runway> comboBoxRunways;
     @FXML private TextField txtRunwayLength;
@@ -46,9 +47,7 @@ public class AirportViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChoiceBoxes();
-
     }
-
 
     private void initChoiceBoxes(){
         choiceBoxAirport.setItems(App.airportObservableList);

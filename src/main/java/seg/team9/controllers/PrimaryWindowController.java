@@ -123,7 +123,11 @@ public class PrimaryWindowController implements Initializable {
     public void onPrintBreakdownClick(ActionEvent actionEvent) {
         int choice;
         try {
-            new PDFGenerator();
+            Airport a = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+            Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
+            Runway r = AirportViewController.getInstance().getComboBoxRunways().getValue();
+
+            new PDFGenerator(a, o, r);
             choice = UtilsUI.showPopupWithButtons("You can either open and print the " +
                     "report or simply save it.", Alert.AlertType.INFORMATION);
         } catch (IOException | DocumentException e) {

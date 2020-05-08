@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.airport.AirportViewController">
@@ -85,7 +86,12 @@
                               <Label maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="60.0" text="Stopway:" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
-                        <Button mnemonicParsing="false" onAction="#addAirport" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                        <HBox spacing="25.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#addAirport" text="Add" />
+                               <Button fx:id="buttonHorizontal" layoutX="30.0" mnemonicParsing="false" onAction="#onHorizontalClick" prefHeight="25.6" prefWidth="82.4" text="Horizontal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                               <Button fx:id="buttonAlign" mnemonicParsing="false" onAction="#onAlignClick" prefHeight="26.4" prefWidth="60.8" text="Align" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />                           </children>
+                        </HBox>
                      </children>
                   </GridPane>
                </children>

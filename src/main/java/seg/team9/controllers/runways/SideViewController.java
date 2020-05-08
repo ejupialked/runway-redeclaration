@@ -133,7 +133,7 @@ public class SideViewController implements Initializable {
         screenWidth = topDownViewController.screenWidth;
         grass.setY(screenHeight*0.5);
         grass.setWidth(screenWidth);
-        grass.setHeight(screenHeight);
+        grass.setHeight(screenHeight/2);
     }
 
     private void updateSlopes(){

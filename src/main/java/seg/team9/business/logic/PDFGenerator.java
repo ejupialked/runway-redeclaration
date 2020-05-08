@@ -45,9 +45,9 @@ public class PDFGenerator {
 
     Document document;
 
-    public PDFGenerator() throws IOException, DocumentException {
+    public PDFGenerator(Airport a, Obstacle o, Runway r) throws IOException, DocumentException {
         takeSnapShots();
-        createPdf(PDF);
+        createPdf(a, o, r);
     }
 
     private void takeSnapShots() {
@@ -75,15 +75,10 @@ public class PDFGenerator {
     }
 
 
-    public void createPdf(String filename) throws DocumentException, IOException {
-
-        Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
-        Airport a = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
-        Runway r = AirportViewController.getInstance().getComboBoxRunways().getValue();
-
+    public void createPdf(Airport a, Obstacle o, Runway r) throws DocumentException, IOException {
 
         this.document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream(String.valueOf(filename)));
+        PdfWriter.getInstance(document, new FileOutputStream(String.valueOf(PDF)));
         document.open();
 
         PdfPTable header = new PdfPTable(2);
