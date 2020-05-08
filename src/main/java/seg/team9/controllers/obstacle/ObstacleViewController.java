@@ -24,6 +24,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.business.models.Obstacle;
+import seg.team9.controllers.PrimaryWindowController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 import seg.team9.utils.UtilsUI;
@@ -149,6 +150,7 @@ public class ObstacleViewController implements Initializable {
     public void updateCheckbox(){
         boxObstacles.getItems().clear();
         boxObstacles.setItems(App.obstacleObservableList);
+        TopDownViewController.getInstance().updateUI();
     }
     public void updateLabelsObstacle(Obstacle o) {
          txtObstacleName.setText(o.getName());

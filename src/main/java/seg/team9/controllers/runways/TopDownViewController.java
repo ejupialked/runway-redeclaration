@@ -358,7 +358,7 @@ public class TopDownViewController implements Initializable {
                 textFlipped = true;
             }
             else if(textFlipped){
-                UtilsUI.rotateView(text, 0, 3000);
+                  UtilsUI.rotateView(text, 0, 3000);
                 textFlipped = false;
 
             }
@@ -366,8 +366,6 @@ public class TopDownViewController implements Initializable {
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
-
-        //PrimaryWindowController.getInstance().changeColourArrows();
 
     }
 
