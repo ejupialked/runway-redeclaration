@@ -47,7 +47,28 @@ public class AirportViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChoiceBoxes();
+        updateTextFields(comboBoxRunways.getValue());
     }
+
+    private void updateTextFields(Runway t1) {
+        txtRunwayLength.setText(addUnitMeasurement(String.valueOf(t1.getLength())));
+
+        DirectedRunway left = t1.getLRunway();
+        DirectedRunway right=  t1.getRRunway();
+
+        //left
+        txtLeftDesignator.setText(left.getDesignator());
+        txtClearwayLeft.setText(addUnitMeasurement(left.getClearway().toString()));
+        txtStopwayLeft.setText(addUnitMeasurement(left.getStopway().toString()));
+        txtThresholdLeft.setText(addUnitMeasurement(left.getThreshold().toString()));
+
+        //right
+        txtRightDesignator.setText(right.getDesignator());
+        txtClearwayRight.setText(addUnitMeasurement(right.getClearway().toString()));
+        txtStopwayRight.setText(addUnitMeasurement(right.getStopway().toString()));
+        txtThresholdRight.setText(addUnitMeasurement(right.getThreshold().toString()));
+    }
+
 
     private void initChoiceBoxes(){
         choiceBoxAirport.setItems(App.airportObservableList);
@@ -73,23 +94,8 @@ public class AirportViewController implements Initializable {
 
         comboBoxRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             if (t1 != null) {
-                txtRunwayLength.setText(addUnitMeasurement(String.valueOf(t1.getLength())));
 
-                DirectedRunway left = t1.getLRunway();
-                DirectedRunway right=  t1.getRRunway();
-
-                //left
-                txtLeftDesignator.setText(left.getDesignator());
-                txtClearwayLeft.setText(addUnitMeasurement(left.getClearway().toString()));
-                txtStopwayLeft.setText(addUnitMeasurement(left.getStopway().toString()));
-                txtThresholdLeft.setText(addUnitMeasurement(left.getThreshold().toString()));
-
-                //right
-                txtRightDesignator.setText(right.getDesignator());
-                txtClearwayRight.setText(addUnitMeasurement(right.getClearway().toString()));
-                txtStopwayRight.setText(addUnitMeasurement(right.getStopway().toString()));
-                txtThresholdRight.setText(addUnitMeasurement(right.getThreshold().toString()));
-
+                updateTextFields(t1);
                 TopDownViewController.getInstance().displayDirectedRunwaySelected(observableValue.getValue());
                 SideViewController.getInstance().updateUI();
             }

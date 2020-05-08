@@ -207,6 +207,7 @@ public class TopDownViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init TopDownViewController");
         topDownView.setMinHeight(0);
+        topDownView.setMinWidth(200);
         topDownView.setMinWidth(0);
         AnchorPane.setBottomAnchor(topDownView, 0d);
         AnchorPane.setTopAnchor(topDownView, 0d);
@@ -219,6 +220,7 @@ public class TopDownViewController implements Initializable {
         initText();
         initLines();
         initRectangles();
+
         if(!isColorDefault)
             initArrowsColors();
         else

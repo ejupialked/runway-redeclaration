@@ -38,7 +38,7 @@
                   <Menu mnemonicParsing="false" text="Theme">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#onDefaultColourClick" text="Default" />
-                        <MenuItem mnemonicParsing="false" onAction="#onColourBlindColourClick"  text="ColourBlind" />
+                        <MenuItem mnemonicParsing="false" onAction="#onColourBlindColourClick" text="ColourBlind" />
                     </items>
                   </Menu>
                </items>
@@ -50,7 +50,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane fx:id="splitPaneView" dividerPositions="0.22287199480181935, 0.6660168940870695" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+      <SplitPane fx:id="splitPaneView" dividerPositions="0.23391812865497075, 0.7894736842105263" layoutY="28.0" prefHeight="895.0" prefWidth="1149.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <items>
             <VBox maxWidth="345.0" minWidth="-Infinity" style="-fx-background-color: #E0E0E0;">
                <children>
