@@ -1,31 +1,50 @@
 package seg.team9.controllers;
 
+import com.itextpdf.text.DocumentException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.PDFGenerator;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
-import seg.team9.controllers.runways.MapLegend;
+import seg.team9.business.models.Obstacle;
+import seg.team9.controllers.airport.AirportViewController;
+import seg.team9.controllers.runways.*;
 import seg.team9.utils.MockData;
-import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
-import seg.team9.controllers.runways.SideViewController;
-import seg.team9.controllers.runways.TopDownViewController;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import seg.team9.utils.UtilsUI.DialogDirectoryChooser;
+import seg.team9.utils.UtilsUI;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PrimaryWindowController implements Initializable {
@@ -39,9 +58,7 @@ public class PrimaryWindowController implements Initializable {
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
     @FXML private MenuBar menuBar; //menu bar
-    @FXML private MenuItem menuItemClose;
-    @FXML private ChoiceBox<Airport> choiceBoxAirport;
-    @FXML private ChoiceBox<Runway> choiceBoxRunway;
+
     // Injecting colour pickers
     @FXML private ColorPicker colourPickerTORA;
     @FXML private ColorPicker colourPickerTODA;
@@ -51,180 +68,189 @@ public class PrimaryWindowController implements Initializable {
 
     private ArrayList<AnchorPane> lightPanes;
     private ArrayList<AnchorPane> darkPanes;
+
     @FXML private AnchorPane paneView;
-    @FXML private AnchorPane paneCalculations;
-    @FXML private AnchorPane paneQMarks;
-
-    // Injecting controllers
-    @FXML private SideViewController sideViewController; // side runway
-    @FXML private TopDownViewController topDownViewController; // top down runway
-    @FXML private ObstacleViewController obstacleViewController;
-    @FXML private CalculationsViewController calculationsViewController;
-
-    @FXML
-    ImageView compass;
-    @FXML
-    ImageView needle;
-
-    @FXML Label labelCompass;
 
 
-    // -fx-background-color #E0E0E0
-    //Declaring colours
-    private String white = " #FFFFFF";
-    private String grey = "#E0E0E0";
-    private String darkerWhite = "#cccccc";
-    private String darkerGray = "#B3B3B3";
+    private App app;
 
-
-    public PrimaryWindowController(){instance = this;}
-    public static PrimaryWindowController getInstance(){return instance;}
+    public PrimaryWindowController() {
+        instance = this;
+    }
+    public static PrimaryWindowController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        sideViewController = SideViewController.getInstance();
-        initCompass();
         initMenuBar();
-        initChoiceBoxes();
         initArrays();
         initSplitPane();
         initTabPane();
     }
 
-    private void initCompass() {
-        needle.setRotate(270);
-    }
 
-    void initSplitPane(){
+    void initSplitPane() {
         logger.info(splitPaneView.getDividers().get(0).getPosition());
     }
 
     private void initArrays() {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
-        lightPanes.add(paneCalculations);
-        lightPanes.add(calculationsViewController.getPaneCalculations());
-        darkPanes.add(paneView);
-        darkPanes.add(paneQMarks);
-        darkPanes.add(obstacleViewController.getPaneObstacles());
     }
 
-    private void initChoiceBoxes(){
-        choiceBoxAirport.getItems().addAll(App.airportObservableList);
-        choiceBoxAirport.getSelectionModel().selectFirst();
-
-        Airport a = choiceBoxAirport.getValue();
-
-        choiceBoxRunway.getItems().addAll(a.getRunwayList());
-        choiceBoxRunway.getSelectionModel().selectFirst();
-
-        topDownViewController.displayDirectedRunwaySelected(choiceBoxRunway.getSelectionModel().getSelectedItem());
-        sideViewController.updateUI();
-
-        //when an airport is selected the runway list will update
-        choiceBoxAirport.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Airport>() {
-            @Override
-            public void changed(ObservableValue<? extends Airport> observableValue, Airport airport, Airport t1) {
-                choiceBoxRunway.getItems().clear();
-                choiceBoxRunway.getItems().addAll(t1.getRunwayList());
-                choiceBoxRunway.getSelectionModel().selectFirst();
-            }
-        });
-
-
-        choiceBoxRunway.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
-            if(t1 != null) {
-                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
-                sideViewController.updateUI();
-            }
-
-            topDownViewController.initArrowsColors();
-            logger.info("Changed colours");
-        });
-
+    private void initMenuBar() {
     }
 
-
-    private void initMenuBar(){
-    }
-
-    private void initTabPane(){
+    private void initTabPane() {
         tabPaneRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, oldv, newv) -> {
-            if(newv.getId().equals("topDownViewTab")){
-                topDownViewController.isSelected = true;
-                sideViewController.isSelected = false;
+            if (newv.getId().equals("topDownViewTab")) {
+                TopDownViewController.getInstance().isSelected = true;
+                SideViewController.getInstance().isSelected = false;
+            } else {
+                TopDownViewController.getInstance().isSelected = false;
+                SideViewController.getInstance().isSelected = true;
             }
-            else{
-                topDownViewController.isSelected = false;
-                sideViewController.isSelected = true;
-            }
-            topDownViewController.updateUI();
-            sideViewController.updateUI();
+            TopDownViewController.getInstance().updateUI();
+            SideViewController.getInstance().updateUI();
         });
     }
-
-    public ChoiceBox<Airport> getChoiceBoxAirport() {
-        return choiceBoxAirport;
-    }
-
-    public void onColourChangeDefault(ActionEvent actionEvent) {
-        for (AnchorPane pane : lightPanes)
-            pane.setStyle("-fx-background-color: " + white + ";");
-
-        for(AnchorPane pane : darkPanes)
-            pane.setStyle("-fx-background-color: " + grey + ";");
-    }
-
-    public void onColourChangeDark(ActionEvent actionEvent) {
-        for (AnchorPane pane : lightPanes)
-            pane.setStyle("-fx-background-color: " + darkerWhite + ";");
-
-        for(AnchorPane pane : darkPanes)
-            pane.setStyle("-fx-background-color: " + darkerGray + ";");
-    }
-
-    public void rotateNeedle(Double val){
-        if(val < 0)
-            labelCompass.setText(val+360 + "°");
-        else
-            labelCompass.setText(val + "°");
-        UtilsUI.rotateView(needle, val, 3000);
-    }
-
 
 
     public void onPrintBreakdownClick(ActionEvent actionEvent) {
+        int choice;
+        try {
+            Airport a = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+            Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
+            Runway r = AirportViewController.getInstance().getComboBoxRunways().getValue();
+
+            new PDFGenerator(a, o, r);
+            choice = UtilsUI.showPopupWithButtons("You can either open and print the " +
+                    "report or simply save it.", Alert.AlertType.INFORMATION);
+        } catch (IOException | DocumentException e) {
+            UtilsUI.showErrorMessage(e.getMessage());
+            return;
+        }
+
+        if (choice == 3) {
+            App.getPrimaryWindow().getScene().setCursor(Cursor.WAIT);
+            app.showFile();
+            App.getPrimaryWindow().getScene().setCursor(Cursor.DEFAULT);
+        } else if (choice == 2) {
+            DialogDirectoryChooser ddc = new DialogDirectoryChooser(App.getPrimaryWindow());
+            File fileSaved = null; //returns location of the fil
+            try {
+                fileSaved = ddc.saveFile();
+                if(fileSaved != null){
+                    UtilsUI.showInfoMessage("The report can be found here: " + fileSaved.getAbsolutePath());
+                }
+            } catch (Exception e) {
+                UtilsUI.showErrorMessage(e.getMessage());
+            }
+        }
     }
 
     public void onObstacleExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
-        xmlExporter.importObstacles(MockData.obstacles);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*.xml"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if(file == null)
+            return;
+
+        if(!file.getName().contains(".xml"))
+            file = new File(file.getAbsolutePath()+".xml");
+
+        boolean check = xmlExporter.exportObstacles(ObstacleViewController.getInstance().getBoxObstacles().getValue(),file);
+        if (check) {
+            logger.info("Exported successfully");
+            UtilsUI.showInfoMessage("The obstacles have been successfully exported to an XML file.");
+        }
+        else {
+            logger.info("Exporting went wrong");
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the obstacles to an XML file.");
+        }
     }
 
     public void onAirportExportClick(ActionEvent actionEvent) {
         XMLExporter xmlExporter = App.xml;
-        xmlExporter.exportAirport(MockData.aiports.get(0));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("XML format(*.xml)","*.xml"));
+        File file = fileChooser.showSaveDialog(new Stage());
+        if(file == null)
+            return;
+
+        if(!file.getName().contains(".xml"))
+            file = new File(file.getAbsolutePath()+".xml");
+
+        boolean check = xmlExporter.exportAirport(AirportViewController.getInstance().getChoiceBoxAirport().getValue(),file);
+
+        if (check) {
+            logger.info("Exported successfully");
+            UtilsUI.showInfoMessage("Airport: " + AirportViewController.getInstance().getChoiceBoxAirport().getValue().getName()
+                    + " has been exported to an XML file.");
+        }
+        else {
+            logger.info("Exporting went wrong");
+            UtilsUI.showErrorMessage("Something went wrong while trying to export the airport: "
+                    + AirportViewController.getInstance().getChoiceBoxAirport().getValue().getName() + " to an XML file.");
+        }
+
     }
 
     public void onObstacleImportClick(ActionEvent actionEvent) {
-        XMLImporter xmlExporter = App.xml;
+        XMLImporter xmlImporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        File file = fileChooser.showOpenDialog(new Stage());
+        List<Obstacle> list = xmlImporter.importObstacles(file);
+        App.obstacleObservableList.addAll(list);
 
-        //  xmlExporter.importObstacles()
+        UtilsUI.showInfoMessage("Obstacles from file " + file.getName() +" has been imported to the application.");
+
     }
 
     public void onAirportImportClick(ActionEvent actionEvent) {
-        XMLImporter xmlExporter = App.xml;
+        XMLImporter xmlImporter = App.xml;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file to import");
+        File file = fileChooser.showOpenDialog(new Stage());
+        Airport airport = xmlImporter.importAirport(file);
+        App.airportObservableList.add(airport);
+        logger.info("Imported Airport : " + airport.getName());
 
-        //xmlExporter.importObstacles()
+        airport.getRunwayList()
+                .forEach(r -> logger.info("With runway : " + r.toString()));
+
+
+        UtilsUI.showInfoMessage("Airport from file " + file.getName()
+                +" named " + airport.getName() + " has been imported to the application.");
+
     }
 
 
+        public MapLegend getSideLegend () {
+            return sideLegend;
+        }
 
-    public MapLegend getSideLegend() {
-        return sideLegend;
+        public MapLegend getTopLegend () {
+            return topLegend;
+        }
+
+        public void setApp (App app){
+            this.app = app;
+        }
+
+    public void onDefaultColourClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().isColorDefault = true;
+        TopDownViewController.getInstance().initArrowsColoursDefault();
     }
 
-    public MapLegend getTopLegend() {
-        return topLegend;
+    public void onColourBlindColourClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().isColorDefault = false;
+        TopDownViewController.getInstance().initArrowsColors();
     }
 }
+

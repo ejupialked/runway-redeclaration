@@ -1,6 +1,5 @@
 package seg.team9.business.logic;
 
-import javafx.css.CssParser;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.business.models.DirectedRunway;
@@ -10,6 +9,8 @@ import seg.team9.controllers.breakdown.CalculationBreakdownController;
 
 import java.util.HashMap;
 
+
+
 public class Calculator {
 
     private static final Logger logger = LogManager.getLogger("Calculator");
@@ -18,11 +19,12 @@ public class Calculator {
     private static final Double STRIPEND = 60d;
     private HashMap<String, String> calculationBreakdown = new HashMap<String, String>();
 
+
     //Running this method on a runway will calculate the redesignated values and store them in the WorkingXXXX variables.
     //The method does not return anything - merely used as a gateway.
     public void redesignate(Runway runway, Obstacle obstacle){
         findDirection(runway, obstacle);
-
+        runway.setCalculationBreakdow(calculationBreakdown);
         CalculationBreakdownController.getInstance().showBreakdown(calculationBreakdown);
     }
 

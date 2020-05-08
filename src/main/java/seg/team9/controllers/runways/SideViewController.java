@@ -133,7 +133,7 @@ public class SideViewController implements Initializable {
         screenWidth = topDownViewController.screenWidth;
         grass.setY(screenHeight*0.5);
         grass.setWidth(screenWidth);
-        grass.setHeight(screenHeight);
+        grass.setHeight(screenHeight/2);
     }
 
     private void updateSlopes(){
@@ -167,5 +167,10 @@ public class SideViewController implements Initializable {
         sideView.getChildren().add(PrimaryWindowController.getInstance().getSideLegend());
         AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
         AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
+    }
+
+
+    public AnchorPane getSideView() {
+        return sideView;
     }
 }

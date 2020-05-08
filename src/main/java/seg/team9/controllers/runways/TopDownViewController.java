@@ -1,5 +1,6 @@
 package seg.team9.controllers.runways;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,7 +25,6 @@ import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 public class TopDownViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("TopDownViewController");
@@ -38,14 +38,18 @@ public class TopDownViewController implements Initializable {
 
     private Button button = new Button("Helllo");
     public boolean isSelected = true;
-
+    public boolean isHorizontal = true;
+    public boolean isColorDefault = false;
+    private boolean changedRunway = false;
+    private Runway prevRunway;
     private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
-    private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D));
+    private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D), 4000d);
 
     //UI STUFF
     private Pane graphics = new Pane();
     private Pane text = new Pane();
     public Pane arrows = new Pane();
+    private Compass compass;
     private boolean textFlipped = false;
 
 
@@ -93,12 +97,12 @@ public class TopDownViewController implements Initializable {
     private Line RESAEndLineR = new Line();
     private Line BlastEndLineR = new Line();
 
-    private Arrow arrowTODAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowASDAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowTORAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowLDAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowRESAR = new Arrow(0,0,0,0,0);
-    private Arrow arrowBlastR = new Arrow(0,0,0,0,0);
+    public Arrow arrowTODAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowASDAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowTORAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowLDAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowRESAR = new Arrow(0,0,0,0,0);
+    public Arrow arrowBlastR = new Arrow(0,0,0,0,0);
 
     private Text textTODAR = new Text("TODA");
     private Text textASDAR = new Text("ASDA");
@@ -140,12 +144,12 @@ public class TopDownViewController implements Initializable {
     private Line RESAEndLineL = new Line();
     private Line BlastEndLineL = new Line();
 
-    private Arrow arrowTODAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowASDAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowTORAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowLDAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowRESAL = new Arrow(0,0,0,0,0);
-    private Arrow arrowBlastL = new Arrow(0,0,0,0,0);
+    public Arrow arrowTODAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowASDAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowTORAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowLDAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowRESAL = new Arrow(0,0,0,0,0);
+    public Arrow arrowBlastL = new Arrow(0,0,0,0,0);
 
     private Text textTODAL = new Text("TODA");
     private Text textASDAL = new Text("ASDA");
@@ -204,13 +208,25 @@ public class TopDownViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logger.info("init TopDownViewController");
         topDownView.setMinHeight(0);
+        topDownView.setMinWidth(200);
         topDownView.setMinWidth(0);
+        AnchorPane.setBottomAnchor(topDownView, 0d);
+        AnchorPane.setTopAnchor(topDownView, 0d);
+        AnchorPane.setLeftAnchor(topDownView, 0d);
+        AnchorPane.setRightAnchor(topDownView, 0d);
+
+
         topDownView.setStyle("-fx-background-color: green");
-        addChildren();
         initText();
         initLines();
         initRectangles();
-        initArrowsColors();
+
+        if(!isColorDefault)
+            initArrowsColors();
+        else
+            initArrowsColoursDefault();
+
+        addChildren();
 
 
         topDownView.widthProperty().addListener((obs,oldVal,newVal) -> {
@@ -224,6 +240,7 @@ public class TopDownViewController implements Initializable {
         updateUI();
 
     }
+
 
     public void updateScaler(){
         middleY = graphics.getHeight()*0.5;
@@ -336,11 +353,30 @@ public class TopDownViewController implements Initializable {
 
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
+            if(compass != null)
+                compass.rotateNeedle(graphicsRot-90);
 
-            PrimaryWindowController.getInstance().rotateNeedle(graphicsRot-90);
+            if(!isHorizontal && changedRunway) {
+                UtilsUI.rotateView(graphics, 0, 3000);
+                if ((graphicsRot > 90) && !textFlipped) {
+                    UtilsUI.rotateView(text, 180, 3000);
+                    textFlipped = true;
+                } else if (textFlipped) {
+                    UtilsUI.rotateView(text, 0, 3000);
+                    textFlipped = false;
+                }
+            }
+        }catch (NumberFormatException e){
+            logger.error("invalid runway rotation");
+        }
 
+    }
+
+    public void rotateRunway(){
+        double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
+
+        try{
             UtilsUI.rotateView(graphics, graphicsRot, 3000);
-
             if((graphicsRot>90) && !textFlipped) {
                 UtilsUI.rotateView(text, 180, 3000);
                 textFlipped = true;
@@ -348,19 +384,24 @@ public class TopDownViewController implements Initializable {
             else if(textFlipped){
                 UtilsUI.rotateView(text, 0, 3000);
                 textFlipped = false;
-
             }
-
-        }catch (NumberFormatException e){
+        }
+        catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
-
-        //PrimaryWindowController.getInstance().changeColourArrows();
-
     }
 
-
-
+    public void rotateRunwayHorizontal(){
+        double angle = 0;
+        UtilsUI.rotateView(graphics, angle, 3000);
+        if ((angle > 90) && !textFlipped) {
+            UtilsUI.rotateView(text, 180, 3000);
+            textFlipped = true;
+        } else if (textFlipped) {
+            UtilsUI.rotateView(text, 0, 3000);
+            textFlipped = false;
+        }
+    }
 
     public void updateClearedAndGradedArea(){
         double[] points = {
@@ -597,7 +638,10 @@ public class TopDownViewController implements Initializable {
         arrowBlastR= new Arrow(BlastStartXR, 0.42*screenHeight, BlastEndXR, 0.42*screenHeight);
         arrowBlastL = new Arrow(BlastStartXL, 0.58*screenHeight, BlastEndXL, 0.58*screenHeight);
 
-        initArrowsColors();
+        if(!isColorDefault)
+            initArrowsColors();
+        else
+            initArrowsColoursDefault();
 
 
         text.getChildren().add(textTORAR);
@@ -699,14 +743,23 @@ public class TopDownViewController implements Initializable {
         AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
         AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
 
+
+
+        if(compass != null) {
+            topDownView.getChildren().add(compass);
+            AnchorPane.setBottomAnchor(compass, 0d);
+            AnchorPane.setRightAnchor(compass, -35d);
+        }
     }
 
 
 
     public void displayDirectedRunwaySelected(Runway runway) {
+        changedRunway = true;
         currentRunway = runway;
         updateValues();
         updateUI();
+        changedRunway = false;
     }
 
     public void displayObstacleSelected(Obstacle obstacle){
@@ -743,7 +796,7 @@ public class TopDownViewController implements Initializable {
 
         }
         catch (NullPointerException e){
-            e.printStackTrace();
+
         }
     }
 
@@ -793,6 +846,7 @@ public class TopDownViewController implements Initializable {
     }
 
     public void initArrowsColors(){
+
         arrowTORAL.changeColour(UtilsUI.Colors.TORA);
         arrowTORAL.setStrokeWidth(4f);
 
@@ -828,41 +882,61 @@ public class TopDownViewController implements Initializable {
 
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
+
+        PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
+        isColorDefault = false;
+
     }
 
-    public void changeColourTORA(Color color){
-        arrowTORAL.changeColour(color);
+    public void initArrowsColoursDefault(){
+
+        arrowTORAL.changeColour(UtilsUI.Colors.DEFAULT);
         arrowTORAL.setStrokeWidth(4f);
 
-        arrowTORAR.changeColour(color);
+        arrowTORAR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowTORAR.setStrokeWidth(4f);
 
-    }
-
-    public void changeColourTODA(Color color){
-        arrowTODAL.changeColour(color);
+        arrowTODAL.changeColour(UtilsUI.Colors.DEFAULT);
         arrowTODAL.setStrokeWidth(4f);
 
-        arrowTODAR.changeColour(color);
+        arrowTODAR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowTODAR.setStrokeWidth(4f);
 
-    }
-
-    public void changeColourLDA(Color color){
-        arrowLDAL.changeColour(color);
+        arrowLDAL.changeColour(UtilsUI.Colors.DEFAULT);
         arrowLDAL.setStrokeWidth(4f);
 
-        arrowLDAR.changeColour(color);
+        arrowLDAR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowLDAR.setStrokeWidth(4f);
 
-    }
-
-    public void changeColourASDA(Color color){
-        arrowASDAR.changeColour(color);
+        arrowASDAR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowASDAR.setStrokeWidth(4f);
 
-        arrowASDAL.changeColour(color);
+        arrowASDAL.changeColour(UtilsUI.Colors.DEFAULT);
         arrowASDAL.setStrokeWidth(4f);
 
+        arrowRESAL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowRESAL.setStrokeWidth(4f);
+
+        arrowRESAR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowRESAR.setStrokeWidth(4f);
+
+        arrowBlastL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowBlastL.setStrokeWidth(4f);
+
+        arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowBlastR.setStrokeWidth(4f);
+
+        PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
+        isColorDefault = true;
+    }
+
+
+
+    public AnchorPane getTopDownView() {
+        return topDownView;
+    }
+
+    public void setCompass(Compass compass) {
+        this.compass = compass;
     }
 }
