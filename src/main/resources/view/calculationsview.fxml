@@ -16,7 +16,7 @@
         <content>
             <AnchorPane fx:id="paneCalculations" prefWidth="395.0" style="-fx-background-color: #E0E0E0;">
                 <children>
-                  <GridPane layoutX="14.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-border-color: black;" AnchorPane.leftAnchor="10.0">
+                  <GridPane layoutX="14.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" AnchorPane.leftAnchor="10.0">
                     <columnConstraints>
                         <ColumnConstraints />
                         <ColumnConstraints />
@@ -34,7 +34,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="TORA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="TORA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <font>
                                   <Font name="System Bold" size="16.0" />
                               </font>
@@ -45,7 +45,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="TODA" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="TODA" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <font>
                                   <Font name="System Bold" size="16.0" />
                               </font>
@@ -56,7 +56,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="LDA" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LDA" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <font>
                                   <Font name="System Bold" size="16.0" />
                               </font>
@@ -67,7 +67,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="ASDA" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="ASDA" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <font>
                                   <Font name="System Bold" size="16.0" />
                               </font>
@@ -78,7 +78,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label fx:id="labelTORAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3234" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                          <Label fx:id="labelTORAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3234" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <font>
                                   <Font size="16.0" />
                               </font>
@@ -89,7 +89,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label fx:id="labelTODAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3434" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                          <Label fx:id="labelTODAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3434" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <font>
                                   <Font size="16.0" />
                               </font>
@@ -100,7 +100,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label fx:id="labelLDAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3232" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                          <Label fx:id="labelLDAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3232" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <font>
                                   <Font size="16.0" />
                               </font>
@@ -111,7 +111,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                          <Label fx:id="labelASDAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3423" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                          <Label fx:id="labelASDAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3423" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <font>
                                   <Font size="16.0" />
                               </font>
@@ -122,7 +122,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                           </Label>
-                        <Label fx:id="leftDesignator" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="27/L" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Label fx:id="leftDesignator" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="27/L" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -133,7 +133,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="rightDesignator" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="27/R" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="rightDesignator" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="27/R" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -144,7 +144,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelTORAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="2344m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="labelTORAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="2344m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -155,7 +155,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelTODAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="labelTODAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -166,7 +166,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelLDAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="labelLDAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -177,7 +177,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelASDAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="234" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Label fx:id="labelASDAr" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="234" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -188,7 +188,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="leftDesignator1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="27/L" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                        <Label fx:id="leftDesignator1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="27/L" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -199,7 +199,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="rightDesignator1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="27/R" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                        <Label fx:id="rightDesignator1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="27/R" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -210,7 +210,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalTORAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3234" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalTORAl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3234" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -221,7 +221,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalTORAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="2344m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalTORAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="2344m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -232,7 +232,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalLDAl1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3232" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalLDAl1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3232" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -243,7 +243,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalLDAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalLDAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="234" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -254,7 +254,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalTODAl1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3434" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalTODAl1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3434" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -265,7 +265,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalTODAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalTODAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="234" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -276,7 +276,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalASDAl1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="3423" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalASDAl1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="3423" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -287,7 +287,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="labelOriginalASDAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="234" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                        <Label fx:id="labelOriginalASDAr1" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="234" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -308,7 +308,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black;" text="Runway">
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Runway">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
