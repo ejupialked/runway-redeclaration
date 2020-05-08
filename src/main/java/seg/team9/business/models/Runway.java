@@ -13,6 +13,10 @@ public class Runway {
         this.length = length;
     }
 
+    public double getLength() {
+        return length;
+    }
+
     public DirectedRunway getRRunway(){
         return rightRunway;
     }

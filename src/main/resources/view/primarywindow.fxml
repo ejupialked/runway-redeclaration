@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -41,8 +37,8 @@
                <items>
                   <Menu mnemonicParsing="false" text="Theme">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#onColourChangeDefault" text="Default" />
-                        <MenuItem mnemonicParsing="false" onAction="#onColourChangeDark" text="Dark" />
+                      <MenuItem mnemonicParsing="false" text="Default" />
+                        <MenuItem mnemonicParsing="false" text="Dark" />
                     </items>
                   </Menu>
                </items>
@@ -71,7 +67,7 @@
             </VBox>
           <AnchorPane fx:id="paneView" style="-fx-background-color: #E0E0E0;">
                <children>
-                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="71.0" prefHeight="842.0" prefWidth="613.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="71.0">
+                  <TabPane fx:id="tabPaneRunways" layoutX="15.0" layoutY="71.0" style="-fx-border-style: solid;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <tabs>
                       <Tab fx:id="topDownViewTab" text="Top-down View">
                           <content>
@@ -83,24 +79,13 @@
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <HBox layoutX="24.0" layoutY="21.0" AnchorPane.leftAnchor="20.0">
-                     <children>
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Airport:" />
-                        <ChoiceBox fx:id="choiceBoxAirport" />
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Runway:">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </Label>
-                        <ComboBox fx:id="comboBoxRunways" />
-                     </children>
-                  </HBox>
                   <HBox layoutX="322.0" layoutY="22.0" AnchorPane.rightAnchor="200.0" />
                </children>
 
                               </AnchorPane>
             <VBox>
                <children>
+                   <fx:include fx:id="airportview" source="airportView.fxml" />
                    <fx:include fx:id="obstacleView" source="obstacleview.fxml" />
                </children>
             </VBox>

@@ -19,6 +19,7 @@ import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.controllers.airport.AirportViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
@@ -77,8 +78,8 @@ public class PDFGenerator {
     public void createPdf(String filename) throws DocumentException, IOException {
 
         Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
-        Airport a = PrimaryWindowController.getInstance().getChoiceBoxAirport().getValue();
-        Runway r = PrimaryWindowController.getInstance().getComboBoxRunways().getValue();
+        Airport a = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+        Runway r = AirportViewController.getInstance().getComboBoxRunways().getValue();
 
 
         this.document = new Document();

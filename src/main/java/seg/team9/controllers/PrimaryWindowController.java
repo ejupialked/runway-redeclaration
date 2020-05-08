@@ -23,6 +23,7 @@ import seg.team9.business.logic.PDFGenerator;
 import seg.team9.business.logic.XML.XMLExporter;
 import seg.team9.business.logic.XML.XMLImporter;
 import seg.team9.business.models.Obstacle;
+import seg.team9.controllers.airport.AirportViewController;
 import seg.team9.controllers.runways.Compass;
 import seg.team9.controllers.runways.MapLegend;
 import seg.team9.utils.MockData;
@@ -59,70 +60,34 @@ public class PrimaryWindowController implements Initializable {
     Compass topCompass = new Compass();
 
     // Injecting ui components.
-    @FXML
-    private TabPane tabPaneRunways;
-    @FXML
-    private MenuBar menuBar; //menu bar
-    @FXML
-    private MenuItem menuItemClose;
-    @FXML
-    private ChoiceBox<Airport> choiceBoxAirport;
-    @FXML
-    private ComboBox<Runway> comboBoxRunways;
+    @FXML private TabPane tabPaneRunways;
+    @FXML private MenuBar menuBar; //menu bar
+
     // Injecting colour pickers
-    @FXML
-    private ColorPicker colourPickerTORA;
-    @FXML
-    private ColorPicker colourPickerTODA;
-    @FXML
-    private ColorPicker colourPickerLDA;
-    @FXML
-    private ColorPicker colourPickerASDA;
-    @FXML
-    private SplitPane splitPaneView;
+    @FXML private ColorPicker colourPickerTORA;
+    @FXML private ColorPicker colourPickerTODA;
+    @FXML private ColorPicker colourPickerLDA;
+    @FXML private ColorPicker colourPickerASDA;
+    @FXML private SplitPane splitPaneView;
 
     private ArrayList<AnchorPane> lightPanes;
     private ArrayList<AnchorPane> darkPanes;
-    @FXML
-    private AnchorPane paneView;
-    @FXML
-    private AnchorPane paneCalculations;
-    @FXML
-    private AnchorPane paneQMarks;
 
-    // Injecting controllers
-    @FXML
-    private SideViewController sideViewController; // side runway
-    @FXML
-    private TopDownViewController topDownViewController; // top down runway
-    @FXML
-    private ObstacleViewController obstacleViewController;
-    @FXML
-    private CalculationsViewController calculationsViewController;
+    @FXML private AnchorPane paneView;
 
 
-    // -fx-background-color #E0E0E0
-    //Declaring colours
-    private String white = " #FFFFFF";
-    private String grey = "#E0E0E0";
-    private String darkerWhite = "#cccccc";
-    private String darkerGray = "#B3B3B3";
     private App app;
-
 
     public PrimaryWindowController() {
         instance = this;
     }
-
     public static PrimaryWindowController getInstance() {
         return instance;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        sideViewController = SideViewController.getInstance();
         initMenuBar();
-        initChoiceBoxes();
         initArrays();
         initSplitPane();
         initTabPane();
@@ -136,53 +101,6 @@ public class PrimaryWindowController implements Initializable {
     private void initArrays() {
         lightPanes = new ArrayList<>();
         darkPanes = new ArrayList<>();
-        lightPanes.add(paneCalculations);
-        lightPanes.add(calculationsViewController.getPaneCalculations());
-        darkPanes.add(paneView);
-        darkPanes.add(paneQMarks);
-        darkPanes.add(obstacleViewController.getPaneObstacles());
-    }
-
-    private void initChoiceBoxes(){
-        choiceBoxAirport.setItems(App.airportObservableList);
-        choiceBoxAirport.getSelectionModel().selectFirst();
-
-        Airport a = choiceBoxAirport.getValue();
-
-        initComboBox(a);
-
-
-        topDownViewController.displayDirectedRunwaySelected(comboBoxRunways.getSelectionModel().getSelectedItem());
-        sideViewController.updateUI();
-
-        //when an airport is selected the runway list will update
-        choiceBoxAirport.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Airport>() {
-            @Override
-            public void changed(ObservableValue<? extends Airport> observableValue, Airport airport, Airport t1) {
-                comboBoxRunways.getItems().clear();
-                comboBoxRunways.setItems(FXCollections.observableArrayList(t1.getRunwayList()));
-                comboBoxRunways.getSelectionModel().selectFirst();
-            }
-        });
-
-
-        comboBoxRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
-            if (t1 != null) {
-                topDownViewController.displayDirectedRunwaySelected(observableValue.getValue());
-                sideViewController.updateUI();
-            }
-
-            topDownViewController.initArrowsColors();
-            logger.info("Changed colours");
-        });
-
-    }
-
-
-    public void initComboBox(Airport a) {
-        comboBoxRunways.setPromptText("Select runway");
-        comboBoxRunways.setItems(FXCollections.observableArrayList(a.getRunwayList()));
-        comboBoxRunways.getSelectionModel().selectFirst();
     }
 
     private void initMenuBar() {
@@ -191,39 +109,15 @@ public class PrimaryWindowController implements Initializable {
     private void initTabPane() {
         tabPaneRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, oldv, newv) -> {
             if (newv.getId().equals("topDownViewTab")) {
-                topDownViewController.isSelected = true;
-                sideViewController.isSelected = false;
+                TopDownViewController.getInstance().isSelected = true;
+                SideViewController.getInstance().isSelected = false;
             } else {
-                topDownViewController.isSelected = false;
-                sideViewController.isSelected = true;
+                TopDownViewController.getInstance().isSelected = false;
+                SideViewController.getInstance().isSelected = true;
             }
-            topDownViewController.updateUI();
-            sideViewController.updateUI();
+            TopDownViewController.getInstance().updateUI();
+            SideViewController.getInstance().updateUI();
         });
-    }
-
-    public ChoiceBox<Airport> getChoiceBoxAirport() {
-        return choiceBoxAirport;
-    }
-
-    public ComboBox<Runway> getComboBoxRunways() {
-        return comboBoxRunways;
-    }
-
-    public void onColourChangeDefault(ActionEvent actionEvent) {
-        for (AnchorPane pane : lightPanes)
-            pane.setStyle("-fx-background-color: " + white + ";");
-
-        for (AnchorPane pane : darkPanes)
-            pane.setStyle("-fx-background-color: " + grey + ";");
-    }
-
-    public void onColourChangeDark(ActionEvent actionEvent) {
-        for (AnchorPane pane : lightPanes)
-            pane.setStyle("-fx-background-color: " + darkerWhite + ";");
-
-        for (AnchorPane pane : darkPanes)
-            pane.setStyle("-fx-background-color: " + darkerGray + ";");
     }
 
 
@@ -291,16 +185,17 @@ public class PrimaryWindowController implements Initializable {
         if(!file.getName().contains(".xml"))
             file = new File(file.getAbsolutePath()+".xml");
 
-        boolean check = xmlExporter.exportAirport(getChoiceBoxAirport().getValue(),file);
+        boolean check = xmlExporter.exportAirport(AirportViewController.getInstance().getChoiceBoxAirport().getValue(),file);
+
         if (check) {
             logger.info("Exported successfully");
-            UtilsUI.showInfoMessage("Airport: " + getChoiceBoxAirport().getValue().getName()
+            UtilsUI.showInfoMessage("Airport: " + AirportViewController.getInstance().getChoiceBoxAirport().getValue().getName()
                     + " has been exported to an XML file.");
         }
         else {
             logger.info("Exporting went wrong");
             UtilsUI.showErrorMessage("Something went wrong while trying to export the airport: "
-                    + getChoiceBoxAirport().getValue().getName() + " to an XML file.");
+                    + AirportViewController.getInstance().getChoiceBoxAirport().getValue().getName() + " to an XML file.");
         }
 
     }
