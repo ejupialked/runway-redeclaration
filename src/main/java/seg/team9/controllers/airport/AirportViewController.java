@@ -8,17 +8,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
 import seg.team9.business.models.Airport;
+import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
+import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static seg.team9.utils.UtilsUI.addUnitMeasurement;
 
 public class AirportViewController implements Initializable {
 
@@ -29,6 +34,14 @@ public class AirportViewController implements Initializable {
     @FXML private ComboBox<Runway> comboBoxRunways;
     @FXML private TextField txtRunwayLength;
 
+    @FXML private Label txtLeftDesignator;
+    @FXML private Label txtRightDesignator;
+    @FXML private TextField txtThresholdRight;
+    @FXML private TextField txtClearwayRight;
+    @FXML private TextField txtStopwayRight;
+    @FXML private TextField txtThresholdLeft;
+    @FXML private TextField txtClearwayLeft;
+    @FXML private TextField txtStopwayLeft;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,10 +72,25 @@ public class AirportViewController implements Initializable {
             }
         });
 
-
         comboBoxRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             if (t1 != null) {
-                txtRunwayLength.setText(String.valueOf(t1.getLength()));
+                txtRunwayLength.setText(addUnitMeasurement(String.valueOf(t1.getLength())));
+
+                DirectedRunway left = t1.getLRunway();
+                DirectedRunway right=  t1.getRRunway();
+
+                //left
+                txtLeftDesignator.setText(left.getDesignator());
+                txtClearwayLeft.setText(addUnitMeasurement(left.getClearway().toString()));
+                txtStopwayLeft.setText(addUnitMeasurement(left.getStopway().toString()));
+                txtThresholdLeft.setText(addUnitMeasurement(left.getThreshold().toString()));
+
+                //right
+                txtRightDesignator.setText(right.getDesignator());
+                txtClearwayRight.setText(addUnitMeasurement(right.getClearway().toString()));
+                txtStopwayRight.setText(addUnitMeasurement(right.getStopway().toString()));
+                txtThresholdRight.setText(addUnitMeasurement(right.getThreshold().toString()));
+
                 TopDownViewController.getInstance().displayDirectedRunwaySelected(observableValue.getValue());
                 SideViewController.getInstance().updateUI();
             }
@@ -99,5 +127,7 @@ public class AirportViewController implements Initializable {
 
     public void onHorizontalClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().rotateRunwayHorizontal();
+    }
+    public void addAirport(ActionEvent actionEvent) {
     }
 }
