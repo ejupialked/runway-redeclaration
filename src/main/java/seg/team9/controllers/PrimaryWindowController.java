@@ -247,46 +247,12 @@ public class PrimaryWindowController implements Initializable {
         }
 
     public void onDefaultColourClick(ActionEvent actionEvent) {
-        TopDownViewController.getInstance().arrowTORAL.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowTORAL.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowTORAR.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowTORAR.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowTODAL.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowTODAL.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowTODAR.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowTODAR.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowLDAL.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowLDAL.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowLDAR.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowLDAR.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowASDAR.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowASDAR.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowASDAL.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowASDAL.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowRESAL.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowRESAL.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowRESAR.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowRESAR.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowBlastL.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowBlastL.setStrokeWidth(4f);
-
-        TopDownViewController.getInstance().arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
-        TopDownViewController.getInstance().arrowBlastR.setStrokeWidth(4f);
-
-        getTopLegend().setOpacity(0);
+        TopDownViewController.getInstance().isColorDefault = true;
+        TopDownViewController.getInstance().initArrowsColoursDefault();
     }
 
     public void onColourBlindColourClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().isColorDefault = false;
         TopDownViewController.getInstance().initArrowsColors();
     }
 }

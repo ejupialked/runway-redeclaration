@@ -38,6 +38,7 @@ public class TopDownViewController implements Initializable {
     private Button button = new Button("Helllo");
     public boolean isSelected = true;
     public boolean isHorizontal = true;
+    public boolean isColorDefault = false;
     private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
     private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D), 4000d);
 
@@ -216,7 +217,10 @@ public class TopDownViewController implements Initializable {
         initText();
         initLines();
         initRectangles();
-        initArrowsColors();
+        if(!isColorDefault)
+            initArrowsColors();
+        else
+            initArrowsColoursDefault();
 
         addChildren();
 
@@ -620,7 +624,10 @@ public class TopDownViewController implements Initializable {
         arrowBlastR= new Arrow(BlastStartXR, 0.42*screenHeight, BlastEndXR, 0.42*screenHeight);
         arrowBlastL = new Arrow(BlastStartXL, 0.58*screenHeight, BlastEndXL, 0.58*screenHeight);
 
-        initArrowsColors();
+        if(!isColorDefault)
+            initArrowsColors();
+        else
+            initArrowsColoursDefault();
 
 
         text.getChildren().add(textTORAR);
@@ -821,6 +828,7 @@ public class TopDownViewController implements Initializable {
     }
 
     public void initArrowsColors(){
+
         arrowTORAL.changeColour(UtilsUI.Colors.TORA);
         arrowTORAL.setStrokeWidth(4f);
 
@@ -858,8 +866,51 @@ public class TopDownViewController implements Initializable {
         arrowBlastR.setStrokeWidth(4f);
 
         PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
+        isColorDefault = false;
+
     }
 
+    public void initArrowsColoursDefault(){
+
+        arrowTORAL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowTORAL.setStrokeWidth(4f);
+
+        arrowTORAR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowTORAR.setStrokeWidth(4f);
+
+        arrowTODAL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowTODAL.setStrokeWidth(4f);
+
+        arrowTODAR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowTODAR.setStrokeWidth(4f);
+
+        arrowLDAL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowLDAL.setStrokeWidth(4f);
+
+        arrowLDAR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowLDAR.setStrokeWidth(4f);
+
+        arrowASDAR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowASDAR.setStrokeWidth(4f);
+
+        arrowASDAL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowASDAL.setStrokeWidth(4f);
+
+        arrowRESAL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowRESAL.setStrokeWidth(4f);
+
+        arrowRESAR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowRESAR.setStrokeWidth(4f);
+
+        arrowBlastL.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowBlastL.setStrokeWidth(4f);
+
+        arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowBlastR.setStrokeWidth(4f);
+
+        PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
+        isColorDefault = true;
+    }
 
     public AnchorPane getTopDownView() {
         return topDownView;
