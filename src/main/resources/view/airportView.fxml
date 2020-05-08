@@ -45,6 +45,11 @@
                               <Button fx:id="buttonAlign" mnemonicParsing="false" onAction="#onAlignClick" prefHeight="26.4" prefWidth="60.8" text="Align" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <Button fx:id="buttonHorizontal" layoutX="30.0" mnemonicParsing="false" onAction="#onHorizontalClick" prefHeight="25.6" prefWidth="82.4" text="Horizontal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </GridPane>
                </children>

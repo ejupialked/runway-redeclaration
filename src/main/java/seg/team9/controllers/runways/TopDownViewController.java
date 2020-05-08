@@ -39,6 +39,8 @@ public class TopDownViewController implements Initializable {
     public boolean isSelected = true;
     public boolean isHorizontal = true;
     public boolean isColorDefault = false;
+    private boolean changedRunway = false;
+    private Runway prevRunway;
     private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
     private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D), 4000d);
 
@@ -353,7 +355,7 @@ public class TopDownViewController implements Initializable {
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
             compass.rotateNeedle(graphicsRot-90);
-            if(!isHorizontal) {
+            if(!isHorizontal && changedRunway) {
                 UtilsUI.rotateView(graphics, 0, 3000);
                 if ((graphicsRot > 90) && !textFlipped) {
                     UtilsUI.rotateView(text, 180, 3000);
@@ -388,6 +390,17 @@ public class TopDownViewController implements Initializable {
         }
     }
 
+    public void rotateRunwayHorizontal(){
+        double angle = 0;
+        UtilsUI.rotateView(graphics, angle, 3000);
+        if ((angle > 90) && !textFlipped) {
+            UtilsUI.rotateView(text, 180, 3000);
+            textFlipped = true;
+        } else if (textFlipped) {
+            UtilsUI.rotateView(text, 0, 3000);
+            textFlipped = false;
+        }
+    }
 
     public void updateClearedAndGradedArea(){
         double[] points = {
@@ -739,9 +752,11 @@ public class TopDownViewController implements Initializable {
 
 
     public void displayDirectedRunwaySelected(Runway runway) {
+        changedRunway = true;
         currentRunway = runway;
         updateValues();
         updateUI();
+        changedRunway = false;
     }
 
     public void displayObstacleSelected(Obstacle obstacle){

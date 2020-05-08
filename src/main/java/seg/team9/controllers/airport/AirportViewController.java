@@ -96,4 +96,8 @@ public class AirportViewController implements Initializable {
         TopDownViewController.getInstance().isHorizontal = false;
 
     }
+
+    public void onHorizontalClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().rotateRunwayHorizontal();
+    }
 }
