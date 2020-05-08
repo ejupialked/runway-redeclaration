@@ -93,5 +93,7 @@ public class AirportViewController implements Initializable {
 
     public void onAlignClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().rotateRunway();
+        TopDownViewController.getInstance().isHorizontal = false;
+
     }
 }

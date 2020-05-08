@@ -37,7 +37,7 @@ public class TopDownViewController implements Initializable {
 
     private Button button = new Button("Helllo");
     public boolean isSelected = true;
-
+    public boolean isHorizontal = true;
     private Obstacle currentObstacle = new Obstacle("Nothing", 0D, 0D, 900000D, 0D,0D);
     private Runway currentRunway = new Runway(new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D),new DirectedRunway("SELECTARUNWAY",0D,0D,0D,0D,0D,0D,0D), 4000d);
 
@@ -349,7 +349,16 @@ public class TopDownViewController implements Initializable {
             double graphicsRot = Integer.parseInt(currentRunway.getRRunway().getDesignator().replaceAll("\\D", "")) * 10 - 90;
 
             compass.rotateNeedle(graphicsRot-90);
-
+            if(!isHorizontal) {
+                UtilsUI.rotateView(graphics, 0, 3000);
+                if ((graphicsRot > 90) && !textFlipped) {
+                    UtilsUI.rotateView(text, 180, 3000);
+                    textFlipped = true;
+                } else if (textFlipped) {
+                    UtilsUI.rotateView(text, 0, 3000);
+                    textFlipped = false;
+                }
+            }
         }catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
         }
@@ -361,7 +370,6 @@ public class TopDownViewController implements Initializable {
 
         try{
             UtilsUI.rotateView(graphics, graphicsRot, 3000);
-
             if((graphicsRot>90) && !textFlipped) {
                 UtilsUI.rotateView(text, 180, 3000);
                 textFlipped = true;
@@ -369,9 +377,7 @@ public class TopDownViewController implements Initializable {
             else if(textFlipped){
                 UtilsUI.rotateView(text, 0, 3000);
                 textFlipped = false;
-
             }
-
         }
         catch (NumberFormatException e){
             logger.info("invalidrunwayrotation");
