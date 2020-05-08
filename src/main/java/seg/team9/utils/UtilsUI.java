@@ -77,7 +77,7 @@ public class UtilsUI {
         public static Color RESA = Color.LAWNGREEN;
         public static Color BLAST = Color.BROWN;
         public static Color OBSTACLE = Color.RED;
-
+        public static Color DEFAULT = Color.WHITE;
     }
 
 

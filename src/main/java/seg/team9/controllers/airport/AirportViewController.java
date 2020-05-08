@@ -119,6 +119,15 @@ public class AirportViewController implements Initializable {
         return instance;
     }
 
+    public void onAlignClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().rotateRunway();
+        TopDownViewController.getInstance().isHorizontal = false;
+
+    }
+
+    public void onHorizontalClick(ActionEvent actionEvent) {
+        TopDownViewController.getInstance().rotateRunwayHorizontal();
+    }
     public void addAirport(ActionEvent actionEvent) {
     }
 }
