@@ -5,8 +5,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seg.team9.App;
-import seg.team9.exceptions.ObstacleOutsideOfRunwayException;
+import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.exceptions.TextFieldEmptyException;
+import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Obstacle;
 
@@ -26,8 +27,6 @@ public class ObstacleAddFormController {
         try {
             validateUserInput();
         } catch (TextFieldEmptyException e) {
-            UtilsUI.showErrorMessage(e.getMessage());
-        } catch (ObstacleOutsideOfRunwayException e) {
             UtilsUI.showErrorMessage(e.getMessage());
         }
         Obstacle o = new Obstacle(
@@ -53,7 +52,7 @@ public class ObstacleAddFormController {
      * Validate all user inputs
      * @throws TextFieldEmptyException if a text field is empty
      */
-    public void validateUserInput() throws TextFieldEmptyException, ObstacleOutsideOfRunwayException {
+    public void validateUserInput() throws TextFieldEmptyException {
         if(textName.getText().equals("")) {
             throw new TextFieldEmptyException("Name");
         }
