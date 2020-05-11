@@ -55,7 +55,7 @@
             <VBox minWidth="-Infinity" style="-fx-background-color: #E0E0E0;">
                <children>
                    <fx:include fx:id="calculationsView" source="calculationsview.fxml" />
-                  <TitledPane fx:id="titledPaneBreakdown" maxHeight="-Infinity" prefWidth="350.0" text="Re-declaration breakdown">
+                  <TitledPane fx:id="titledPaneBreakdown" maxHeight="-Infinity" minHeight="-Infinity" prefWidth="350.0" text="Re-declaration breakdown">
                      <content>
                          <fx:include fx:id="calculationBreakdownView" source="calculationbreakdownview.fxml" />
                      </content>

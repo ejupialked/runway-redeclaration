@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -146,12 +148,15 @@ public class PDFGenerator {
         document.add(outer);
 
 
-        document.add(new Paragraph("Re-declaration breakdown (to fix with real values...)", subTitleFont));
+        Map towards = r.getCalculationBreakdow().get("towards");
+        Map over = r.getCalculationBreakdow().get("over");
+
+        document.add(new Paragraph("Re-declaration breakdown", subTitleFont));
         addNewlines(document, 1);
-        document.add(new Paragraph(new Phrase("09L (Take Off Away, Landing Over):", subTitleItalic)));
-        document.add(breakdownTable(r.getLRunway()));
-        document.add(new Paragraph(new Phrase("29R (Take Off Away, Landing Over):", subTitleItalic)));
-        document.add(breakdownTable(r.getRRunway()));
+        document.add(new Paragraph(new Phrase(towards.get("title").toString(), subTitleItalic)));
+        document.add(breakdownTable(r.getLRunway(), r, towards));
+        document.add(new Paragraph(new Phrase(over.get("title").toString(), subTitleItalic)));
+        document.add(breakdownTable(r.getRRunway(), r, over));
 
 
         PdfPTable table = createDeclarationTable(r);
@@ -186,7 +191,9 @@ public class PDFGenerator {
 
 
 
-    private PdfPTable breakdownTable(DirectedRunway runway) throws DocumentException {
+    private PdfPTable breakdownTable(DirectedRunway runway, Runway r, Map direction) throws DocumentException {
+
+
         PdfPTable breakdown1 = new PdfPTable(3);
         breakdown1.setHorizontalAlignment(0);
         breakdown1.setSpacingBefore(10);
@@ -196,13 +203,13 @@ public class PDFGenerator {
 
         breakdown1.addCell(new Phrase("TORA", subTitleFontSmall));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("Original TORA - Blast Protection - Distance from Threshold - Displaced Threshold", bodyFont));
+        breakdown1.addCell(new Phrase(direction.get("TORA").toString(), bodyFont));
         breakdown1.addCell((""));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("3902 - 300 - -50 - 306", bodyFont));
+        breakdown1.addCell(new Phrase(direction.get("TORA1").toString(), bodyFont));
         breakdown1.addCell((""));
         breakdown1.addCell("=");
-        breakdown1.addCell(new Phrase("2343", resultFont));
+        breakdown1.addCell(new Phrase(direction.get("TORA2").toString(), resultFont));
 
         PdfPCell line = new PdfPCell(new Phrase(" "));
         line.getPhrase().getFont().setSize(4);
@@ -212,32 +219,32 @@ public class PDFGenerator {
 
         breakdown1.addCell(new Phrase("ASDA", subTitleFontSmall));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("(R) TORA + STOPWAY", bodyFont));
+        breakdown1.addCell(new Phrase(direction.get("ASDA").toString(), bodyFont));
         breakdown1.addCell(new Phrase("", bodyFont));
         breakdown1.addCell(new Phrase("="));
-        breakdown1.addCell(new Phrase("2343", resultFont));
+        breakdown1.addCell(new Phrase(direction.get("ASDA1").toString(), resultFont));
 
         breakdown1.addCell(line);
 
 
         breakdown1.addCell(new Phrase("TODA", subTitleFontSmall));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("(R) TORA + CLEARWAY", bodyFont));
+        breakdown1.addCell(new Phrase(direction.get("TODA").toString(), bodyFont));
         breakdown1.addCell("");
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("2343", resultFont));
+        breakdown1.addCell(new Phrase(direction.get("TODA1").toString(), resultFont));
 
         breakdown1.addCell(line);
 
         breakdown1.addCell(new Phrase("LDA", subTitleFontSmall));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("Original LDA - Distance from Threshold – Strip End - Slope Calculation",bodyFont));
+        breakdown1.addCell(new Phrase(direction.get("LDA").toString(),bodyFont));
         breakdown1.addCell((""));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("3595 - -50 - 60 - 12*50", bodyFont));
+        breakdown1.addCell(new Phrase(direction.get("LDA1").toString(), bodyFont));
         breakdown1.addCell((""));
         breakdown1.addCell(new Phrase("=", bodyFont));
-        breakdown1.addCell(new Phrase("2343", resultFont));
+        breakdown1.addCell(new Phrase(direction.get("LDA2").toString(), resultFont));
 
         return breakdown1;
     }
