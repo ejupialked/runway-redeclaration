@@ -321,7 +321,7 @@ public class SideViewController implements Initializable {
                 BlastStartXR = 0D;
                 BlastEndXR = 0D;
             }
-            textBlastR.setText("Blast Protection/Slope Consideration: " + Math.round(Math.abs(LDAEndXR-RESAStartXR)/topDownViewController.xScaler));
+            textBlastR.setText(Math.round(Math.abs(LDAEndXR-RESAStartXR)/topDownViewController.xScaler) + "m");
 
 
 
@@ -344,7 +344,7 @@ public class SideViewController implements Initializable {
                 BlastStartXL = 0D;
                 BlastEndXL = 0D;
             }
-            textBlastL.setText("Blast Protection/Slope Consideration: " + Math.round(Math.abs(LDAStartXL-RESAEndXL)/topDownViewController.xScaler));
+            textBlastL.setText(Math.round(Math.abs(LDAStartXL-RESAEndXL)/topDownViewController.xScaler) + "m");
         }
         else{
             TORAEndXR = topDownViewController.runwayBeginX + currentRunway.getRRunway().getTora() * topDownViewController.xScaler;
@@ -366,7 +366,7 @@ public class SideViewController implements Initializable {
                 BlastStartXR = 0D;
                 BlastEndXR = 0D;
             }
-            textBlastR.setText("Blast Protection/Slope Consideration: " + Math.round(Math.abs(LDAStartXR-RESAEndXR)/topDownViewController.xScaler));
+            textBlastR.setText(Math.round(Math.abs(LDAStartXR-RESAEndXR)/topDownViewController.xScaler) + "m");
 
 
             TORAStartXL = topDownViewController.runwayBeginX + currentRunway.getLRunway().getTora() * topDownViewController.xScaler;
@@ -388,7 +388,7 @@ public class SideViewController implements Initializable {
                 BlastStartXL = 0D;
                 BlastEndXL = 0D;
             }
-            textBlastL.setText("Blast Protection/Slope Consideration: " + Math.round(Math.abs(LDAEndXL-RESAStartXL)/topDownViewController.xScaler));
+            textBlastL.setText(Math.round(Math.abs(LDAEndXL-RESAStartXL)/topDownViewController.xScaler) + "m");
         }
 
         updateText();

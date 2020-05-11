@@ -489,12 +489,12 @@ public class TopDownViewController implements Initializable {
     }
 
     public void updateArrows(){
-        arrows.getChildren().clear();
         text.getChildren().clear();
+        arrows.getChildren().clear();
 
         updateText();
 
-        if(currentObstacle.getDistanceRThreshold()>currentObstacle.getDistanceLThreshold()){
+        if(getCurrentObstacle().getDistanceRThreshold()>getCurrentObstacle().getDistanceLThreshold()){
             TORAStartXR = runwayBeginX;
             TORAEndXR = runwayBeginX + currentRunway.getRRunway().getWorkingTORA() * xScaler;
             TODAStartXR = runwayBeginX;
@@ -515,7 +515,7 @@ public class TopDownViewController implements Initializable {
                 BlastStartXR = 0D;
                 BlastEndXR = 0D;
             }
-            textBlastR.setText("Blast Protection: " + Math.round(Math.abs(LDAEndXR-RESAStartXR)/xScaler));
+            textBlastR.setText(Math.round(Math.abs(LDAEndXR-RESAStartXR)/xScaler) + "m");
 
 
 
@@ -538,7 +538,7 @@ public class TopDownViewController implements Initializable {
                 BlastStartXL = 0D;
                 BlastEndXL = 0D;
             }
-            textBlastL.setText("Blast Protection: " + Math.round(Math.abs(LDAStartXL-RESAEndXL)/xScaler));
+            textBlastL.setText(Math.round(Math.abs(LDAStartXL-RESAEndXL)/xScaler) + "m");
         }
         else{
             TORAEndXR = runwayBeginX + currentRunway.getRRunway().getTora() * xScaler;
@@ -560,7 +560,7 @@ public class TopDownViewController implements Initializable {
                 BlastStartXR = 0D;
                 BlastEndXR = 0D;
             }
-            textBlastR.setText("Blast Protection: " + Math.round(Math.abs(LDAStartXR-RESAEndXR)/xScaler));
+            textBlastR.setText(Math.round(Math.abs(LDAStartXR-RESAEndXR)/xScaler) + "m");
 
 
             TORAStartXL = runwayBeginX + currentRunway.getLRunway().getTora() * xScaler;
@@ -582,11 +582,10 @@ public class TopDownViewController implements Initializable {
                 BlastStartXL = 0D;
                 BlastEndXL = 0D;
             }
-            textBlastL.setText("Blast Protection: " + Math.round(Math.abs(LDAEndXL-RESAStartXL)/xScaler));
+            textBlastL.setText(Math.round(Math.abs(LDAEndXL-RESAStartXL)/xScaler) + "m");
         }
 
         updateText();
-
 
         setLinePos(TORAStartLineR, TORAStartXR,middleY, TORAStartXR,screenHeight*0.05);
         setLinePos(TORAEndLineR, TORAEndXR,middleY, TORAEndXR,screenHeight*0.05);
@@ -638,7 +637,7 @@ public class TopDownViewController implements Initializable {
         arrowBlastR= new Arrow(BlastStartXR, 0.42*screenHeight, BlastEndXR, 0.42*screenHeight);
         arrowBlastL = new Arrow(BlastStartXL, 0.58*screenHeight, BlastEndXL, 0.58*screenHeight);
 
-        if(!isColorDefault)
+        if(isColorDefault)
             initArrowsColors();
         else
             initArrowsColoursDefault();
@@ -658,7 +657,6 @@ public class TopDownViewController implements Initializable {
         text.getChildren().add(textBlastL);
 
 
-        arrows.getChildren().add(text);
 
 
         arrows.getChildren().add(TORAStartLineR);
@@ -698,8 +696,7 @@ public class TopDownViewController implements Initializable {
         arrows.getChildren().add(arrowRESAL);
         arrows.getChildren().add(arrowBlastR);
         arrows.getChildren().add(arrowBlastL);
-
-
+        arrows.getChildren().add(text);
     }
 
     public void updateObstacle(){
@@ -711,7 +708,7 @@ public class TopDownViewController implements Initializable {
     }
 
     public void addChildren(){
-       topDownView.getChildren().clear();
+        topDownView.getChildren().clear();
         graphics.getChildren().clear();
 
 
@@ -732,9 +729,7 @@ public class TopDownViewController implements Initializable {
         graphics.getChildren().add(stopwayL);
         graphics.getChildren().add(clearwayL);
 
-        if(isSelected){
-            graphics.getChildren().add(arrows);
-        }
+        graphics.getChildren().add(arrows);
 
 
         topDownView.getChildren().add(graphics);
