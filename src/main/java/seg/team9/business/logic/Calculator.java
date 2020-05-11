@@ -92,6 +92,11 @@ public class Calculator {
         calculationBreakdown.get(direction).put("LDA", "Original LDA - Distance From Threshold - Slope Calculation - Strip End");
         calculationBreakdown.get(direction).put("LDA1",runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND);
         calculationBreakdown.get(direction).put("LDA2", runway.getWorkingLDA().toString());
+        
+        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
+        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
+        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
+        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
     }
 
     //This method calculates the redesignated values for the runway that is taking off towards and landing towards the obstacle.
@@ -117,6 +122,11 @@ public class Calculator {
         calculationBreakdown.get(direction).put("LDA", "Distance from Threshold - RESA - Strip End");
         calculationBreakdown.get(direction).put("LDA1", distance + " - " + runway.getResa() + " - " + STRIPEND);
         calculationBreakdown.get(direction).put("LDA2", runway.getWorkingLDA().toString());
+        
+        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
+        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
+        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
+        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
 
     }
 
