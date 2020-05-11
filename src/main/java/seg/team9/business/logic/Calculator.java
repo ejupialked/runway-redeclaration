@@ -76,6 +76,10 @@ public class Calculator {
         );
         calculationBreakdown.put("TOALOLDAdesc", "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End");
         calculationBreakdown.put("TOALOLDAval", "LDA: " + runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND + " = " + runway.getWorkingLDA());
+        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
+        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
+        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
+        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
     }
 
     //This method calculates the redesignated values for the runway that is taking off towards and landing towards the obstacle.
@@ -98,6 +102,10 @@ public class Calculator {
         );
         calculationBreakdown.put("TOTLTLDAdesc", "LDA: Distance from threshold - RESA - Strip End");
         calculationBreakdown.put("TOTLTLDAval", "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND + " = " + runway.getWorkingLDA());
+        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
+        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
+        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
+        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
     }
 
     //The calculations breakdown for the calculator are stored as a hashmap, pairing up a key for the part of the calculation with its value.
