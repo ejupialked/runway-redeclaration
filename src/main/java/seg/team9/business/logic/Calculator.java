@@ -66,32 +66,34 @@ public class Calculator {
     //This method calculates the redesignated values for the runway that is taking off away from and landing over the obstacle.
     //The calculation breakdown for this runway are added to the hashmap.
     //The parameters are the runway to calculate on, the distance of the obstacle from that runway's threshold and the height of the obstacle.
-    private void calculateTOALO(DirectedRunway runway, Double distance, Double height, String direction){
-        runway.setWorkingTORA(runway.getTora() - BLAST_PROTECTION - distance - runway.getThreshold());
+    private void calculateTOALO(DirectedRunway runway, Double distance, Double height){
+        runway.setWorkingTORA(
+                runway.getTora() - BLAST_PROTECTION - distance - runway.getThreshold()
+        );
+        calculationBreakdown.put("TOALOTORAdesc", "TORA: Actual TORA - Blast Protection - Distance From Threshold - Runway Threshold");
+        calculationBreakdown.put("TOALOTORAval", "TORA: " + runway.getTora() + " - " + BLAST_PROTECTION + " - " + distance + " - " + runway.getThreshold() + " = " + runway.getWorkingTORA());
 
-        calculationBreakdown.get(direction).put("TORA", "Original TORA - Blast Protection" + " - Distance From Threshold - Displaced Threshold");
-        calculationBreakdown.get(direction).put("TORA1",  runway.getTora() + " - " + BLAST_PROTECTION + " - " + distance + " - " + runway.getThreshold() );
-        calculationBreakdown.get(direction).put("TORA2", runway.getWorkingTORA().toString());
+        runway.setWorkingASDA(
+                runway.getWorkingTORA() + runway.getStopway()
+        );
+        calculationBreakdown.put("TOALOASDAdesc", "ASDA: Working TORA + Stopway");
+        calculationBreakdown.put("TOALOASDAval", "ASDA: " + runway.getWorkingTORA() + " + " + runway.getStopway() + " = " + runway.getWorkingASDA());
 
+        runway.setWorkingTODA(
+                runway.getWorkingTORA()  + runway.getClearway()
+        );
+        calculationBreakdown.put("TOALOTODAdesc", "TODA: Working TORA + Clearway");
+        calculationBreakdown.put("TOALOTODAval", "TODA: " + runway.getWorkingTORA() + " + " + runway.getClearway() + " = " + runway.getWorkingTODA());
 
-        runway.setWorkingASDA(runway.getWorkingTORA() + runway.getStopway());
-
-        calculationBreakdown.get(direction).put("ASDA", "(R) TORA + STOPWAY");
-        calculationBreakdown.get(direction).put("ASDA1", runway.getWorkingTORA() + " + " + runway.getStopway());
-        calculationBreakdown.get(direction).put("ASDA2",  runway.getWorkingASDA().toString());
-
-        runway.setWorkingTODA(runway.getWorkingTORA()  + runway.getClearway());
-
-        calculationBreakdown.get(direction).put("TODA", "(R) TORA + Clearway");
-        calculationBreakdown.get(direction).put("TODA1", runway.getWorkingTORA() + " + " + runway.getClearway());
-        calculationBreakdown.get(direction).put("TODA2", runway.getWorkingTODA().toString());
-
-
-        runway.setWorkingLDA(runway.getLda() - distance - (height * SLOPE) - STRIPEND);
-
-        calculationBreakdown.get(direction).put("LDA", "Original LDA - Distance From Threshold - Slope Calculation - Strip End");
-        calculationBreakdown.get(direction).put("LDA1",runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND);
-        calculationBreakdown.get(direction).put("LDA2", runway.getWorkingLDA().toString());
+        runway.setWorkingLDA(
+                runway.getLda() - distance - (height * SLOPE) - STRIPEND
+        );
+        calculationBreakdown.put("TOALOLDAdesc", "LDA: Actual LDA - Distance From Threshold - (Height * Slope) - Strip End");
+        calculationBreakdown.put("TOALOLDAval", "LDA: " + runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND + " = " + runway.getWorkingLDA());
+        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
+        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
+        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
+        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
     }
 
     //This method calculates the redesignated values for the runway that is taking off towards and landing towards the obstacle.
@@ -110,14 +112,17 @@ public class Calculator {
         calculationBreakdown.get(direction).put("ASDA1", runway.getWorkingASDA().toString());
 
         runway.setWorkingTODA(runway.getWorkingTORA());
-        calculationBreakdown.get(direction).put("TODA", "(R) TODA");
-        calculationBreakdown.get(direction).put("TODA1", runway.getWorkingTODA().toString());
-
-        runway.setWorkingLDA(distance - runway.getResa() - STRIPEND);
-        calculationBreakdown.get(direction).put("LDA", "Distance from Threshold - RESA - Strip End");
-        calculationBreakdown.get(direction).put("LDA1", distance + " - " + runway.getResa() + " - " + STRIPEND);
-        calculationBreakdown.get(direction).put("LDA2", runway.getWorkingLDA().toString());
-
+        calculationBreakdown.put("TOTLTTODAdesc", "TODA: Working TORA");
+        calculationBreakdown.put("TOTLTTODAval", "TODA: " + runway.getWorkingTORA() + " = " + runway.getWorkingTORA());
+        runway.setWorkingLDA(
+                distance - runway.getResa() - STRIPEND
+        );
+        calculationBreakdown.put("TOTLTLDAdesc", "LDA: Distance from threshold - RESA - Strip End");
+        calculationBreakdown.put("TOTLTLDAval", "LDA: " + distance + " - " + runway.getResa() + " - " + STRIPEND + " = " + runway.getWorkingLDA());
+        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
+        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
+        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
+        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
     }
 
     //The calculations breakdown for the calculator are stored as a hashmap, pairing up a key for the part of the calculation with its value.
