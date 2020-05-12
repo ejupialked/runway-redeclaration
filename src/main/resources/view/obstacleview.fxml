@@ -46,7 +46,7 @@
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtObstacleHeight" text="33333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <TextField fx:id="txtObstacleHeight" editable="false" text="33333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
@@ -59,7 +59,7 @@
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtObstacleWidth" text="40m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <TextField fx:id="txtObstacleWidth" editable="false" text="40m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
@@ -80,12 +80,12 @@
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtDistanceCenter" text="300m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <TextField fx:id="txtDistanceCenter" editable="false" text="300m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                      </TextField>
-                     <TextField fx:id="txtDistanceThresholdLeft" text="3333333333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     <TextField fx:id="txtDistanceThresholdLeft" editable="false" text="3333333333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
@@ -98,7 +98,7 @@
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtDistanceThresholdRight" text="333333333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                     <TextField fx:id="txtDistanceThresholdRight" editable="false" text="333333333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
