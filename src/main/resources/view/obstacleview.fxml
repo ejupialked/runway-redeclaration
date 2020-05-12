@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane style="-fx-background-color: E0E0E0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seg.team9.controllers.obstacle.ObstacleViewController">
-        <TitledPane animated="true" maxWidth="-Infinity" text="Obstacle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <TitledPane animated="true" text="Obstacle" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <content>
                 <AnchorPane fx:id="paneObstacles" maxHeight="-Infinity">
                     <children>
@@ -35,75 +34,74 @@
                   <children>
                      <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Obstacle" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                           <Font name="Arial Bold" size="13.0" />
                         </font></Label>
                               <ChoiceBox fx:id="boxObstacles" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
                      <Label alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Height" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                           <Font name="Arial Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtObstacleHeight" editable="false" text="33333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <Label fx:id="txtObstacleHeight" text="33333" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
-                     </TextField>
+                     </Label>
                      <Label alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="Width" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                           <Font name="Arial Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtObstacleWidth" editable="false" text="40m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <Label fx:id="txtObstacleWidth" text="40m" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
-                     </TextField>
-                     <Label alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Runway centerline:" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     </Label>
+                     <Label alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="(Distance) centerline:" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                           <Font name="Arial Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Right edge of runway:" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="(Distance) right threshold:" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                           <Font name="Arial Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtDistanceCenter" editable="false" text="300m" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <Label fx:id="txtDistanceCenter" text="300m" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
-                     </TextField>
-                     <TextField fx:id="txtDistanceThresholdLeft" editable="false" text="3333333333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     </Label>
+                     <Label fx:id="txtDistanceThresholdLeft" text="3333333333" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
-                     </TextField>
-                     <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Left edge of runway:" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                     </Label>
+                     <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="(Distance) left threshold:" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                           <Font name="Arial Bold" size="13.0" />
                         </font>
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
                      </Label>
-                     <TextField fx:id="txtDistanceThresholdRight" editable="false" text="333333333" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                     <Label fx:id="txtDistanceThresholdRight" text="333333333" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                         <GridPane.margin>
                            <Insets />
                         </GridPane.margin>
-                     </TextField>
-                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Distance :" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                     </Label>
                               <Button fx:id="buttonAddObstacle" mnemonicParsing="false" onMouseClicked="#onClick" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
                         <font>
                            <Font size="14.0" />

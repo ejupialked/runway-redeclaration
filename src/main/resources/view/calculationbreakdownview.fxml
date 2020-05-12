@@ -15,7 +15,7 @@
               <AnchorPane>
                  <TextArea fx:id="TORAText" editable="false" prefHeight="320.0" text="sddf" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <font>
-                           <Font name="Arial" size="16.0" />
+                           <Font name="Arial" size="15.0" />
                         </font></TextArea>
               </AnchorPane>
             </content>
@@ -25,7 +25,7 @@
                  <AnchorPane>
                     <TextArea fx:id="TODAText" editable="false" prefHeight="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <font>
-                           <Font name="Arial" size="16.0" />
+                           <Font name="Arial" size="15.0" />
                         </font></TextArea>
                  </AnchorPane>
               </content>
@@ -35,7 +35,7 @@
                  <AnchorPane minHeight="0.0" minWidth="0.0">
                     <TextArea fx:id="LDAText" editable="false" prefHeight="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                         <font>
-                           <Font name="Arial" size="16.0" />
+                           <Font name="Arial" size="15.0" />
                         </font></TextArea>
                  </AnchorPane>
               </content>
@@ -45,7 +45,7 @@
                  <AnchorPane minHeight="0.0" minWidth="0.0">
                     <TextArea fx:id="ASDAText" editable="false" prefHeight="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                         <font>
-                           <Font name="Arial" size="16.0" />
+                           <Font name="Arial" size="15.0" />
                         </font></TextArea>
                  </AnchorPane>
               </content>

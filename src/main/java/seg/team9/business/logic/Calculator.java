@@ -26,10 +26,12 @@ public class Calculator {
     //Running this method on a runway will calculate the redesignated values and store them in the WorkingXXXX variables.
     //The method does not return anything - merely used as a gateway.
     public void redesignate(Runway runway, Obstacle obstacle){
+        logger.info("Redeclaring distances..");
         calculationBreakdown.put("over", overBreakdown);
         calculationBreakdown.put("towards", towardsBreakdown);
 
         findDirection(runway, obstacle);
+
         runway.setCalculationBreakdow(calculationBreakdown);
         CalculationBreakdownController.getInstance().showBreakdown(calculationBreakdown);
     }
@@ -92,11 +94,26 @@ public class Calculator {
         calculationBreakdown.get(direction).put("LDA", "Original LDA - Distance From Threshold - Slope Calculation - Strip End");
         calculationBreakdown.get(direction).put("LDA1",runway.getLda() + " - " + distance + " - (" + height + " * " + SLOPE + ") - " + STRIPEND);
         calculationBreakdown.get(direction).put("LDA2", runway.getWorkingLDA().toString());
-        
-        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
-        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
-        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
-        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
+
+        if(runway.getWorkingTORA() < 0){
+            calculationBreakdown.get(direction).put("TORA2", "0" + "    (The actual value would be '" +runway.getWorkingTORA().toString() + "')");
+            runway.setWorkingTORA(0d);
+        }
+        if(runway.getWorkingTODA() < 0) {
+            calculationBreakdown.get(direction).put("TODA2", "0" + "     ( The actual value would be '" +runway.getWorkingTODA().toString() + ")'");
+            runway.setWorkingTODA(0d);
+        }
+
+        if(runway.getWorkingASDA() < 0) {
+            calculationBreakdown.get(direction).put("ASDA2", "0" + "    ( The actual value would be '" +runway.getWorkingASDA().toString() + "')");
+            runway.setWorkingASDA(0d);
+        }
+
+        if(runway.getWorkingLDA() < 0) {
+            calculationBreakdown.get(direction).put("LDA2", "0" + "     ( The actual value would be '" +runway.getWorkingLDA().toString() + "')");
+            runway.setWorkingLDA(0d);
+        }
+
     }
 
     //This method calculates the redesignated values for the runway that is taking off towards and landing towards the obstacle.
@@ -123,10 +140,24 @@ public class Calculator {
         calculationBreakdown.get(direction).put("LDA1", distance + " - " + runway.getResa() + " - " + STRIPEND);
         calculationBreakdown.get(direction).put("LDA2", runway.getWorkingLDA().toString());
         
-        if(runway.getWorkingTORA() < 0) runway.setWorkingTORA(0d);
-        if(runway.getWorkingTODA() < 0) runway.setWorkingTODA(0d);
-        if(runway.getWorkingASDA() < 0) runway.setWorkingASDA(0d);
-        if(runway.getWorkingLDA() < 0) runway.setWorkingLDA(0d);
+        if(runway.getWorkingTORA() < 0){
+            calculationBreakdown.get(direction).put("TORA2", "0" + "    (The actual value would be '" +runway.getWorkingTORA().toString() + "')");
+            runway.setWorkingTORA(0d);
+        }
+        if(runway.getWorkingTODA() < 0) {
+            calculationBreakdown.get(direction).put("TODA1", "0" + "     ( The actual value would be '" +runway.getWorkingTODA().toString() + ")'");
+            runway.setWorkingTODA(0d);
+        }
+
+        if(runway.getWorkingASDA() < 0) {
+            calculationBreakdown.get(direction).put("ASDA1", "0" + "    ( The actual value would be '" +runway.getWorkingASDA().toString() + "')");
+            runway.setWorkingASDA(0d);
+        }
+
+        if(runway.getWorkingLDA() < 0) {
+            calculationBreakdown.get(direction).put("LDA2", "0" + "     ( The actual value would be '" +runway.getWorkingLDA().toString() + "')");
+            runway.setWorkingLDA(0d);
+        }
 
     }
 
