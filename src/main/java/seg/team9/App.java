@@ -18,7 +18,10 @@ import seg.team9.business.logic.Calculator;
 import seg.team9.business.logic.XML.XML;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Obstacle;
+import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.controllers.airport.AirportViewController;
+import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.Compass;
 import seg.team9.controllers.runways.TopDownViewController;
 import seg.team9.utils.MockData;
@@ -73,6 +76,10 @@ public class App extends Application {
         primaryWindow.setResizable(false);
         primaryWindow.show();
 
+        Airport a = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+        Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
+        Runway r = AirportViewController.getInstance().getComboBoxRunways().getValue();
+        TopDownViewController.getInstance().displayDirectedRunwaySelected(a, r,o, 0);
         TopDownViewController.getInstance().setCompass(new Compass());
     }
 

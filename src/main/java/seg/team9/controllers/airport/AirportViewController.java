@@ -13,11 +13,11 @@ import seg.team9.App;
 import seg.team9.business.logic.Calculator;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
+import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
-import seg.team9.controllers.runways.Compass;
+import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
-import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -87,8 +87,6 @@ public class AirportViewController implements Initializable {
 
         initComboBox(a);
 
-
-        TopDownViewController.getInstance().displayDirectedRunwaySelected(comboBoxRunways.getSelectionModel().getSelectedItem());
         SideViewController.getInstance().updateUI();
 
         //when an airport is selected the runway list will update
@@ -105,7 +103,9 @@ public class AirportViewController implements Initializable {
             if (t1 != null) {
 
                 updateLabels(t1);
-                TopDownViewController.getInstance().displayDirectedRunwaySelected(observableValue.getValue());
+                Airport air = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+                Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
+                TopDownViewController.getInstance().displayDirectedRunwaySelected(air, observableValue.getValue(), o, 2);
                 SideViewController.getInstance().updateUI();
             }
             if(!TopDownViewController.getInstance().isColorDefault)

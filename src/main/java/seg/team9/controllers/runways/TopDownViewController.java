@@ -3,6 +3,7 @@ package seg.team9.controllers.runways;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -16,11 +17,16 @@ import javafx.scene.text.Text;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.DistanceCheck;
+import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
 import seg.team9.controllers.calculation.CalculationsViewController;
+import seg.team9.controllers.obstacle.ObstacleEditFormController;
+import seg.team9.controllers.obstacle.ObstacleViewController;
+import seg.team9.exceptions.ObstacleOutsideOfRunwayException;
 import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
@@ -747,21 +753,58 @@ public class TopDownViewController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param
+     * @param runway
+     * @param selectedObstacle
+     * @param option "1" for airport selection, "2" for runway selection, "3" for obstacle selection, "0" for nothing
+     */
+    public void displayDirectedRunwaySelected(Airport a, Runway runway, Obstacle selectedObstacle, int option) {
+
+        if(option == 1){
+            UtilsUI.showPopup("Airport selected: " + a.getName()
+                    + "\n" + "Runway selected: "
+                    + runway.toString(), Alert.AlertType.INFORMATION);
+        }else if(option == 2){
+            UtilsUI.showPopup("Airport selected: " + a.getName()
+                    + "\n" + "Runway selected: "
+                    + runway.toString(), Alert.AlertType.INFORMATION);
+        }else if(option == 3){
+            UtilsUI.showPopup("Obstacle selected: " + selectedObstacle.getName(),
+                  Alert.AlertType.INFORMATION);
+        } else if (option == 0){
+
+        }
+
+        try {
+            DistanceCheck.checkObstacleDistances(runway,
+                    selectedObstacle.getDistanceCenter(),
+                    selectedObstacle.getDistanceRThreshold(),
+                    selectedObstacle.getDistanceLThreshold());
+
+            changedRunway = true;
+            currentObstacle = selectedObstacle;
+            currentRunway = runway;
+            updateValues();
+            updateUI();
+            changedRunway = false;
+        } catch (ObstacleOutsideOfRunwayException e) {
+
+            UtilsUI.showPopup("The distances of "
+                    + selectedObstacle.getName() +
+                    " are invalid in runway " +
+                    runway.toString() +
+                    "\n" +
+                    "Please enter them again.", Alert.AlertType.WARNING);
+
+            ObstacleViewController.editObstacle(selectedObstacle, true);
+            ObstacleViewController.getInstance().setFromEdit(true);
+        }
 
 
-    public void displayDirectedRunwaySelected(Runway runway) {
-        changedRunway = true;
-        currentRunway = runway;
-        updateValues();
-        updateUI();
-        changedRunway = false;
     }
 
-    public void displayObstacleSelected(Obstacle obstacle){
-        currentObstacle = obstacle;
-        updateValues();
-        updateUI();
-    }
 
     public Obstacle getCurrentObstacle(){
         return currentObstacle;
@@ -770,8 +813,9 @@ public class TopDownViewController implements Initializable {
     public void updateValues(){
         logger.info("currentRunway"+currentRunway);
         try {
-            App.getCalculator().redesignate(currentRunway, currentObstacle);
 
+            logger.info("Opening edit obstacle..");
+            App.getCalculator().redesignate(currentRunway, currentObstacle);
             CalculationsViewController.getInstance().updateCalculationValues(currentRunway);
 
             runwayDesignatorR.setText(currentRunway.getRRunway().getDesignator());
@@ -835,7 +879,6 @@ public class TopDownViewController implements Initializable {
 
 
     }
-
 
     public Runway getCurrentRunway(){
         return currentRunway;
@@ -925,8 +968,6 @@ public class TopDownViewController implements Initializable {
         PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
         isColorDefault = true;
     }
-
-
 
     public AnchorPane getTopDownView() {
         return topDownView;
