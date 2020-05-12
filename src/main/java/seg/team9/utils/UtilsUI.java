@@ -33,7 +33,7 @@ public class UtilsUI {
         return value + "m";
     }
 
-    private static void showPopup(String message , Alert.AlertType type) {
+    public static void showPopup(String message , Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(type.name());
         alert.setHeaderText(null);
@@ -78,6 +78,12 @@ public class UtilsUI {
         public static Color BLAST = Color.BROWN;
         public static Color OBSTACLE = Color.RED;
         public static Color DEFAULT = Color.WHITE;
+        public static Color DIRECTION = Color.WHITE;
+
+        public static Color CLEARWAY = Color.PURPLE;
+        public static Color STOPWAY = Color.DARKGRAY;
+
+
     }
 
 

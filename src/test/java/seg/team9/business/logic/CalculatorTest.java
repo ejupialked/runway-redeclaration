@@ -8,6 +8,7 @@ import seg.team9.business.models.DirectedRunway;
 import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CalculatorTest {
     private static final Logger logger = LogManager.getLogger("CalculatorTest");
@@ -16,8 +17,8 @@ public class CalculatorTest {
     private static  DirectedRunway rr;
     private static  DirectedRunway lr2;
     private static  DirectedRunway rr2;
-    private static HashMap<String, String> bd;
-    private static HashMap<String, String> bd2;
+    private static Map bd;
+    private static Map bd2;
 
     @BeforeClass
     //This is the instantiation of all needed objects for the tests to be run.
@@ -31,26 +32,26 @@ public class CalculatorTest {
         rr = new DirectedRunway("27R", 3884d, 3962d, 3884d, 3884d, 0d, 0d, 0d);
         Runway r = new Runway(rr, lr, 4000d);
         c.redesignate(r,o);
-        bd = (HashMap) c.getCalculationsBreakdown().clone();
+        bd = r.getCalculationBreakdow();
 
         Obstacle o2 = new Obstacle("Boeing737", 25d, 100d, 20d, 2853d, 500d);
         rr2 = new DirectedRunway("09R", 3660d, 3660d, 3660d, 3353d, 307d, 0d, 0d);
         lr2 = new DirectedRunway("27L", 3660d, 3660d, 3660d, 3660d, 0d, 0d, 0d);
         Runway r2 = new Runway(rr2, lr2, 4000d);
         c.redesignate(r2,o2);
-        bd2 = (HashMap) c.getCalculationsBreakdown().clone();
+        bd2 = r2.getCalculationBreakdow();
     }
 
     //Tests for calculated values.
 
-    @Test
-    //Testing the redesignated TORA value of the first right runway (27R).
-    public void testTORARight() {
-        logger.debug("Testing right TORA...");
-        logger.debug("Expected: 2986.0");
-        logger.debug("Actual: "+rr.getWorkingTORA());
-        Assert.assertEquals(2986d, rr.getWorkingTORA(), 0.0f);
-    }
+        @Test
+        //Testing the redesignated TORA value of the first right runway (27R).
+        public void testTORARight() {
+            logger.debug("Testing right TORA...");
+            logger.debug("Expected: 2986.0");
+            logger.debug("Actual: "+rr.getWorkingTORA());
+            Assert.assertEquals(2986d, rr.getWorkingTORA(), 0.0f);
+        }
 
     @Test
     //Testing the redesignated TODA value of the first right runway (27R).

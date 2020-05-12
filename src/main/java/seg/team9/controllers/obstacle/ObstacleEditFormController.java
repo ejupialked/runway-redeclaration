@@ -6,7 +6,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seg.team9.App;
+import seg.team9.business.logic.DistanceCheck;
+import seg.team9.business.models.Runway;
+import seg.team9.controllers.airport.AirportViewController;
+import seg.team9.exceptions.NegativeOrZeroNumberException;
+import seg.team9.exceptions.ObstacleAlreadyInUseException;
+import seg.team9.exceptions.ObstacleOutsideOfRunwayException;
 import seg.team9.exceptions.TextFieldEmptyException;
+import seg.team9.utils.MockData;
 import seg.team9.utils.UtilsUI;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.runways.TopDownViewController;
@@ -22,72 +29,133 @@ public class ObstacleEditFormController  {
     @FXML private TextField textName;
     private Obstacle obstacleSelected;
 
-    public void initForm(Obstacle obstacleSelected){
+    public void initForm(Obstacle obstacleSelected, boolean resetDistances){
         this.obstacleSelected = obstacleSelected;
+        textName.setText(obstacleSelected.getName());
+
         textHeight.setText(obstacleSelected.getHeight().toString());
         textWidth.setText(obstacleSelected.getWidth().toString());
-        textCenterDist.setText(obstacleSelected.getDistanceCenter().toString());
-        textDistLThreshold.setText(obstacleSelected.getDistanceLThreshold().toString());
-        textDistRThreshold.setText(obstacleSelected.getDistanceRThreshold().toString());
-        textName.setText(obstacleSelected.getName());
+
+        if(resetDistances) {
+            textCenterDist.setText("");
+            textDistLThreshold.setText("");
+            textDistRThreshold.setText("");
+        }else{
+            textCenterDist.setText(obstacleSelected.getDistanceCenter().toString());
+            textDistLThreshold.setText(obstacleSelected.getDistanceLThreshold().toString());
+            textDistRThreshold.setText(obstacleSelected.getDistanceRThreshold().toString());
+        }
     }
 
     @FXML
     void onClick(MouseEvent event) {
-
         try {
-            validateUserInput();
-        } catch (TextFieldEmptyException e) {
+            Obstacle obstacle = validateUserInput(false, AirportViewController.getInstance().getComboBoxRunways().getValue(),
+                    textName.getText(),
+                    textWidth.getText(),
+                    textHeight.getText(),
+                    textCenterDist.getText(),
+                    textDistLThreshold.getText(),
+                    textDistRThreshold.getText()
+            );
+            App.obstacleObservableList.remove(obstacleSelected);
+            App.obstacleObservableList.add(obstacle);
+            ObstacleViewController.fromEdit = true;
+           ObstacleViewController.getInstance().getBoxObstacles().getSelectionModel().select(obstacle);
+
+            TopDownViewController.getInstance().updateUI();
+            Stage scene = (Stage) buttonEdit.getScene().getWindow();
+            scene.close();
+            UtilsUI.showInfoMessage("Obstacle: " + obstacleSelected.getName() + " has been edited!");
+
+        } catch (TextFieldEmptyException | ObstacleOutsideOfRunwayException e) {
             UtilsUI.showErrorMessage(e.getMessage());
+        } catch (NumberFormatException e){
+            UtilsUI.showErrorMessage("Please insert a valid number. " + e.getMessage());
+        } catch (Exception e) {
+           UtilsUI.showErrorMessage(e.getMessage());
         }
+    }
 
-        //get scene
-        Stage scene = (Stage) buttonEdit.getScene().getWindow();
 
-        App.obstacleObservableList.remove(obstacleSelected);
-
-        obstacleSelected.setName(textName.getText());
-        obstacleSelected.setDistanceCenter(Double.parseDouble(textCenterDist.getText()));
-        obstacleSelected.setDistanceLThreshold(Double.parseDouble(textDistLThreshold.getText()));
-        obstacleSelected.setDistanceRThreshold(Double.parseDouble(textDistRThreshold.getText()));
-        obstacleSelected.setWidth(Double.parseDouble(textWidth.getText()));
-        obstacleSelected.setHeight(Double.parseDouble(textHeight.getText()));
-
-        App.obstacleObservableList.add(obstacleSelected);
-
-        //updates labels in the obstacle view
-        ObstacleViewController.getInstance().updateLabelsObstacle(obstacleSelected);
-        TopDownViewController.getInstance().updateUI();
-
-        scene.close();
-
-        UtilsUI.showInfoMessage("Obstacle: " + obstacleSelected.getName() + " has been edited!");
-
+    public Obstacle getObstacleSelected() {
+        return obstacleSelected;
     }
 
     /**
      * Validate all user inputs
      * @throws TextFieldEmptyException if a text field is empty
      */
-    public void validateUserInput() throws TextFieldEmptyException {
-        if(textName.getText().equals("")) {
+    public Obstacle validateUserInput(boolean testing, Runway runway, String name, String width, String height, String center,
+                                             String left, String right)
+            throws TextFieldEmptyException,
+            ObstacleOutsideOfRunwayException,
+            ObstacleAlreadyInUseException, NegativeOrZeroNumberException {
+        Obstacle o = null;
+
+        //check if fields are empty
+        if(name.isBlank()) {
             throw new TextFieldEmptyException("Name");
         }
-        else if(textWidth.getText().equals("")) {
+        else if(width.isBlank()) {
             throw new TextFieldEmptyException("Width");
         }
-        else if(textHeight.getText().equals("")) {
+        else if(height.isBlank()) {
             throw new TextFieldEmptyException("Height");
         }
-        else if(textCenterDist.getText().equals("")) {
+        else if(center.isBlank()) {
             throw new TextFieldEmptyException("Center Distance");
         }
-        else if(textDistLThreshold.getText().equals("")) {
+        else if(left.isBlank()) {
             throw new TextFieldEmptyException("Distance threshold (left)");
         }
-        else if(textDistRThreshold.getText().equals("")) {
+        else if(right.isBlank()) {
             throw new TextFieldEmptyException("Distance threshold (right)");
         }
+
+
+        //check if the obstacle has the same name as another obstacle
+        if(!testing) {
+            for (Obstacle ob : App.obstacleObservableList) {
+                if (ob.getName().equalsIgnoreCase(name.replaceAll(" ", "")) && !ob.equals(obstacleSelected)) {
+                    throw new ObstacleAlreadyInUseException(name);
+                }
+            }
+        }else{
+            for (Obstacle ob : MockData.obstacles) {
+                if (ob.getName().equalsIgnoreCase(name.replaceAll(" ", "")) && !ob.equals(obstacleSelected)) {
+                    throw new ObstacleAlreadyInUseException(name);
+                }
+            }
+        }
+
+
+        Double heightD = Double.parseDouble(height);
+        Double widthD = Double.parseDouble(width);
+        Double centerD = Double.parseDouble(center);
+        Double rightD = Double.parseDouble(right);
+        Double leftD = Double.parseDouble(left);
+
+
+        //check if fields are empty
+        if(widthD <= 0) {
+            throw new NegativeOrZeroNumberException("Width");
+        } else if (heightD <= 0) {
+            throw new NegativeOrZeroNumberException("Height");
+        }
+
+
+        //check if obstacle are valid
+        if (!testing)
+            runway = AirportViewController.getInstance().getComboBoxRunways().getValue();
+
+        DistanceCheck.checkObstacleDistances(runway, centerD, rightD, leftD);
+
+        o = new Obstacle(name, heightD, widthD, centerD, rightD, leftD);
+
+
+        return o;
     }
+
 
 }

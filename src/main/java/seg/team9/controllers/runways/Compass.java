@@ -20,7 +20,6 @@ public class Compass extends AnchorPane {
     private static final Logger logger = LogManager.getLogger("Compass");
 
     private String FILE_NAME = "compassView";
-
     public Compass() {
         logger.info("init compass..");
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/view/" + FILE_NAME + ".fxml"));
@@ -56,12 +55,22 @@ public class Compass extends AnchorPane {
 
     public void onAlignClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().rotateRunway();
+        if(TopDownViewController.getInstance().isHorizontal)
+            UtilsUI.showInfoMessage("Rotating runway to align with the compass head.");
+        else
+            UtilsUI.showInfoMessage("Runway is already aligned with the compass head.");
         TopDownViewController.getInstance().isHorizontal = false;
-
     }
 
     public void onHorizontalClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().rotateRunwayHorizontal();
+        if(!TopDownViewController.getInstance().isHorizontal){
+            UtilsUI.showInfoMessage("Rotating runway to the horizontal position.");
+        }
+        else {
+            UtilsUI.showInfoMessage("Runway is already in horizontal position.");
+        }
+        TopDownViewController.getInstance().isHorizontal = true;
     }
 
     @FXML private Button horizontal;

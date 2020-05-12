@@ -29,14 +29,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="left edge of runway:" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Label text="(Distance) right threshold:" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Italic" size="13.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
-            <Label text="right edge of runway:" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+            <Label text="(Distance) left threshold:" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Italic" size="13.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -66,20 +66,7 @@
                   <Insets left="2.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Distance from" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-               <font>
-                  <Font name="System Italic" size="13.0" />
-               </font>
-            </Label>
             <Label text="m" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="2.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="m" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Italic" size="14.0" />
                </font>
@@ -95,14 +82,14 @@
                   <Insets left="2.0" />
                </GridPane.margin>
             </Label>
-            <Label text="center-line:" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Label text="(Distance) centerline:" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Italic" size="13.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
             <Label text="Name:" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Italic" size="13.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -110,7 +97,7 @@
             </Label>
             <Label text="Height:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Italic" size="13.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -118,18 +105,36 @@
             </Label>
             <Label text="Width:" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Italic" size="13.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="textName" GridPane.columnIndex="1" />
-            <TextField fx:id="textHeight" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="textCenterDist" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="textDistLThreshold" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="textDistRThreshold" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="textWidth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textName" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="textHeight" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="textCenterDist" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="textDistLThreshold" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="textDistRThreshold" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="textWidth" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font></TextField>
          </children>
       </GridPane>
    </children>

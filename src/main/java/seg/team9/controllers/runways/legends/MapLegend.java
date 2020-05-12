@@ -1,4 +1,4 @@
-package seg.team9.controllers.runways;
+package seg.team9.controllers.runways.legends;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

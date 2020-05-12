@@ -20,6 +20,7 @@ public class Obstacle {
         this.distanceLThreshold = distanceLThreshold;
     }
 
+
     public Double getHeight() {
         return height;
     }

@@ -10,13 +10,14 @@ import javafx.scene.control.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.logic.Calculator;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.DirectedRunway;
+import seg.team9.business.models.Obstacle;
 import seg.team9.business.models.Runway;
-import seg.team9.controllers.runways.Compass;
+import seg.team9.controllers.obstacle.ObstacleViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
-import seg.team9.utils.UtilsUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,26 +35,28 @@ public class AirportViewController implements Initializable {
 
     @FXML private ChoiceBox<Airport> choiceBoxAirport;
     @FXML private ComboBox<Runway> comboBoxRunways;
-    @FXML private TextField txtRunwayLength;
+    @FXML private Label txtRunwayLength;
 
     @FXML private Label txtLeftDesignator;
     @FXML private Label txtRightDesignator;
-    @FXML private TextField txtThresholdRight;
-    @FXML private TextField txtClearwayRight;
-    @FXML private TextField txtStopwayRight;
-    @FXML private TextField txtThresholdLeft;
-    @FXML private TextField txtClearwayLeft;
-    @FXML private TextField txtStopwayLeft;
+    @FXML private Label txtThresholdRight;
+    @FXML private Label txtClearwayRight;
+    @FXML private Label txtStopwayRight;
+    @FXML private Label txtThresholdLeft;
+    @FXML private Label txtClearwayLeft;
+    @FXML private Label txtStopwayLeft;
+    @FXML private Label txtStripEnd;
+    @FXML private Label txtBlastProtection;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initChoiceBoxes();
-        updateTextFields(comboBoxRunways.getValue());
+        updateLabels(comboBoxRunways.getValue());
         logger.info("init AirportController...");
     }
 
 
-    private void updateTextFields(Runway t1) {
+    private void updateLabels(Runway t1) {
         txtRunwayLength.setText(addUnitMeasurement(String.valueOf(t1.getLength())));
 
         DirectedRunway left = t1.getLRunway();
@@ -77,12 +80,13 @@ public class AirportViewController implements Initializable {
         choiceBoxAirport.setItems(App.airportObservableList);
         choiceBoxAirport.getSelectionModel().selectFirst();
 
+        txtStripEnd.setText(Calculator.getBlastProtection() + "m");
+        txtStripEnd.setText(Calculator.getSTRIPEND() + "m");
+
         Airport a = choiceBoxAirport.getValue();
 
         initComboBox(a);
 
-
-        TopDownViewController.getInstance().displayDirectedRunwaySelected(comboBoxRunways.getSelectionModel().getSelectedItem());
         SideViewController.getInstance().updateUI();
 
         //when an airport is selected the runway list will update
@@ -98,12 +102,16 @@ public class AirportViewController implements Initializable {
         comboBoxRunways.getSelectionModel().selectedItemProperty().addListener((observableValue, directedRunway, t1) -> {
             if (t1 != null) {
 
-                updateTextFields(t1);
-                TopDownViewController.getInstance().displayDirectedRunwaySelected(observableValue.getValue());
+                updateLabels(t1);
+                Airport air = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+                Obstacle o = ObstacleViewController.getInstance().getBoxObstacles().getValue();
+                TopDownViewController.getInstance().displayDirectedRunwaySelected(air, observableValue.getValue(), o, 2);
                 SideViewController.getInstance().updateUI();
             }
-
-            TopDownViewController.getInstance().initArrowsColors();
+            if(!TopDownViewController.getInstance().isColorDefault)
+                TopDownViewController.getInstance().initArrowsColors();
+            else
+                TopDownViewController.getInstance().initArrowsColoursDefault();
             logger.info("Changed colours");
         });
 

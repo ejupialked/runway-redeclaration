@@ -13,6 +13,7 @@ module seg.team9 {
     opens seg.team9.controllers.obstacle to javafx.fxml;
     opens seg.team9.controllers.runways to javafx.fxml;
     opens seg.team9.controllers.airport to javafx.fxml;
+    opens seg.team9.controllers.runways.legends to javafx.fxml;
 
     opens seg.team9.controllers to javafx.fxml;
 

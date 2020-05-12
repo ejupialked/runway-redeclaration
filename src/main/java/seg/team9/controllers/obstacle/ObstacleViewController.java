@@ -11,21 +11,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import seg.team9.App;
+import seg.team9.business.models.Airport;
 import seg.team9.business.models.Obstacle;
+import seg.team9.business.models.Runway;
 import seg.team9.controllers.PrimaryWindowController;
+import seg.team9.controllers.airport.AirportViewController;
 import seg.team9.controllers.runways.SideViewController;
 import seg.team9.controllers.runways.TopDownViewController;
 import seg.team9.utils.UtilsUI;
@@ -39,17 +41,18 @@ public class ObstacleViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("ObstacleViewController");
 
     private static ObstacleViewController instance;
-
+    public static boolean fromEdit = false;
 
     @FXML private ChoiceBox<Obstacle> boxObstacles;
-    @FXML private TextField txtObstacleHeight;
-    @FXML private TextField txtObstacleWidth;
-    @FXML private TextField txtDistanceCenter;
-    @FXML private TextField txtDistanceThresholdLeft;
-    @FXML private TextField txtDistanceThresholdRight;
+    @FXML private Label txtObstacleHeight;
+    @FXML private Label txtObstacleWidth;
+    @FXML private Label txtDistanceCenter;
+    @FXML private Label txtDistanceThresholdLeft;
+    @FXML private Label txtDistanceThresholdRight;
     @FXML private AnchorPane paneObstacles;
     private Obstacle selectedObstacle;
     private HashMap<CheckBox,Obstacle> checkToObst = new HashMap<CheckBox, Obstacle>();
+
 
 
     public ObstacleViewController() {
@@ -75,7 +78,9 @@ public class ObstacleViewController implements Initializable {
         updateLabelsObstacle(boxObstacles.getValue());
 
         setSelectedObstacle(boxObstacles.getValue());
-        TopDownViewController.getInstance().displayObstacleSelected(boxObstacles.getValue());
+        Runway r = AirportViewController.getInstance().getComboBoxRunways().getValue();
+        Airport a = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+        TopDownViewController.getInstance().displayDirectedRunwaySelected(a, r, boxObstacles.getValue(), 0);
 
 
 
@@ -83,14 +88,24 @@ public class ObstacleViewController implements Initializable {
         boxObstacles.getSelectionModel().selectedItemProperty().addListener((observableValue, obstacle, t1) -> {
             setSelectedObstacle(t1);
             updateLabelsObstacle(t1);
-            TopDownViewController.getInstance().displayObstacleSelected(t1);
+            Airport air = AirportViewController.getInstance().getChoiceBoxAirport().getValue();
+            Runway r1 = AirportViewController.getInstance().getComboBoxRunways().getValue();
+            if(fromEdit) {
+                TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 0);
+            }else {
+               TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 3);
+            }
+            fromEdit = false;
             SideViewController.getInstance().updateUI();
         });
 
 
-
     }
 
+
+    public void setFromEdit(boolean fromEdit) {
+        this.fromEdit = fromEdit;
+    }
 
     public void setSelectedObstacle(Obstacle selectedObstacle) {
         this.selectedObstacle = selectedObstacle;
@@ -120,30 +135,45 @@ public class ObstacleViewController implements Initializable {
 
     @FXML
     void onEditObstacle(MouseEvent event) {
+        editObstacle(selectedObstacle, false);
+    }
+    
+
+    public static void editObstacle(Obstacle selectedObstacle, boolean resetObstacle){
         final String formName= "obstacleeditform";
+
         Parent root;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(ObstacleEditFormController.class.getResource("/view/"+formName+".fxml"));
             root = fxmlLoader.load();
 
             ObstacleEditFormController obstacleEditFormController = fxmlLoader.getController();
-            obstacleEditFormController.initForm(selectedObstacle);
+            obstacleEditFormController.initForm(selectedObstacle, resetObstacle);
 
             Stage stage = new Stage();
             stage.setTitle("Edit Obstacle");
             stage.setResizable(false);
             stage.setScene(new Scene(root));
 
+
+            if(resetObstacle) {
+                stage.setOnCloseRequest(windowEvent -> {
+                    UtilsUI.showPopup("Edit the distances of " + selectedObstacle + " first.", Alert.AlertType.WARNING);
+                    windowEvent.consume();
+
+                });
+            }
             //prevent user from interacting with main view
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(App.getPrimaryWindow());
 
+
+            fromEdit = true;
             stage.show();
         }
         catch (IOException e) {
             logger.error(e);
         }
-
     }
 
 
