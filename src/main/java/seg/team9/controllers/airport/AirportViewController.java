@@ -102,8 +102,10 @@ public class AirportViewController implements Initializable {
                 TopDownViewController.getInstance().displayDirectedRunwaySelected(observableValue.getValue());
                 SideViewController.getInstance().updateUI();
             }
-
-            TopDownViewController.getInstance().initArrowsColors();
+            if(!TopDownViewController.getInstance().isColorDefault)
+                TopDownViewController.getInstance().initArrowsColors();
+            else
+                TopDownViewController.getInstance().initArrowsColoursDefault();
             logger.info("Changed colours");
         });
 
