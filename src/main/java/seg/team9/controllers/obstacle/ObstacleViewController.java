@@ -41,7 +41,7 @@ public class ObstacleViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("ObstacleViewController");
 
     private static ObstacleViewController instance;
-    public boolean fromEdit = false;
+    public static boolean fromEdit = false;
 
     @FXML private ChoiceBox<Obstacle> boxObstacles;
     @FXML private Label txtObstacleHeight;
@@ -93,7 +93,7 @@ public class ObstacleViewController implements Initializable {
             if(fromEdit) {
                 TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 0);
             }else {
-               // TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 3);
+               TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 3);
             }
             fromEdit = false;
             SideViewController.getInstance().updateUI();
@@ -167,6 +167,8 @@ public class ObstacleViewController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(App.getPrimaryWindow());
 
+
+            fromEdit = true;
             stage.show();
         }
         catch (IOException e) {

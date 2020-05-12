@@ -60,7 +60,9 @@ public class ObstacleEditFormController  {
             );
             App.obstacleObservableList.remove(obstacleSelected);
             App.obstacleObservableList.add(obstacle);
+            ObstacleViewController.fromEdit = true;
            ObstacleViewController.getInstance().getBoxObstacles().getSelectionModel().select(obstacle);
+
             TopDownViewController.getInstance().updateUI();
             Stage scene = (Stage) buttonEdit.getScene().getWindow();
             scene.close();
