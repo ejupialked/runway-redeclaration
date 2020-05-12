@@ -108,11 +108,11 @@ public class PDFGenerator {
         details.addCell(new Phrase("Name:", subTitleFontSmall));
         details.addCell(a.getName());
         details.addCell(new Phrase("Runway:", subTitleFontSmall));
-        details.addCell(a.getRunwayList().get(0).toString());
+        details.addCell(r.toString()    );
         details.addCell(new Phrase("Blast protection:", subTitleFontSmall));
-        details.addCell("-");
+        details.addCell(Calculator.getBlastProtection() + "m");
         details.addCell(new Phrase("Strip end:", subTitleFontSmall));
-        details.addCell("-");
+        details.addCell(Calculator.getSTRIPEND() + "m");
         PdfPTable obstacle = new PdfPTable(2);
         obstacle.setHorizontalAlignment( 0);
         obstacle.setSpacingBefore(10);
@@ -283,14 +283,14 @@ public class PDFGenerator {
 
 
         PdfPCell desiL = cellWithPadding(runway.getLRunway().getDesignator());
-        desiL.setHorizontalAlignment(Element.ALIGN_CENTER);
+        desiL.setHorizontalAlignment(Element.ALIGN_LEFT);
         table.addCell(desiL);
         table.addCell(cellWithPadding(runway.getLRunway().getTora().toString()+ "m"));
         table.addCell(cellWithPadding(runway.getLRunway().getToda().toString()+ "m"));
         table.addCell(cellWithPadding(runway.getLRunway().getAsda().toString()+ "m"));
         table.addCell(cellWithPadding(runway.getLRunway().getLda().toString()+ "m"));
 
-        PdfPCell desiR = cellWithPadding(runway.getRRunway().getDesignator() );
+        PdfPCell desiR = cellWithPadding(runway.getRRunway().getDesignator());
         desiL.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(desiR);
         table.addCell(cellWithPadding(runway.getRRunway().getTora().toString()+ "m"));

@@ -15,8 +15,8 @@ public class Calculator {
 
     private static final Logger logger = LogManager.getLogger("Calculator");
     private static final Double BLAST_PROTECTION = 300d;
-    private static final Double SLOPE = 50d;
     private static final Double STRIPEND = 60d;
+    private static final Double SLOPE = 50d;
     private Map<String, String> overBreakdown = new HashMap<>();
     private Map<String, String> towardsBreakdown = new HashMap<>();
 
@@ -143,5 +143,13 @@ public class Calculator {
 
     public static Double getSLOPE() {
         return SLOPE;
+    }
+
+    public static Double getBlastProtection() {
+        return BLAST_PROTECTION;
+    }
+
+    public static Double getSTRIPEND() {
+        return STRIPEND;
     }
 }
