@@ -78,7 +78,7 @@ public class UtilsUI {
         public static Color BLAST = Color.BROWN;
         public static Color OBSTACLE = Color.RED;
         public static Color DEFAULT = Color.WHITE;
-        public static Color DIRECTION = Color.BLACK;
+        public static Color DIRECTION = Color.WHITE;
     }
 
 
