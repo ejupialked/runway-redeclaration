@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="193.0" prefWidth="212.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
-      <ImageView fx:id="needle" fitHeight="120.0" fitWidth="140.0" layoutX="26.0" layoutY="45.0" pickOnBounds="true" preserveRatio="false">
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <ImageView fx:id="needle" fitHeight="90.0" fitWidth="109.0" layoutX="64.0" layoutY="149.0" pickOnBounds="true" preserveRatio="false">
          <image>
             <Image url="@../Images/needle.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="compass" fitHeight="152.0" fitWidth="200.0" layoutX="7.0" layoutY="34.0" pickOnBounds="true" preserveRatio="false" style="-fx-background-color: rgba(0, 0, 0, .2);">
+      <ImageView fx:id="compass" fitHeight="120.0" fitWidth="157.0" layoutX="48.0" layoutY="137.0" pickOnBounds="true" preserveRatio="false" style="-fx-background-color: rgba(0, 0, 0, .2);">
          <image>
             <Image url="@../Images/compass.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelCompass" layoutX="5.0" layoutY="165.0" text="230.0°" textFill="WHITE" AnchorPane.topAnchor="165.0">
+      <Label fx:id="labelCompass" layoutX="14.0" layoutY="188.0" text="230.0°" textFill="WHITE" AnchorPane.topAnchor="188.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-   <Button fx:id="align" layoutX="107.0" layoutY="1.0" mnemonicParsing="false" opacity="0.85" text="Align" />
-   <Button fx:id="horizontal" layoutY="1.0" mnemonicParsing="false" opacity="0.85" text="Horizontal" />
+   <Button fx:id="align" layoutX="13.0" layoutY="216.0" mnemonicParsing="false" opacity="0.85" text="Align" AnchorPane.topAnchor="216.0" />
+   <Button fx:id="horizontal" layoutX="82.0" layoutY="107.0" mnemonicParsing="false" opacity="0.85" text="Horizontal" />
 </fx:root>

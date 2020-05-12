@@ -1,6 +1,5 @@
 package seg.team9.controllers.runways;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -756,7 +755,7 @@ public class TopDownViewController implements Initializable {
         if(compass != null) {
             topDownView.getChildren().add(compass);
             AnchorPane.setBottomAnchor(compass, 0d);
-            AnchorPane.setRightAnchor(compass, -35d);
+            AnchorPane.setRightAnchor(compass, -15d);
         }
     }
 
