@@ -1,4 +1,4 @@
-package seg.team9.utils;
+package seg.team9.business.logic;
 
 import seg.team9.business.logic.Calculator;
 import seg.team9.business.models.Obstacle;

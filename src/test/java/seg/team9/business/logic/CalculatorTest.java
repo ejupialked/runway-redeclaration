@@ -44,14 +44,14 @@ public class CalculatorTest {
 
     //Tests for calculated values.
 
-    @Test
-    //Testing the redesignated TORA value of the first right runway (27R).
-    public void testTORARight() {
-        logger.debug("Testing right TORA...");
-        logger.debug("Expected: 2986.0");
-        logger.debug("Actual: "+rr.getWorkingTORA());
-        Assert.assertEquals(2986d, rr.getWorkingTORA(), 0.0f);
-    }
+        @Test
+        //Testing the redesignated TORA value of the first right runway (27R).
+        public void testTORARight() {
+            logger.debug("Testing right TORA...");
+            logger.debug("Expected: 2986.0");
+            logger.debug("Actual: "+rr.getWorkingTORA());
+            Assert.assertEquals(2986d, rr.getWorkingTORA(), 0.0f);
+        }
 
     @Test
     //Testing the redesignated TODA value of the first right runway (27R).
