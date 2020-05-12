@@ -237,11 +237,10 @@ public class SideViewController implements Initializable {
         grass.setFill(Color.GREEN);
         grass.setX(0);
         grass.setY(0);
-        stopwayL.setFill(Color.RED);
-        stopwayR.setFill(Color.RED);
-        stopwayR.setFill(Color.RED);
-        clearwayL.setFill(Color.ORANGE);
-        clearwayR.setFill(Color.ORANGE);
+        stopwayL.setFill(UtilsUI.Colors.STOPWAY);
+        stopwayR.setFill(UtilsUI.Colors.STOPWAY);
+        clearwayL.setFill(UtilsUI.Colors.CLEARWAY);
+        clearwayR.setFill(UtilsUI.Colors.CLEARWAY);
     }
 
     public void updateUI(){
@@ -658,7 +657,11 @@ public class SideViewController implements Initializable {
         arrowLanding.changeColour(UtilsUI.Colors.DIRECTION);
         arrowLanding.setStrokeWidth(4f);
 
-        PrimaryWindowController.getInstance().getSideLegend().setOpacity(100.0);
+        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+
+        primary.setSideLegend(primary.getSideLegendBlind());
+        primary.setTopLegend(primary.getTopLegendBlind());
+
         isColorDefault = false;
 
     }
@@ -707,7 +710,11 @@ public class SideViewController implements Initializable {
         arrowLanding.changeColour(UtilsUI.Colors.DEFAULT);
         arrowLanding.setStrokeWidth(4f);
 
-        PrimaryWindowController.getInstance().getSideLegend().setOpacity(0);
+        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+
+        primary.setSideLegend(primary.getSideMapLegendDefault());
+        primary.setTopLegend(primary.getTopMapLegendDefault());
+
         isColorDefault = true;
     }
 }

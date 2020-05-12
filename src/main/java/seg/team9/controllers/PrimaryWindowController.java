@@ -1,19 +1,12 @@
 package seg.team9.controllers;
 
 import com.itextpdf.text.DocumentException;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,18 +19,14 @@ import seg.team9.business.logic.XML.XMLImporter;
 import seg.team9.business.models.Obstacle;
 import seg.team9.controllers.airport.AirportViewController;
 import seg.team9.controllers.runways.*;
-import seg.team9.utils.MockData;
+import seg.team9.controllers.runways.legends.MapLegend;
+import seg.team9.controllers.runways.legends.SideMapLegend;
 import seg.team9.business.models.Airport;
 import seg.team9.business.models.Runway;
-import seg.team9.controllers.calculation.CalculationsViewController;
 import seg.team9.controllers.obstacle.ObstacleViewController;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import seg.team9.controllers.runways.legends.SideMapLegendDefault;
+import seg.team9.controllers.runways.legends.TopMapLegendDefault;
 import seg.team9.utils.UtilsUI.DialogDirectoryChooser;
 import seg.team9.utils.UtilsUI;
 import java.io.File;
@@ -52,8 +41,16 @@ public class PrimaryWindowController implements Initializable {
 
     private static PrimaryWindowController instance;
 
-    MapLegend sideLegend = new MapLegend();
-    MapLegend topLegend = new MapLegend();
+
+    AnchorPane topLegend;
+    AnchorPane sideLegend;
+
+    SideMapLegend sideLegendBlind = new SideMapLegend();
+    MapLegend topLegendBlind = new MapLegend();
+
+    SideMapLegendDefault sideMapLegendDefault = new SideMapLegendDefault();
+    TopMapLegendDefault topMapLegendDefault = new TopMapLegendDefault();
+
 
     // Injecting ui components.
     @FXML private TabPane tabPaneRunways;
@@ -87,8 +84,26 @@ public class PrimaryWindowController implements Initializable {
         initArrays();
         initSplitPane();
         initTabPane();
+        this.topLegend = topLegendBlind;
+        this.sideLegend = sideLegendBlind;
     }
 
+
+    public SideMapLegend getSideLegendBlind() {
+        return sideLegendBlind;
+    }
+
+    public MapLegend getTopLegendBlind() {
+        return topLegendBlind;
+    }
+
+    public SideMapLegendDefault getSideMapLegendDefault() {
+        return sideMapLegendDefault;
+    }
+
+    public TopMapLegendDefault getTopMapLegendDefault() {
+        return topMapLegendDefault;
+    }
 
     void initSplitPane() {
         logger.info(splitPaneView.getDividers().get(0).getPosition());
@@ -231,11 +246,11 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
-        public MapLegend getSideLegend () {
+        public AnchorPane getSideLegend () {
             return sideLegend;
         }
 
-        public MapLegend getTopLegend () {
+        public AnchorPane getTopLegend () {
             return topLegend;
         }
 
@@ -246,6 +261,7 @@ public class PrimaryWindowController implements Initializable {
     public void onDefaultColourClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().isColorDefault = true;
         SideViewController.getInstance().isColorDefault = true;
+
         TopDownViewController.getInstance().initArrowsColoursDefault();
         SideViewController.getInstance().initArrowsColoursDefault();
     }
@@ -255,6 +271,14 @@ public class PrimaryWindowController implements Initializable {
         TopDownViewController.getInstance().initArrowsColors();
         SideViewController.getInstance().isColorDefault = false;
         SideViewController.getInstance().initArrowsColors();
+    }
+
+    public void setTopLegend(AnchorPane topLegend) {
+        this.topLegend = topLegend;
+    }
+
+    public void setSideLegend(AnchorPane sideLegend) {
+        this.sideLegend = sideLegend;
     }
 }
 

@@ -79,6 +79,11 @@ public class UtilsUI {
         public static Color OBSTACLE = Color.RED;
         public static Color DEFAULT = Color.WHITE;
         public static Color DIRECTION = Color.WHITE;
+
+        public static Color CLEARWAY = Color.PURPLE;
+        public static Color STOPWAY = Color.DARKGRAY;
+
+
     }
 
 

@@ -922,8 +922,13 @@ public class TopDownViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
 
-        PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
+        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+
+        primary.setSideLegend(primary.getSideLegendBlind());
+        primary.setTopLegend(primary.getTopLegendBlind());
+        //PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
         isColorDefault = false;
+
 
     }
 
@@ -965,7 +970,11 @@ public class TopDownViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowBlastR.setStrokeWidth(4f);
 
-        PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
+        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+        primary.setSideLegend(primary.getSideMapLegendDefault());
+        graphics.requestLayout();
+        primary.setTopLegend(primary.getTopMapLegendDefault());
+       // PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
         isColorDefault = true;
     }
 
