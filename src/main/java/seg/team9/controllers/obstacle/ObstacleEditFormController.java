@@ -29,14 +29,22 @@ public class ObstacleEditFormController  {
     @FXML private TextField textName;
     private Obstacle obstacleSelected;
 
-    public void initForm(Obstacle obstacleSelected){
+    public void initForm(Obstacle obstacleSelected, boolean resetDistances){
         this.obstacleSelected = obstacleSelected;
+        textName.setText(obstacleSelected.getName());
+
         textHeight.setText(obstacleSelected.getHeight().toString());
         textWidth.setText(obstacleSelected.getWidth().toString());
-        textCenterDist.setText(obstacleSelected.getDistanceCenter().toString());
-        textDistLThreshold.setText(obstacleSelected.getDistanceLThreshold().toString());
-        textDistRThreshold.setText(obstacleSelected.getDistanceRThreshold().toString());
-        textName.setText(obstacleSelected.getName());
+
+        if(resetDistances) {
+            textCenterDist.setText("");
+            textDistLThreshold.setText("");
+            textDistRThreshold.setText("");
+        }else{
+            textCenterDist.setText(obstacleSelected.getDistanceCenter().toString());
+            textDistLThreshold.setText(obstacleSelected.getDistanceLThreshold().toString());
+            textDistRThreshold.setText(obstacleSelected.getDistanceRThreshold().toString());
+        }
     }
 
     @FXML
@@ -49,14 +57,14 @@ public class ObstacleEditFormController  {
                     textCenterDist.getText(),
                     textDistLThreshold.getText(),
                     textDistRThreshold.getText()
-            );            App.obstacleObservableList.remove(obstacleSelected);
-
+            );
+            App.obstacleObservableList.remove(obstacleSelected);
             App.obstacleObservableList.add(obstacle);
-            ObstacleViewController.getInstance().getBoxObstacles().getSelectionModel().select(obstacle);
+           ObstacleViewController.getInstance().getBoxObstacles().getSelectionModel().select(obstacle);
             TopDownViewController.getInstance().updateUI();
-            UtilsUI.showInfoMessage("Obstacle: " + obstacleSelected.getName() + " has been edited!");
             Stage scene = (Stage) buttonEdit.getScene().getWindow();
             scene.close();
+            UtilsUI.showInfoMessage("Obstacle: " + obstacleSelected.getName() + " has been edited!");
 
         } catch (TextFieldEmptyException | ObstacleOutsideOfRunwayException e) {
             UtilsUI.showErrorMessage(e.getMessage());
@@ -102,9 +110,6 @@ public class ObstacleEditFormController  {
         else if(right.isBlank()) {
             throw new TextFieldEmptyException("Distance threshold (right)");
         }
-
-
-
 
 
         //check if the obstacle has the same name as another obstacle
