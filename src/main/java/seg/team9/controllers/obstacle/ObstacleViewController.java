@@ -41,7 +41,7 @@ public class ObstacleViewController implements Initializable {
     private static final Logger logger = LogManager.getLogger("ObstacleViewController");
 
     private static ObstacleViewController instance;
-    private boolean fromEdit = false;
+    public boolean fromEdit = false;
 
     @FXML private ChoiceBox<Obstacle> boxObstacles;
     @FXML private Label txtObstacleHeight;
@@ -52,6 +52,7 @@ public class ObstacleViewController implements Initializable {
     @FXML private AnchorPane paneObstacles;
     private Obstacle selectedObstacle;
     private HashMap<CheckBox,Obstacle> checkToObst = new HashMap<CheckBox, Obstacle>();
+
 
 
     public ObstacleViewController() {
@@ -91,11 +92,10 @@ public class ObstacleViewController implements Initializable {
             Runway r1 = AirportViewController.getInstance().getComboBoxRunways().getValue();
             if(fromEdit) {
                 TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 0);
-                fromEdit = false;
             }else {
-                TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 3);
-                fromEdit = false;
+               // TopDownViewController.getInstance().displayDirectedRunwaySelected(air, r1, t1, 3);
             }
+            fromEdit = false;
             SideViewController.getInstance().updateUI();
         });
 
@@ -137,6 +137,7 @@ public class ObstacleViewController implements Initializable {
     void onEditObstacle(MouseEvent event) {
         editObstacle(selectedObstacle, false);
     }
+    
 
     public static void editObstacle(Obstacle selectedObstacle, boolean resetObstacle){
         final String formName= "obstacleeditform";
@@ -154,11 +155,14 @@ public class ObstacleViewController implements Initializable {
             stage.setResizable(false);
             stage.setScene(new Scene(root));
 
-            stage.setOnCloseRequest(windowEvent -> {
-                UtilsUI.showPopup("Edit the distances of " + selectedObstacle + " first.", Alert.AlertType.WARNING);
-                windowEvent.consume();
 
-            });
+            if(resetObstacle) {
+                stage.setOnCloseRequest(windowEvent -> {
+                    UtilsUI.showPopup("Edit the distances of " + selectedObstacle + " first.", Alert.AlertType.WARNING);
+                    windowEvent.consume();
+
+                });
+            }
             //prevent user from interacting with main view
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(App.getPrimaryWindow());
