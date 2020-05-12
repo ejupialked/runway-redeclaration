@@ -1,5 +1,6 @@
 package seg.team9.controllers.runways;
 
+import com.itextpdf.xmp.impl.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -97,6 +98,7 @@ public class SideViewController implements Initializable {
     public Arrow arrowLDAR = new Arrow(0,0,0,0,0);
     public Arrow arrowRESAR = new Arrow(0,0,0,0,0);
     public Arrow arrowBlastR = new Arrow(0,0,0,0,0);
+    public Arrow arrowTakeoff = new Arrow(0,0,0,0,0);
 
     private Text textTODAR = new Text("TODA");
     private Text textASDAR = new Text("ASDA");
@@ -104,6 +106,7 @@ public class SideViewController implements Initializable {
     private Text textLDAR = new Text("LDA");
     private Text textRESAR = new Text("RESA");
     private Text textBlastR = new Text("Blast Protection");
+    private Text textTakeoff= new Text("Take off Direction");
 
     //Left Arrows
     public Double TORAStartXL = 0D;
@@ -144,6 +147,7 @@ public class SideViewController implements Initializable {
     public Arrow arrowLDAL = new Arrow(0,0,0,0,0);
     public Arrow arrowRESAL = new Arrow(0,0,0,0,0);
     public Arrow arrowBlastL = new Arrow(0,0,0,0,0);
+    public Arrow arrowLanding = new Arrow(0,0,0,0,0);
 
     private Text textTODAL = new Text("TODA");
     private Text textASDAL = new Text("ASDA");
@@ -151,6 +155,7 @@ public class SideViewController implements Initializable {
     private Text textLDAL = new Text("LDA");
     private Text textRESAL = new Text("RESA");
     private Text textBlastL = new Text("Blast Protection");
+    private Text textLanding = new Text("Landing Direction");
 
     private Rectangle runway = new Rectangle();
     private Rectangle grass = new Rectangle();
@@ -208,6 +213,8 @@ public class SideViewController implements Initializable {
         textRESAR.setFill(Color.WHITE);
         textBlastR.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textBlastR.setFill(Color.WHITE);
+        textTakeoff.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
+        textTakeoff.setFill(Color.WHITE);
 
         textTODAL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textTODAL.setFill(Color.WHITE);
@@ -221,6 +228,8 @@ public class SideViewController implements Initializable {
         textRESAL.setFill(Color.WHITE);
         textBlastL.setFont(Font.font(FONT_FAMILY, FontWeight.BOLD, 13));
         textBlastL.setFill(Color.WHITE);
+        textLanding.setFont(Font.font(FONT_FAMILY,FontWeight.BOLD,13));
+        textLanding.setFill(Color.WHITE);
     }
 
     public void initRectangles(){
@@ -265,6 +274,9 @@ public class SideViewController implements Initializable {
         textRESAR.setX(topDownViewController.RESAStartXR);
         textBlastR.setY(screenHeight*0.415);
         textBlastR.setX(topDownViewController.BlastStartXR);
+        textTakeoff.setText("Take off Direction");
+        textTakeoff.setX(screenWidth*0.02);
+        textTakeoff.setY(screenHeight*0.15);
 
         textTODAL.setText("TODA: "+topDownViewController.TODAL.toString());
         textTODAL.setX(topDownViewController.TODAEndXL);
@@ -283,6 +295,9 @@ public class SideViewController implements Initializable {
         textRESAL.setY(screenHeight*0.595);
         textBlastL.setX(topDownViewController.BlastEndXL);
         textBlastL.setY(screenHeight*0.57);
+        textLanding.setText("Landing Direction");
+        textLanding.setX(screenWidth*0.87);
+        textLanding.setY(screenHeight*0.90);
 
 
     }
@@ -444,6 +459,9 @@ public class SideViewController implements Initializable {
         arrowBlastR= new Arrow(BlastStartXR, 0.42*screenHeight, BlastEndXR, 0.42*screenHeight);
         arrowBlastL = new Arrow(BlastStartXL, 0.58*screenHeight, BlastEndXL, 0.58*screenHeight);
 
+        arrowTakeoff = new Arrow(0.03*screenWidth,0.10*screenHeight,0.10*screenWidth,0.10*screenHeight);
+        arrowLanding = new Arrow(0.97*screenWidth,0.95*screenHeight,0.90*screenWidth,0.95*screenHeight);
+
         if(!isColorDefault)
             initArrowsColors();
         else
@@ -462,6 +480,8 @@ public class SideViewController implements Initializable {
         text.getChildren().add(textRESAL);
         text.getChildren().add(textBlastR);
         text.getChildren().add(textBlastL);
+        text.getChildren().add(textTakeoff);
+        text.getChildren().add(textLanding);
 
 
 
@@ -503,6 +523,8 @@ public class SideViewController implements Initializable {
         arrows.getChildren().add(arrowRESAL);
         arrows.getChildren().add(arrowBlastR);
         arrows.getChildren().add(arrowBlastL);
+        arrows.getChildren().add(arrowTakeoff);
+        arrows.getChildren().add(arrowLanding);
     }
 
     private void updateObstacle(){
@@ -630,6 +652,12 @@ public class SideViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
 
+        arrowTakeoff.changeColour(UtilsUI.Colors.DIRECTION);
+        arrowTakeoff.setStrokeWidth(4f);
+
+        arrowLanding.changeColour(UtilsUI.Colors.DIRECTION);
+        arrowLanding.setStrokeWidth(4f);
+
         PrimaryWindowController.getInstance().getSideLegend().setOpacity(100.0);
         isColorDefault = false;
 
@@ -672,6 +700,12 @@ public class SideViewController implements Initializable {
 
         arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowBlastR.setStrokeWidth(4f);
+
+        arrowTakeoff.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowTakeoff.setStrokeWidth(4f);
+
+        arrowLanding.changeColour(UtilsUI.Colors.DEFAULT);
+        arrowLanding.setStrokeWidth(4f);
 
         PrimaryWindowController.getInstance().getSideLegend().setOpacity(0);
         isColorDefault = true;
