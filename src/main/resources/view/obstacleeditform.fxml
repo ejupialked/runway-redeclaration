@@ -81,7 +81,7 @@
                   <Insets left="2.0" />
                </GridPane.margin>
             </Label>
-              <Label text="m" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+              <Label GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                   <font>
                       <Font name="System Italic" size="14.0" />
                   </font>
