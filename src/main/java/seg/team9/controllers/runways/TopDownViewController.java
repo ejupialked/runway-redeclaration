@@ -227,10 +227,13 @@ public class TopDownViewController implements Initializable {
         initLines();
         initRectangles();
 
+
+
         if(!isColorDefault)
             initArrowsColors();
         else
             initArrowsColoursDefault();
+
 
         addChildren();
 
@@ -738,13 +741,17 @@ public class TopDownViewController implements Initializable {
         graphics.getChildren().add(arrows);
 
 
+
         topDownView.getChildren().add(graphics);
-        topDownView.getChildren().add(PrimaryWindowController.getInstance().getTopLegend());
-
-        AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
-        AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getTopLegend(), 20d);
 
 
+        topDownView.getChildren().add(primary.getTopMapLegendDefault());
+        AnchorPane.setTopAnchor(primary.getTopMapLegendDefault(), 20d);
+        AnchorPane.setRightAnchor(primary.getTopMapLegendDefault(), 20d);
+
+        topDownView.getChildren().add(primary.getTopLegendBlind());
+        AnchorPane.setTopAnchor(primary.getTopLegendBlind(), 20d);
+        AnchorPane.setRightAnchor(primary.getTopLegendBlind(), 20d);
 
         if(compass != null) {
             topDownView.getChildren().add(compass);
@@ -922,11 +929,9 @@ public class TopDownViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
 
-        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+        primary.getTopMapLegendDefault().setOpacity(0);
+        primary.getTopLegendBlind().setOpacity(100);
 
-        primary.setSideLegend(primary.getSideLegendBlind());
-        primary.setTopLegend(primary.getTopLegendBlind());
-        //PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
         isColorDefault = false;
 
 
@@ -970,11 +975,9 @@ public class TopDownViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowBlastR.setStrokeWidth(4f);
 
-        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
-        primary.setSideLegend(primary.getSideMapLegendDefault());
-        graphics.requestLayout();
-        primary.setTopLegend(primary.getTopMapLegendDefault());
-       // PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
+        primary.getTopLegendBlind().setOpacity(0);
+        primary.getTopMapLegendDefault().setOpacity(100);
+
         isColorDefault = true;
     }
 
@@ -985,4 +988,6 @@ public class TopDownViewController implements Initializable {
     public void setCompass(Compass compass) {
         this.compass = compass;
     }
+    PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+
 }

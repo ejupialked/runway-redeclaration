@@ -42,8 +42,6 @@ public class PrimaryWindowController implements Initializable {
     private static PrimaryWindowController instance;
 
 
-    AnchorPane topLegend;
-    AnchorPane sideLegend;
 
     SideMapLegend sideLegendBlind = new SideMapLegend();
     MapLegend topLegendBlind = new MapLegend();
@@ -84,8 +82,6 @@ public class PrimaryWindowController implements Initializable {
         initArrays();
         initSplitPane();
         initTabPane();
-        this.topLegend = topLegendBlind;
-        this.sideLegend = sideLegendBlind;
     }
 
 
@@ -246,14 +242,6 @@ public class PrimaryWindowController implements Initializable {
     }
 
 
-        public AnchorPane getSideLegend () {
-            return sideLegend;
-        }
-
-        public AnchorPane getTopLegend () {
-            return topLegend;
-        }
-
         public void setApp (App app){
             this.app = app;
         }
@@ -273,12 +261,5 @@ public class PrimaryWindowController implements Initializable {
         SideViewController.getInstance().initArrowsColors();
     }
 
-    public void setTopLegend(AnchorPane topLegend) {
-        this.topLegend = topLegend;
-    }
-
-    public void setSideLegend(AnchorPane sideLegend) {
-        this.sideLegend = sideLegend;
-    }
 }
 

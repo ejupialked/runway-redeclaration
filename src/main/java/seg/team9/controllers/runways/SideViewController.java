@@ -28,6 +28,7 @@ public class SideViewController implements Initializable {
 
     private TopDownViewController topDownViewController = TopDownViewController.getInstance();
     private Runway currentRunway;
+    PrimaryWindowController primary =  PrimaryWindowController.getInstance();
 
     public boolean isSelected = false;
 
@@ -603,9 +604,14 @@ public class SideViewController implements Initializable {
         sideView.getChildren().add(arrows);
         sideView.getChildren().add(text);
 
-        sideView.getChildren().add(PrimaryWindowController.getInstance().getSideLegend());
-        AnchorPane.setTopAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
-        AnchorPane.setRightAnchor(PrimaryWindowController.getInstance().getSideLegend(), 20d);
+
+        sideView.getChildren().add(primary.getSideMapLegendDefault());
+        AnchorPane.setTopAnchor(primary.getSideMapLegendDefault(), 20d);
+        AnchorPane.setRightAnchor(primary.getSideMapLegendDefault(), 20d);
+
+        sideView.getChildren().add(primary.getSideLegendBlind());
+        AnchorPane.setTopAnchor(primary.getSideLegendBlind(), 20d);
+        AnchorPane.setRightAnchor(primary.getSideLegendBlind(), 20d);
     }
 
 
@@ -657,10 +663,9 @@ public class SideViewController implements Initializable {
         arrowLanding.changeColour(UtilsUI.Colors.DIRECTION);
         arrowLanding.setStrokeWidth(4f);
 
-        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
+        primary.getSideMapLegendDefault().setOpacity(0);
+        primary.getSideLegendBlind().setOpacity(100);
 
-        primary.setSideLegend(primary.getSideLegendBlind());
-        primary.setTopLegend(primary.getTopLegendBlind());
 
         isColorDefault = false;
 
@@ -710,10 +715,9 @@ public class SideViewController implements Initializable {
         arrowLanding.changeColour(UtilsUI.Colors.DEFAULT);
         arrowLanding.setStrokeWidth(4f);
 
-        PrimaryWindowController primary =  PrimaryWindowController.getInstance();
 
-        primary.setSideLegend(primary.getSideMapLegendDefault());
-        primary.setTopLegend(primary.getTopMapLegendDefault());
+        primary.getSideLegendBlind().setOpacity(0);
+        primary.getSideMapLegendDefault().setOpacity(100);
 
         isColorDefault = true;
     }
