@@ -245,12 +245,16 @@ public class PrimaryWindowController implements Initializable {
 
     public void onDefaultColourClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().isColorDefault = true;
+        SideViewController.getInstance().isColorDefault = true;
         TopDownViewController.getInstance().initArrowsColoursDefault();
+        SideViewController.getInstance().initArrowsColoursDefault();
     }
 
     public void onColourBlindColourClick(ActionEvent actionEvent) {
         TopDownViewController.getInstance().isColorDefault = false;
         TopDownViewController.getInstance().initArrowsColors();
+        SideViewController.getInstance().isColorDefault = false;
+        SideViewController.getInstance().initArrowsColors();
     }
 }
 

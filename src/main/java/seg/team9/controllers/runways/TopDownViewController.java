@@ -637,7 +637,7 @@ public class TopDownViewController implements Initializable {
         arrowBlastR= new Arrow(BlastStartXR, 0.42*screenHeight, BlastEndXR, 0.42*screenHeight);
         arrowBlastL = new Arrow(BlastStartXL, 0.58*screenHeight, BlastEndXL, 0.58*screenHeight);
 
-        if(isColorDefault)
+        if(!isColorDefault)
             initArrowsColors();
         else
             initArrowsColoursDefault();

@@ -30,7 +30,7 @@ public class SideViewController implements Initializable {
 
     public boolean isSelected = false;
 
-    public boolean isColorDefault = true;
+    public boolean isColorDefault = false;
 
 
     @FXML AnchorPane sideView;
@@ -444,7 +444,7 @@ public class SideViewController implements Initializable {
         arrowBlastR= new Arrow(BlastStartXR, 0.42*screenHeight, BlastEndXR, 0.42*screenHeight);
         arrowBlastL = new Arrow(BlastStartXL, 0.58*screenHeight, BlastEndXL, 0.58*screenHeight);
 
-        if(isColorDefault)
+        if(!isColorDefault)
             initArrowsColors();
         else
             initArrowsColoursDefault();
@@ -630,7 +630,7 @@ public class SideViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.BLAST);
         arrowBlastR.setStrokeWidth(4f);
 
-        PrimaryWindowController.getInstance().getTopLegend().setOpacity(100.0);
+        PrimaryWindowController.getInstance().getSideLegend().setOpacity(100.0);
         isColorDefault = false;
 
     }
@@ -673,7 +673,7 @@ public class SideViewController implements Initializable {
         arrowBlastR.changeColour(UtilsUI.Colors.DEFAULT);
         arrowBlastR.setStrokeWidth(4f);
 
-        PrimaryWindowController.getInstance().getTopLegend().setOpacity(0);
+        PrimaryWindowController.getInstance().getSideLegend().setOpacity(0);
         isColorDefault = true;
     }
 }
