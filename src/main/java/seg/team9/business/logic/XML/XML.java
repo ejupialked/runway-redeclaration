@@ -131,6 +131,10 @@ public class XML implements XMLExporter, XMLImporter{
                 Element stopwayr = document.createElement("stopway");
                 stopwayr.appendChild(document.createTextNode(run.getRRunway().getStopway().toString()));
                 right.appendChild(stopwayr);
+
+                Element length = document.createElement("length");
+                length.appendChild(document.createTextNode(String.valueOf(run.getLength())));
+                runway.appendChild(length);
             }
 
             DOMSource source = new DOMSource(document);
@@ -247,8 +251,9 @@ public class XML implements XMLExporter, XMLImporter{
                 Double stopwayL = Double.parseDouble(runway.getElementsByTagName("stopway").item(0).getTextContent());
                 Double stopwayR = Double.parseDouble(runway.getElementsByTagName("stopway").item(1).getTextContent());
 
+                Double length = Double.parseDouble(runway.getElementsByTagName("length").item(0).getTextContent());
                 airport.addRunway(new Runway(new DirectedRunway(designatorR,toraR,todaR,asdaR,ldaR,thresholdR,clearwayR,stopwayR),
-                        new DirectedRunway(designatorL,toraL,todaL,asdaL,ldaL,thresholdL,clearwayL,stopwayL), 3000d));
+                        new DirectedRunway(designatorL,toraL,todaL,asdaL,ldaL,thresholdL,clearwayL,stopwayL), length));
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e){
