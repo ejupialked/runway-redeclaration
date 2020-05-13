@@ -36,6 +36,16 @@ public class Calculator {
         CalculationBreakdownController.getInstance().showBreakdown(calculationBreakdown);
     }
 
+    public void testRedesignate(Runway runway, Obstacle obstacle){
+        logger.info("Redeclaring distances..");
+        calculationBreakdown.put("over", overBreakdown);
+        calculationBreakdown.put("towards", towardsBreakdown);
+
+        findDirection(runway, obstacle);
+
+        runway.setCalculationBreakdow(calculationBreakdown);
+    }
+
 
     //This method finds which situation for take off & landing applies to each runway.
     //TOTLT - Taking off towards, landing towards
@@ -84,7 +94,7 @@ public class Calculator {
 
         runway.setWorkingTODA(runway.getWorkingTORA()  + runway.getClearway());
 
-        calculationBreakdown.get(direction).put("TODA", "(R) TORA + Clearway");
+        calculationBreakdown.get(direction).put("TODA", "(R) TORA + CLEARWAY");
         calculationBreakdown.get(direction).put("TODA1", runway.getWorkingTORA() + " + " + runway.getClearway());
         calculationBreakdown.get(direction).put("TODA2", runway.getWorkingTODA().toString());
 
@@ -132,7 +142,7 @@ public class Calculator {
         calculationBreakdown.get(direction).put("ASDA1", runway.getWorkingASDA().toString());
 
         runway.setWorkingTODA(runway.getWorkingTORA());
-        calculationBreakdown.get(direction).put("TODA", "(R) TODA");
+        calculationBreakdown.get(direction).put("TODA", "(R) TORA");
         calculationBreakdown.get(direction).put("TODA1", runway.getWorkingTODA().toString());
 
         runway.setWorkingLDA(distance - runway.getResa() - STRIPEND);
