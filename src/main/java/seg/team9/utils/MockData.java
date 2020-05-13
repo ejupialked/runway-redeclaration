@@ -17,32 +17,40 @@ public class MockData {
     private static List<Airport> airports(){
         ArrayList<Airport> airportArrayList = new ArrayList<>();
 
-        //HENRYS TEST LAND
+        //HEATHROW
+        Double l1 = 4000d;
+        Double l2 = 3700d;
+
         DirectedRunway d7 = new DirectedRunway("09R",4000D,4100D,4000D,4000D,0D,100D,50D);
         DirectedRunway d8 = new DirectedRunway("27L",4000D,4100D,4000D,4000D,0D,100D,50D);
-        Runway r4 = new Runway(d7, d8, 4000);
-        Airport a4 = new Airport("Henrys Test Land","Southampton",39.21,23.89);
+        Runway r1 = new Runway(d7, d8, 4000d);
+        DirectedRunway dd1 = new DirectedRunway("09L", 3660d, 3660d, 3660d, l2-306d, 306d, 200D, 200D);
+        DirectedRunway dd2 = new DirectedRunway("27R", 3660d, 3660d, 3660d, 3660d, 0d, 200D, 200D);
+        Runway r4 = new Runway(dd1, dd2, 4000);
+        Airport a4 = new Airport("(LHR) London Heathrow","London",39.21,23.89);
         a4.addRunway(r4);
+        a4.addRunway(r1);
 
-        //HEATHROW
-        DirectedRunway d1 = new DirectedRunway("09L", 3902d, 3902d, 3902d, 3902d, 306d, 200D, 200D);
-        DirectedRunway d2 = new DirectedRunway("27R", 3902d, 3902d, 3884d, 3902d, 0d, 200D, 200D);
-        Runway r1 = new Runway(d1, d2, 4000d);
-        DirectedRunway dd1 = new DirectedRunway("09R", 3660d, 3660d, 3660d, 3660d, 306d, 200D, 200D);
-        DirectedRunway dd2 = new DirectedRunway("27L", 3660d, 3660d, 3660d, 3660d, 0d, 200D, 200D);
-        Runway rr1 = new Runway(dd1, dd2, 4000d);
-        Airport a1 = new Airport("(LHR) London Heathrow");
-        a1.addRunway(r1);
+        //Birmingham
+        Double l3 = 3052d;
+        Double threshold = 3052d;
+        DirectedRunway d1 = new DirectedRunway("15", 3902d, 3902d, 3902d, l3-306d, 306d, 200D, 200D);
+        DirectedRunway d2 = new DirectedRunway("33", 3902d, 3902d, 3884d, 3902d, 0d, 200D, 200D);
+        Runway rr1 = new Runway(d1, d2, 4000d);
+        Airport a1 = new Airport("(BHX) Birmingham Airport ");
         a1.addRunway(rr1);
 
 
         //GATWICK
-        DirectedRunway d3 = new DirectedRunway("08L", 2565d, 2565d, 2565d, 2565d, 307d, 200D, 124d);
+        Double l4 = 2565d;
+        Double l5 = 3316d;
+
+        DirectedRunway d3 = new DirectedRunway("08L", 2565d, 2565d, 2565d, l4-307, 307d, 200D, 124d);
         DirectedRunway d4 = new DirectedRunway("26R", 2565d, 2565d, 2565d, 2565d, 0d, 233d, 111d);
-        Runway r2 = new Runway(d3, d4, 2565d);
-        DirectedRunway dd3 = new DirectedRunway("08R", 3316d, 3316d, 3316d, 3316d, 307d, 231d, 33d);
+        Runway r2 = new Runway(d3, d4, l4);
+        DirectedRunway dd3 = new DirectedRunway("08R", 3316d, 3316d, 3316d, l5-231,231d , 231d, 33d);
         DirectedRunway dd4 = new DirectedRunway("26L", 3316d, 3316d, 3316d, 3316d, 0d, 111d, 333d);
-        Runway rr2 = new Runway(dd3, dd4, 3316d);
+        Runway rr2 = new Runway(dd3, dd4, l5);
         Airport a2 = new Airport("(LGW) Gatwick Airport");
         a2.addRunway(r2);
         a2.addRunway(rr2);
@@ -61,12 +69,6 @@ public class MockData {
         Airport a5 = new Airport("(SOU) Southampton Airport");
         a5.addRunway(r5);
 
-        //Birminghan
-        DirectedRunway d13 = new DirectedRunway("15",3052d,3052d,3052d,3052d,0D,200D,200D);
-        DirectedRunway d14 = new DirectedRunway("33",3052d,3052d,3052d,3052d,0D,200D,200D);
-        Runway r6 = new Runway(d13, d14, 3052d);
-        Airport a6 = new Airport("(SOU) Southampton Airport");
-        a6.addRunway(r6);
 
 
 
