@@ -57,12 +57,14 @@ public class CalculationsViewController implements Initializable {
         labelASDAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingASDA().toString()));
         labelTORAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingTORA().toString()));
         labelLDAr.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getWorkingLDA().toString()));
+        labelThresholdRight.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getThreshold().toString()));
 
         leftDesignator.setText(runway.getLRunway().getDesignator());
         labelTODAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingTODA().toString()));
         labelASDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingASDA().toString()));
         labelTORAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingTORA().toString()));
         labelLDAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getWorkingLDA().toString()));
+        labelthresholdLeft.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getThreshold().toString()));
 
 
         rightDesignator1.setText(runway.getRRunway().getDesignator());
@@ -70,12 +72,14 @@ public class CalculationsViewController implements Initializable {
         labelOriginalASDAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getAsda().toString()));
         labelOriginalTORAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getTora().toString()));
         labelOriginalLDAr1.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getLda().toString()));
+        labelThresholdRightOri.setText(UtilsUI.addUnitMeasurement(runway.getRRunway().getThreshold().toString()));
 
         leftDesignator1.setText(runway.getLRunway().getDesignator());
         labelOriginalTODAl1.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getToda().toString()));
         labelOriginalASDAl1.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getAsda().toString()));
         labelOriginalTORAl.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getTora().toString()));
         labelOriginalLDAl1.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getLda().toString()));
+        labelThresholdLeftOri.setText(UtilsUI.addUnitMeasurement(runway.getLRunway().getThreshold().toString()));
 
 
     }
@@ -123,4 +127,17 @@ public class CalculationsViewController implements Initializable {
     @FXML private Label labelOriginalTODAr1;
     @FXML private Label labelOriginalLDAr1;
     @FXML private Label labelOriginalASDAr1;
+
+
+    @FXML
+    private Label labelthresholdLeft;
+
+    @FXML
+    private Label labelThresholdRight;
+
+    @FXML
+    private Label labelThresholdLeftOri;
+
+    @FXML
+    private Label labelThresholdRightOri;
 }
