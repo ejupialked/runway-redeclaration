@@ -109,6 +109,8 @@ public class PDFGenerator {
         details.addCell(a.getName());
         details.addCell(new Phrase("Runway:", subTitleFontSmall));
         details.addCell(r.toString()    );
+        details.addCell(new Phrase("Runway length:", subTitleFontSmall));
+        details.addCell(r.getLength() + "m");
         details.addCell(new Phrase("Blast protection:", subTitleFontSmall));
         details.addCell(Calculator.getBlastProtection() + "m");
         details.addCell(new Phrase("Strip end:", subTitleFontSmall));
